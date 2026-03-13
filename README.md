@@ -152,6 +152,66 @@ Maintain a clean codebase with built-in linting and formatting.
 **🗃️ State Management with Pinia:**
 Handle your app's state with Pinia for clean, organized code.
 
+## Frontend Tooling Akışı & Standartları 🚦
+
+Aşağıdaki akış, bir geliştiricinin kod yazımından yayına alım sürecine kadar takip ettiği kalite kontrol adımlarını özetler:
+
+| Aşama | Açıklama | Araçlar |
+|-------|----------|---------|
+| **Geliştirme Aşaması** | Kod editörü üzerinde real-time kontrol | ESLint, Prettier, TypeScript |
+| **Lokal Onay (Git Commit)** | Kodun depoya gönderilmeden önceki son filtresi | Husky (Git Hooks), lint-staged (sadece değişen dosyalar), commitlint (standart commit mesajları) |
+| **Doğrulama (Git Push / PR)** | Uzak sunucuda otomatik kontrol süreci | CI Pipeline: Lint kontrolü, Tip kontrolü (Type-check) ve Build testi |
+| **Final Onay ve Dokümantasyon** | Akran denetimi ve bileşen dokümantasyonu | Code Review, Storybook (önerilir) |
+
+### Akış Diyagramı
+
+```
+Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-staged → commitlint
+     → Git Push/PR → CI (Lint + Type-check + Build) → Code Review → Merge
+```
+
+### Araç Seçimi (Tool Selection) 🚗
+
+| Tool | Görev | Alternatif | Neden Seçildi |
+|------|-------|------------|---------------|
+| **ESLint** | Kod kalitesi kontrolü | Biome | ESLint ekosistemi geniş, TypeScript + Vue desteği güçlü |
+| **Prettier** | Kod formatlama | Rome | Henüz olgun değil, Prettier yaygın ve stabil |
+| **Husky + lint-staged** | Commit öncesi kontrol | - | Sadece değişen dosyaları kontrol eder, performans yüksek |
+| **Commitlint** | Semantic commit | - | Otomatik changelog ve okunabilir Git history |
+| **Storybook** | UI izolasyonu ve dokümantasyon | Styleguidist | Geniş ekosistem ve addon desteği (projeye eklenebilir) |
+
+### Kullanım Detayları
+
+#### Geliştirme Aşaması
+- **ESLint**: `npm run lint` — Kod kalitesi ve stil kuralları
+- **Prettier**: `npm run format` — Otomatik formatlama (VSCode'da format on save önerilir)
+- **TypeScript**: `npm run type-check` — Tip güvenliği kontrolü
+
+#### Lokal Onay (Git Hooks)
+- **pre-commit**: `lint-staged` — Sadece staged dosyalarda ESLint + Prettier çalıştırır
+- **commit-msg**: `commitlint` — Commit mesajının [Conventional Commits](https://www.conventionalcommits.org/) formatında olmasını zorunlu kılar
+
+**Geçerli commit tipleri:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
+
+**Örnek commit mesajı:** `feat: kullanıcı giriş sayfası eklendi`
+
+#### CI Pipeline (.github/workflows/ci.yml)
+- Lint kontrolü
+- Type-check (vue-tsc)
+- Production build testi
+
+### Önerilen IDE Ayarları (.vscode/settings.json)
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+```
+
 ## Update Logs
 
 ### Version 2.0.2 - [December 30, 2025]
