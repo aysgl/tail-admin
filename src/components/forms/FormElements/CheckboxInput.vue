@@ -8,7 +8,12 @@
           class="flex items-center text-sm font-medium text-gray-700 cursor-pointer select-none dark:text-gray-400"
         >
           <div class="relative">
-            <input type="checkbox" id="checkboxLabelOne" v-model="checkboxOne" class="sr-only" />
+            <input
+              type="checkbox"
+              id="checkboxLabelOne"
+              v-model="checkboxOne"
+              class="sr-only"
+            />
             <div
               :class="
                 checkboxOne
@@ -47,7 +52,12 @@
           class="flex items-center text-sm font-medium text-gray-700 cursor-pointer select-none dark:text-gray-400"
         >
           <div class="relative">
-            <input type="checkbox" id="checkboxLabelTwo" v-model="checkboxTwo" class="sr-only" />
+            <input
+              type="checkbox"
+              id="checkboxLabelTwo"
+              v-model="checkboxTwo"
+              class="sr-only"
+            />
             <div
               :class="
                 checkboxTwo

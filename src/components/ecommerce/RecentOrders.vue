@@ -85,7 +85,10 @@
             <td class="py-3 whitespace-nowrap">
               <div class="flex items-center gap-3">
                 <div class="h-[50px] w-[50px] overflow-hidden rounded-md">
-                  <img :src="product.image" :alt="product.name" />
+                  <img
+                    :src="product.image"
+                    :alt="product.name"
+                  />
                 </div>
                 <div>
                   <p class="font-medium text-gray-800 text-theme-sm dark:text-white/90">
@@ -125,7 +128,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
 const products = ref([

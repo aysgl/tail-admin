@@ -61,14 +61,22 @@
       </div>
     </div>
     <div class="max-w-full overflow-x-auto custom-scrollbar">
-      <div id="chartThree" class="-ml-4 min-w-[1000px] xl:min-w-full pl-2">
-        <VueApexCharts type="area" height="310" :options="chartOptions" :series="series" />
+      <div
+        id="chartThree"
+        class="-ml-4 min-w-[1000px] xl:min-w-full pl-2"
+      >
+        <VueApexCharts
+          type="area"
+          height="310"
+          :options="chartOptions"
+          :series="series"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import flatPickr from 'vue-flatpickr-component'
 
@@ -82,7 +90,7 @@ const selected = ref('optionOne')
 const date = ref('')
 
 const flatpickrConfig = {
-  mode: 'range',
+  mode: 'range' as const,
   dateFormat: 'M j',
   defaultDate: [new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), new Date()],
 }

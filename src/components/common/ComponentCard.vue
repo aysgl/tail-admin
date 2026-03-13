@@ -10,7 +10,10 @@
       <h3 class="text-base font-medium text-gray-800 dark:text-white/90">
         {{ title }}
       </h3>
-      <p v-if="desc" class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+      <p
+        v-if="desc"
+        class="mt-1 text-sm text-gray-500 dark:text-gray-400"
+      >
         {{ desc }}
       </p>
     </div>
@@ -25,8 +28,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 interface Props {
   title: string
   className?: string

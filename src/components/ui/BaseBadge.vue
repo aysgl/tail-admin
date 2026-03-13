@@ -1,10 +1,16 @@
 <template>
   <span :class="[baseStyles, sizeClass, colorStyles]">
-    <span v-if="startIcon" class="mr-1">
+    <span
+      v-if="startIcon"
+      class="mr-1"
+    >
       <component :is="startIcon" />
     </span>
     <slot></slot>
-    <span v-if="endIcon" class="ml-1">
+    <span
+      v-if="endIcon"
+      class="ml-1"
+    >
       <component :is="endIcon" />
     </span>
   </span>

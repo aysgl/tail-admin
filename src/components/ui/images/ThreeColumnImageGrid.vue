@@ -1,6 +1,9 @@
 <template>
   <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-    <div v-for="(image, index) in images" :key="index">
+    <div
+      v-for="(image, index) in images"
+      :key="index"
+    >
       <img
         :src="image.src"
         :alt="image.alt"
@@ -10,7 +13,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const images = [
   { src: '/images/grid-image/image-04.png', alt: 'Grid image 1' },
   { src: '/images/grid-image/image-05.png', alt: 'Grid image 2' },

@@ -1,11 +1,17 @@
 <template>
-  <div class="relative" ref="dropdownRef">
+  <div
+    class="relative"
+    ref="dropdownRef"
+  >
     <button
       class="flex items-center text-gray-700 dark:text-gray-400"
       @click.prevent="toggleDropdown"
     >
       <span class="mr-3 overflow-hidden rounded-full h-11 w-11">
-        <img src="/images/user/owner.jpg" alt="User" />
+        <img
+          src="/images/user/owner.jpg"
+          alt="User"
+        />
       </span>
 
       <span class="block mr-1 font-medium text-theme-sm">Musharof </span>
@@ -28,7 +34,10 @@
       </div>
 
       <ul class="flex flex-col gap-1 pt-4 pb-3 border-b border-gray-200 dark:border-gray-800">
-        <li v-for="item in menuItems" :key="item.href">
+        <li
+          v-for="item in menuItems"
+          :key="item.href"
+        >
           <router-link
             :to="item.href"
             class="flex items-center gap-3 px-3 py-2 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
@@ -57,7 +66,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { UserCircleIcon, ChevronDownIcon, LogoutIcon, SettingsIcon, InfoCircleIcon } from '@/icons'
 import { RouterLink } from 'vue-router'
 import { ref, onMounted, onUnmounted } from 'vue'
@@ -85,8 +94,8 @@ const signOut = () => {
   closeDropdown()
 }
 
-const handleClickOutside = (event) => {
-  if (dropdownRef.value && !dropdownRef.value.contains(event.target)) {
+const handleClickOutside = (event: MouseEvent) => {
+  if (dropdownRef.value && !(dropdownRef.value as HTMLElement).contains(event.target as Node)) {
     closeDropdown()
   }
 }

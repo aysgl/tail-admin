@@ -26,22 +26,6 @@
 
 <script setup lang="ts">
 import { SuccessIcon, ErrorIcon, WarningIcon, InfoCircleIcon } from '@/icons'
-import { computed } from 'vue'
-
-interface AlertProps {
-  variant: 'success' | 'error' | 'warning' | 'info'
-  title: string
-  message: string
-  showLink?: boolean
-  linkHref?: string
-  linkText?: string
-}
-
-const props = withDefaults(defineProps<AlertProps>(), {
-  showLink: false,
-  linkHref: '#',
-  linkText: 'Learn more',
-})
 
 const variantClasses = {
   success: {
@@ -69,4 +53,18 @@ const icons = {
   warning: WarningIcon,
   info: InfoCircleIcon,
 }
+
+type Variant = keyof typeof variantClasses
+
+withDefaults(
+  defineProps<{
+    variant?: Variant
+    title: string
+    message: string
+    showLink?: boolean
+    linkHref?: string
+    linkText?: string
+  }>(),
+  { variant: 'info', showLink: false, linkHref: '#', linkText: 'Learn more' },
+)
 </script>

@@ -34,9 +34,17 @@
         </div>
       </div>
       <div class="relative max-h-[195px]">
-        <div id="chartTwo" class="h-full">
+        <div
+          id="chartTwo"
+          class="h-full"
+        >
           <div class="radial-bar-chart">
-            <VueApexCharts type="radialBar" height="330" :options="chartOptions" :series="series" />
+            <VueApexCharts
+              type="radialBar"
+              height="330"
+              :options="chartOptions"
+              :series="series"
+            />
           </div>
         </div>
         <span
@@ -133,9 +141,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import DropdownMenu from '../common/DropdownMenu.vue'
-const menuItems = [
+const menuItems: { label: string; onClick?: () => void }[] = [
   { label: 'View More', onClick: () => console.log('View More clicked') },
   { label: 'Delete', onClick: () => console.log('Delete clicked') },
 ]

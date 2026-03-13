@@ -17,7 +17,7 @@ const router = createRouter({
     {
       path: '/calendar',
       name: 'Calendar',
-      component: () => import('../views/Others/Calendar.vue'),
+      component: () => import('../views/Others/CalendarView.vue'),
       meta: {
         title: 'Calendar',
       },
@@ -25,7 +25,7 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'Profile',
-      component: () => import('../views/Others/UserProfile.vue'),
+      component: () => import('../views/Others/UserProfileView.vue'),
       meta: {
         title: 'Profile',
       },
@@ -59,7 +59,7 @@ const router = createRouter({
     {
       path: '/alerts',
       name: 'Alerts',
-      component: () => import('../views/UiElements/Alerts.vue'),
+      component: () => import('../views/UiElements/BaseAlerts.vue'),
       meta: {
         title: 'Alerts',
       },
@@ -67,7 +67,7 @@ const router = createRouter({
     {
       path: '/avatars',
       name: 'Avatars',
-      component: () => import('../views/UiElements/Avatars.vue'),
+      component: () => import('../views/UiElements/BaseAvatars.vue'),
       meta: {
         title: 'Avatars',
       },
@@ -75,7 +75,7 @@ const router = createRouter({
     {
       path: '/badge',
       name: 'Badge',
-      component: () => import('../views/UiElements/Badges.vue'),
+      component: () => import('../views/UiElements/BaseBadges.vue'),
       meta: {
         title: 'Badge',
       },
@@ -84,7 +84,7 @@ const router = createRouter({
     {
       path: '/buttons',
       name: 'Buttons',
-      component: () => import('../views/UiElements/Buttons.vue'),
+      component: () => import('../views/UiElements/BaseButtons.vue'),
       meta: {
         title: 'Buttons',
       },
@@ -93,7 +93,7 @@ const router = createRouter({
     {
       path: '/images',
       name: 'Images',
-      component: () => import('../views/UiElements/Images.vue'),
+      component: () => import('../views/UiElements/BaseImages.vue'),
       meta: {
         title: 'Images',
       },
@@ -101,7 +101,7 @@ const router = createRouter({
     {
       path: '/videos',
       name: 'Videos',
-      component: () => import('../views/UiElements/Videos.vue'),
+      component: () => import('../views/UiElements/BaseVideos.vue'),
       meta: {
         title: 'Videos',
       },
@@ -127,7 +127,7 @@ const router = createRouter({
     {
       path: '/signin',
       name: 'Signin',
-      component: () => import('../views/Auth/Signin.vue'),
+      component: () => import('../views/Auth/SigninView.vue'),
       meta: {
         title: 'Signin',
       },
@@ -135,7 +135,7 @@ const router = createRouter({
     {
       path: '/signup',
       name: 'Signup',
-      component: () => import('../views/Auth/Signup.vue'),
+      component: () => import('../views/Auth/SignupView.vue'),
       meta: {
         title: 'Signup',
       },

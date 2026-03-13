@@ -39,7 +39,10 @@
           </div>
         </div>
 
-        <button class="edit-button" @click="isProfileInfoModal = true">
+        <button
+          class="edit-button"
+          @click="isProfileInfoModal = true"
+        >
           <svg
             class="fill-current"
             width="18"
@@ -59,7 +62,10 @@
         </button>
       </div>
     </div>
-    <Modal v-if="isProfileInfoModal" @close="isProfileInfoModal = false">
+    <BaseModal
+      v-if="isProfileInfoModal"
+      @close="isProfileInfoModal = false"
+    >
       <template #body>
         <div
           class="no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11"
@@ -246,13 +252,13 @@
           </form>
         </div>
       </template>
-    </Modal>
+    </BaseModal>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-import Modal from './Modal.vue'
+import BaseModal from './BaseModal.vue'
 
 const isProfileInfoModal = ref(false)
 

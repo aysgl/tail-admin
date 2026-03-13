@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "npm run type-check && npm run build-only",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
-    "lint": "eslint . --fix",
+    "lint": "eslint . --format stylish",
+    "lint:fix": "prettier --write src/ && eslint . --fix",
     "format": "prettier --write src/",
     "prepare": "husky"
   },
@@ -50,6 +51,7 @@
     "@commitlint/config-conventional": "^20.4.4",
     "@tailwindcss/postcss": "^4.0.0",
     "@tsconfig/node22": "^22.0.0",
+    "@types/dropzone": "^5.7.9",
     "@types/node": "^22.10.7",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",

@@ -36,7 +36,13 @@
           class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
           :class="{ 'text-gray-800 dark:text-white/90': formData.selectInput }"
         >
-          <option value="" disabled selected>Select Option</option>
+          <option
+            value=""
+            disabled
+            selected
+          >
+            Select Option
+          </option>
           <option value="marketing">Marketing</option>
           <option value="template">Template</option>
           <option value="development">Development</option>
@@ -202,8 +208,18 @@
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="6.25" cy="10" r="5.625" fill="#E80B26" />
-            <circle cx="13.75" cy="10" r="5.625" fill="#F59D31" />
+            <circle
+              cx="6.25"
+              cy="10"
+              r="5.625"
+              fill="#E80B26"
+            />
+            <circle
+              cx="13.75"
+              cy="10"
+              r="5.625"
+              fill="#F59D31"
+            />
             <path
               d="M10 14.1924C11.1508 13.1625 11.875 11.6657 11.875 9.99979C11.875 8.33383 11.1508 6.8371 10 5.80713C8.84918 6.8371 8.125 8.33383 8.125 9.99979C8.125 11.6657 8.84918 13.1625 10 14.1924Z"
               fill="#FC6020"

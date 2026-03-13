@@ -32,7 +32,10 @@
             <td class="px-5 py-4 sm:px-6">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 overflow-hidden rounded-full">
-                  <img :src="user.avatar" :alt="user.name" />
+                  <img
+                    :src="user.avatar"
+                    :alt="user.name"
+                  />
                 </div>
                 <div>
                   <span class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
@@ -54,7 +57,10 @@
                   :key="memberIndex"
                   class="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
                 >
-                  <img :src="member" alt="team member" />
+                  <img
+                    :src="member"
+                    alt="team member"
+                  />
                 </div>
               </div>
             </td>
@@ -85,7 +91,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
 const users = ref([

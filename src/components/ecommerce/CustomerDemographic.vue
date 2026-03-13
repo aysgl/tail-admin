@@ -25,7 +25,10 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="items-center w-full rounded-full max-w-8">
-            <img src="/images/country/country-01.svg" alt="usa" />
+            <img
+              src="/images/country/country-01.svg"
+              alt="usa"
+            />
           </div>
           <div>
             <p class="font-semibold text-gray-800 text-theme-sm dark:text-white/90">USA</p>
@@ -36,7 +39,9 @@
         </div>
 
         <div class="flex w-full max-w-[140px] items-center gap-3">
-          <div class="relative block h-2 w-full max-w-[100px] rounded-sm bg-gray-200 dark:bg-gray-800">
+          <div
+            class="relative block h-2 w-full max-w-[100px] rounded-sm bg-gray-200 dark:bg-gray-800"
+          >
             <div
               class="absolute left-0 top-0 flex h-full w-[79%] items-center justify-center rounded-sm bg-brand-500 text-xs font-medium text-white"
             ></div>
@@ -48,7 +53,10 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="items-center w-full rounded-full max-w-8">
-            <img src="/images/country/country-02.svg" alt="france" />
+            <img
+              src="/images/country/country-02.svg"
+              alt="france"
+            />
           </div>
           <div>
             <p class="font-semibold text-gray-800 text-theme-sm dark:text-white/90">France</p>
@@ -59,7 +67,9 @@
         </div>
 
         <div class="flex w-full max-w-[140px] items-center gap-3">
-          <div class="relative block h-2 w-full max-w-[100px] rounded-sm bg-gray-200 dark:bg-gray-800">
+          <div
+            class="relative block h-2 w-full max-w-[100px] rounded-sm bg-gray-200 dark:bg-gray-800"
+          >
             <div
               class="absolute left-0 top-0 flex h-full w-[23%] items-center justify-center rounded-sm bg-brand-500 text-xs font-medium text-white"
             ></div>
@@ -77,7 +87,7 @@ import jsVectorMap from 'jsvectormap'
 import 'jsvectormap/dist/maps/world'
 
 const mapOneRef = ref<HTMLElement | null>(null)
-const mapInstance = ref<any>(null)
+const mapInstance = ref<InstanceType<typeof jsVectorMap> | undefined>(undefined)
 
 const initMap = () => {
   if (mapOneRef.value) {
@@ -123,7 +133,10 @@ const initMap = () => {
         selected: {},
         selectedHover: {},
       },
-      onRegionTooltipShow: function (event: MouseEvent, tooltip: any) {
+      onRegionTooltipShow: function (
+        event: MouseEvent,
+        tooltip: InstanceType<typeof jsVectorMap.Tooltip>,
+      ) {
         const code = (event.target as HTMLElement).getAttribute('data-code')
         if (code === 'EG') {
           tooltip.setContent(tooltip.text() + ' (Hello Egypt)')

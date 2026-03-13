@@ -1,7 +1,14 @@
 <template>
-  <div class="relative" v-click-outside="closeDropdown" ref="dropdown">
+  <div
+    class="relative"
+    v-click-outside="closeDropdown"
+    ref="dropdown"
+  >
     <!-- Dropdown Trigger Button -->
-    <button @click="toggleDropdown" :class="buttonClass">
+    <button
+      @click="toggleDropdown"
+      :class="props.buttonClass"
+    >
       <slot name="icon">
         <!-- Default icon -->
         <svg
@@ -22,16 +29,19 @@
     </button>
 
     <!-- Dropdown Menu -->
-    <div v-if="open" :class="menuClass">
+    <div
+      v-if="open"
+      :class="props.menuClass"
+    >
       <slot name="menu">
         <!-- Default menu items -->
-        <template v-for="(item, index) in menuItems">
+        <template v-for="(item, index) in props.menuItems">
           <router-link
             v-if="item.to"
             :key="`router-${index}`"
             :to="item.to"
-            @click.native="handleMenuItemClick(item.onClick)"
-            :class="itemClass"
+            @click="handleMenuItemClick(item.onClick)"
+            :class="props.itemClass"
           >
             {{ item.label }}
           </router-link>
@@ -40,7 +50,7 @@
             v-else
             :key="`button-${index}`"
             @click="handleMenuItemClick(item.onClick)"
-            :class="itemClass"
+            :class="props.itemClass"
           >
             {{ item.label }}
           </button>
@@ -50,29 +60,40 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-import vClickOutside from './v-click-outside.vue'
+import { clickOutside } from '@/directives/clickOutside'
 
-const props = defineProps({
-  menuItems: {
-    type: Array,
-    default: () => [],
-  },
-  buttonClass: {
-    type: String,
-    default: 'text-gray-500 dark:text-gray-400',
-  },
-  menuClass: {
-    type: String,
-    default:
+interface MenuItem {
+  label: string
+  to?: string
+  onClick?: () => void
+}
+
+const props = withDefaults(
+  defineProps<{
+    menuItems?: MenuItem[]
+    buttonClass?: string
+    menuClass?: string
+    itemClass?: string
+  }>(),
+  {
+    menuItems: () => [],
+    buttonClass: 'text-gray-500 dark:text-gray-400',
+    menuClass:
       'absolute right-0 z-40 w-40 p-2 space-y-1 bg-white border border-gray-200 top-full rounded-2xl shadow-lg dark:border-gray-800 dark:bg-gray-dark',
-  },
-  itemClass: {
-    type: String,
-    default:
+    itemClass:
       'flex w-full px-3 py-2 font-medium text-left text-gray-500 rounded-lg text-theme-xs hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300',
   },
+)
+
+defineSlots<{
+  icon?: () => unknown
+  menu?: () => unknown
+}>()
+
+defineOptions({
+  directives: { clickOutside },
 })
 
 const open = ref(false)
@@ -85,18 +106,10 @@ const closeDropdown = () => {
   open.value = false
 }
 
-const handleMenuItemClick = (callback) => {
+const handleMenuItemClick = (callback?: () => void) => {
   if (typeof callback === 'function') {
     callback() // Execute the provided callback function
   }
   closeDropdown() // Close the dropdown after the item is clicked
-}
-</script>
-
-<script>
-export default {
-  directives: {
-    clickOutside: vClickOutside,
-  },
 }
 </script>

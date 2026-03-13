@@ -11,14 +11,28 @@
           class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
           :class="{ 'text-gray-800 dark:text-white/90': singleSelect }"
         >
-          <option value="" disabled>Select Option</option>
-          <option value="marketing" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+          <option
+            value=""
+            disabled
+          >
+            Select Option
+          </option>
+          <option
+            value="marketing"
+            class="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
+          >
             Marketing
           </option>
-          <option value="template" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+          <option
+            value="template"
+            class="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
+          >
             Template
           </option>
-          <option value="development" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+          <option
+            value="development"
+            class="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
+          >
             Development
           </option>
         </select>
@@ -47,13 +61,17 @@
 
     <!-- Multiple Select Input -->
     <div>
-      <MultipleSelect v-model="selectedItems" :options="optionss" class="w-full" />
+      <MultipleSelect
+        v-model="selectedItems"
+        :options="optionss"
+        class="w-full"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import MultipleSelect from './MultipleSelect.vue'
 
 const optionss = [
@@ -68,13 +86,4 @@ const optionss = [
 const selectedItems = ref([])
 
 const singleSelect = ref('')
-
-const options = ref([
-  { text: 'Option 1', selected: false },
-  { text: 'Option 2', selected: false },
-  { text: 'Option 3', selected: false },
-  { text: 'Option 4', selected: false },
-])
-
-const selected = computed(() => options.value.filter((option) => option.selected))
 </script>

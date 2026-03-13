@@ -1,6 +1,10 @@
 <template>
   <div :class="['relative rounded-full', sizeClasses[size]]">
-    <img :src="src" :alt="alt" class="object-cover rounded-full" />
+    <img
+      :src="src"
+      :alt="alt"
+      class="object-cover rounded-full"
+    />
     <span
       v-if="status !== 'none'"
       :class="[
@@ -13,19 +17,6 @@
 </template>
 
 <script setup lang="ts">
-interface AvatarProps {
-  src: string
-  alt?: string
-  size?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge'
-  status?: 'online' | 'offline' | 'busy' | 'none'
-}
-
-const props = withDefaults(defineProps<AvatarProps>(), {
-  alt: 'User Avatar',
-  size: 'medium',
-  status: 'none',
-})
-
 const sizeClasses = {
   xsmall: 'h-6 w-6 max-w-6',
   small: 'h-8 w-8 max-w-8',
@@ -48,5 +39,18 @@ const statusColorClasses = {
   online: 'bg-success-500',
   offline: 'bg-error-400',
   busy: 'bg-warning-500',
-}
+} as const
+
+type Size = keyof typeof sizeClasses
+type Status = keyof typeof statusColorClasses | 'none'
+
+withDefaults(
+  defineProps<{
+    src: string
+    alt?: string
+    size?: Size
+    status?: Status
+  }>(),
+  { size: 'medium', status: 'none', alt: '' },
+)
 </script>

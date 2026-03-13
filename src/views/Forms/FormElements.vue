@@ -4,45 +4,45 @@
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
       <div class="space-y-6">
         <ComponentCard title="Default Inputs">
-          <DefaultInputs />
+          <BaseDefaultInput />
         </ComponentCard>
         <ComponentCard title="Select Inputs">
-          <SelectInput />
+          <BaseSelectInput />
         </ComponentCard>
         <ComponentCard title="Inputs States">
-          <TextArea />
+          <BaseTextArea />
         </ComponentCard>
         <ComponentCard title="Inputs States">
-          <InputState />
+          <BaseInputState />
         </ComponentCard>
       </div>
       <div class="space-y-6">
-        <ComponentCard title="Inputs Group"> <InputGroup /> </ComponentCard>
-        <ComponentCard title="File Input"> <FileInput /> </ComponentCard>
+        <ComponentCard title="Inputs Group"> <BaseInputGroup /> </ComponentCard>
+        <ComponentCard title="File Input"> <BaseFileInput /> </ComponentCard>
         <ComponentCard title="Checkboxes">
-          <CheckboxInput />
+          <BaseCheckboxInput />
         </ComponentCard>
         <ComponentCard title="Dropzone">
-          <Dropzone />
+          <BaseDropzone />
         </ComponentCard>
       </div>
     </div>
   </AdminLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import AdminLayout from '@/components/layout/AdminLayout.vue'
-import DefaultInputs from '@/components/forms/FormElements/DefaultInputs.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
-import SelectInput from '@/components/forms/FormElements/SelectInput.vue'
-import InputState from '@/components/forms/FormElements/InputState.vue'
-import TextArea from '@/components/forms/FormElements/TextArea.vue'
-import InputGroup from '@/components/forms/FormElements/InputGroup.vue'
-import Dropzone from '@/components/forms/FormElements/Dropzone.vue'
-import FileInput from '@/components/forms/FormElements/FileInput.vue'
-import CheckboxInput from '@/components/forms/FormElements/CheckboxInput.vue'
+import BaseDefaultInput from '@/components/forms/FormElements/DefaultInputs.vue'
+import BaseSelectInput from '@/components/forms/FormElements/BaseSelectInput.vue'
+import BaseTextArea from '@/components/forms/FormElements/TextArea.vue'
+import BaseInputState from '@/components/forms/FormElements/InputState.vue'
+import BaseDropzone from '@/components/forms/FormElements/BaseDropzone.vue'
+import BaseCheckboxInput from '@/components/forms/FormElements/CheckboxInput.vue'
+import BaseInputGroup from '@/components/forms/FormElements/InputGroup.vue'
+import BaseFileInput from '@/components/forms/FormElements/FileInput.vue'
 
 const currentPageTitle = ref('Form Elements')
 </script>

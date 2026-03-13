@@ -1,5 +1,8 @@
 <template>
-  <div class="relative" ref="dropdownRef">
+  <div
+    class="relative"
+    ref="dropdownRef"
+  >
     <button
       class="relative flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-full hover:text-dark-900 h-11 w-11 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
       @click="toggleDropdown"
@@ -39,7 +42,10 @@
       >
         <h5 class="text-lg font-semibold text-gray-800 dark:text-white/90">Notification</h5>
 
-        <button @click="closeDropdown" class="text-gray-500 dark:text-gray-400">
+        <button
+          @click="closeDropdown"
+          class="text-gray-500 dark:text-gray-400"
+        >
           <svg
             class="fill-current"
             width="24"
@@ -59,13 +65,21 @@
       </div>
 
       <ul class="flex flex-col h-auto overflow-y-auto custom-scrollbar">
-        <li v-for="notification in notifications" :key="notification.id" @click="handleItemClick">
+        <li
+          v-for="notification in notifications"
+          :key="notification.id"
+          @click="handleItemClick"
+        >
           <a
             class="flex gap-3 rounded-lg border-b border-gray-100 p-3 px-4.5 py-3 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-white/5"
             href="#"
           >
             <span class="relative block w-full h-10 rounded-full z-1 max-w-10">
-              <img :src="notification.userImage" alt="User" class="overflow-hidden rounded-full" />
+              <img
+                :src="notification.userImage"
+                alt="User"
+                class="overflow-hidden rounded-full"
+              />
               <span
                 :class="notification.status === 'online' ? 'bg-success-500' : 'bg-error-500'"
                 class="absolute bottom-0 right-0 z-10 h-2.5 w-full max-w-2.5 rounded-full border-[1.5px] border-white dark:border-gray-900"
@@ -105,7 +119,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 
@@ -206,20 +220,20 @@ const closeDropdown = () => {
   dropdownOpen.value = false
 }
 
-const handleClickOutside = (event) => {
-  if (dropdownRef.value && !dropdownRef.value.contains(event.target)) {
+const handleClickOutside = (event: MouseEvent) => {
+  if (dropdownRef.value && !(dropdownRef.value as HTMLElement).contains(event.target as Node)) {
     closeDropdown()
   }
 }
 
-const handleItemClick = (event) => {
+const handleItemClick = (event: MouseEvent) => {
   event.preventDefault()
   // Handle the item click action here
   console.log('Notification item clicked')
   closeDropdown()
 }
 
-const handleViewAllClick = (event) => {
+const handleViewAllClick = (event: MouseEvent) => {
   event.preventDefault()
   // Handle the "View All Notification" action here
   console.log('View All Notifications clicked')

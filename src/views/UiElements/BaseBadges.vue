@@ -4,21 +4,35 @@
     <div class="space-y-5 sm:space-y-6">
       <ComponentCard title="With Light Background">
         <div class="flex flex-wrap gap-4 sm:items-center sm:justify-center">
-          <Badge v-for="color in colors" :key="color" :color="color">
+          <Badge
+            v-for="color in colors"
+            :key="color"
+            :color="color"
+          >
             {{ color }}
           </Badge>
         </div>
       </ComponentCard>
       <ComponentCard title="With Solid Background">
         <div class="flex flex-wrap gap-4 sm:items-center sm:justify-center">
-          <Badge v-for="color in colors" :key="color" :color="color" variant="solid">
+          <Badge
+            v-for="color in colors"
+            :key="color"
+            :color="color"
+            variant="solid"
+          >
             {{ color }}
           </Badge>
         </div>
       </ComponentCard>
       <ComponentCard title="Light Background with Left Icon">
         <div class="flex flex-wrap gap-4 sm:items-center sm:justify-center">
-          <Badge v-for="color in colors" :key="color" :color="color" :endIcon="PlusIcon">
+          <Badge
+            v-for="color in colors"
+            :key="color"
+            :color="color"
+            :endIcon="PlusIcon"
+          >
             {{ color }}
           </Badge>
         </div>
@@ -38,7 +52,12 @@
       </ComponentCard>
       <ComponentCard title="Light Background with Right Icon">
         <div class="flex flex-wrap gap-4 sm:items-center sm:justify-center">
-          <Badge v-for="color in colors" :key="color" :color="color" :endIcon="PlusIcon">
+          <Badge
+            v-for="color in colors"
+            :key="color"
+            :color="color"
+            :endIcon="PlusIcon"
+          >
             {{ color }}
           </Badge>
         </div>
@@ -62,7 +81,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Badge from '../../components/ui/Badge.vue'
+import Badge from '../../components/ui/BaseBadge.vue'
 import PageBreadcrumb from '../../components/common/PageBreadcrumb.vue'
 import AdminLayout from '../../components/layout/AdminLayout.vue'
 import ComponentCard from '../../components/common/ComponentCard.vue'

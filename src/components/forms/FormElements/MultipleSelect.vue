@@ -1,11 +1,19 @@
 <template>
-  <div class="relative" ref="multiSelectRef">
+  <div
+    class="relative"
+    ref="multiSelectRef"
+  >
     <div
       @click="toggleDropdown"
       class="dark:bg-dark-900 h-11 flex items-center w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
       :class="{ 'text-gray-800 dark:text-white/90': isOpen }"
     >
-      <span v-if="selectedItems.length === 0" class="text-gray-400"> Select items... </span>
+      <span
+        v-if="selectedItems.length === 0"
+        class="text-gray-400"
+      >
+        Select items...
+      </span>
       <div class="flex flex-wrap items-center flex-auto gap-2">
         <div
           v-for="item in selectedItems"
@@ -103,31 +111,34 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import type { PropType } from 'vue'
+
+type Option = { value: string; label: string }
 
 const props = defineProps({
   options: {
-    type: Array,
+    type: Array as PropType<Option[]>,
     required: true,
   },
   modelValue: {
-    type: Array,
+    type: Array as PropType<Option[]>,
     default: () => [],
   },
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits<{ (e: 'update:modelValue', value: Option[]): void }>()
 
 const isOpen = ref(false)
-const selectedItems = ref(props.modelValue)
-const multiSelectRef = ref(null)
+const selectedItems = ref<Option[]>(props.modelValue ?? [])
+const multiSelectRef = ref<HTMLElement | null>(null)
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value
 }
 
-const toggleItem = (item) => {
+const toggleItem = (item: { value: string; label: string }) => {
   const index = selectedItems.value.findIndex((selected) => selected.value === item.value)
   if (index === -1) {
     selectedItems.value.push(item)
@@ -137,7 +148,7 @@ const toggleItem = (item) => {
   emit('update:modelValue', selectedItems.value)
 }
 
-const removeItem = (item) => {
+const removeItem = (item: { value: string; label: string }) => {
   const index = selectedItems.value.findIndex((selected) => selected.value === item.value)
   if (index !== -1) {
     selectedItems.value.splice(index, 1)
@@ -145,12 +156,13 @@ const removeItem = (item) => {
   }
 }
 
-const isSelected = (item) => {
+const isSelected = (item: { value: string; label: string }) => {
   return selectedItems.value.some((selected) => selected.value === item.value)
 }
 
-const handleClickOutside = (event) => {
-  if (multiSelectRef.value && !multiSelectRef.value.contains(event.target)) {
+const handleClickOutside = (event: MouseEvent) => {
+  const el = multiSelectRef.value
+  if (el && event.target instanceof Node && !el.contains(event.target)) {
     isOpen.value = false
   }
 }

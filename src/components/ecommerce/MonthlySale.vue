@@ -28,14 +28,22 @@
     </div>
 
     <div class="max-w-full overflow-x-auto custom-scrollbar">
-      <div id="chartOne" class="-ml-5 min-w-[650px] xl:min-w-full pl-2">
-        <VueApexCharts type="bar" height="180" :options="chartOptions" :series="series" />
+      <div
+        id="chartOne"
+        class="-ml-5 min-w-[650px] xl:min-w-full pl-2"
+      >
+        <VueApexCharts
+          type="bar"
+          height="180"
+          :options="chartOptions"
+          :series="series"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import DropdownMenu from '../common/DropdownMenu.vue'
 const menuItems = [
@@ -126,7 +134,7 @@ const chartOptions = ref({
       show: false,
     },
     y: {
-      formatter: function (val) {
+      formatter: function (val: number) {
         return val.toString()
       },
     },

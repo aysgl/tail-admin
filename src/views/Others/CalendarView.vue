@@ -5,11 +5,18 @@
       class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]"
     >
       <div class="custom-calendar">
-        <FullCalendar ref="calendarRef" class="min-h-screen" :options="calendarOptions" />
+        <FullCalendar
+          ref="calendarRef"
+          class="min-h-screen"
+          :options="calendarOptions"
+        />
       </div>
 
       <!-- Modal -->
-      <Modal v-if="isOpen" @close="closeModal = false">
+      <BaseModal
+        v-if="isOpen"
+        @close="closeModal"
+      >
         <template #body>
           <div
             class="no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11"
@@ -40,7 +47,11 @@
                   Event Color
                 </label>
                 <div class="flex flex-wrap items-center gap-4 sm:gap-5">
-                  <div v-for="(value, key) in calendarsEvents" :key="key" class="n-chk">
+                  <div
+                    v-for="(value, key) in calendarsEvents"
+                    :key="key"
+                    class="n-chk"
+                  >
                     <div :class="`form-check form-check-${value} form-check-inline`">
                       <label
                         class="flex items-center text-sm text-gray-700 form-check-label dark:text-gray-400"
@@ -115,7 +126,7 @@
             </div>
           </div>
         </template>
-      </Modal>
+      </BaseModal>
       <!-- <Teleport to="body">
         <div v-if="isOpen" class="modal-backdrop" @click="closeModal"></div>
         <div v-if="isOpen" class="modal">
@@ -218,26 +229,39 @@
   </AdminLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, reactive, onMounted } from 'vue'
 import AdminLayout from '@/components/layout/AdminLayout.vue'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
-
-const currentPageTitle = ref('Calendar')
-import { ref, reactive, onMounted } from 'vue'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import Modal from '@/components/profile/Modal.vue'
+import BaseModal from '@/components/ui/BaseModal.vue'
 
-const calendarRef = ref(null)
+type CalendarEvent = {
+  id: string
+  title: string
+  start: string
+  end?: string
+  allDay?: boolean
+  extendedProps: { calendar: string }
+}
+
+const currentPageTitle = ref('Calendar')
 const isOpen = ref(false)
-const selectedEvent = ref(null)
+const selectedEvent = ref<{
+  id?: string
+  title: string
+  start?: Date | null
+  end?: Date | null
+  extendedProps?: { calendar?: string }
+} | null>(null)
 const eventTitle = ref('')
 const eventStartDate = ref('')
 const eventEndDate = ref('')
 const eventLevel = ref('')
-const events = ref([])
+const events = ref<CalendarEvent[]>([])
 
 const calendarsEvents = reactive({
   Danger: 'danger',
@@ -287,28 +311,30 @@ const resetModalFields = () => {
   selectedEvent.value = null
 }
 
-const handleDateSelect = (selectInfo) => {
+const handleDateSelect = (selectInfo: { startStr: string; endStr?: string }) => {
   resetModalFields()
   eventStartDate.value = selectInfo.startStr
   eventEndDate.value = selectInfo.endStr || selectInfo.startStr
   openModal()
 }
 
-const handleEventClick = (clickInfo) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const handleEventClick = (clickInfo: any) => {
   const event = clickInfo.event
   selectedEvent.value = event
   eventTitle.value = event.title
   eventStartDate.value = event.start?.toISOString().split('T')[0] || ''
   eventEndDate.value = event.end?.toISOString().split('T')[0] || ''
-  eventLevel.value = event.extendedProps.calendar
+  eventLevel.value = event.extendedProps?.calendar ?? ''
   openModal()
 }
 
 const handleAddOrUpdateEvent = () => {
-  if (selectedEvent.value) {
+  const current = selectedEvent.value
+  if (current?.id) {
     // Update existing event
     events.value = events.value.map((event) =>
-      event.id === selectedEvent.value.id
+      event.id === current.id
         ? {
             ...event,
             title: eventTitle.value,
@@ -333,13 +359,17 @@ const handleAddOrUpdateEvent = () => {
   closeModal()
 }
 const handleDeleteEvent = () => {
-  if (selectedEvent.value) {
-    events.value = events.value.filter((event) => event.id !== selectedEvent.value.id)
+  const current = selectedEvent.value
+  if (current?.id) {
+    events.value = events.value.filter((event) => event.id !== current.id)
     closeModal()
   }
 }
 
-const renderEventContent = (eventInfo) => {
+const renderEventContent = (eventInfo: {
+  event: { extendedProps: { calendar: string }; title: string }
+  timeText: string
+}) => {
   const colorClass = `fc-bg-${eventInfo.event.extendedProps.calendar.toLowerCase()}`
   return {
     html: `

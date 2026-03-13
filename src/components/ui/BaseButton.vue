@@ -10,19 +10,23 @@
     @click="onClick"
     :disabled="disabled"
   >
-    <span v-if="startIcon" class="flex items-center">
+    <span
+      v-if="startIcon"
+      class="flex items-center"
+    >
       <component :is="startIcon" />
     </span>
     <slot></slot>
-    <span v-if="endIcon" class="flex items-center">
+    <span
+      v-if="endIcon"
+      class="flex items-center"
+    >
       <component :is="endIcon" />
     </span>
   </button>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-
 interface ButtonProps {
   size?: 'sm' | 'md'
   variant?: 'primary' | 'outline'

@@ -51,7 +51,7 @@
         />
       </ComponentCard>
       <ComponentCard title="Info Alert">
-        <Alert
+        <BaseAlert
           variant="info"
           title="Info  Message"
           message="Be cautious when performing this action."
@@ -59,7 +59,7 @@
           linkHref="/"
           linkText="Learn more"
         />
-        <Alert
+        <BaseAlert
           variant="info"
           title="Info Message Message"
           message="Be cautious when performing this action."
@@ -70,12 +70,12 @@
   </AdminLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import AdminLayout from '@/components/layout/AdminLayout.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
-import Alert from '@/components/ui/Alert.vue'
+import BaseAlert from '@/components/ui/BaseAlert.vue'
 const currentPageTitle = ref('Alerts')
 </script>
 

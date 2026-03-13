@@ -6,7 +6,10 @@
           <div
             class="w-20 h-20 overflow-hidden border border-gray-200 rounded-full dark:border-gray-800"
           >
-            <img src="/images/user/owner.jpg" alt="user" />
+            <img
+              src="/images/user/owner.jpg"
+              alt="user"
+            />
           </div>
           <div class="order-3 xl:order-2">
             <h4
@@ -43,7 +46,12 @@
                 />
               </svg>
             </a>
-            <a href="https://x.com/PimjoHQ" target="_blank" rel="noopener" class="social-button">
+            <a
+              href="https://x.com/PimjoHQ"
+              target="_blank"
+              rel="noopener"
+              class="social-button"
+            >
               <svg
                 class="fill-current"
                 width="20"
@@ -100,7 +108,10 @@
             </a>
           </div>
         </div>
-        <button @click="isProfileInfoModal = true" class="edit-button">
+        <button
+          @click="isProfileInfoModal = true"
+          class="edit-button"
+        >
           <svg
             class="fill-current"
             width="18"
@@ -120,7 +131,10 @@
         </button>
       </div>
     </div>
-    <Modal v-if="isProfileInfoModal" @close="isProfileInfoModal = false">
+    <BaseModal
+      v-if="isProfileInfoModal"
+      @close="isProfileInfoModal = false"
+    >
       <template #body>
         <div
           class="no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11"
@@ -307,13 +321,13 @@
           </form>
         </div>
       </template>
-    </Modal>
+    </BaseModal>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-import Modal from './Modal.vue'
+import BaseModal from './BaseModal.vue'
 
 const isProfileInfoModal = ref(false)
 
