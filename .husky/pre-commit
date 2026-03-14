@@ -1,5 +1,2 @@
 #!/bin/sh
-# Commit öncesi: Tarayıcıda checklist sayfası açılır (IDE dahil her yerde çalışır)
-node scripts/open-reminder.js
-
-# Lint-staged ve commit mesajı prepare-commit-msg'da çalışır
+npx lint-staged --no-stash

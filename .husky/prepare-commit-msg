@@ -1,5 +1,5 @@
 #!/bin/sh
-# 1. Commit mesajı formatını kontrol et - HATA VARSA İLK MESAJ BU OLSUN
+# Commit mesajı formatı kontrolü (commitlint) — lint-staged pre-commit'te
 if [ -f "$1" ] && [ -s "$1" ]; then
   npx --no -- commitlint --edit "$1" >/dev/null 2>&1
   if [ $? -ne 0 ]; then
@@ -13,6 +13,3 @@ if [ -f "$1" ] && [ -s "$1" ]; then
     exit 1
   fi
 fi
-
-# 2. Format doğruysa lint-staged (uyarı commit-msg'da - commit sonrası gösterilir)
-npx lint-staged --no-stash

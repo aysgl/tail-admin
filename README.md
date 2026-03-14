@@ -19,6 +19,8 @@ TailAdmin provides essential UI components and layouts for building feature-rich
 - Tailwind CSS 4.x
 - TypeScript
 
+Tüm bağımlılıklar ve script'ler için `package.json` dosyasına bakın.
+
 ### Quick Links
 
 - [✨ Visit Website](https://tailadmin.com)
@@ -45,8 +47,9 @@ TailAdmin provides essential UI components and layouts for building feature-rich
 
 To get started with TailAdmin, ensure you have the following prerequisites installed and set up:
 
-- Node.js 18.x or later (recommended to use Node.js 20.x or later)
-- Recommended IDE Setup: [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **Node.js:** Minimum 22.x (proje `@tsconfig/node22` kullanır; Node 24 ile de uyumludur)
+- **Paket yöneticisi:** `npm` kullanın — `package-lock.json` commit edilir, tutarlılık için yarn/pnpm karıştırmayın
+- **IDE:** [VSCode](https://code.visualstudio.com/) veya [Cursor](https://cursor.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) önerilir (Vetur devre dışı)
 
 #### Type Support for `.vue` Imports in TS
 
@@ -66,93 +69,46 @@ git clone https://github.com/TailAdmin/vue-tailwind-admin-dashboard.git
 
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
 2. Start the development server:
 
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
 3. Production build:
+
    ```bash
    npm run build
-   # or
-   yarn build
    ```
 
-## Feature Comparison
+Tüm komutlar (`lint`, `format`, `storybook`, `stash` vb.) ve geliştirme akışı için aşağıdaki [Config Dokümantasyonu & Tooling](#config-dokümantasyonu--tooling-) bölümüne ve ilgili config dosyalarına bakın.
 
-### Free Version
+## Config Dokümantasyonu & Tooling ⚠️
 
-- 1 Unique Dashboard
-- 50+ Dashboard UI components
-- Basic Figma design files
-- Community support
+Bu projedeki tüm yapılandırma dosyalarının dokümantasyonu. **Merge conflict yaşamamak için** config dokümanlarını güncellerken dikkatli olun.
 
-### Pro Version
+### Config Dokümanları
 
-- 7 Unique Dashboards: Analytics, Ecommerce, Marketing, CRM, Stocks (more coming soon)
-- 500+ dashboard components and UI elements
-- Complete Figma design file
-- Email support
+| Dosya                                | Açıklama                           |
+| ------------------------------------ | ---------------------------------- |
+| [COMMITLINT.md](./COMMITLINT.md)     | Commit mesajı kuralları ve formatı |
+| [EDITORCONFIG.md](./EDITORCONFIG.md) | EditorConfig ayarları              |
+| [ESLINT.md](./ESLINT.md)             | ESLint kuralları ve kullanımı      |
+| [POSTCSS.md](./POSTCSS.md)           | PostCSS yapılandırması             |
+| [PRETTIER.md](./PRETTIER.md)         | Prettier formatlama kuralları      |
+| [STORYBOOK.md](./STORYBOOK.md)       | Storybook kurulumu ve kullanımı    |
+| [TSCONFIG.md](./TSCONFIG.md)         | TypeScript yapılandırması          |
+| [VITE.md](./VITE.md)                 | Vite build ve dev ayarları         |
 
-To learn more about pro version features and pricing, visit our [pricing page](https://tailadmin.com/pricing).
+### Takım Gereksinimleri
 
-## Components
+- **Node.js:** Minimum Node 22.x (proje `@tsconfig/node22` kullanır; Node 24 ile de uyumludur)
+- **Paket yöneticisi:** `npm` kullanın — `package-lock.json` commit edilir, tutarlılık için yarn/pnpm karıştırmayın
+- **IDE:** VSCode veya Cursor + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) önerilir (Vetur devre dışı)
 
-TailAdmin is a pre-designed starting point for building a web-based dashboard using Vue.js and Tailwind CSS. The template includes:
-
-- Sophisticated and accessible sidebar
-- Data visualization components
-- Prebuilt profile management and 404 page
-- Tables and Charts(Line and Bar)
-- Authentication forms and input elements
-- Alerts, Dropdowns, Modals, Buttons and more
-- Can't forget Dark Mode 🕶️
-
-All components are built with Vue and styled using Tailwind CSS for easy customization.
-
-## Features
-
-**💎 High-quality, Premium Modern Design:**
-A thoughtfully designed dashboard template with a deep focus on UX/UI, already trusted and utilized by over 10K+ web apps worldwide.
-
-**✨ Vue 3:**
-Get enhanced performance with the latest Vue version.
-
-**⚡ Vite Build System:**
-Enjoy quick development with Vite, ensuring fast code compilation.
-
-**🔀 Vue Router:**
-Manage app navigation with ease using Vue Router for seamless transitions.
-
-**💡 Reactive Utilities:**
-Enhance component reactivity with @vueuse/core utilities.
-
-**📊 Charting with ApexCharts:**
-Visualize data with ApexCharts for beautiful analytics.
-
-**🗺️ Vector Maps with JSVectorMap:**
-Easily integrate interactive vector maps with JSVectorMap.
-
-**🖌️ UI with Tailwind CSS:**
-Frontend UI built on the powerful and versatile Tailwind CSS framework.
-
-**💫 TypeScript Support:**
-Write safer, maintainable code with TailAdmin Vue's TypeScript Support.
-
-**✅ Linting and Formatting:**
-Maintain a clean codebase with built-in linting and formatting.
-
-**🗃️ State Management with Pinia:**
-Handle your app's state with Pinia for clean, organized code.
-
-## Frontend Tooling Akışı & Standartları 🚦
+### Frontend Tooling Akışı & Standartları 🚦
 
 Aşağıdaki akış, bir geliştiricinin kod yazımından yayına alım sürecine kadar takip ettiği kalite kontrol adımlarını özetler:
 
@@ -163,14 +119,14 @@ Aşağıdaki akış, bir geliştiricinin kod yazımından yayına alım sürecin
 | **Doğrulama (Git Push / PR)**   | Uzak sunucuda otomatik kontrol süreci          | CI Pipeline: Lint kontrolü, Tip kontrolü (Type-check) ve Build testi                             |
 | **Final Onay ve Dokümantasyon** | Akran denetimi ve bileşen dokümantasyonu       | Code Review, Storybook (önerilir)                                                                |
 
-### Akış Diyagramı
+#### Akış Diyagramı
 
 ```
 Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-staged → commitlint
      → Git Push/PR → CI (Lint + Type-check + Build) → Code Review → Merge
 ```
 
-### Araç Seçimi (Tool Selection) 🚗
+#### Araç Seçimi (Tool Selection) 🚗
 
 | Tool                    | Görev                          | Alternatif   | Neden Seçildi                                            |
 | ----------------------- | ------------------------------ | ------------ | -------------------------------------------------------- |
@@ -180,53 +136,45 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 | **Commitlint**          | Semantic commit                | -            | Otomatik changelog ve okunabilir Git history             |
 | **Storybook**           | UI izolasyonu ve dokümantasyon | Styleguidist | Geniş ekosistem ve addon desteği (projeye eklenebilir)   |
 
-### Kullanım Detayları
+#### Kullanım Detayları
 
-#### Geliştirme Aşaması
+**Geliştirme Aşaması**
 
 - **ESLint**: `npm run lint` — Kod kalitesi ve stil kuralları
-- **Prettier**: `npm run format` — Otomatik formatlama (VSCode'da format on save önerilir)
-- **TypeScript**: `npm run type-check` — Tip güvenliği kontrolü
+- **Prettier**: `npm run format` — Otomatik formatlama (VSCode/Cursor'da format on save önerilir)
+- **TypeScript (vue-tsc)**: `npm run type-check` — Vue SFC'leri dahil tip güvenliği kontrolü
 
-#### Lokal Onay (Git Hooks)
+**Lokal Onay (Git Hooks)**
 
-- **pre-commit**: `lint-staged` — Sadece staged dosyalarda ESLint + Prettier çalıştırır
-- **commit-msg**: `commitlint` — Commit mesajının [Conventional Commits](https://www.conventionalcommits.org/) formatında olmasını zorunlu kılar
+| Hook                   | Ne yapar                                                                   |
+| ---------------------- | -------------------------------------------------------------------------- |
+| **pre-commit**         | `lint-staged` — staged dosyalarda ESLint + Prettier                        |
+| **prepare-commit-msg** | Commit mesajı formatı kontrolü (commitlint)                                |
+| **commit-msg**         | Commit mesajı formatı son kontrolü (commitlint)                            |
+| **pre-push**           | Hatırlatma: `npm run lint` ve `npm run build` çalıştırıldığından emin olun |
 
 **Geçerli commit tipleri:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
 
 **Örnek commit mesajı:** `feat: kullanıcı giriş sayfası eklendi`
 
-- **pre-commit**: Commit öncesi tarayıcıda checklist sayfası açılır (IDE dahil her yerde çalışır).
-- **pre-push**: Push öncesi hatırlatma — `npm run lint` ve `npm run build` çalıştırdığınızdan emin olun.
+**Stash Sonrası Hatırlatma**
 
-#### Stash Öncesi Kontrol
-
-`git stash` kullanmadan önce lint, format ve build çalıştırıldığından emin olmak için:
+`npm run stash` veya `git stash` (stash:setup sonrası) kullandığınızda stash tamamlandıktan sonra hatırlatma gösterilir:
 
 ```bash
 npm run stash
+# veya git stash kullanmak için (bir kez): npm run stash:setup
 ```
 
-veya `git stash` komutunu bu uyarıyla kullanmak için (bir kez çalıştırın):
+Stash sonrası: `lint:fix`, `lint`, `type-check`, `build` sırasını çalıştırmanız hatırlatılır.
 
-```bash
-npm run stash:setup
-```
-
-Bundan sonra `git stash` yazdığınızda otomatik uyarı gelir:
-
-- **[y]** Evet, devam et
-- **[n]** Hayır, iptal et
-- **[r]** Hayır, önce lint:fix + build çalıştır, sonra stash yap
-
-#### CI Pipeline (.github/workflows/ci.yml)
+**CI Pipeline** (.github/workflows/ci.yml)
 
 - Lint kontrolü
 - Type-check (vue-tsc)
 - Production build testi
 
-### Önerilen IDE Ayarları (.vscode/settings.json)
+**Önerilen IDE Ayarları** (.vscode/settings.json)
 
 ```json
 {
@@ -238,76 +186,8 @@ Bundan sonra `git stash` yazdığınızda otomatik uyarı gelir:
 }
 ```
 
-## Update Logs
+### Conflict Önleme İpuçları
 
-### Version 2.0.2 - [December 30, 2025]
-
-#### Enhancements
-
-- Added date range picker to Statistics Chart component.
-- Improved responsive design for chart header.
-
-### Version 2.0.1 - [February 27, 2025]
-
-#### Update Overview
-
-- Upgraded to Tailwind CSS v4 for better performance and efficiency.
-- Updated class usage to match the latest syntax and features.
-- Replaced deprecated class and optimized styles.
-
-#### Next Steps
-
-- Run npm install or yarn install to update dependencies.
-- Check for any style changes or compatibility issues.
-- Refer to the Tailwind CSS v4 [Migration Guide](https://tailwindcss.com/docs/upgrade-guide) on this release. if needed.
-- This update keeps the project up to date with the latest Tailwind improvements. 🚀
-
-### Version 2.0.0 - [February 2025]
-
-Major update with Vue 3 migration and comprehensive redesign.
-
-#### Major Improvements
-
-- Complete migration to Vue 3 Composition API
-- Updated to Vue Router 4
-- Enhanced user interface with new Vue 3 components
-- Improved performance with Vue 3's virtual DOM
-- Better accessibility and responsive design
-
-#### New Features
-
-- Redesigned dashboards (Ecommerce, Analytics, Marketing, CRM)
-- Collapsible sidebar with Vue 3 integration
-- Enhanced navigation with Vue Router 4
-- Real-time chat functionality
-- Full-featured calendar with drag-and-drop
-- Advanced table components
-- Updated data visualization with ApexCharts
-
-#### Breaking Changes
-
-- Requires Vue 3 and Vue Router 4
-- Chart components migrated to ApexCharts for Vue 3
-- Modified routing implementation
-- Updated component APIs for Vue 3 compatibility
-
-[Read more](https://tailadmin.com/docs/update-logs/vue) on this release.
-
-### Version 1.0.2 - [June 19, 2024]
-
-#### Issues
-
-- Fix Mobile Menu Hamburger Icon issue.
-
-### Version 1.0.1 - [Feb 08, 2024]
-
-#### Enhancements
-
-- Make it functional [Multiselect Dropdown/Form Elements].
-- Delete SelectGroup Components then create a SelectGroup folder and create two files under this
-  folder SelectGroupOne.vue SelectGroupTwo.vue [Select Group/Form Elements & Layout].
-- Update style.css file.
-
-### Version 1.0.0 - Initial Release - [Jan 22, 2024]
-
-- Initial release of TailAdmin Vue.
+- Config değişikliği yapmadan önce `git pull` ile güncel olun
+- Mümkünse config dokümanlarını tek kişi güncellemeye çalışın
+- Merge sonrası `*.md` dosyalarını kontrol edin

@@ -9,4 +9,3 @@ PRETTIER.md merge=union
 STORYBOOK.md merge=union
 TSCONFIG.md merge=union
 VITE.md merge=union
-\!CONFIG.md merge=union
