@@ -9,9 +9,3 @@ if [ $? -ne 0 ]; then
   echo ""
   exit 1
 fi
-
-# Commit başarılı - push öncesi hatırlatma (IDE'de görünsün diye en sonda)
-echo ""
-echo "⚠️  Hatırlatma: Push öncesi 'npm run lint' ve 'npm run build' çalıştırdığınızdan emin olun."
-echo "   CI bu kontrolleri otomatik yapacaktır."
-echo ""

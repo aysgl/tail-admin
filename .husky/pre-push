@@ -1,0 +1,6 @@
+#!/bin/sh
+# Push öncesi hatırlatma - IDE'de Push tıklandığında bu çalışır
+echo ""
+echo "⚠️  Hatırlatma: Push öncesi 'npm run lint' ve 'npm run build' çalıştırdığınızdan emin olun."
+echo "   CI bu kontrolleri otomatik yapacaktır."
+echo ""
