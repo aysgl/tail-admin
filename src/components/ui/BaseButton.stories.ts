@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 import BaseButton from './BaseButton.vue'
-// Bir efsaneyyy
 
 const meta: Meta<typeof BaseButton> = {
   component: BaseButton,
