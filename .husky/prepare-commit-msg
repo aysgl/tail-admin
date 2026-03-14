@@ -1,15 +1,2 @@
 #!/bin/sh
-# Commit mesajı formatı kontrolü (commitlint) — lint-staged pre-commit'te
-if [ -f "$1" ] && [ -s "$1" ]; then
-  npx --no -- commitlint --edit "$1" >/dev/null 2>&1
-  if [ $? -ne 0 ]; then
-    echo ""
-    echo "❌ Commit mesajı formatı hatalı!"
-    echo "   Yazdığınız: $(head -1 "$1")"
-    echo "   Doğru format: tip: açıklama (tip ile açıklama arasında boşluk olmalı)"
-    echo "   Geçerli tipler: feat, fix, docs, style, refactor, perf, test, chore"
-    echo "   Örnek: feat: yeni buton eklendi"
-    echo ""
-    exit 1
-  fi
-fi
+# Commit mesajı kontrolü commit-msg hook'unda (IDE uyumluluğu için prepare-commit-msg boş)

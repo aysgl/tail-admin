@@ -146,12 +146,11 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 
 **Lokal Onay (Git Hooks)**
 
-| Hook                   | Ne yapar                                                                   |
-| ---------------------- | -------------------------------------------------------------------------- |
-| **pre-commit**         | `lint-staged` — staged dosyalarda ESLint + Prettier                        |
-| **prepare-commit-msg** | Commit mesajı formatı kontrolü (commitlint)                                |
-| **commit-msg**         | Commit mesajı formatı son kontrolü (commitlint)                            |
-| **pre-push**           | Hatırlatma: `npm run lint` ve `npm run build` çalıştırıldığından emin olun |
+| Hook           | Ne yapar                                                                   |
+| -------------- | -------------------------------------------------------------------------- |
+| **pre-commit** | `lint-staged` — staged dosyalarda ESLint + Prettier                        |
+| **commit-msg** | Commit mesajı formatı kontrolü (commitlint) — TİP HATASI burada gösterilir |
+| **pre-push**   | Hatırlatma: `npm run lint` ve `npm run build` çalıştırıldığından emin olun |
 
 **Geçerli commit tipleri:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
 
