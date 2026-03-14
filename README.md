@@ -234,7 +234,7 @@ Bundan sonra `git stash` yazdığınızda otomatik uyarı gelir:
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  }
 }
 ```
 

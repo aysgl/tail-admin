@@ -24,9 +24,8 @@
       box-shadow: 0 25px 50px -12px rgba(0,0,0,.5);
     }
     h1 { font-size: 1.25rem; margin-bottom: 1rem; color: #fbbf24; }
-    ul { list-style: none; margin: 1rem 0; }
-    li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
-    li::before { content: "☐"; position: absolute; left: 0; }
+    ol { margin: 1rem 0; padding-left: 1.5rem; }
+    li { padding: 0.5rem 0; }
     code { background: #475569; padding: 0.2em 0.4em; border-radius: 4px; font-size: 0.9em; }
     .footer { margin-top: 1.5rem; font-size: 0.85rem; color: #94a3b8; }
   </style>
@@ -34,11 +33,13 @@
 <body>
   <div class="card">
     <h1>⚠️ Commit öncesi kontrol</h1>
-    <p>Şunları çalıştırdınız mı?</p>
-    <ul>
+    <p>CI deploy hatası çıkmaması için sırayla çalıştırın:</p>
+    <ol>
       <li><code>npm run lint:fix</code></li>
+      <li><code>npm run lint</code></li>
+      <li><code>npm run type-check</code></li>
       <li><code>npm run build</code></li>
-    </ul>
+    </ol>
     <p class="footer">Bu sayfa commit sırasında otomatik açılır.</p>
   </div>
 </body>
