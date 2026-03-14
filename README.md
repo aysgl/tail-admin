@@ -197,10 +197,8 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 
 **Örnek commit mesajı:** `feat: kullanıcı giriş sayfası eklendi`
 
-- **pre-commit**: Commit öncesi hatırlatma — "Lint, format ve build çalıştırdınız mı?" uyarısı gösterilir.
+- **pre-commit**: Commit öncesi tarayıcıda checklist sayfası açılır (IDE dahil her yerde çalışır).
 - **pre-push**: Push öncesi hatırlatma — `npm run lint` ve `npm run build` çalıştırdığınızdan emin olun.
-
-**IDE'de uyarıyı görmek:** View > Output > Git kanalını seçin. `.vscode/settings.json` içinde `git.logLevel: "Trace"` ile hook çıktıları daha görünür olur. Commit/push sırasında Output panelini açık tutun.
 
 #### Stash Öncesi Kontrol
 
@@ -237,11 +235,8 @@ Bundan sonra `git stash` yazdığınızda otomatik uyarı gelir:
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "git.logLevel": "Trace"
 }
 ```
-
-`git.logLevel: "Trace"` — Commit/push sırasında hook uyarılarının Output > Git panelinde görünmesini sağlar.
 
 ## Update Logs
 

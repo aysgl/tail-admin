@@ -1,8 +1,5 @@
 #!/bin/sh
-# Commit öncesi uyarı (IDE: View > Output > Git panelinde görünür)
-echo ""
-echo "⚠️  Commit öncesi hatırlatma: Lint, format ve build çalıştırdınız mı?"
-echo "   npm run lint:fix  |  npm run build"
-echo ""
+# Commit öncesi: Tarayıcıda checklist sayfası açılır (IDE dahil her yerde çalışır)
+node scripts/open-reminder.js
 
 # Lint-staged ve commit mesajı prepare-commit-msg'da çalışır
