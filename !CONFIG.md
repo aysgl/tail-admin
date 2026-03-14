@@ -4,16 +4,16 @@ Bu projedeki tüm yapılandırma dosyalarının dokümantasyonu. **Merge conflic
 
 ## Config Dokümanları
 
-| Dosya | Açıklama |
-|-------|----------|
-| [COMMITLINT.md](./COMMITLINT.md) | Commit mesajı kuralları ve formatı |
-| [EDITORCONFIG.md](./EDITORCONFIG.md) | EditorConfig ayarları |
-| [ESLINT.md](./ESLINT.md) | ESLint kuralları ve kullanımı |
-| [POSTCSS.md](./POSTCSS.md) | PostCSS yapılandırması |
-| [PRETTIER.md](./PRETTIER.md) | Prettier formatlama kuralları |
-| [STORYBOOK.md](./STORYBOOK.md) | Storybook kurulumu ve kullanımı |
-| [TSCONFIG.md](./TSCONFIG.md) | TypeScript yapılandırması |
-| [VITE.md](./VITE.md) | Vite build ve dev ayarları |
+| Dosya                                | Açıklama                           |
+| ------------------------------------ | ---------------------------------- |
+| [COMMITLINT.md](./COMMITLINT.md)     | Commit mesajı kuralları ve formatı |
+| [EDITORCONFIG.md](./EDITORCONFIG.md) | EditorConfig ayarları              |
+| [ESLINT.md](./ESLINT.md)             | ESLint kuralları ve kullanımı      |
+| [POSTCSS.md](./POSTCSS.md)           | PostCSS yapılandırması             |
+| [PRETTIER.md](./PRETTIER.md)         | Prettier formatlama kuralları      |
+| [STORYBOOK.md](./STORYBOOK.md)       | Storybook kurulumu ve kullanımı    |
+| [TSCONFIG.md](./TSCONFIG.md)         | TypeScript yapılandırması          |
+| [VITE.md](./VITE.md)                 | Vite build ve dev ayarları         |
 
 ## Conflict Önleme İpuçları
 
