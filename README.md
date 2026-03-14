@@ -214,6 +214,7 @@ npm run stash:setup
 ```
 
 Bundan sonra `git stash` yazdığınızda otomatik uyarı gelir:
+
 - **[y]** Evet, devam et
 - **[n]** Hayır, iptal et
 - **[r]** Hayır, önce lint:fix + build çalıştır, sonra stash yap
