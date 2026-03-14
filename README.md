@@ -199,6 +199,25 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 
 - **pre-push**: Push öncesi hatırlatma — `npm run lint` ve `npm run build` çalıştırdığınızdan emin olun. (Terminalde `git push` yaparken uyarı görünür; IDE kullanıyorsanız Output > Git panelini kontrol edin.)
 
+#### Stash Öncesi Kontrol
+
+`git stash` kullanmadan önce lint, format ve build çalıştırıldığından emin olmak için:
+
+```bash
+npm run stash
+```
+
+veya `git stash` komutunu bu uyarıyla kullanmak için (bir kez çalıştırın):
+
+```bash
+npm run stash:setup
+```
+
+Bundan sonra `git stash` yazdığınızda otomatik uyarı gelir:
+- **[y]** Evet, devam et
+- **[n]** Hayır, iptal et
+- **[r]** Hayır, önce lint:fix + build çalıştır, sonra stash yap
+
 #### CI Pipeline (.github/workflows/ci.yml)
 
 - Lint kontrolü

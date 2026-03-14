@@ -14,7 +14,9 @@
     "format": "prettier --write src/",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "stash": "./scripts/pre-stash-check.sh",
+    "stash:setup": "git config --local alias.stash '!./scripts/pre-stash-check.sh'"
   },
   "lint-staged": {
     "*.{ts,tsx,vue,js,jsx}": [
