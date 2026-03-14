@@ -195,6 +195,8 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 
 **Örnek commit mesajı:** `feat: kullanıcı giriş sayfası eklendi`
 
+- **pre-push**: Push öncesi hatırlatma — `npm run lint` ve `npm run build` çalıştırdığınızdan emin olun. (Terminalde `git push` yaparken uyarı görünür; IDE kullanıyorsanız Output > Git panelini kontrol edin.)
+
 #### CI Pipeline (.github/workflows/ci.yml)
 - Lint kontrolü
 - Type-check (vue-tsc)
