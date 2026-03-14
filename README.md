@@ -64,26 +64,26 @@ git clone https://github.com/TailAdmin/vue-tailwind-admin-dashboard.git
 
 1. Install dependencies:
 
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
 2. Start the development server:
 
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
 
 3. Production build:
-   ```bash
-   npm run build
-   # or
-   yarn build
-   ```
+    ```bash
+    npm run build
+    # or
+    yarn build
+    ```
 
 ## Feature Comparison
 
@@ -154,134 +154,242 @@ Handle your app's state with Pinia for clean, organized code.
 
 ## Frontend Tooling Akışı & Standartları 🚦
 
-Aşağıdaki akış, bir geliştiricinin kod yazımından yayına alım sürecine kadar takip ettiği kalite kontrol adımlarını özetler:
+Aşağıdaki akış, bir geliştiricinin kod yazımından yayına alım sürecine kadar takip ettiği kalite kontrol adımlarını özetler.
 
-| Aşama | Açıklama | Araçlar |
-|-------|----------|---------|
-| **Geliştirme Aşaması** | Kod editörü üzerinde real-time kontrol | ESLint, Prettier, TypeScript |
-| **Lokal Onay (Git Commit)** | Kodun depoya gönderilmeden önceki son filtresi | Husky (Git Hooks), lint-staged (sadece değişen dosyalar), commitlint (standart commit mesajları) |
-| **Doğrulama (Git Push / PR)** | Uzak sunucuda otomatik kontrol süreci | CI Pipeline: Lint kontrolü, Tip kontrolü (Type-check) ve Build testi |
-| **Final Onay ve Dokümantasyon** | Akran denetimi ve bileşen dokümantasyonu | Code Review, Storybook (önerilir) |
+### 1. Akış Tablosu
 
-### Akış Diyagramı
+| Aşama                           | Açıklama                                       | Araçlar                                                                                          |
+| ------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Geliştirme Aşaması**          | Kod editörü üzerinde real-time kontrol         | ESLint, Prettier, TypeScript                                                                     |
+| **Lokal Onay (Git Commit)**     | Kodun depoya gönderilmeden önceki son filtresi | Husky (Git Hooks), lint-staged (sadece değişen dosyalar), commitlint (standart commit mesajları) |
+| **Doğrulama (Git Push / PR)**   | Uzak sunucuda otomatik kontrol süreci          | CI Pipeline: Lint kontrolü, Tip kontrolü (Type-check) ve Build testi                             |
+| **Final Onay ve Dokümantasyon** | Akran denetimi ve bileşen dokümantasyonu       | Code Review, Storybook                                                                           |
+
+### 2. Akış Diyagramı
 
 ```
 Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-staged → commitlint
      → Git Push/PR → CI (Lint + Type-check + Build) → Code Review → Merge
 ```
 
-### Araç Seçimi (Tool Selection) 🚗
+### 3. Araç Seçimleri (Tool Selection) 🚗
 
-| Tool | Görev | Alternatif | Neden Seçildi |
-|------|-------|------------|---------------|
-| **ESLint** | Kod kalitesi kontrolü | Biome | ESLint ekosistemi geniş, TypeScript + Vue desteği güçlü |
-| **Prettier** | Kod formatlama | Rome | Henüz olgun değil, Prettier yaygın ve stabil |
-| **Husky + lint-staged** | Commit öncesi kontrol | - | Sadece değişen dosyaları kontrol eder, performans yüksek |
-| **Commitlint** | Semantic commit | - | Otomatik changelog ve okunabilir Git history |
-| **Storybook** | UI izolasyonu ve dokümantasyon | Styleguidist | Geniş ekosistem ve addon desteği (projeye eklenebilir) |
+| Tool                    | Görev                          | Alternatif   | Neden Seçildi                                            |
+| ----------------------- | ------------------------------ | ------------ | -------------------------------------------------------- |
+| **ESLint**              | Kod kalitesi kontrolü          | Biome        | ESLint ekosistemi geniş, TypeScript + Vue desteği güçlü  |
+| **Prettier**            | Kod formatlama                 | Rome         | Henüz olgun değil, Prettier yaygın ve stabil             |
+| **Husky + lint-staged** | Commit öncesi kontrol          | -            | Sadece değişen dosyaları kontrol eder, performans yüksek |
+| **Commitlint**          | Semantic commit                | -            | Otomatik changelog ve okunabilir Git history             |
+| **Storybook**           | UI izolasyonu ve dokümantasyon | Styleguidist | Geniş ekosistem ve addon desteği (projeye eklenebilir)   |
 
-### Kullanım Detayları
+### 4. Konfigürasyon Dosyaları ⚙️
 
-#### Geliştirme Aşaması
-- **ESLint**: `npm run lint` — Kod kalitesi ve stil kuralları
-- **Prettier**: `npm run format` — Otomatik formatlama (VSCode'da format on save önerilir)
-- **TypeScript**: `npm run type-check` — Tip güvenliği kontrolü
+Projede kullanılan araçlar, belirli konfigürasyon dosyaları aracılığıyla yönetilir. Bu dosyalar ekip içinde kod kalitesi, formatlama, commit standartları ve IDE uyumluluğunu garanti eder.
 
-#### Lokal Onay (Git Hooks)
-- **pre-commit**: `lint-staged` — Sadece staged dosyalarda ESLint + Prettier çalıştırır
-- **commit-msg**: `commitlint` — Commit mesajının [Conventional Commits](https://www.conventionalcommits.org/) formatında olmasını zorunlu kılar
+| Dosya                  | Amaç                                                                               |
+| ---------------------- | ---------------------------------------------------------------------------------- |
+| `eslint.config.ts`     | Kod kalitesi ve lint kurallarını tanımlar (Prettier çakışması için skipFormatting) |
+| `.prettierrc`          | Kod formatlama standartlarını belirler                                             |
+| `.editorconfig`        | IDE'ler arasında ortak kod stilini sağlar                                          |
+| `.lintstagedrc`        | Commit öncesi sadece değişen dosyalarda çalışacak komutları tanımlar               |
+| `commitlint.config.js` | Commit mesajlarının Conventional Commits standardına uymasını sağlar               |
 
-**Geçerli commit tipleri:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
+#### 🧩 .editorconfig
 
-**Örnek commit mesajı:** `feat: kullanıcı giriş sayfası eklendi`
+IDE seviyesinde kod stilini standartlaştırır. Farklı geliştiriciler farklı editörler kullansa bile girinti, line ending ve encoding gibi ayarlar aynı kalır.
 
-#### CI Pipeline (.github/workflows/ci.yml)
-- Lint kontrolü
-- Type-check (vue-tsc)
-- Production build testi
+playground https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
 
-### Önerilen IDE Ayarları (.vscode/settings.json)
+**Örnek Konfigürasyon:**
+
+```ini
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+```
+
+**Ayar Açıklamaları:**
+
+| Ayar                       | Açıklama                                 |
+| -------------------------- | ---------------------------------------- |
+| `root = true`              | Bu dosyanın proje kökü olduğunu belirtir |
+| `charset = utf-8`          | Dosya karakter kodlamasını belirler      |
+| `indent_style = space`     | Girinti için boşluk kullanılır           |
+| `indent_size = 2`          | Girinti genişliği 2 boşluktur            |
+| `end_of_line = lf`         | Satır sonu karakteri Unix standardı (LF) |
+| `insert_final_newline`     | Dosya sonunda yeni satır ekler           |
+| `trim_trailing_whitespace` | Satır sonundaki boşlukları temizler      |
+
+#### 🧹 .prettierrc
+
+Kodun otomatik formatlanmasını sağlar. Kod stilinin ekip genelinde tutarlı kalmasını garanti eder.
+
+**Prettier Komutları:**
+
+| Komut                   | Açıklama                                                                     |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| `prettier --write .`    | Tüm dosyaları formatlar                                                      |
+| `prettier --write src/` | Belirtilen dizindeki dosyaları formatlar                                     |
+| `prettier --check .`    | Dosyaların Prettier kurallarına uygunluğunu kontrol eder (değişiklik yapmaz) |
+
+**Örnek Konfigürasyon:**
 
 ```json
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "printWidth": 200,
+    "trailingComma": "all"
 }
 ```
 
-## Update Logs
+**Ayar Açıklamaları:**
 
-### Version 2.0.2 - [December 30, 2025]
+| Ayar            | Açıklama                            |
+| --------------- | ----------------------------------- |
+| `semi`          | Satır sonu noktalı virgül kullanımı |
+| `singleQuote`   | Tek tırnak kullanımı                |
+| `tabWidth`      | Girinti genişliği                   |
+| `printWidth`    | Maksimum satır uzunluğu             |
+| `trailingComma` | Nesne ve array sonuna virgül ekleme |
 
-#### Enhancements
+<sup>`.prettierignore` ile dosya/dizin hariç tutulur. Tek dosya için: `checkIgnorePragma: true` + dosya başına `/** @noprettier */`</sup>
 
-- Added date range picker to Statistics Chart component.
-- Improved responsive design for chart header.
+#### 🔍 ESLint (eslint.config.ts)
 
-### Version 2.0.1 - [February 27, 2025]
+Kod kalitesi ve best practice kurallarını tanımlar. ESLint aşağıdaki hataları tespit eder:
 
-#### Update Overview
+- kullanılmayan değişkenler
+- unreachable code
+- yanlış async kullanım
+- Vue/TypeScript best practice ihlalleri
 
-- Upgraded to Tailwind CSS v4 for better performance and efficiency.
-- Updated class usage to match the latest syntax and features.
-- Replaced deprecated class and optimized styles.
+**ESLint + Prettier çakışması:** `@vue/eslint-config-prettier` paketindeki `skipFormatting` kullanılarak formatlama kuralları ESLint'ten devre dışı bırakılır. Böylece formatlama sadece Prettier'a bırakılır, çakışma önlenir.
 
-#### Next Steps
+<sup>Config'te `ignores` ile dosya/dizin hariç tutulur. Tek dosya için dosya başına `/* eslint-disable */`; tek satır için `/* eslint-disable-next-line */`</sup>
 
-- Run npm install or yarn install to update dependencies.
-- Check for any style changes or compatibility issues.
-- Refer to the Tailwind CSS v4 [Migration Guide](https://tailwindcss.com/docs/upgrade-guide) on this release. if needed.
-- This update keeps the project up to date with the latest Tailwind improvements. 🚀
+**ESLint Komutları:**
 
-### Version 2.0.0 - [February 2025]
+| Komut                       | Açıklama                                  |
+| --------------------------- | ----------------------------------------- |
+| `eslint .`                  | Tüm dosyalarda lint kontrolü yapar        |
+| `eslint . --fix`            | Otomatik düzeltilebilir hataları düzeltir |
+| `eslint . --format stylish` | Okunabilir çıktı formatı (varsayılan)     |
 
-Major update with Vue 3 migration and comprehensive redesign.
+**Örnek Konfigürasyon (eslint.config.ts):**
 
-#### Major Improvements
+```ts
+import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
 
-- Complete migration to Vue 3 Composition API
-- Updated to Vue Router 4
-- Enhanced user interface with new Vue 3 components
-- Improved performance with Vue 3's virtual DOM
-- Better accessibility and responsive design
+export default defineConfigWithVueTs(
+    // ... diğer config
+    skipFormatting, // ← Prettier ile çakışan kuralları kapatır
+)
+```
 
-#### New Features
+#### 🚦 .lintstagedrc
 
-- Redesigned dashboards (Ecommerce, Analytics, Marketing, CRM)
-- Collapsible sidebar with Vue 3 integration
-- Enhanced navigation with Vue Router 4
-- Real-time chat functionality
-- Full-featured calendar with drag-and-drop
-- Advanced table components
-- Updated data visualization with ApexCharts
+Commit öncesinde sadece staged (değişmiş) dosyalar üzerinde kontrol çalıştırır.
 
-#### Breaking Changes
+**Örnek Konfigürasyon:**
 
-- Requires Vue 3 and Vue Router 4
-- Chart components migrated to ApexCharts for Vue 3
-- Modified routing implementation
-- Updated component APIs for Vue 3 compatibility
+```json
+{
+    "*.{js,ts,vue}": ["eslint --fix", "prettier --write"]
+}
+```
 
-[Read more](https://tailadmin.com/docs/update-logs/vue) on this release.
+Bu yapı sayesinde:
 
-### Version 1.0.2 - [June 19, 2024]
+- sadece değişen dosyalar lint edilir
+- commit süresi kısa kalır
+- gereksiz lint çalışmaları önlenir
 
-#### Issues
+#### 📝 commitlint.config.js
 
-- Fix Mobile Menu Hamburger Icon issue.
+Commit mesajlarının Conventional Commits standardına uygun olmasını zorunlu kılar.
 
-### Version 1.0.1 - [Feb 08, 2024]
+**Örnek Konfigürasyon:**
 
-#### Enhancements
+```js
+module.exports = {
+    extends: ['@commitlint/config-conventional'],
+}
+```
 
-- Make it functional [Multiselect Dropdown/Form Elements].
-- Delete SelectGroup Components then create a SelectGroup folder and create two files under this
-  folder SelectGroupOne.vue SelectGroupTwo.vue [Select Group/Form Elements & Layout].
-- Update style.css file.
+**Geçerli Commit Tipleri:**
 
-### Version 1.0.0 - Initial Release - [Jan 22, 2024]
+| Tip        | Açıklama                 |
+| ---------- | ------------------------ |
+| `feat`     | yeni özellik             |
+| `fix`      | hata düzeltme            |
+| `docs`     | dokümantasyon            |
+| `style`    | kod stili değişikliği    |
+| `refactor` | refactor                 |
+| `perf`     | performans iyileştirmesi |
+| `test`     | test ekleme/güncelleme   |
+| `chore`    | bakım işleri             |
 
-- Initial release of TailAdmin Vue.
+**Örnek Commit:** `feat: kullanıcı giriş sayfası eklendi`
+
+### 5. IDE Ayarları 🧑‍💻
+
+**`.editorconfig` vs `.vscode/settings.json` farkı:**
+
+| Dosya                   | Amaç                                                                                         |
+| ----------------------- | -------------------------------------------------------------------------------------------- |
+| `.editorconfig`         | Temel stil kuralları (charset, indent, line ending) — editör bağımsız, tüm IDE'lerde çalışır |
+| `.vscode/settings.json` | VS Code davranışı — format on save, hangi formatter kullanılacak                             |
+
+İkisi farklı görevlere sahiptir. `.editorconfig` girinti ve satır sonu gibi temel kuralları tanımlar; `.vscode/settings.json` ise "kaydederken Prettier çalışsın" gibi IDE davranışlarını ayarlar.
+
+**`.vscode/settings.json` repoda olmalı mı?** Ekip VS Code kullanıyorsa **evet** — repoda olması herkesin aynı ayarlarla (format on save, Prettier varsayılan) çalışmasını sağlar. Repoda sadece `.vscode/extensions.json` varsa, `settings.json` eklenebilir.
+
+**Önerilen ayarlar (`.vscode/settings.json`):**
+
+```json
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
+```
+
+### 6. Kullanım Detayları
+
+#### Tek Komut ile Build
+
+`npm run build` komutu sırasıyla lint, type-check ve production build çalıştırır. Tek tek uğraşmaya gerek yok:
+
+```bash
+npm run build   # lint → type-check → vite build
+```
+
+#### Geliştirme Aşaması
+
+- **ESLint**: `npm run lint` — Kod kalitesi kontrolü
+- **ESLint + Prettier (fix)**: `npm run lint:fix` — Formatlama + lint düzeltmeleri
+- **Prettier**: `npm run format` — Sadece formatlama (VSCode'da format on save önerilir)
+- **TypeScript**: `npm run type-check` — Tip güvenliği kontrolü
+- **Storybook**: `npm run storybook` — UI bileşen dokümantasyonu (port 6006)
+- **Storybook Build**: `npm run build-storybook` — Storybook statik export
+
+#### Lokal Onay (Git Hooks)
+
+- **pre-commit**: `lint-staged` — Sadece staged dosyalarda ESLint + Prettier çalıştırır
+- **commit-msg**: `commitlint` — Commit mesajının [Conventional Commits](https://www.conventionalcommits.org/) formatında olmasını zorunlu kılar (geçerli tipler ve örnek için yukarıdaki commitlint bölümüne bakınız)
+
+#### CI Pipeline (.github/workflows/ci.yml)
+
+- Lint kontrolü
+- Type-check (vue-tsc)
+- Production build testi

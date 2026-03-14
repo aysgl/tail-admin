@@ -1,0 +1,17 @@
+# Merge request'teki commit mesajlarının Conventional Commits formatına uygunluğunu kontrol eder.
+# commitlint.config.js kurallarına göre doğrulama yapar.
+lint:commit:
+    image: registry.hub.docker.com/library/node:alpine
+    variables:
+        # GitLab varsayılan olarak 20 commit klonlar. GIT_DEPTH: 0 ile tüm geçmiş alınır,
+        # böylece büyük MR'larda da tüm commit mesajları kontrol edilebilir.
+        GIT_DEPTH: 0
+    before_script:
+        - apk add --no-cache git
+        - npm install --save-dev @commitlint/config-conventional @commitlint/cli
+    script:
+        # MR'daki hedef branch ile mevcut commit arasındaki tüm commit mesajlarını kontrol eder.
+        - npx commitlint --from ${CI_MERGE_REQUEST_DIFF_BASE_SHA} --to ${CI_COMMIT_SHA}
+    rules:
+        # Sadece merge request pipeline'larında çalışır (doğrudan push'larda çalışmaz).
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
