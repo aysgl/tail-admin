@@ -1,1 +1,11 @@
+#!/bin/sh
 npx --no -- commitlint --edit "$1"
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "⚠️  Commit mesajı formatı hatalı!"
+  echo "   Doğru format: tip: açıklama"
+  echo "   Örnekler: feat: yeni özellik | fix: düzeltme | chore: güncelleme"
+  echo "   Geçerli tipler: feat, fix, docs, style, refactor, perf, test, chore"
+  echo ""
+  exit 1
+fi

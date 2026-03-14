@@ -1,0 +1,22 @@
+#!/bin/sh
+# 1. Commit mesajı formatını kontrol et - HATA VARSA İLK MESAJ BU OLSUN
+if [ -f "$1" ] && [ -s "$1" ]; then
+  npx --no -- commitlint --edit "$1" >/dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    echo ""
+    echo "❌ Commit mesajı formatı hatalı!"
+    echo "   Yazdığınız: $(head -1 "$1")"
+    echo "   Doğru format: tip: açıklama (tip ile açıklama arasında boşluk olmalı)"
+    echo "   Geçerli tipler: feat, fix, docs, style, refactor, perf, test, chore"
+    echo "   Örnek: feat: yeni buton eklendi"
+    echo ""
+    exit 1
+  fi
+fi
+
+# 2. Format doğruysa genel uyarı + lint-staged
+echo ""
+echo "⚠️  Hatırlatma: Push öncesi 'npm run lint' ve 'npm run build' çalıştırdığınızdan emin olun."
+echo "   CI bu kontrolleri otomatik yapacaktır."
+echo ""
+npx lint-staged --no-stash

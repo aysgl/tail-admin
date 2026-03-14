@@ -1,1 +1,4 @@
-npx lint-staged
+#!/bin/sh
+# Boş - format kontrolü, uyarı ve lint-staged prepare-commit-msg'da
+# (Git sırası: pre-commit → prepare-commit-msg; mesaj prepare-commit-msg'ta hazır)
+# prepare-commit-msg ilk anlamlı çıktıyı verir, IDE'de doğru mesaj görünsün
