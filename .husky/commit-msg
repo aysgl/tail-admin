@@ -2,10 +2,16 @@
 npx --no -- commitlint --edit "$1"
 if [ $? -ne 0 ]; then
   echo ""
-  echo "⚠️  Commit mesajı formatı hatalı!"
+  echo "❌ Commit mesajı formatı hatalı!"
   echo "   Doğru format: tip: açıklama"
   echo "   Örnekler: feat: yeni özellik | fix: düzeltme | chore: güncelleme"
   echo "   Geçerli tipler: feat, fix, docs, style, refactor, perf, test, chore"
   echo ""
   exit 1
 fi
+
+# Commit başarılı - push öncesi hatırlatma (IDE'de görünsün diye en sonda)
+echo ""
+echo "⚠️  Hatırlatma: Push öncesi 'npm run lint' ve 'npm run build' çalıştırdığınızdan emin olun."
+echo "   CI bu kontrolleri otomatik yapacaktır."
+echo ""

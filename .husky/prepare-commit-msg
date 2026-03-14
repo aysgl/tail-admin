@@ -14,9 +14,5 @@ if [ -f "$1" ] && [ -s "$1" ]; then
   fi
 fi
 
-# 2. Format doğruysa genel uyarı + lint-staged
-echo ""
-echo "⚠️  Hatırlatma: Push öncesi 'npm run lint' ve 'npm run build' çalıştırdığınızdan emin olun."
-echo "   CI bu kontrolleri otomatik yapacaktır."
-echo ""
+# 2. Format doğruysa lint-staged (uyarı commit-msg'da - commit sonrası gösterilir)
 npx lint-staged --no-stash
