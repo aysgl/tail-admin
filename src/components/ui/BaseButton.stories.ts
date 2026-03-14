@@ -1,96 +1,70 @@
-import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import { fn } from 'storybook/test'
+import type { Meta, StoryObj } from '@storybook/vue3'
 import BaseButton from './BaseButton.vue'
 
-const meta = {
-    title: 'UI/BaseButton',
-    component: BaseButton,
-    tags: ['autodocs'],
-    argTypes: {
-        size: {
-            control: 'select',
-            options: ['sm', 'md']
-        },
-        variant: {
-            control: 'select',
-            options: ['primary', 'outline']
-        },
-        disabled: {
-            control: 'boolean'
-        }
-    },
-    args: {
-        onClick: fn()
-    }
-} satisfies Meta<typeof BaseButton>
-
+const meta: Meta<typeof BaseButton> = {
+  component: BaseButton,
+  tags: ['autodocs'],
+  argTypes: {
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    variant: { control: 'select', options: ['primary', 'outline', 'ghost', 'link'] },
+  },
+}
 export default meta
-type Story = StoryObj<typeof meta>
+
+type Story = StoryObj<typeof BaseButton>
 
 export const Primary: Story = {
-    args: {
-        variant: 'primary'
+  args: {
+    variant: 'primary',
+    size: 'md',
+  },
+  render: (args) => ({
+    components: { BaseButton },
+    setup() {
+      return { args }
     },
-    render: (args) => ({
-        components: {
-            BaseButton
-        },
-        setup() {
-            return {
-                args
-            }
-        },
-        template: '<BaseButton v-bind="args">Primary Button</BaseButton>'
-    })
+    template: '<BaseButton v-bind="args">Button</BaseButton>',
+  }),
 }
 
 export const Outline: Story = {
-    args: {
-        variant: 'outline'
+  args: {
+    variant: 'outline',
+    size: 'md',
+  },
+  render: (args) => ({
+    components: { BaseButton },
+    setup() {
+      return { args }
     },
-    render: (args) => ({
-        components: {
-            BaseButton
-        },
-        setup() {
-            return {
-                args
-            }
-        },
-        template: '<BaseButton v-bind="args">Outline Button</BaseButton>'
-    })
+    template: '<BaseButton v-bind="args">Button</BaseButton>',
+  }),
 }
 
-export const Small: Story = {
-    args: {
-        size: 'sm'
+export const Ghost: Story = {
+  args: {
+    variant: 'ghost',
+    size: 'md',
+  },
+  render: (args) => ({
+    components: { BaseButton },
+    setup() {
+      return { args }
     },
-    render: (args) => ({
-        components: {
-            BaseButton
-        },
-        setup() {
-            return {
-                args
-            }
-        },
-        template: '<BaseButton v-bind="args">Small Button</BaseButton>'
-    })
+    template: '<BaseButton v-bind="args">Button</BaseButton>',
+  }),
 }
 
-export const Disabled: Story = {
-    args: {
-        disabled: true
+export const Link: Story = {
+  args: {
+    variant: 'link',
+    size: 'md',
+  },
+  render: (args) => ({
+    components: { BaseButton },
+    setup() {
+      return { args }
     },
-    render: (args) => ({
-        components: {
-            BaseButton
-        },
-        setup() {
-            return {
-                args
-            }
-        },
-        template: '<BaseButton v-bind="args">Disabled Button</BaseButton>'
-    })
+    template: '<BaseButton v-bind="args">Button</BaseButton>',
+  }),
 }

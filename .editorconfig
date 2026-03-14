@@ -1,45 +1,9 @@
-root = true
 [*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,vue}]
 charset = utf-8
 indent_size = 2
 indent_style = space
-end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-# --- Diğer EditorConfig Seçenekleri (editör desteğine göre) ---
-
-# Dize sabitleri için tercih edilen tırnak işareti: single, double, auto
-# quote_type = single
-
-# C ailesi dilleri için başlık dosyalarının dahil yolları ( : ile ayrılmış)
-# c_include_path = ./include:./lib
-
-# Java CLASSPATH ( : ile ayrılmış yollar)
-# java_class_path = ./src:./lib
-
-# Süslü parantezin sol kısmı bir sonraki satırda mı? (C, C++, Java, JS vb.)
-# curly_bracket_next_line = false
-
-# Aritmetik ve Boolean operatörlerinin etrafında boşluk: true, false, hybrid
-# spaces_around_operators = true
-
-# Köşeli parantez ve parantezlerin etrafındaki boşluklar: none, inside, outside, both
-# spaces_around_brackets = both
-
-# Süslü parantez stili: K&R, Allman, GNU, Horstmann (Prettier ile uyumlu değil)
-# indent_brace_style = K&R
-
-# Joker karaktere dönüşümden önce gereken import sayısı (Java vb.)
-# wildcard_import_limit = 5
-
-# Devam satırı girintisi boyutu (Python, JetBrains, Netbeans)
-# continuation_indent_size = 4
-
-# Yorum karakterleri: block_comment, line_comment, block_comment_start, block_comment_end
-# line_comment = //
-# block_comment_start = /*
-# block_comment_end = */
-
-# Satır uzunluğu limiti (çoğu editör desteklemez; Prettier için .prettierrc.json printWidth kullanın)
-# max_line_length = unset
+end_of_line = lf
+max_line_length = 100

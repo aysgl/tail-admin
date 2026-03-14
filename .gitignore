@@ -28,8 +28,4 @@ coverage
 *.sw?
 
 *.tsbuildinfo
-.eslintcache
 .vercel
-
-*storybook.log
-storybook-static

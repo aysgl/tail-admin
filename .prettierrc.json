@@ -1,13 +1,15 @@
 {
-    "plugins": ["prettier-plugin-tailwindcss"],
-    "printWidth": 100,
-    "tabWidth": 4,
-    "semi": false,
-    "singleQuote": true,
-    "jsxSingleQuote": true,
-    "trailingComma": "none",
-    "singleAttributePerLine": true,
-    "proseWrap": "always",
-    "vueIndentScriptAndStyle": true,
-    "experimentalTernaries": true
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 100,
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleAttributePerLine": true,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": true
 }
