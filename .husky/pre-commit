@@ -1,4 +1,8 @@
 #!/bin/sh
-# Boş - format kontrolü, uyarı ve lint-staged prepare-commit-msg'da
-# (Git sırası: pre-commit → prepare-commit-msg; mesaj prepare-commit-msg'ta hazır)
-# prepare-commit-msg ilk anlamlı çıktıyı verir, IDE'de doğru mesaj görünsün
+# Commit öncesi uyarı (IDE: View > Output > Git panelinde görünür)
+echo ""
+echo "⚠️  Commit öncesi hatırlatma: Lint, format ve build çalıştırdınız mı?"
+echo "   npm run lint:fix  |  npm run build"
+echo ""
+
+# Lint-staged ve commit mesajı prepare-commit-msg'da çalışır
