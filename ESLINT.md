@@ -6,12 +6,12 @@ Bu doküman, projedeki `eslint.config.ts` yapılandırmasını ve kullanılan ek
 
 ## 1. Konfigürasyon Özeti
 
-| Özellik           | Değer                                      |
-| ----------------- | ------------------------------------------ |
-| **Config formatı**| Flat config (`eslint.config.ts`)            |
-| **Lint edilen**    | `**/*.{ts,mts,tsx,vue}`                    |
-| **Hariç tutulan** | `dist`, `dist-ssr`, `coverage`             |
-| **Formatlama**    | Prettier (ESLint format kuralları devre dışı) |
+| Özellik            | Değer                                         |
+| ------------------ | --------------------------------------------- |
+| **Config formatı** | Flat config (`eslint.config.ts`)              |
+| **Lint edilen**    | `**/*.{ts,mts,tsx,vue}`                       |
+| **Hariç tutulan**  | `dist`, `dist-ssr`, `coverage`                |
+| **Formatlama**     | Prettier (ESLint format kuralları devre dışı) |
 
 ---
 
@@ -34,11 +34,11 @@ files: ['**/*.{ts,mts,tsx,vue}']
 ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**']
 ```
 
-| Dizin       | Açıklama                          |
-| ----------- | --------------------------------- |
-| `dist/**`   | Vite build çıktısı                |
-| `dist-ssr/**` | SSR build çıktısı               |
-| `coverage/**` | Test coverage raporları          |
+| Dizin         | Açıklama                |
+| ------------- | ----------------------- |
+| `dist/**`     | Vite build çıktısı      |
+| `dist-ssr/**` | SSR build çıktısı       |
+| `coverage/**` | Test coverage raporları |
 
 ---
 
@@ -72,11 +72,11 @@ Prettier ile çakışan ESLint format kurallarını devre dışı bırakır. For
 
 ## 4. NPM Scriptleri
 
-| Komut              | Açıklama                                      |
-| ------------------ | --------------------------------------------- |
-| `npm run lint`     | Tüm dosyalarda lint kontrolü (`--format stylish`) |
+| Komut              | Açıklama                                                    |
+| ------------------ | ----------------------------------------------------------- |
+| `npm run lint`     | Tüm dosyalarda lint kontrolü (`--format stylish`)           |
 | `npm run lint:fix` | Önce Prettier ile formatla, sonra ESLint `--fix` ile düzelt |
-| `npm run format`   | Sadece Prettier ile formatla                   |
+| `npm run format`   | Sadece Prettier ile formatla                                |
 
 ### Örnek Kullanım
 
@@ -154,13 +154,8 @@ Daha fazla bilgi: [eslint-config-typescript - Advanced Setup](https://github.com
 ```json
 {
   "lint-staged": {
-    "*.{ts,tsx,vue,js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,css,scss,md}": [
-      "prettier --write"
-    ]
+    "*.{ts,tsx,vue,js,jsx}": ["eslint --fix", "prettier --write"],
+    "*.{json,css,scss,md}": ["prettier --write"]
   }
 }
 ```

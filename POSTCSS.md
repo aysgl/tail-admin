@@ -6,11 +6,11 @@ Bu doküman, projedeki `postcss.config.js` dosyasını açıklar. PostCSS, CSS i
 
 ## 1. Konfigürasyon Özeti
 
-| Özellik | Değer |
-| ------- | ----- |
-| **Dosya** | `postcss.config.js` |
-| **Plugin** | `@tailwindcss/postcss` |
-| **Tailwind** | v4 (CSS-first config) |
+| Özellik      | Değer                  |
+| ------------ | ---------------------- |
+| **Dosya**    | `postcss.config.js`    |
+| **Plugin**   | `@tailwindcss/postcss` |
+| **Tailwind** | v4 (CSS-first config)  |
 
 ---
 

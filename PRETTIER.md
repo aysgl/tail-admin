@@ -193,7 +193,7 @@ gibi özel sözdizimleri için eklentiler kullanılır.
 
 ```json
 {
-    "plugins": ["prettier-plugin-tailwindcss"]
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
 ```
 
@@ -204,10 +204,10 @@ için farklı girinti).
 
 ```json
 {
-    "overrides": [
-        { "files": "*.md", "options": { "printWidth": 120 } },
-        { "files": "*.json", "options": { "tabWidth": 4 } }
-    ]
+  "overrides": [
+    { "files": "*.md", "options": { "printWidth": 120 } },
+    { "files": "*.json", "options": { "tabWidth": 4 } }
+  ]
 }
 ```
 
@@ -250,8 +250,8 @@ konum, çıkışta format sonrası konum döner.
 
 ```js
 const { formatted, cursorOffset } = await prettier.formatWithCursor('  const x=1', {
-    cursorOffset: 10,
-    parser: 'babel'
+  cursorOffset: 10,
+  parser: 'babel',
 })
 // formatted: 'const x = 1;\n'
 // cursorOffset: 12  ← imleç "1"den sonra kalır

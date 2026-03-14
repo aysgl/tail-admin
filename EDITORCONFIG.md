@@ -6,12 +6,12 @@ Bu doküman, projedeki `.editorconfig` dosyasını açıklar. EditorConfig, fark
 
 ## 1. Konfigürasyon Özeti
 
-| Özellik | Değer |
-| ------- | ----- |
-| **Dosya** | `.editorconfig` |
-| **Hedef** | `*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,vue}` |
-| **Girinti** | 2 boşluk (space) |
-| **Satır sonu** | LF (Unix) |
+| Özellik        | Değer                                   |
+| -------------- | --------------------------------------- |
+| **Dosya**      | `.editorconfig`                         |
+| **Hedef**      | `*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,vue}` |
+| **Girinti**    | 2 boşluk (space)                        |
+| **Satır sonu** | LF (Unix)                               |
 
 ---
 
@@ -62,17 +62,17 @@ Bu dosyadan sonra üst dizinlerdeki `.editorconfig` dosyaları yok sayılır. Pr
 [*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,vue}]
 ```
 
-| Uzantı | Açıklama |
-| ------ | -------- |
-| `.js` | JavaScript |
-| `.jsx` | JSX |
-| `.mjs` | ESM JavaScript |
+| Uzantı | Açıklama            |
+| ------ | ------------------- |
+| `.js`  | JavaScript          |
+| `.jsx` | JSX                 |
+| `.mjs` | ESM JavaScript      |
 | `.cjs` | CommonJS JavaScript |
-| `.ts` | TypeScript |
-| `.tsx` | TypeScript + JSX |
-| `.mts` | ESM TypeScript |
+| `.ts`  | TypeScript          |
+| `.tsx` | TypeScript + JSX    |
+| `.mts` | ESM TypeScript      |
 | `.cts` | CommonJS TypeScript |
-| `.vue` | Vue SFC |
+| `.vue` | Vue SFC             |
 
 ---
 
@@ -80,19 +80,19 @@ Bu dosyadan sonra üst dizinlerdeki `.editorconfig` dosyaları yok sayılır. Pr
 
 Dosyada yorum olarak listelenen, editör desteğine göre kullanılabilecek seçenekler:
 
-| Seçenek | Açıklama |
-| ------- | -------- |
-| `quote_type` | Tırnak tercihi: `single`, `double`, `auto` |
-| `c_include_path` | C/C++ include yolları |
-| `java_class_path` | Java CLASSPATH |
-| `curly_bracket_next_line` | Süslü parantez stili |
-| `spaces_around_operators` | Operatör etrafında boşluk |
-| `spaces_around_brackets` | Parantez etrafında boşluk |
-| `indent_brace_style` | Süslü parantez stili (K&R, Allman, vb.) |
-| `wildcard_import_limit` | Wildcard import limiti |
-| `continuation_indent_size` | Devam satırı girintisi |
-| `line_comment`, `block_comment_*` | Yorum karakterleri |
-| `max_line_length` | Satır uzunluğu (çoğu editör desteklemez; Prettier `printWidth` kullanın) |
+| Seçenek                           | Açıklama                                                                 |
+| --------------------------------- | ------------------------------------------------------------------------ |
+| `quote_type`                      | Tırnak tercihi: `single`, `double`, `auto`                               |
+| `c_include_path`                  | C/C++ include yolları                                                    |
+| `java_class_path`                 | Java CLASSPATH                                                           |
+| `curly_bracket_next_line`         | Süslü parantez stili                                                     |
+| `spaces_around_operators`         | Operatör etrafında boşluk                                                |
+| `spaces_around_brackets`          | Parantez etrafında boşluk                                                |
+| `indent_brace_style`              | Süslü parantez stili (K&R, Allman, vb.)                                  |
+| `wildcard_import_limit`           | Wildcard import limiti                                                   |
+| `continuation_indent_size`        | Devam satırı girintisi                                                   |
+| `line_comment`, `block_comment_*` | Yorum karakterleri                                                       |
+| `max_line_length`                 | Satır uzunluğu (çoğu editör desteklemez; Prettier `printWidth` kullanın) |
 
 ---
 

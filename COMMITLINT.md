@@ -6,11 +6,11 @@ Bu doküman, projedeki `commitlint.config.js` dosyasını açıklar. Commitlint,
 
 ## 1. Konfigürasyon Özeti
 
-| Özellik | Değer |
-| ------- | ----- |
-| **Dosya** | `commitlint.config.js` |
-| **Base** | `@commitlint/config-conventional` |
-| **Başlık uzunluğu** | 100 karakter |
+| Özellik             | Değer                             |
+| ------------------- | --------------------------------- |
+| **Dosya**           | `commitlint.config.js`            |
+| **Base**            | `@commitlint/config-conventional` |
+| **Başlık uzunluğu** | 100 karakter                      |
 
 ---
 
@@ -31,16 +31,16 @@ Bu doküman, projedeki `commitlint.config.js` dosyasını açıklar. Commitlint,
 
 ## 3. İzin Verilen type Değerleri
 
-| type | Açıklama |
-| ---- | -------- |
-| `feat` | Yeni özellik |
-| `fix` | Bug düzeltmesi |
-| `docs` | Dokümantasyon |
-| `style` | Kod formatı (mantık değişikliği yok) |
-| `refactor` | Refaktör |
-| `perf` | Performans |
-| `test` | Test |
-| `chore` | Build, config, bağımlılık vb. |
+| type       | Açıklama                             |
+| ---------- | ------------------------------------ |
+| `feat`     | Yeni özellik                         |
+| `fix`      | Bug düzeltmesi                       |
+| `docs`     | Dokümantasyon                        |
+| `style`    | Kod formatı (mantık değişikliği yok) |
+| `refactor` | Refaktör                             |
+| `perf`     | Performans                           |
+| `test`     | Test                                 |
+| `chore`    | Build, config, bağımlılık vb.        |
 
 ---
 
@@ -104,33 +104,33 @@ Husky, `commit-msg` hook'unda commitlint'i çalıştırır. Geçersiz commit mes
 
 ### En Sık Kullanılan Kurallar
 
-| Kural | Amaç | Neden Kullanılır |
-| ----- | ---- | ---------------- |
-| **type-enum** | İzin verilen commit tiplerini belirler | Conventional Commits temeli; CHANGELOG ve semver için |
-| **header-max-length** | Başlık uzunluğunu sınırlar (örn. 72, 100) | Git arayüzünde okunabilirlik; GitHub/GitLab'da satır taşmasını önler |
-| **subject-case** | Subject'in büyük/küçük harf formatını kontrol eder | Tutarlı format; `lower-case` en yaygın tercih |
-| **type-empty** | `type` boş olamaz | `type: feat` formatını zorunlu kılar |
-| **subject-empty** | Subject boş olamaz | `feat:` gibi eksik açıklamaları engeller |
+| Kural                 | Amaç                                               | Neden Kullanılır                                                     |
+| --------------------- | -------------------------------------------------- | -------------------------------------------------------------------- |
+| **type-enum**         | İzin verilen commit tiplerini belirler             | Conventional Commits temeli; CHANGELOG ve semver için                |
+| **header-max-length** | Başlık uzunluğunu sınırlar (örn. 72, 100)          | Git arayüzünde okunabilirlik; GitHub/GitLab'da satır taşmasını önler |
+| **subject-case**      | Subject'in büyük/küçük harf formatını kontrol eder | Tutarlı format; `lower-case` en yaygın tercih                        |
+| **type-empty**        | `type` boş olamaz                                  | `type: feat` formatını zorunlu kılar                                 |
+| **subject-empty**     | Subject boş olamaz                                 | `feat:` gibi eksik açıklamaları engeller                             |
 
 ### Sık Kullanılan Ek Kurallar
 
-| Kural | Amaç | Örnek |
-| ----- | ---- | ----- |
-| **header-full-stop** | Başlık sonunda nokta yasak | `feat: login ekle.` → ❌ |
-| **body-leading-blank** | Body'den önce boş satır zorunlu | Body ile header arasında ayrım |
-| **footer-leading-blank** | Footer'dan önce boş satır | Breaking changes için |
-| **scope-enum** | İzin verilen scope listesi | `feat(auth):` veya `feat(api):` |
-| **scope-empty** | Scope zorunlu mu | `never` = her zaman scope gerekir |
+| Kural                    | Amaç                            | Örnek                             |
+| ------------------------ | ------------------------------- | --------------------------------- |
+| **header-full-stop**     | Başlık sonunda nokta yasak      | `feat: login ekle.` → ❌          |
+| **body-leading-blank**   | Body'den önce boş satır zorunlu | Body ile header arasında ayrım    |
+| **footer-leading-blank** | Footer'dan önce boş satır       | Breaking changes için             |
+| **scope-enum**           | İzin verilen scope listesi      | `feat(auth):` veya `feat(api):`   |
+| **scope-empty**          | Scope zorunlu mu                | `never` = her zaman scope gerekir |
 
 ### Daha Az Kullanılan Kurallar
 
-| Kural | Amaç | Ne Zaman Kullanılır |
-| ----- | ---- | ------------------- |
-| **body-max-length** | Body uzunluğu sınırı | Çok uzun açıklamaları engellemek |
-| **body-max-line-length** | Satır uzunluğu sınırı | Markdown/format tutarlılığı |
-| **signed-off-by** | DCO imzası zorunlu | Linux kernel, bazı open source projeler |
-| **references-empty** | Issue referansı zorunlu | `Closes #123` gibi referanslar |
-| **breaking-change-exclamation-mark** | `!` ile breaking change işareti | `feat!:` formatı |
+| Kural                                | Amaç                            | Ne Zaman Kullanılır                     |
+| ------------------------------------ | ------------------------------- | --------------------------------------- |
+| **body-max-length**                  | Body uzunluğu sınırı            | Çok uzun açıklamaları engellemek        |
+| **body-max-line-length**             | Satır uzunluğu sınırı           | Markdown/format tutarlılığı             |
+| **signed-off-by**                    | DCO imzası zorunlu              | Linux kernel, bazı open source projeler |
+| **references-empty**                 | Issue referansı zorunlu         | `Closes #123` gibi referanslar          |
+| **breaking-change-exclamation-mark** | `!` ile breaking change işareti | `feat!:` formatı                        |
 
 ### Önerilen Minimal Set
 

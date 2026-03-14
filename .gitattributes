@@ -1,1 +1,12 @@
 * text=auto eol=lf
+
+# Config dokümanları: merge sırasında her iki branch'in değişikliklerini birleştir (conflict azaltır)
+COMMITLINT.md merge=union
+EDITORCONFIG.md merge=union
+ESLINT.md merge=union
+POSTCSS.md merge=union
+PRETTIER.md merge=union
+STORYBOOK.md merge=union
+TSCONFIG.md merge=union
+VITE.md merge=union
+\!CONFIG.md merge=union

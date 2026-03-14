@@ -6,11 +6,11 @@ Bu doküman, projedeki `.storybook/main.ts` dosyasını açıklar. Storybook, UI
 
 ## 1. Konfigürasyon Özeti
 
-| Özellik | Değer |
-| ------- | ----- |
-| **Dosya** | `.storybook/main.ts` |
-| **Framework** | Vue 3 + Vite |
-| **Stories** | `*.mdx`, `*.stories.@(js|jsx|mjs|ts|tsx)` |
+| Özellik       | Değer                     |
+| ------------- | ------------------------- | --- | --- | --- | ----- |
+| **Dosya**     | `.storybook/main.ts`      |
+| **Framework** | Vue 3 + Vite              |
+| **Stories**   | `*.mdx`, `\*.stories.@(js | jsx | mjs | ts  | tsx)` |
 
 ---
 
@@ -20,23 +20,23 @@ Bu doküman, projedeki `.storybook/main.ts` dosyasını açıklar. Storybook, UI
 stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)']
 ```
 
-| Pattern | Açıklama |
-| ------- | -------- |
-| `../src/**/*.mdx` | MDX dokümantasyon dosyaları |
-| `../src/**/*.stories.@(js|jsx|mjs|ts|tsx)` | Hikâye dosyaları |
+| Pattern                    | Açıklama                    |
+| -------------------------- | --------------------------- | --- | --- | ----- | ---------------- |
+| `../src/**/*.mdx`          | MDX dokümantasyon dosyaları |
+| `../src/\*_/_.stories.@(js | jsx                         | mjs | ts  | tsx)` | Hikâye dosyaları |
 
 ---
 
 ## 3. Addon'lar
 
-| Addon | Açıklama |
-| ----- | -------- |
-| `@chromatic-com/storybook` | Chromatic (görsel regression testi) entegrasyonu |
-| `@storybook/addon-vitest` | Vitest ile hikâye testleri |
-| `@storybook/addon-a11y` | Erişilebilirlik (a11y) kontrolü |
-| `@storybook/addon-docs` | Otomatik dokümantasyon |
-| `@storybook/addon-design` | Tasarım araçları entegrasyonu |
-| `@storybook/addon-onboarding` | Yeni kullanıcı tanıtımı |
+| Addon                         | Açıklama                                         |
+| ----------------------------- | ------------------------------------------------ |
+| `@chromatic-com/storybook`    | Chromatic (görsel regression testi) entegrasyonu |
+| `@storybook/addon-vitest`     | Vitest ile hikâye testleri                       |
+| `@storybook/addon-a11y`       | Erişilebilirlik (a11y) kontrolü                  |
+| `@storybook/addon-docs`       | Otomatik dokümantasyon                           |
+| `@storybook/addon-design`     | Tasarım araçları entegrasyonu                    |
+| `@storybook/addon-onboarding` | Yeni kullanıcı tanıtımı                          |
 
 ---
 
@@ -52,22 +52,22 @@ Vue 3 ve Vite ile Storybook çalışır. Vite build pipeline'ı kullanılır.
 
 ## 5. İlgili Dosyalar
 
-| Dosya | Açıklama |
-| ----- | -------- |
-| `.storybook/main.ts` | Ana Storybook config |
-| `.storybook/preview.ts` | Global decorator, parametreler |
-| `.storybook/tsconfig.json` | Storybook TypeScript config |
-| `.storybook/vitest.setup.ts` | Vitest test kurulumu |
+| Dosya                        | Açıklama                       |
+| ---------------------------- | ------------------------------ |
+| `.storybook/main.ts`         | Ana Storybook config           |
+| `.storybook/preview.ts`      | Global decorator, parametreler |
+| `.storybook/tsconfig.json`   | Storybook TypeScript config    |
+| `.storybook/vitest.setup.ts` | Vitest test kurulumu           |
 
 ---
 
 ## 6. Komutlar
 
-| Komut | Açıklama |
-| ----- | -------- |
-| `npm run storybook` | Geliştirme sunucusu (port 6006) |
-| `npm run build-storybook` | Statik Storybook build |
-| `npm run chromatic` | Chromatic'e yükle (görsel test) |
+| Komut                     | Açıklama                        |
+| ------------------------- | ------------------------------- |
+| `npm run storybook`       | Geliştirme sunucusu (port 6006) |
+| `npm run build-storybook` | Statik Storybook build          |
+| `npm run chromatic`       | Chromatic'e yükle (görsel test) |
 
 ---
 

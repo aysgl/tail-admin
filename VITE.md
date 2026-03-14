@@ -6,12 +6,12 @@ Bu doküman, projedeki `vite.config.ts` dosyasını açıklar. Vite, Vue 3 proje
 
 ## 1. Konfigürasyon Özeti
 
-| Özellik | Değer |
-| ------- | ----- |
-| **Dosya** | `vite.config.ts` |
-| **Framework** | Vue 3 |
-| **Path alias** | `@` → `./src` |
-| **Test** | Vitest + Storybook + Playwright |
+| Özellik        | Değer                           |
+| -------------- | ------------------------------- |
+| **Dosya**      | `vite.config.ts`                |
+| **Framework**  | Vue 3                           |
+| **Path alias** | `@` → `./src`                   |
+| **Test**       | Vitest + Storybook + Playwright |
 
 ---
 
@@ -54,28 +54,30 @@ Vitest `projects` kullanır; Storybook hikâyeleri için ayrı bir proje tanıml
 
 ```ts
 test: {
-  projects: [{
-    extends: true,
-    plugins: [storybookTest({ configDir: path.join(dirname, '.storybook') })],
-    test: {
-      name: 'storybook',
-      browser: { enabled: true, headless: true, provider: playwright({}) },
-      setupFiles: ['.storybook/vitest.setup.ts']
-    }
-  }]
+  projects: [
+    {
+      extends: true,
+      plugins: [storybookTest({ configDir: path.join(dirname, '.storybook') })],
+      test: {
+        name: 'storybook',
+        browser: { enabled: true, headless: true, provider: playwright({}) },
+        setupFiles: ['.storybook/vitest.setup.ts'],
+      },
+    },
+  ]
 }
 ```
 
 ### Özellikler
 
-| Özellik | Değer | Açıklama |
-| ------- | ----- | -------- |
-| `name` | `storybook` | Proje adı |
-| `browser.enabled` | `true` | Tarayıcı ortamında test |
-| `browser.headless` | `true` | Görünmez tarayıcı |
-| `browser.provider` | `playwright` | Playwright kullanımı |
-| `browser.instances` | `chromium` | Chromium tarayıcısı |
-| `setupFiles` | `.storybook/vitest.setup.ts` | Test öncesi kurulum |
+| Özellik             | Değer                        | Açıklama                |
+| ------------------- | ---------------------------- | ----------------------- |
+| `name`              | `storybook`                  | Proje adı               |
+| `browser.enabled`   | `true`                       | Tarayıcı ortamında test |
+| `browser.headless`  | `true`                       | Görünmez tarayıcı       |
+| `browser.provider`  | `playwright`                 | Playwright kullanımı    |
+| `browser.instances` | `chromium`                   | Chromium tarayıcısı     |
+| `setupFiles`        | `.storybook/vitest.setup.ts` | Test öncesi kurulum     |
 
 ### Storybook Test Entegrasyonu
 
@@ -85,12 +87,12 @@ test: {
 
 ## 5. İlgili Komutlar
 
-| Komut | Açıklama |
-| ----- | -------- |
-| `npm run dev` | Geliştirme sunucusu (Vite) |
-| `npm run build` | Lint + type-check + build |
-| `npm run build-only` | Sadece Vite build |
-| `npm run preview` | Build çıktısını önizleme |
+| Komut                | Açıklama                   |
+| -------------------- | -------------------------- |
+| `npm run dev`        | Geliştirme sunucusu (Vite) |
+| `npm run build`      | Lint + type-check + build  |
+| `npm run build-only` | Sadece Vite build          |
+| `npm run preview`    | Build çıktısını önizleme   |
 
 ---
 
