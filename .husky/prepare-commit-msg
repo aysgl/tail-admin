@@ -1,2 +1,3 @@
-#!/bin/sh
-# Commit mesajı kontrolü commit-msg hook'unda (IDE uyumluluğu için prepare-commit-msg boş)
+#!/usr/bin/env sh
+
+# No-op: commit message validation is done in commit-msg hook

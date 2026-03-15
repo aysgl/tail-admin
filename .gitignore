@@ -29,3 +29,7 @@ coverage
 
 *.tsbuildinfo
 .vercel
+COMMIT_ERROR.txt
+
+
+storybook-static/*

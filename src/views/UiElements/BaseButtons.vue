@@ -3,107 +3,89 @@
     <PageBreadcrumb :pageTitle="currentPageTitle" />
     <div class="space-y-5 sm:space-y-6">
       <ComponentCard title="Primary Button">
-        <div class="flex items-center gap-5">
+        <div class="flex flex-wrap items-center gap-5">
           <Button
             size="sm"
-            variant="primary"
+            variant="solid"
+            color="primary"
+            >Button Text</Button
           >
-            Button Text
-          </Button>
           <Button
             size="md"
-            variant="primary"
+            variant="solid"
+            color="primary"
+            >Button Text</Button
           >
-            Button Text
-          </Button>
         </div>
       </ComponentCard>
-      <ComponentCard title="Primary Button with Left Icon">
-        <div class="flex items-center gap-5">
+      <ComponentCard title="Color Variants (variant + color)">
+        <div class="flex flex-wrap items-center gap-3">
           <Button
-            size="sm"
-            variant="primary"
+            variant="solid"
+            color="primary"
+            >Primary</Button
+          >
+          <Button variant="secondary">Secondary</Button>
+          <Button
+            variant="solid"
+            color="success"
+            >Success</Button
+          >
+          <Button
+            variant="solid"
+            color="error"
+            >Error</Button
+          >
+          <Button
+            variant="solid"
+            color="warning"
+            >Warning</Button
+          >
+          <Button
+            variant="solid"
+            color="info"
+            >Info</Button
+          >
+        </div>
+      </ComponentCard>
+      <ComponentCard title="Button with Icons">
+        <div class="flex flex-wrap items-center gap-5">
+          <Button
+            variant="solid"
+            color="primary"
             :startIcon="BoxIcon"
+            >Left Icon</Button
           >
-            Button Text
-          </Button>
           <Button
-            size="md"
-            variant="primary"
-            :startIcon="BoxIcon"
+            variant="solid"
+            color="primary"
+            :endIcon="BoxIcon"
+            >Right Icon</Button
           >
-            Button Text
-          </Button>
         </div>
       </ComponentCard>
-      <ComponentCard title="Primary Button with Right Icon">
-        <div class="flex items-center gap-5">
+      <ComponentCard title="Outline, Ghost, Link (color ile)">
+        <div class="flex flex-wrap items-center gap-3">
           <Button
-            size="sm"
-            variant="primary"
-            :endIcon="BoxIcon"
-          >
-            Button Text
-          </Button>
-          <Button
-            size="md"
-            variant="primary"
-            :endIcon="BoxIcon"
-          >
-            Button Text
-          </Button>
-        </div>
-      </ComponentCard>
-      <ComponentCard title="Primary Button">
-        <div class="flex items-center gap-5">
-          <Button
-            size="sm"
             variant="outline"
+            color="primary"
+            >Outline</Button
           >
-            Button Text
-          </Button>
           <Button
-            size="md"
             variant="outline"
+            color="success"
+            >Outline Success</Button
           >
-            Button Text
-          </Button>
-        </div>
-      </ComponentCard>
-      <ComponentCard title="Primary Button with Left Icon">
-        <div class="flex items-center gap-5">
           <Button
-            size="sm"
-            variant="outline"
-            :startIcon="BoxIcon"
+            variant="ghost"
+            color="error"
+            >Ghost Error</Button
           >
-            Button Text
-          </Button>
           <Button
-            size="md"
-            variant="outline"
-            :startIcon="BoxIcon"
+            variant="link"
+            color="info"
+            >Link Info</Button
           >
-            Button Text
-          </Button>
-        </div>
-      </ComponentCard>
-      <ComponentCard title="Primary Button with Right Icon">
-        <div class="flex items-center gap-5">
-          <Button
-            size="sm"
-            variant="outline"
-            :endIcon="BoxIcon"
-          >
-            Button Text
-          </Button>
-          <Button
-            size="md"
-            variant="outline"
-            :endIcon="BoxIcon"
-          >
-            Button Text
-          </Button>
         </div>
       </ComponentCard>
     </div>

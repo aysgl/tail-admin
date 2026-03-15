@@ -6,65 +6,36 @@ const meta: Meta<typeof BaseButton> = {
   tags: ['autodocs'],
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    variant: { control: 'select', options: ['primary', 'outline', 'ghost', 'link'] },
+    variant: {
+      control: 'select',
+      options: ['solid', 'secondary', 'outline', 'ghost', 'link'],
+    },
+    color: {
+      control: 'select',
+      options: ['primary', 'success', 'error', 'warning', 'info'],
+    },
   },
 }
 export default meta
 
 type Story = StoryObj<typeof BaseButton>
 
-export const Primary: Story = {
-  args: {
-    variant: 'primary',
-    size: 'md',
+const renderButton = (args: object) => ({
+  components: { BaseButton },
+  setup() {
+    return { args }
   },
-  render: (args) => ({
-    components: { BaseButton },
-    setup() {
-      return { args }
-    },
-    template: '<BaseButton v-bind="args">Button</BaseButton>',
-  }),
-}
+  template: '<BaseButton v-bind="args">Button</BaseButton>',
+})
 
+export const Primary: Story = { args: { variant: 'fill', color: 'brand' }, render: renderButton }
 export const Outline: Story = {
-  args: {
-    variant: 'outline',
-    size: 'md',
-  },
-  render: (args) => ({
-    components: { BaseButton },
-    setup() {
-      return { args }
-    },
-    template: '<BaseButton v-bind="args">Button</BaseButton>',
-  }),
+  args: { variant: 'outline', color: 'brand' },
+  render: renderButton,
 }
-
-export const Ghost: Story = {
-  args: {
-    variant: 'ghost',
-    size: 'md',
-  },
-  render: (args) => ({
-    components: { BaseButton },
-    setup() {
-      return { args }
-    },
-    template: '<BaseButton v-bind="args">Button</BaseButton>',
-  }),
+export const Ghost: Story = { args: { variant: 'ghost', color: 'brand' }, render: renderButton }
+export const Secondary: Story = {
+  args: { variant: 'secondary', color: 'brand' },
+  render: renderButton,
 }
-
-export const Link: Story = {
-  args: {
-    variant: 'link',
-    size: 'md',
-  },
-  render: (args) => ({
-    components: { BaseButton },
-    setup() {
-      return { args }
-    },
-    template: '<BaseButton v-bind="args">Button</BaseButton>',
-  }),
-}
+export const Link: Story = { args: { variant: 'link', color: 'brand' }, render: renderButton }

@@ -1,6 +1,7 @@
-#!/bin/sh
-# Push öncesi hatırlatma
+#!/usr/bin/env sh
+
+node scripts/commitlint-push-check.js || exit 1
+
 echo ""
-echo "⚠️  Hatırlatma: Push öncesi 'npm run lint' ve 'npm run build' çalıştırdığınızdan emin olun."
-echo "   CI bu kontrolleri otomatik yapacaktır."
+echo "⚠️  Push öncesi: npm run lint ve npm run build çalıştırdığınızdan emin olun."
 echo ""

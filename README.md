@@ -146,15 +146,17 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 
 **Lokal Onay (Git Hooks)**
 
-| Hook           | Ne yapar                                                                   |
-| -------------- | -------------------------------------------------------------------------- |
-| **pre-commit** | `lint-staged` — staged dosyalarda ESLint + Prettier                        |
-| **commit-msg** | Commit mesajı formatı kontrolü (commitlint) — TİP HATASI burada gösterilir |
-| **pre-push**   | Hatırlatma: `npm run lint` ve `npm run build` çalıştırıldığından emin olun |
+| Hook           | Ne yapar                                                                               |
+| -------------- | -------------------------------------------------------------------------------------- |
+| **pre-commit** | `lint-staged` — staged dosyalarda ESLint + Prettier                                    |
+| **commit-msg** | Commit mesajı formatı kontrolü (commitlint)                                            |
+| **pre-push**   | Commit mesajları kontrolü (**IDE commit'leri de yakalanır**) + lint/build hatırlatması |
 
 **Geçerli commit tipleri:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
 
 **Örnek commit mesajı:** `feat: kullanıcı giriş sayfası eklendi`
+
+**Not:** IDE sadece script yolunu gösterebilir. Hata mesajı `COMMIT_ERROR.txt` dosyasına yazılır (proje kökünde, IDE'de görünür).
 
 **Stash Sonrası Hatırlatma**
 
