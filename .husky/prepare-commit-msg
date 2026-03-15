@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-# No-op: commit message validation is done in commit-msg hook
