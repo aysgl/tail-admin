@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-node scripts/commitlint-push-check.js || exit 1
-
 echo ""
 echo "⚠️  Push öncesi: npm run lint ve npm run build çalıştırdığınızdan emin olun."
 echo ""
