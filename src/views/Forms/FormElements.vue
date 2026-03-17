@@ -1,7 +1,11 @@
 <template>
   <AdminLayout>
-    <PageBreadcrumb :pageTitle="currentPageTitle" />
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <PageBreadcrumb
+      :pageTitle="currentPageTitle"
+    />
+    <div
+      class="grid grid-cols-1 gap-6 sm:grid-cols-2"
+    >
       <div class="space-y-6">
         <ComponentCard title="Default Inputs">
           <BaseDefaultInput />
@@ -17,8 +21,12 @@
         </ComponentCard>
       </div>
       <div class="space-y-6">
-        <ComponentCard title="Inputs Group"> <BaseInputGroup /> </ComponentCard>
-        <ComponentCard title="File Input"> <BaseFileInput /> </ComponentCard>
+        <ComponentCard title="Inputs Group">
+          <BaseInputGroup />
+        </ComponentCard>
+        <ComponentCard title="File Input">
+          <BaseFileInput />
+        </ComponentCard>
         <ComponentCard title="Checkboxes">
           <BaseCheckboxInput />
         </ComponentCard>

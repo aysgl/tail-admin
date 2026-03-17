@@ -62,7 +62,9 @@
       </div>
     </div>
 
-    <div class="text-base text-center text-gray-500 dark:text-gray-400">
+    <div
+      class="text-base text-center text-gray-600 dark:text-gray-400"
+    >
       <div class="flex justify-center gap-0.5">
         <div
           v-for="(day, index) in daysArray"
@@ -72,7 +74,9 @@
             v-show="day.visible"
             class="inline-block timer-box"
           >
-            <span class="inline-block">{{ day.value }}</span>
+            <span class="inline-block">{{
+              day.value
+            }}</span>
           </span>
         </div>
         <div>days left</div>
@@ -84,16 +88,22 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
-type TimeDigit = { value: string; visible: boolean; remainingPercentage?: number }
+type TimeDigit = {
+  value: string
+  visible: boolean
+  remainingPercentage?: number
+}
 const daysArray = ref<TimeDigit[]>([])
 const hoursArray = ref<TimeDigit[]>([])
 const minutesArray = ref<TimeDigit[]>([])
 const secondsArray = ref<TimeDigit[]>([])
-const endTime = new Date('December 20, 2025 23:59:59 GMT+0530').getTime()
+const endTime = new Date(
+  'December 20, 2025 23:59:59 GMT+0530',
+).getTime()
 const now = ref(new Date().getTime())
 const timeLeft = ref(0)
 
-let counter: number
+let counter: ReturnType<typeof setInterval>
 
 const countdown = () => {
   counter = setInterval(() => {
@@ -116,10 +126,22 @@ const format = (value: number) => {
 }
 
 const updateTimeArrays = () => {
-  daysArray.value = getTimeArray(timeLeft.value / (60 * 60 * 24), 'days')
-  hoursArray.value = getTimeArray((timeLeft.value / (60 * 60)) % 24, 'hours')
-  minutesArray.value = getTimeArray((timeLeft.value / 60) % 60, 'minutes')
-  secondsArray.value = getTimeArray(timeLeft.value % 60, 'seconds')
+  daysArray.value = getTimeArray(
+    timeLeft.value / (60 * 60 * 24),
+    'days',
+  )
+  hoursArray.value = getTimeArray(
+    (timeLeft.value / (60 * 60)) % 24,
+    'hours',
+  )
+  minutesArray.value = getTimeArray(
+    (timeLeft.value / 60) % 60,
+    'minutes',
+  )
+  secondsArray.value = getTimeArray(
+    timeLeft.value % 60,
+    'seconds',
+  )
 }
 
 const getMaxValueForUnit = (unit: string) => {
@@ -137,9 +159,13 @@ const getMaxValueForUnit = (unit: string) => {
   }
 }
 
-const getTimeArray = (value: number, unit: string) => {
+const getTimeArray = (
+  value: number,
+  unit: string,
+) => {
   const stringValue = format(value).toString()
-  const percentage = (value / getMaxValueForUnit(unit)) * 100
+  const percentage =
+    (value / getMaxValueForUnit(unit)) * 100
   return stringValue.split('').map((digit) => ({
     value: digit,
     visible: true,
@@ -148,10 +174,18 @@ const getTimeArray = (value: number, unit: string) => {
 }
 
 const resetTimeArrays = () => {
-  daysArray.value = [{ value: '0', visible: true }]
-  hoursArray.value = [{ value: '0', visible: true }]
-  minutesArray.value = [{ value: '0', visible: true }]
-  secondsArray.value = [{ value: '0', visible: true }]
+  daysArray.value = [
+    { value: '0', visible: true },
+  ]
+  hoursArray.value = [
+    { value: '0', visible: true },
+  ]
+  minutesArray.value = [
+    { value: '0', visible: true },
+  ]
+  secondsArray.value = [
+    { value: '0', visible: true },
+  ]
 }
 
 onMounted(() => {

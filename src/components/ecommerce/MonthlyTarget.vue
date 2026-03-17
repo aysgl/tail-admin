@@ -1,14 +1,20 @@
 <template>
   <div
-    class="rounded-2xl border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-white/[0.03]"
+    class="rounded-2xl border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-white/0.03"
   >
     <div
       class="px-5 pt-5 bg-white shadow-default rounded-2xl pb-11 dark:bg-gray-900 sm:px-6 sm:pt-6"
     >
       <div class="flex justify-between">
         <div>
-          <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Monthly Target</h3>
-          <p class="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
+          <h3
+            class="text-lg font-semibold text-gray-800 dark:text-white/90"
+          >
+            Monthly Target
+          </h3>
+          <p
+            class="mt-1 text-gray-600 text-theme-sm dark:text-gray-400"
+          >
             Target you’ve set for each month
           </p>
         </div>
@@ -52,14 +58,21 @@
           >+10%</span
         >
       </div>
-      <p class="mx-auto mt-1.5 w-full max-w-[380px] text-center text-sm text-gray-500 sm:text-base">
-        You earn $3287 today, it's higher than last month. Keep up your good work!
+      <p
+        class="mx-auto mt-1.5 w-full max-w-[380px] text-center text-sm text-gray-600 sm:text-base"
+      >
+        You earn $3287 today, it's higher than
+        last month. Keep up your good work!
       </p>
     </div>
 
-    <div class="flex items-center justify-center gap-5 px-6 py-3.5 sm:gap-8 sm:py-5">
+    <div
+      class="flex items-center justify-center gap-5 px-6 py-3.5 sm:gap-8 sm:py-5"
+    >
       <div>
-        <p class="mb-1 text-center text-gray-500 text-theme-xs dark:text-gray-400 sm:text-sm">
+        <p
+          class="mb-1 text-center text-gray-600 text-theme-xs dark:text-gray-400 sm:text-sm"
+        >
           Target
         </p>
         <p
@@ -83,10 +96,14 @@
         </p>
       </div>
 
-      <div class="w-px bg-gray-200 h-7 dark:bg-gray-800"></div>
+      <div
+        class="w-px bg-gray-200 h-7 dark:bg-gray-800"
+      ></div>
 
       <div>
-        <p class="mb-1 text-center text-gray-500 text-theme-xs dark:text-gray-400 sm:text-sm">
+        <p
+          class="mb-1 text-center text-gray-600 text-theme-xs dark:text-gray-400 sm:text-sm"
+        >
           Revenue
         </p>
         <p
@@ -110,10 +127,14 @@
         </p>
       </div>
 
-      <div class="w-px bg-gray-200 h-7 dark:bg-gray-800"></div>
+      <div
+        class="w-px bg-gray-200 h-7 dark:bg-gray-800"
+      ></div>
 
       <div>
-        <p class="mb-1 text-center text-gray-500 text-theme-xs dark:text-gray-400 sm:text-sm">
+        <p
+          class="mb-1 text-center text-gray-600 text-theme-xs dark:text-gray-400 sm:text-sm"
+        >
           Today
         </p>
         <p
@@ -143,9 +164,19 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import DropdownMenu from '../common/DropdownMenu.vue'
-const menuItems: { label: string; onClick?: () => void }[] = [
-  { label: 'View More', onClick: () => console.log('View More clicked') },
-  { label: 'Delete', onClick: () => console.log('Delete clicked') },
+const menuItems: {
+  label: string
+  onClick?: () => void
+}[] = [
+  {
+    label: 'View More',
+    onClick: () =>
+      console.log('View More clicked'),
+  },
+  {
+    label: 'Delete',
+    onClick: () => console.log('Delete clicked'),
+  },
 ]
 import VueApexCharts from 'vue3-apexcharts'
 

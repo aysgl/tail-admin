@@ -1,9 +1,13 @@
 <template>
   <AdminLayout>
-    <PageBreadcrumb :pageTitle="currentPageTitle" />
+    <PageBreadcrumb
+      :pageTitle="currentPageTitle"
+    />
     <div class="space-y-5 sm:space-y-6">
       <ComponentCard title="Primary Button">
-        <div class="flex flex-wrap items-center gap-5">
+        <div
+          class="flex flex-wrap items-center gap-5"
+        >
           <Button
             size="sm"
             variant="solid"
@@ -18,14 +22,20 @@
           >
         </div>
       </ComponentCard>
-      <ComponentCard title="Color Variants (variant + color)">
-        <div class="flex flex-wrap items-center gap-3">
+      <ComponentCard
+        title="Color Variants (variant + color)"
+      >
+        <div
+          class="flex flex-wrap items-center gap-3"
+        >
           <Button
             variant="solid"
             color="primary"
             >Primary</Button
           >
-          <Button variant="secondary">Secondary</Button>
+          <Button variant="secondary"
+            >Secondary</Button
+          >
           <Button
             variant="solid"
             color="success"
@@ -49,7 +59,9 @@
         </div>
       </ComponentCard>
       <ComponentCard title="Button with Icons">
-        <div class="flex flex-wrap items-center gap-5">
+        <div
+          class="flex flex-wrap items-center gap-5"
+        >
           <Button
             variant="solid"
             color="primary"
@@ -64,8 +76,12 @@
           >
         </div>
       </ComponentCard>
-      <ComponentCard title="Outline, Ghost, Link (color ile)">
-        <div class="flex flex-wrap items-center gap-3">
+      <ComponentCard
+        title="Outline, Ghost, Link (color ile)"
+      >
+        <div
+          class="flex flex-wrap items-center gap-3"
+        >
           <Button
             variant="outline"
             color="primary"

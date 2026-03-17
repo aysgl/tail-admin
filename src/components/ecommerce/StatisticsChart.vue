@@ -2,10 +2,18 @@
   <div
     class="rounded-2xl border border-gray-200 bg-white px-5 pb-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6"
   >
-    <div class="flex flex-col gap-5 mb-6 sm:flex-row sm:justify-between">
+    <div
+      class="flex flex-col gap-5 mb-6 sm:flex-row sm:justify-between"
+    >
       <div class="w-full">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Statistics</h3>
-        <p class="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
+        <h3
+          class="text-lg font-semibold text-gray-800 dark:text-white/90"
+        >
+          Statistics
+        </h3>
+        <p
+          class="mt-1 text-gray-600 text-theme-sm dark:text-gray-400"
+        >
           Target you’ve set for each month
         </p>
       </div>
@@ -22,7 +30,7 @@
               :class="[
                 selected === option.value
                   ? 'shadow-theme-xs text-gray-900 dark:text-white bg-white dark:bg-gray-800'
-                  : 'text-gray-500 dark:text-gray-400',
+                  : 'text-gray-600 dark:text-gray-400',
                 'px-3 py-2 font-medium rounded-md text-theme-sm hover:text-gray-900 hover:shadow-theme-xs dark:hover:bg-gray-800 dark:hover:text-white',
               ]"
             >
@@ -39,7 +47,7 @@
             placeholder="Select Date"
           />
           <span
-            class="absolute text-gray-500 -translate-y-1/2 pointer-events-none left-1/2 -translate-x-1/2 sm:left-3 sm:translate-x-0 top-1/2 dark:text-gray-400"
+            class="absolute text-gray-600 -translate-y-1/2 pointer-events-none left-1/2 -translate-x-1/2 sm:left-3 sm:translate-x-0 top-1/2 dark:text-gray-400"
           >
             <svg
               class="fill-current"
@@ -60,7 +68,9 @@
         </div>
       </div>
     </div>
-    <div class="max-w-full overflow-x-auto custom-scrollbar">
+    <div
+      class="max-w-full overflow-x-auto custom-scrollbar"
+    >
       <div
         id="chartThree"
         class="-ml-4 min-w-[1000px] xl:min-w-full pl-2"
@@ -92,18 +102,29 @@ const date = ref('')
 const flatpickrConfig = {
   mode: 'range' as const,
   dateFormat: 'M j',
-  defaultDate: [new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), new Date()],
+  defaultDate: [
+    new Date(
+      Date.now() - 7 * 24 * 60 * 60 * 1000,
+    ),
+    new Date(),
+  ],
 }
 import VueApexCharts from 'vue3-apexcharts'
 
 const series = ref([
   {
     name: 'Sales',
-    data: [180, 190, 170, 160, 175, 165, 170, 205, 230, 210, 240, 235],
+    data: [
+      180, 190, 170, 160, 175, 165, 170, 205, 230,
+      210, 240, 235,
+    ],
   },
   {
     name: 'Revenue',
-    data: [40, 30, 50, 40, 55, 40, 70, 100, 110, 120, 150, 140],
+    data: [
+      40, 30, 50, 40, 55, 40, 70, 100, 110, 120,
+      150, 140,
+    ],
   },
 ])
 

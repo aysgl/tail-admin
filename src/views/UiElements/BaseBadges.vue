@@ -1,9 +1,15 @@
 <template>
   <AdminLayout>
-    <PageBreadcrumb :pageTitle="currentPageTitle" />
+    <PageBreadcrumb
+      :pageTitle="currentPageTitle"
+    />
     <div class="space-y-5 sm:space-y-6">
-      <ComponentCard title="With Light Background">
-        <div class="flex flex-wrap gap-4 sm:items-center sm:justify-center">
+      <ComponentCard
+        title="With Light Background"
+      >
+        <div
+          class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
+        >
           <Badge
             v-for="color in colors"
             :key="color"
@@ -13,8 +19,12 @@
           </Badge>
         </div>
       </ComponentCard>
-      <ComponentCard title="With Solid Background">
-        <div class="flex flex-wrap gap-4 sm:items-center sm:justify-center">
+      <ComponentCard
+        title="With Solid Background"
+      >
+        <div
+          class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
+        >
           <Badge
             v-for="color in colors"
             :key="color"
@@ -25,8 +35,12 @@
           </Badge>
         </div>
       </ComponentCard>
-      <ComponentCard title="Light Background with Left Icon">
-        <div class="flex flex-wrap gap-4 sm:items-center sm:justify-center">
+      <ComponentCard
+        title="Light Background with Left Icon"
+      >
+        <div
+          class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
+        >
           <Badge
             v-for="color in colors"
             :key="color"
@@ -37,8 +51,12 @@
           </Badge>
         </div>
       </ComponentCard>
-      <ComponentCard title="Solid Background with Left Icon">
-        <div class="flex flex-wrap gap-4 sm:items-center sm:justify-center">
+      <ComponentCard
+        title="Solid Background with Left Icon"
+      >
+        <div
+          class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
+        >
           <Badge
             v-for="color in colors"
             :key="color"
@@ -50,8 +68,12 @@
           </Badge>
         </div>
       </ComponentCard>
-      <ComponentCard title="Light Background with Right Icon">
-        <div class="flex flex-wrap gap-4 sm:items-center sm:justify-center">
+      <ComponentCard
+        title="Light Background with Right Icon"
+      >
+        <div
+          class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
+        >
           <Badge
             v-for="color in colors"
             :key="color"
@@ -62,8 +84,12 @@
           </Badge>
         </div>
       </ComponentCard>
-      <ComponentCard title="Solid Background with Right Icon">
-        <div class="flex flex-wrap gap-4 sm:items-center sm:justify-center">
+      <ComponentCard
+        title="Solid Background with Right Icon"
+      >
+        <div
+          class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
+        >
           <Badge
             v-for="color in colors"
             :key="color"
@@ -88,5 +114,13 @@ import ComponentCard from '../../components/common/ComponentCard.vue'
 import { PlusIcon } from '@/icons'
 const currentPageTitle = ref('Badge')
 
-const colors = ['primary', 'success', 'error', 'warning', 'info', 'light', 'dark'] as const
+const colors = [
+  'primary',
+  'success',
+  'error',
+  'warning',
+  'info',
+  'light',
+  'dark',
+] as const
 </script>

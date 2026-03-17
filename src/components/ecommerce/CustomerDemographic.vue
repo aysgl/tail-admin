@@ -4,10 +4,14 @@
   >
     <div class="flex justify-between">
       <div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
+        <h3
+          class="text-lg font-semibold text-gray-800 dark:text-white/90"
+        >
           Customers Demographic
         </h3>
-        <p class="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
+        <p
+          class="mt-1 text-gray-600 text-theme-sm dark:text-gray-400"
+        >
           Number of customer based on country
         </p>
       </div>
@@ -22,23 +26,35 @@
       ></div>
     </div>
     <div class="space-y-5">
-      <div class="flex items-center justify-between">
+      <div
+        class="flex items-center justify-between"
+      >
         <div class="flex items-center gap-3">
-          <div class="items-center w-full rounded-full max-w-8">
+          <div
+            class="items-center w-full rounded-full max-w-8"
+          >
             <img
               src="/images/country/country-01.svg"
               alt="usa"
             />
           </div>
           <div>
-            <p class="font-semibold text-gray-800 text-theme-sm dark:text-white/90">USA</p>
-            <span class="block text-gray-500 text-theme-xs dark:text-gray-400">
+            <p
+              class="font-semibold text-gray-800 text-theme-sm dark:text-white/90"
+            >
+              USA
+            </p>
+            <span
+              class="block text-gray-600 text-theme-xs dark:text-gray-400"
+            >
               2,379 Customers
             </span>
           </div>
         </div>
 
-        <div class="flex w-full max-w-[140px] items-center gap-3">
+        <div
+          class="flex w-full max-w-[140px] items-center gap-3"
+        >
           <div
             class="relative block h-2 w-full max-w-[100px] rounded-sm bg-gray-200 dark:bg-gray-800"
           >
@@ -46,27 +62,43 @@
               class="absolute left-0 top-0 flex h-full w-[79%] items-center justify-center rounded-sm bg-brand-500 text-xs font-medium text-white"
             ></div>
           </div>
-          <p class="font-medium text-gray-800 text-theme-sm dark:text-white/90">79%</p>
+          <p
+            class="font-medium text-gray-800 text-theme-sm dark:text-white/90"
+          >
+            79%
+          </p>
         </div>
       </div>
 
-      <div class="flex items-center justify-between">
+      <div
+        class="flex items-center justify-between"
+      >
         <div class="flex items-center gap-3">
-          <div class="items-center w-full rounded-full max-w-8">
+          <div
+            class="items-center w-full rounded-full max-w-8"
+          >
             <img
               src="/images/country/country-02.svg"
               alt="france"
             />
           </div>
           <div>
-            <p class="font-semibold text-gray-800 text-theme-sm dark:text-white/90">France</p>
-            <span class="block text-gray-500 text-theme-xs dark:text-gray-400">
+            <p
+              class="font-semibold text-gray-800 text-theme-sm dark:text-white/90"
+            >
+              France
+            </p>
+            <span
+              class="block text-gray-600 text-theme-xs dark:text-gray-400"
+            >
               589 Customers
             </span>
           </div>
         </div>
 
-        <div class="flex w-full max-w-[140px] items-center gap-3">
+        <div
+          class="flex w-full max-w-[140px] items-center gap-3"
+        >
           <div
             class="relative block h-2 w-full max-w-[100px] rounded-sm bg-gray-200 dark:bg-gray-800"
           >
@@ -74,7 +106,11 @@
               class="absolute left-0 top-0 flex h-full w-[23%] items-center justify-center rounded-sm bg-brand-500 text-xs font-medium text-white"
             ></div>
           </div>
-          <p class="font-medium text-gray-800 text-theme-sm dark:text-white/90">23%</p>
+          <p
+            class="font-medium text-gray-800 text-theme-sm dark:text-white/90"
+          >
+            23%
+          </p>
         </div>
       </div>
     </div>
@@ -87,7 +123,9 @@ import jsVectorMap from 'jsvectormap'
 import 'jsvectormap/dist/maps/world'
 
 const mapOneRef = ref<HTMLElement | null>(null)
-const mapInstance = ref<InstanceType<typeof jsVectorMap> | undefined>(undefined)
+const mapInstance = ref<
+  InstanceType<typeof jsVectorMap> | undefined
+>(undefined)
 
 const initMap = () => {
   if (mapOneRef.value) {
@@ -135,11 +173,17 @@ const initMap = () => {
       },
       onRegionTooltipShow: function (
         event: MouseEvent,
-        tooltip: InstanceType<typeof jsVectorMap.Tooltip>,
+        tooltip: InstanceType<
+          typeof jsVectorMap.Tooltip
+        >,
       ) {
-        const code = (event.target as HTMLElement).getAttribute('data-code')
+        const code = (
+          event.target as HTMLElement
+        ).getAttribute('data-code')
         if (code === 'EG') {
-          tooltip.setContent(tooltip.text() + ' (Hello Egypt)')
+          tooltip.setContent(
+            tooltip.text() + ' (Hello Egypt)',
+          )
         }
       },
     })

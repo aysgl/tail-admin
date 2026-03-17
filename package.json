@@ -16,7 +16,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "stash": "./scripts/pre-stash-check.sh",
-    "stash:setup": "git config --local alias.stash '!./scripts/pre-stash-check.sh'"
+    "stash:setup": "git config --local alias.stash '!./scripts/pre-stash-check.sh'",
+    "chromatic": "npx chromatic --project-token=chpt_a654caf7d2b2fa0"
   },
   "lint-staged": {
     "*.{ts,tsx,vue,js,jsx}": [
@@ -67,6 +68,8 @@
     "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/eslint-config-typescript": "^14.3.0",
     "@vue/tsconfig": "^0.7.0",
+    "axe-core": "^4.11.1",
+    "chromatic": "^15.3.0",
     "eslint": "^9.18.0",
     "eslint-plugin-vue": "^9.32.0",
     "husky": "^9.1.7",

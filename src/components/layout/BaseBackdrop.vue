@@ -8,5 +8,6 @@
 
 <script setup lang="ts">
 import { useSidebar } from '@/composables/useSidebar'
-const { toggleMobileSidebar, isMobileOpen } = useSidebar()
+const { toggleMobileSidebar, isMobileOpen } =
+  useSidebar()
 </script>

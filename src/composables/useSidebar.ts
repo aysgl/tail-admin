@@ -20,7 +20,14 @@
 //   }
 // }
 
-import { ref, computed, onMounted, onUnmounted, provide, inject } from 'vue'
+import {
+  ref,
+  computed,
+  onMounted,
+  onUnmounted,
+  provide,
+  inject,
+} from 'vue'
 import type { Ref } from 'vue' //
 
 interface SidebarContextType {
@@ -56,11 +63,17 @@ export function useSidebarProvider() {
 
   onMounted(() => {
     handleResize()
-    window.addEventListener('resize', handleResize)
+    window.addEventListener(
+      'resize',
+      handleResize,
+    )
   })
 
   onUnmounted(() => {
-    window.removeEventListener('resize', handleResize)
+    window.removeEventListener(
+      'resize',
+      handleResize,
+    )
   })
 
   const toggleSidebar = () => {
@@ -84,11 +97,14 @@ export function useSidebarProvider() {
   }
 
   const toggleSubmenu = (item: string) => {
-    openSubmenu.value = openSubmenu.value === item ? null : item
+    openSubmenu.value =
+      openSubmenu.value === item ? null : item
   }
 
   const context: SidebarContextType = {
-    isExpanded: computed(() => (isMobile.value ? false : isExpanded.value)),
+    isExpanded: computed(() =>
+      isMobile.value ? false : isExpanded.value,
+    ),
     isMobileOpen,
     isHovered,
     activeItem,
@@ -106,7 +122,9 @@ export function useSidebarProvider() {
 }
 
 export function useSidebar(): SidebarContextType {
-  const context = inject<SidebarContextType>(SidebarSymbol)
+  const context = inject<SidebarContextType>(
+    SidebarSymbol,
+  )
   if (!context) {
     throw new Error(
       'useSidebar must be used within a component that has SidebarProvider as an ancestor',

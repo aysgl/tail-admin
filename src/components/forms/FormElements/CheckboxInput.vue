@@ -1,6 +1,8 @@
 <template>
   <div class="space-y-6">
-    <div class="flex flex-wrap items-center gap-8">
+    <div
+      class="flex flex-wrap items-center gap-8"
+    >
       <!-- Default Checkbox -->
       <div>
         <label
@@ -22,7 +24,11 @@
               "
               class="mr-3 flex h-5 w-5 items-center justify-center rounded-md border-[1.25px] hover:border-brand-500 dark:hover:border-brand-500"
             >
-              <span :class="checkboxOne ? '' : 'opacity-0'">
+              <span
+                :class="
+                  checkboxOne ? '' : 'opacity-0'
+                "
+              >
                 <svg
                   width="14"
                   height="14"
@@ -66,7 +72,11 @@
               "
               class="mr-3 flex h-5 w-5 items-center justify-center rounded-md border-[1.25px] hover:border-brand-500 dark:hover:border-brand-500"
             >
-              <span :class="checkboxTwo ? '' : 'opacity-0'">
+              <span
+                :class="
+                  checkboxTwo ? '' : 'opacity-0'
+                "
+              >
                 <svg
                   width="14"
                   height="14"
@@ -111,7 +121,11 @@
               "
               class="mr-3 flex h-5 w-5 items-center justify-center rounded-md border-[1.25px]"
             >
-              <span :class="checkboxThree ? '' : 'opacity-0'">
+              <span
+                :class="
+                  checkboxThree ? '' : 'opacity-0'
+                "
+              >
                 <svg
                   class="stroke-gray-200 dark:stroke-gray-800"
                   width="14"

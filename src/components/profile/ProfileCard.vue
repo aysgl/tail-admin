@@ -1,8 +1,14 @@
 <template>
   <div>
-    <div class="p-5 mb-6 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
-      <div class="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
-        <div class="flex flex-col items-center w-full gap-6 xl:flex-row">
+    <div
+      class="p-5 mb-6 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6"
+    >
+      <div
+        class="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between"
+      >
+        <div
+          class="flex flex-col items-center w-full gap-6 xl:flex-row"
+        >
           <div
             class="w-20 h-20 overflow-hidden border border-gray-200 rounded-full dark:border-gray-800"
           >
@@ -20,12 +26,24 @@
             <div
               class="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left"
             >
-              <p class="text-sm text-gray-500 dark:text-gray-400">Team Manager</p>
-              <div class="hidden h-3.5 w-px bg-gray-300 dark:bg-gray-700 xl:block"></div>
-              <p class="text-sm text-gray-500 dark:text-gray-400">Arizona, United States</p>
+              <p
+                class="text-sm text-gray-600 dark:text-gray-400"
+              >
+                Team Manager
+              </p>
+              <div
+                class="hidden h-3.5 w-px bg-gray-300 dark:bg-gray-700 xl:block"
+              ></div>
+              <p
+                class="text-sm text-gray-600 dark:text-gray-400"
+              >
+                Arizona, United States
+              </p>
             </div>
           </div>
-          <div class="flex items-center order-2 gap-2 grow xl:order-3 xl:justify-end">
+          <div
+            class="flex items-center order-2 gap-2 grow xl:order-3 xl:justify-end"
+          >
             <a
               href="https://www.facebook.com/PimjoHQ"
               target="_blank"
@@ -161,21 +179,32 @@
             </svg>
           </button>
           <div class="px-2 pr-14">
-            <h4 class="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90">
+            <h4
+              class="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90"
+            >
               Edit Personal Information
             </h4>
-            <p class="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7">
-              Update your details to keep your profile up-to-date.
+            <p
+              class="mb-6 text-sm text-gray-600 dark:text-gray-400 lg:mb-7"
+            >
+              Update your details to keep your
+              profile up-to-date.
             </p>
           </div>
           <form class="flex flex-col">
-            <div class="custom-scrollbar h-[458px] overflow-y-auto p-2">
+            <div
+              class="custom-scrollbar h-[458px] overflow-y-auto p-2"
+            >
               <div>
-                <h5 class="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
+                <h5
+                  class="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6"
+                >
                   Social Links
                 </h5>
 
-                <div class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
+                <div
+                  class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2"
+                >
                   <div>
                     <label
                       class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
@@ -230,12 +259,18 @@
                 </div>
               </div>
               <div class="mt-7">
-                <h5 class="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
+                <h5
+                  class="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6"
+                >
                   Personal Information
                 </h5>
 
-                <div class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
-                  <div class="col-span-2 lg:col-span-1">
+                <div
+                  class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2"
+                >
+                  <div
+                    class="col-span-2 lg:col-span-1"
+                  >
                     <label
                       class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
@@ -248,7 +283,9 @@
                     />
                   </div>
 
-                  <div class="col-span-2 lg:col-span-1">
+                  <div
+                    class="col-span-2 lg:col-span-1"
+                  >
                     <label
                       class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
@@ -261,7 +298,9 @@
                     />
                   </div>
 
-                  <div class="col-span-2 lg:col-span-1">
+                  <div
+                    class="col-span-2 lg:col-span-1"
+                  >
                     <label
                       class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
@@ -274,7 +313,9 @@
                     />
                   </div>
 
-                  <div class="col-span-2 lg:col-span-1">
+                  <div
+                    class="col-span-2 lg:col-span-1"
+                  >
                     <label
                       class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
@@ -302,9 +343,13 @@
                 </div>
               </div>
             </div>
-            <div class="flex items-center gap-3 px-2 mt-6 lg:justify-end">
+            <div
+              class="flex items-center gap-3 px-2 mt-6 lg:justify-end"
+            >
               <button
-                @click="isProfileInfoModal = false"
+                @click="
+                  isProfileInfoModal = false
+                "
                 type="button"
                 class="flex w-full justify-center rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] sm:w-auto"
               >

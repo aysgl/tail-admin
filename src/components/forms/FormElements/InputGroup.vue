@@ -2,12 +2,14 @@
   <div class="space-y-6">
     <!-- Email Input -->
     <div>
-      <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+      <label
+        class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+      >
         Email
       </label>
       <div class="relative">
         <span
-          class="absolute left-0 top-1/2 -translate-y-1/2 border-r border-gray-200 px-3.5 py-3 text-gray-500 dark:border-gray-800 dark:text-gray-400"
+          class="absolute left-0 top-1/2 -translate-y-1/2 border-r border-gray-200 px-3.5 py-3 text-gray-600 dark:border-gray-800 dark:text-gray-400"
         >
           <svg
             width="20"
@@ -35,7 +37,9 @@
 
     <!-- Phone Input with Prepended Country Code -->
     <div>
-      <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+      <label
+        class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+      >
         Phone
       </label>
       <div class="relative">
@@ -46,7 +50,9 @@
             class="appearance-none rounded-l-lg border-0 border-r border-gray-200 bg-transparent bg-none py-3 pl-3.5 pr-8 leading-tight text-gray-700 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-800 dark:text-gray-400"
           >
             <option
-              v-for="(code, country) in countryCodes"
+              v-for="(
+                code, country
+              ) in countryCodes"
               :key="country"
               :value="country"
             >
@@ -85,7 +91,9 @@
 
     <!-- Phone Input with Appended Country Code -->
     <div>
-      <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+      <label
+        class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+      >
         Phone
       </label>
       <div class="relative">
@@ -96,7 +104,9 @@
             class="appearance-none rounded-r-lg border-0 border-l border-gray-200 bg-transparent bg-none py-3 pl-3.5 pr-8 leading-tight text-gray-700 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-800 dark:text-gray-400"
           >
             <option
-              v-for="(code, country) in countryCodes"
+              v-for="(
+                code, country
+              ) in countryCodes"
               :key="country"
               :value="country"
             >
@@ -135,10 +145,14 @@
 
     <!-- URL Input -->
     <div>
-      <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"> URL </label>
+      <label
+        class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+      >
+        URL
+      </label>
       <div class="relative">
         <span
-          class="absolute left-0 top-1/2 inline-flex h-11 -translate-y-1/2 items-center justify-center border-r border-gray-200 py-3 pl-3.5 pr-3 text-gray-500 dark:border-gray-800 dark:text-gray-400"
+          class="absolute left-0 top-1/2 inline-flex h-11 -translate-y-1/2 items-center justify-center border-r border-gray-200 py-3 pl-3.5 pr-3 text-gray-600 dark:border-gray-800 dark:text-gray-400"
         >
           http://
         </span>
@@ -153,7 +167,9 @@
 
     <!-- Website Input with Copy Button -->
     <div>
-      <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+      <label
+        class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+      >
         Website
       </label>
       <div class="relative">
@@ -208,11 +224,17 @@ const countryCodes = {
 }
 
 const updatePhoneNumber = () => {
-  phoneNumber.value = countryCodes[selectedCountry.value as keyof typeof countryCodes]
+  phoneNumber.value =
+    countryCodes[
+      selectedCountry.value as keyof typeof countryCodes
+    ]
 }
 
 const updatePhoneNumber2 = () => {
-  phoneNumber2.value = countryCodes[selectedCountry2.value as keyof typeof countryCodes]
+  phoneNumber2.value =
+    countryCodes[
+      selectedCountry2.value as keyof typeof countryCodes
+    ]
 }
 
 const copyWebsite = () => {

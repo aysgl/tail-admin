@@ -1,9 +1,13 @@
 <template>
   <AdminLayout>
-    <PageBreadcrumb :pageTitle="currentPageTitle" />
+    <PageBreadcrumb
+      :pageTitle="currentPageTitle"
+    />
     <div className="space-y-5 sm:space-y-6">
       <ComponentCard title="Default Avatar">
-        <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
+        <div
+          className="flex flex-col items-center justify-center gap-5 sm:flex-row"
+        >
           <Avatar
             :src="avatarSrc"
             :size="size"
@@ -12,8 +16,12 @@
           />
         </div>
       </ComponentCard>
-      <ComponentCard title="Avatar with online indicator">
-        <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
+      <ComponentCard
+        title="Avatar with online indicator"
+      >
+        <div
+          className="flex flex-col items-center justify-center gap-5 sm:flex-row"
+        >
           <Avatar
             :src="avatarSrc"
             status="online"
@@ -23,8 +31,12 @@
           />
         </div>
       </ComponentCard>
-      <ComponentCard title="Avatar with Offline indicator">
-        <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
+      <ComponentCard
+        title="Avatar with Offline indicator"
+      >
+        <div
+          className="flex flex-col items-center justify-center gap-5 sm:flex-row"
+        >
           <Avatar
             :src="avatarSrc"
             status="offline"
@@ -34,8 +46,12 @@
           />
         </div>
       </ComponentCard>
-      <ComponentCard title="Avatar with busy indicator">
-        <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
+      <ComponentCard
+        title="Avatar with busy indicator"
+      >
+        <div
+          className="flex flex-col items-center justify-center gap-5 sm:flex-row"
+        >
           <Avatar
             :src="avatarSrc"
             status="busy"
@@ -58,5 +74,12 @@ import Avatar from '@/components/ui/BaseAvatar.vue'
 const currentPageTitle = ref('Avatars')
 
 const avatarSrc = '/images/user/user-01.jpg'
-const sizes = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'] as const
+const sizes = [
+  'xsmall',
+  'small',
+  'medium',
+  'large',
+  'xlarge',
+  'xxlarge',
+] as const
 </script>

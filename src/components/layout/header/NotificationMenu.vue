@@ -4,11 +4,14 @@
     ref="dropdownRef"
   >
     <button
-      class="relative flex items-center justify-center text-gray-500 transition-colors bg-white border border-gray-200 rounded-full hover:text-dark-900 h-11 w-11 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+      class="relative flex items-center justify-center text-gray-600 transition-colors bg-white border border-gray-200 rounded-full hover:text-dark-900 h-11 w-11 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
       @click="toggleDropdown"
     >
       <span
-        :class="{ hidden: !notifying, flex: notifying }"
+        :class="{
+          hidden: !notifying,
+          flex: notifying,
+        }"
         class="absolute right-0 top-0.5 z-1 h-2 w-2 rounded-full bg-orange-400"
       >
         <span
@@ -40,11 +43,17 @@
       <div
         class="flex items-center justify-between pb-3 mb-3 border-b border-gray-100 dark:border-gray-800"
       >
-        <h5 class="text-lg font-semibold text-gray-800 dark:text-white/90">Notification</h5>
+        <h5
+          class="text-lg font-semibold text-gray-800 dark:text-white/90"
+        >
+          Notification
+        </h5>
 
         <button
+          type="button"
           @click="closeDropdown"
-          class="text-gray-500 dark:text-gray-400"
+          class="text-gray-600 dark:text-gray-400"
+          title="Close notification"
         >
           <svg
             class="fill-current"
@@ -64,7 +73,9 @@
         </button>
       </div>
 
-      <ul class="flex flex-col h-auto overflow-y-auto custom-scrollbar">
+      <ul
+        class="flex flex-col h-auto overflow-y-auto custom-scrollbar"
+      >
         <li
           v-for="notification in notifications"
           :key="notification.id"
@@ -74,33 +85,53 @@
             class="flex gap-3 rounded-lg border-b border-gray-100 p-3 px-4.5 py-3 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-white/5"
             href="#"
           >
-            <span class="relative block w-full h-10 rounded-full z-1 max-w-10">
+            <span
+              class="relative block w-full h-10 rounded-full z-1 max-w-10"
+            >
               <img
                 :src="notification.userImage"
                 alt="User"
                 class="overflow-hidden rounded-full"
               />
               <span
-                :class="notification.status === 'online' ? 'bg-success-500' : 'bg-error-500'"
+                :class="
+                  notification.status === 'online'
+                    ? 'bg-success-500'
+                    : 'bg-error-500'
+                "
                 class="absolute bottom-0 right-0 z-10 h-2.5 w-full max-w-2.5 rounded-full border-[1.5px] border-white dark:border-gray-900"
               ></span>
             </span>
 
             <span class="block">
-              <span class="mb-1.5 block text-theme-sm text-gray-500 dark:text-gray-400">
-                <span class="font-medium text-gray-800 dark:text-white/90">
+              <span
+                class="mb-1.5 block text-theme-sm text-gray-600 dark:text-gray-400"
+              >
+                <span
+                  class="font-medium text-gray-800 dark:text-white/90"
+                >
                   {{ notification.userName }}
                 </span>
                 {{ notification.action }}
-                <span class="font-medium text-gray-800 dark:text-white/90">
+                <span
+                  class="font-medium text-gray-800 dark:text-white/90"
+                >
                   {{ notification.project }}
                 </span>
               </span>
 
-              <span class="flex items-center gap-2 text-gray-500 text-theme-xs dark:text-gray-400">
-                <span>{{ notification.type }}</span>
-                <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
-                <span>{{ notification.time }}</span>
+              <span
+                class="flex items-center gap-2 text-gray-600 text-theme-xs dark:text-gray-400"
+              >
+                <span>{{
+                  notification.type
+                }}</span>
+                <span
+                  class="w-1 h-1 bg-gray-400 rounded-full"
+                ></span>
+                <span>{{
+                  notification.time
+                }}</span>
               </span>
             </span>
           </a>
@@ -220,8 +251,15 @@ const closeDropdown = () => {
   dropdownOpen.value = false
 }
 
-const handleClickOutside = (event: MouseEvent) => {
-  if (dropdownRef.value && !(dropdownRef.value as HTMLElement).contains(event.target as Node)) {
+const handleClickOutside = (
+  event: MouseEvent,
+) => {
+  if (
+    dropdownRef.value &&
+    !(dropdownRef.value as HTMLElement).contains(
+      event.target as Node,
+    )
+  ) {
     closeDropdown()
   }
 }
@@ -233,7 +271,9 @@ const handleItemClick = (event: MouseEvent) => {
   closeDropdown()
 }
 
-const handleViewAllClick = (event: MouseEvent) => {
+const handleViewAllClick = (
+  event: MouseEvent,
+) => {
   event.preventDefault()
   // Handle the "View All Notification" action here
   console.log('View All Notifications clicked')
@@ -241,10 +281,16 @@ const handleViewAllClick = (event: MouseEvent) => {
 }
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
+  document.addEventListener(
+    'click',
+    handleClickOutside,
+  )
 })
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
+  document.removeEventListener(
+    'click',
+    handleClickOutside,
+  )
 })
 </script>

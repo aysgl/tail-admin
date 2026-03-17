@@ -1,4 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
+import type {
+  Meta,
+  StoryObj,
+} from '@storybook/vue3'
 import Ecommerce from './Ecommerce.vue'
 
 const meta: Meta<typeof Ecommerce> = {

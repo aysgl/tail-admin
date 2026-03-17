@@ -1,5 +1,10 @@
 <template>
-  <div :class="['relative rounded-full', sizeClasses[size]]">
+  <div
+    :class="[
+      'relative rounded-full',
+      sizeClasses[size],
+    ]"
+  >
     <img
       :src="src"
       :alt="alt"
@@ -42,7 +47,9 @@ const statusColorClasses = {
 } as const
 
 type Size = keyof typeof sizeClasses
-type Status = keyof typeof statusColorClasses | 'none'
+type Status =
+  | keyof typeof statusColorClasses
+  | 'none'
 
 withDefaults(
   defineProps<{

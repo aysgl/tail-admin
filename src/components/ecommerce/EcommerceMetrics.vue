@@ -1,5 +1,7 @@
 <template>
-  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
+  <div
+    class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6"
+  >
     <div
       class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6"
     >
@@ -23,10 +25,19 @@
         </svg>
       </div>
 
-      <div class="flex items-end justify-between mt-5">
+      <div
+        class="flex items-end justify-between mt-5"
+      >
         <div>
-          <span class="text-sm text-gray-500 dark:text-gray-400">Customers</span>
-          <h4 class="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">3,782</h4>
+          <span
+            class="text-sm text-gray-600 dark:text-gray-400"
+            >Customers</span
+          >
+          <h4
+            class="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90"
+          >
+            3,782
+          </h4>
         </div>
 
         <span
@@ -76,10 +87,19 @@
         </svg>
       </div>
 
-      <div class="flex items-end justify-between mt-5">
+      <div
+        class="flex items-end justify-between mt-5"
+      >
         <div>
-          <span class="text-sm text-gray-500 dark:text-gray-400">Orders</span>
-          <h4 class="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90">5,359</h4>
+          <span
+            class="text-sm text-gray-600 dark:text-gray-400"
+            >Orders</span
+          >
+          <h4
+            class="mt-2 font-bold text-gray-800 text-title-sm dark:text-white/90"
+          >
+            5,359
+          </h4>
         </div>
 
         <span

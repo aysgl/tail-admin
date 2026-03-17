@@ -2,8 +2,14 @@
   <div
     class="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6"
   >
-    <div class="flex items-center justify-between">
-      <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Monthly Sales</h3>
+    <div
+      class="flex items-center justify-between"
+    >
+      <h3
+        class="text-lg font-semibold text-gray-800 dark:text-white/90"
+      >
+        Monthly Sales
+      </h3>
 
       <div class="relative h-fit">
         <DropdownMenu :menu-items="menuItems">
@@ -27,7 +33,9 @@
       </div>
     </div>
 
-    <div class="max-w-full overflow-x-auto custom-scrollbar">
+    <div
+      class="max-w-full overflow-x-auto custom-scrollbar"
+    >
       <div
         id="chartOne"
         class="-ml-5 min-w-[650px] xl:min-w-full pl-2"
@@ -47,8 +55,15 @@
 import { ref, onMounted } from 'vue'
 import DropdownMenu from '../common/DropdownMenu.vue'
 const menuItems = [
-  { label: 'View More', onClick: () => console.log('View More clicked') },
-  { label: 'Delete', onClick: () => console.log('Delete clicked') },
+  {
+    label: 'View More',
+    onClick: () =>
+      console.log('View More clicked'),
+  },
+  {
+    label: 'Delete',
+    onClick: () => console.log('Delete clicked'),
+  },
 ]
 
 import VueApexCharts from 'vue3-apexcharts'
@@ -56,7 +71,10 @@ import VueApexCharts from 'vue3-apexcharts'
 const series = ref([
   {
     name: 'Sales',
-    data: [168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112],
+    data: [
+      168, 385, 201, 298, 187, 195, 291, 110, 215,
+      390, 280, 112,
+    ],
   },
 ])
 

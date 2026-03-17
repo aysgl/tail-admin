@@ -7,7 +7,9 @@
       class="border-gray-300 border-dashed dropzone rounded-xl bg-gray-50 p-7 hover:border-brand-500 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-brand-500 lg:p-10"
     >
       <div class="dz-message m-0!">
-        <div class="mb-[22px] flex justify-center">
+        <div
+          class="mb-[22px] flex justify-center"
+        >
           <div
             class="flex h-[68px] w-[68px] items-center justify-center rounded-full bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-400"
           >
@@ -29,16 +31,21 @@
           </div>
         </div>
 
-        <h4 class="mb-3 font-semibold text-gray-800 text-theme-xl dark:text-white/90">
+        <h4
+          class="mb-3 font-semibold text-gray-800 text-theme-xl dark:text-white/90"
+        >
           Drag & Drop File Here
         </h4>
         <span
           class="mx-auto mb-5 block w-full max-w-[290px] text-sm text-gray-700 dark:text-gray-400"
         >
-          Drag and drop your PNG, JPG, WebP, SVG images here or browse
+          Drag and drop your PNG, JPG, WebP, SVG
+          images here or browse
         </span>
 
-        <span class="font-medium underline cursor-pointer text-theme-sm text-brand-500">
+        <span
+          class="font-medium underline cursor-pointer text-theme-sm text-brand-500"
+        >
           Browse File
         </span>
       </div>
@@ -47,7 +54,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+} from 'vue'
 import Dropzone from 'dropzone'
 import 'dropzone/dist/dropzone.css'
 
@@ -60,30 +71,49 @@ const props = defineProps({
 
 const dropzoneForm = ref(null)
 const dropzoneId = `dropzone-${Math.random().toString(36).substr(2, 9)}`
-let dropzoneInstance: InstanceType<typeof Dropzone> | null = null
+let dropzoneInstance: InstanceType<
+  typeof Dropzone
+> | null = null
 
 onMounted(() => {
   Dropzone.autoDiscover = false
 
-  dropzoneInstance = new Dropzone(`#${dropzoneId}`, {
-    url: props.uploadUrl,
-    thumbnailWidth: 150,
-    maxFilesize: 0.5,
-    acceptedFiles: 'image/jpeg,image/png,image/gif,image/webp,image/svg+xml',
-    headers: { 'My-Awesome-Header': 'header value' },
-    dictDefaultMessage: '',
-    init: function () {
-      this.on('addedfile', (file) => {
-        console.log('A file has been added', file)
-      })
-      this.on('success', (file, response) => {
-        console.log('File successfully uploaded', file, response)
-      })
-      this.on('error', (file, error) => {
-        console.error('An error occurred during upload', file, error)
-      })
+  dropzoneInstance = new Dropzone(
+    `#${dropzoneId}`,
+    {
+      url: props.uploadUrl,
+      thumbnailWidth: 150,
+      maxFilesize: 0.5,
+      acceptedFiles:
+        'image/jpeg,image/png,image/gif,image/webp,image/svg+xml',
+      headers: {
+        'My-Awesome-Header': 'header value',
+      },
+      dictDefaultMessage: '',
+      init: function () {
+        this.on('addedfile', (file) => {
+          console.log(
+            'A file has been added',
+            file,
+          )
+        })
+        this.on('success', (file, response) => {
+          console.log(
+            'File successfully uploaded',
+            file,
+            response,
+          )
+        })
+        this.on('error', (file, error) => {
+          console.error(
+            'An error occurred during upload',
+            file,
+            error,
+          )
+        })
+      },
     },
-  })
+  )
 })
 
 onBeforeUnmount(() => {

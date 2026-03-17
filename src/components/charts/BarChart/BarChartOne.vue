@@ -1,5 +1,7 @@
 <template>
-  <div class="max-w-full overflow-x-auto custom-scrollbar">
+  <div
+    class="max-w-full overflow-x-auto custom-scrollbar"
+  >
     <div
       id="chartOne"
       class="-ml-5 min-w-[650px] xl:min-w-full pl-2"
@@ -21,7 +23,10 @@ import VueApexCharts from 'vue3-apexcharts'
 const series = ref([
   {
     name: 'Sales',
-    data: [168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112],
+    data: [
+      168, 385, 201, 298, 187, 195, 291, 110, 215,
+      390, 280, 112,
+    ],
   },
 ])
 

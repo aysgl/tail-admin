@@ -1,7 +1,12 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+} from 'vue-router'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(
+    import.meta.env.BASE_URL,
+  ),
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { left: 0, top: 0 }
   },
@@ -9,7 +14,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'Ecommerce',
-      component: () => import('../views/Ecommerce.vue'),
+      component: () =>
+        import('../views/Ecommerce.vue'),
       meta: {
         title: 'eCommerce Dashboard',
       },
@@ -17,7 +23,10 @@ const router = createRouter({
     {
       path: '/calendar',
       name: 'Calendar',
-      component: () => import('../views/Others/CalendarView.vue'),
+      component: () =>
+        import(
+          '../views/Others/CalendarView.vue'
+        ),
       meta: {
         title: 'Calendar',
       },
@@ -25,7 +34,10 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'Profile',
-      component: () => import('../views/Others/UserProfileView.vue'),
+      component: () =>
+        import(
+          '../views/Others/UserProfileView.vue'
+        ),
       meta: {
         title: 'Profile',
       },
@@ -33,7 +45,8 @@ const router = createRouter({
     {
       path: '/form-elements',
       name: 'Form Elements',
-      component: () => import('../views/Forms/FormElements.vue'),
+      component: () =>
+        import('../views/Forms/FormElements.vue'),
       meta: {
         title: 'Form Elements',
       },
@@ -41,7 +54,8 @@ const router = createRouter({
     {
       path: '/basic-tables',
       name: 'Basic Tables',
-      component: () => import('../views/Tables/BasicTables.vue'),
+      component: () =>
+        import('../views/Tables/BasicTables.vue'),
       meta: {
         title: 'Basic Tables',
       },
@@ -49,17 +63,26 @@ const router = createRouter({
     {
       path: '/line-chart',
       name: 'Line Chart',
-      component: () => import('../views/Chart/LineChart/LineChart.vue'),
+      component: () =>
+        import(
+          '../views/Chart/LineChart/LineChart.vue'
+        ),
     },
     {
       path: '/bar-chart',
       name: 'Bar Chart',
-      component: () => import('../views/Chart/BarChart/BarChart.vue'),
+      component: () =>
+        import(
+          '../views/Chart/BarChart/BarChart.vue'
+        ),
     },
     {
       path: '/alerts',
       name: 'Alerts',
-      component: () => import('../views/UiElements/BaseAlerts.vue'),
+      component: () =>
+        import(
+          '../views/UiElements/BaseAlerts.vue'
+        ),
       meta: {
         title: 'Alerts',
       },
@@ -67,7 +90,10 @@ const router = createRouter({
     {
       path: '/avatars',
       name: 'Avatars',
-      component: () => import('../views/UiElements/BaseAvatars.vue'),
+      component: () =>
+        import(
+          '../views/UiElements/BaseAvatars.vue'
+        ),
       meta: {
         title: 'Avatars',
       },
@@ -75,7 +101,10 @@ const router = createRouter({
     {
       path: '/badge',
       name: 'Badge',
-      component: () => import('../views/UiElements/BaseBadges.vue'),
+      component: () =>
+        import(
+          '../views/UiElements/BaseBadges.vue'
+        ),
       meta: {
         title: 'Badge',
       },
@@ -84,7 +113,10 @@ const router = createRouter({
     {
       path: '/buttons',
       name: 'Buttons',
-      component: () => import('../views/UiElements/BaseButtons.vue'),
+      component: () =>
+        import(
+          '../views/UiElements/BaseButtons.vue'
+        ),
       meta: {
         title: 'Buttons',
       },
@@ -93,7 +125,10 @@ const router = createRouter({
     {
       path: '/images',
       name: 'Images',
-      component: () => import('../views/UiElements/BaseImages.vue'),
+      component: () =>
+        import(
+          '../views/UiElements/BaseImages.vue'
+        ),
       meta: {
         title: 'Images',
       },
@@ -101,7 +136,10 @@ const router = createRouter({
     {
       path: '/videos',
       name: 'Videos',
-      component: () => import('../views/UiElements/BaseVideos.vue'),
+      component: () =>
+        import(
+          '../views/UiElements/BaseVideos.vue'
+        ),
       meta: {
         title: 'Videos',
       },
@@ -109,7 +147,8 @@ const router = createRouter({
     {
       path: '/blank',
       name: 'Blank',
-      component: () => import('../views/Pages/BlankPage.vue'),
+      component: () =>
+        import('../views/Pages/BlankPage.vue'),
       meta: {
         title: 'Blank',
       },
@@ -118,7 +157,10 @@ const router = createRouter({
     {
       path: '/error-404',
       name: '404 Error',
-      component: () => import('../views/Errors/FourZeroFour.vue'),
+      component: () =>
+        import(
+          '../views/Errors/FourZeroFour.vue'
+        ),
       meta: {
         title: '404 Error',
       },
@@ -127,7 +169,8 @@ const router = createRouter({
     {
       path: '/signin',
       name: 'Signin',
-      component: () => import('../views/Auth/SigninView.vue'),
+      component: () =>
+        import('../views/Auth/SigninView.vue'),
       meta: {
         title: 'Signin',
       },
@@ -135,7 +178,8 @@ const router = createRouter({
     {
       path: '/signup',
       name: 'Signup',
-      component: () => import('../views/Auth/SignupView.vue'),
+      component: () =>
+        import('../views/Auth/SignupView.vue'),
       meta: {
         title: 'Signup',
       },
