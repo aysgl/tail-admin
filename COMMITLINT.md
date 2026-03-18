@@ -44,7 +44,13 @@ Bu doküman, projedeki `commitlint.config.js` dosyasını açıklar. Commitlint,
 
 ---
 
-## 4. Kurallar
+## 4. Sık Yapılan Hatalar
+
+- **`tes:s`** → Yanlış yazım. Doğrusu: **`test: ...`** (type `test`, iki `t`). Bu hata pipeline'da `subject-empty` / `type-empty` ile kendini gösterir.
+
+---
+
+## 5. Kurallar
 
 ### `type-enum`
 
@@ -68,7 +74,7 @@ Bu doküman, projedeki `commitlint.config.js` dosyasını açıklar. Commitlint,
 
 ---
 
-## 5. Örnek Commit Mesajları
+## 6. Örnek Commit Mesajları
 
 ```bash
 # Geçerli
@@ -86,7 +92,7 @@ git commit -m "feat: Add User Profile"  # Add yerine add
 
 ---
 
-## 6. Husky Entegrasyonu
+## 7. Husky Entegrasyonu
 
 `package.json` içinde:
 
@@ -98,7 +104,7 @@ Husky, `commit-msg` hook'unda commitlint'i çalıştırır. Geçersiz commit mes
 
 ---
 
-## 7. Evrensel Kurallar Rehberi
+## 8. Evrensel Kurallar Rehberi
 
 [commitlint Rules](https://commitlint.js.org/reference/rules.html) referansında birçok kural tanımı bulunur. En sık kullanılanlar ve kullanım nedenleri:
 
@@ -146,7 +152,7 @@ Husky, `commit-msg` hook'unda commitlint'i çalıştırır. Geçersiz commit mes
 
 ---
 
-## 8. Referanslar
+## 9. Referanslar
 
 - [Commitlint](https://commitlint.js.org/)
 - [Commitlint Rules](https://commitlint.js.org/reference/rules.html)
