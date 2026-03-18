@@ -30,7 +30,10 @@
           : 'justify-start',
       ]"
     >
-      <router-link to="/">
+      <router-link
+        to="/"
+        aria-label="Home"
+      >
         <img
           v-if="
             isExpanded ||
@@ -234,6 +237,9 @@
                       >
                         <router-link
                           :to="subItem.path"
+                          :aria-label="
+                            subItem.name
+                          "
                           :class="[
                             'menu-dropdown-item',
                             {

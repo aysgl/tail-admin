@@ -3,9 +3,12 @@
     class="relative"
     ref="multiSelectRef"
   >
-    <div
+    <button
+      type="button"
+      class="dark:bg-dark-900 h-11 flex items-center w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 text-left cursor-pointer"
+      aria-haspopup="listbox"
+      :aria-expanded="isOpen"
       @click="toggleDropdown"
-      class="dark:bg-dark-900 h-11 flex items-center w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
       :class="{
         'text-gray-800 dark:text-white/90':
           isOpen,
@@ -68,7 +71,7 @@
           stroke-linejoin="round"
         />
       </svg>
-    </div>
+    </button>
     <transition
       enter-active-class="transition duration-100 ease-out"
       enter-from-class="transform scale-95 opacity-0"
@@ -89,15 +92,22 @@
           <li
             v-for="item in props.options"
             :key="item.value"
-            @click="toggleItem(item)"
+            tabindex="0"
+            role="option"
+            :aria-selected="isSelected(item)"
+            :aria-label="`${item.label}, ${isSelected(item) ? 'selected' : 'not selected'}`"
             class="relative flex items-center w-full px-3 py-2 border-transparent cursor-pointer first:rounded-t-lg last:rounded-b-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
             :class="{
               'bg-gray-50 dark:bg-white/[0.03]':
                 isSelected(item),
             }"
-            role="option"
-            :aria-selected="isSelected(item)"
-            aria-label="Select item"
+            @click="toggleItem(item)"
+            @keydown.enter.prevent="
+              toggleItem(item)
+            "
+            @keydown.space.prevent="
+              toggleItem(item)
+            "
           >
             <span class="grow">{{
               item.label

@@ -95,7 +95,7 @@
     </div>
     <BaseModal
       v-if="isProfileAddressModal"
-      @close="isProfileAddressModal = false"
+      v-model="isProfileAddressModal"
     >
       <template #body>
         <div
@@ -104,7 +104,7 @@
           <!-- close btn -->
           <button
             @click="isProfileAddressModal = false"
-            class="transition-color absolute right-5 top-5 z-999 flex h-11 w-11 items-center justify-center rounded-full bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600 dark:bg-gray-700 dark:bg-white/[0.05] dark:text-gray-400 dark:hover:bg-white/[0.07] dark:hover:text-gray-300"
+            class="transition-color absolute right-5 top-5 z-999 flex h-11 w-11 items-center justify-center rounded-full bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600 dark:bg-white/[0.05] dark:text-gray-400 dark:hover:bg-white/[0.07] dark:hover:text-gray-300"
           >
             <svg
               class="fill-current"
@@ -144,54 +144,70 @@
               >
                 <div>
                   <label
-                    class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    for="address-country"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                   >
-                    Country
+                    <span class="mb-1.5 block"
+                      >Country</span
+                    >
+                    <input
+                      id="address-country"
+                      type="text"
+                      value="United States"
+                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                    />
                   </label>
-                  <input
-                    type="text"
-                    value="United States"
-                    class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                  />
                 </div>
 
                 <div>
                   <label
-                    class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    for="address-city-state"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                   >
-                    City/State
+                    <span class="mb-1.5 block"
+                      >City/State</span
+                    >
+                    <input
+                      id="address-city-state"
+                      type="text"
+                      value="Poenix, Arizona, United States"
+                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                    />
                   </label>
-                  <input
-                    type="text"
-                    value="Poenix, Arizona, United States"
-                    class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                  />
                 </div>
 
                 <div>
                   <label
-                    class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    for="address-postal-code"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                   >
-                    Postal Code
+                    <span class="mb-1.5 block"
+                      >Postal Code</span
+                    >
+                    <input
+                      id="address-postal-code"
+                      type="text"
+                      value="ERT 2489"
+                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                    />
                   </label>
-                  <input
-                    type="text"
-                    value="ERT 2489"
-                    class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                  />
                 </div>
 
                 <div>
                   <label
-                    class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    for="address-tax-id"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                   >
-                    TAX ID
+                    <span class="mb-1.5 block"
+                      >TAX ID</span
+                    >
+                    <input
+                      id="address-tax-id"
+                      type="text"
+                      value="AS4568384"
+                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                    />
                   </label>
-                  <input
-                    type="text"
-                    value="AS4568384"
-                    class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                  />
                 </div>
               </div>
             </div>

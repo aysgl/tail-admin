@@ -15,6 +15,7 @@
             <router-link
               to="/"
               class="inline-flex items-center text-sm text-gray-600 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+              aria-label="Back to dashboard"
             >
               <svg
                 class="stroke-current"
@@ -361,6 +362,7 @@
               <router-link
                 to="/"
                 class="block mb-4"
+                aria-label="Home"
               >
                 <img
                   width="{231}"

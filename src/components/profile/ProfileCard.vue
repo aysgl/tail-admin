@@ -49,6 +49,7 @@
               target="_blank"
               rel="noopener"
               class="social-button"
+              aria-label="Facebook"
             >
               <svg
                 class="fill-current"
@@ -69,6 +70,7 @@
               target="_blank"
               rel="noopener"
               class="social-button"
+              aria-label="X (Twitter)"
             >
               <svg
                 class="fill-current"
@@ -89,6 +91,7 @@
               target="_blank"
               rel="noopener"
               class="social-button"
+              aria-label="LinkedIn"
             >
               <svg
                 class="fill-current"
@@ -109,6 +112,7 @@
               target="_blank"
               rel="noopener"
               class="social-button"
+              aria-label="Instagram"
             >
               <svg
                 class="fill-current"
@@ -151,7 +155,7 @@
     </div>
     <BaseModal
       v-if="isProfileInfoModal"
-      @close="isProfileInfoModal = false"
+      v-model="isProfileInfoModal"
     >
       <template #body>
         <div
@@ -160,7 +164,7 @@
           <!-- close btn -->
           <button
             @click="isProfileInfoModal = false"
-            class="transition-color absolute right-5 top-5 z-999 flex h-11 w-11 items-center justify-center rounded-full bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600 dark:bg-gray-700 dark:bg-white/[0.05] dark:text-gray-400 dark:hover:bg-white/[0.07] dark:hover:text-gray-300"
+            class="transition-color absolute right-5 top-5 z-999 flex h-11 w-11 items-center justify-center rounded-full bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600 dark:bg-white/[0.05] dark:text-gray-400 dark:hover:bg-white/[0.07] dark:hover:text-gray-300"
           >
             <svg
               class="fill-current"
@@ -207,54 +211,70 @@
                 >
                   <div>
                     <label
-                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                      for="profile-facebook"
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
-                      Facebook
+                      <span class="mb-1.5 block"
+                        >Facebook</span
+                      >
+                      <input
+                        id="profile-facebook"
+                        type="text"
+                        value="https://www.facebook.com/PimjoHQ"
+                        class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                      />
                     </label>
-                    <input
-                      type="text"
-                      value="https://www.facebook.com/PimjoHQ"
-                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                    />
                   </div>
 
                   <div>
                     <label
-                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                      for="profile-x"
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
-                      X.com
+                      <span class="mb-1.5 block"
+                        >X.com</span
+                      >
+                      <input
+                        id="profile-x"
+                        type="text"
+                        value="https://x.com/PimjoHQ"
+                        class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                      />
                     </label>
-                    <input
-                      type="text"
-                      value="https://x.com/PimjoHQ"
-                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                    />
                   </div>
 
                   <div>
                     <label
-                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                      for="profile-linkedin"
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
-                      Linkedin
+                      <span class="mb-1.5 block"
+                        >Linkedin</span
+                      >
+                      <input
+                        id="profile-linkedin"
+                        type="text"
+                        value="https://www.linkedin.com/company/pimjo/posts/?feedView=all"
+                        class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                      />
                     </label>
-                    <input
-                      type="text"
-                      value="https://www.linkedin.com/company/pimjo/posts/?feedView=all"
-                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                    />
                   </div>
 
                   <div>
                     <label
-                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                      for="profile-instagram"
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
-                      Instagram
+                      <span class="mb-1.5 block"
+                        >Instagram</span
+                      >
+                      <input
+                        id="profile-instagram"
+                        type="text"
+                        value="https://instagram.com/PimjoHQ"
+                        class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                      />
                     </label>
-                    <input
-                      type="text"
-                      value="https://instagram.com/PimjoHQ"
-                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                    />
                   </div>
                 </div>
               </div>
@@ -272,73 +292,93 @@
                     class="col-span-2 lg:col-span-1"
                   >
                     <label
-                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                      for="profile-first-name"
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
-                      First Name
+                      <span class="mb-1.5 block"
+                        >First Name</span
+                      >
+                      <input
+                        id="profile-first-name"
+                        type="text"
+                        value="Musharof"
+                        class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                      />
                     </label>
-                    <input
-                      type="text"
-                      value="Musharof"
-                      class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                    />
                   </div>
 
                   <div
                     class="col-span-2 lg:col-span-1"
                   >
                     <label
-                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                      for="profile-last-name"
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
-                      Last Name
+                      <span class="mb-1.5 block"
+                        >Last Name</span
+                      >
+                      <input
+                        id="profile-last-name"
+                        type="text"
+                        value="Chowdhury"
+                        class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                      />
                     </label>
-                    <input
-                      type="text"
-                      value="Chowdhury"
-                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                    />
                   </div>
 
                   <div
                     class="col-span-2 lg:col-span-1"
                   >
                     <label
-                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                      for="profile-email"
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
-                      Email Address
+                      <span class="mb-1.5 block"
+                        >Email Address</span
+                      >
+                      <input
+                        id="profile-email"
+                        type="text"
+                        value="randomuser@pimjo.com"
+                        class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                      />
                     </label>
-                    <input
-                      type="text"
-                      value="randomuser@pimjo.com"
-                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                    />
                   </div>
 
                   <div
                     class="col-span-2 lg:col-span-1"
                   >
                     <label
-                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                      for="profile-phone"
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
-                      Phone
+                      <span class="mb-1.5 block"
+                        >Phone</span
+                      >
+                      <input
+                        id="profile-phone"
+                        type="text"
+                        value="+09 363 398 46"
+                        class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                      />
                     </label>
-                    <input
-                      type="text"
-                      value="+09 363 398 46"
-                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                    />
                   </div>
 
                   <div class="col-span-2">
                     <label
-                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                      for="profile-bio"
+                      class="block text-sm font-medium text-gray-700 dark:text-gray-400"
                     >
-                      Bio
+                      <span class="mb-1.5 block"
+                        >Bio</span
+                      >
+                      <input
+                        id="profile-bio"
+                        type="text"
+                        value="Team Manager"
+                        class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+                      />
                     </label>
-                    <input
-                      type="text"
-                      value="Team Manager"
-                      class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                    />
                   </div>
                 </div>
               </div>

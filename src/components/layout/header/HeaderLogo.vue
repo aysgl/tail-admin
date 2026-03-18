@@ -2,6 +2,7 @@
   <router-link
     to="/"
     class="lg:hidden"
+    aria-label="Home"
   >
     <img
       class="dark:hidden"

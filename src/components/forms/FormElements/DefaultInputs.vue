@@ -2,13 +2,17 @@
   <div class="space-y-6">
     <!-- Text Input -->
     <div>
-      <label class="block">
+      <label
+        for="default-input"
+        class="block"
+      >
         <span
           class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
         >
           Input
         </span>
         <input
+          id="default-input"
           type="text"
           v-model="formData.input"
           class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
@@ -18,13 +22,17 @@
 
     <!-- Input with Placeholder -->
     <div>
-      <label class="block">
+      <label
+        for="default-input-placeholder"
+        class="block"
+      >
         <span
           class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
         >
           Input with Placeholder
         </span>
         <input
+          id="default-input-placeholder"
           type="text"
           v-model="formData.inputWithPlaceholder"
           placeholder="info@gmail.com"
@@ -35,7 +43,10 @@
 
     <!-- Select Input -->
     <div>
-      <label class="block">
+      <label
+        for="default-select-input"
+        class="block"
+      >
         <span
           class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
         >
@@ -43,6 +54,7 @@
         </span>
         <div class="relative z-20 bg-transparent">
           <select
+            id="default-select-input"
             v-model="formData.selectInput"
             class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
             :class="{
@@ -93,7 +105,10 @@
 
     <!-- Password Input -->
     <div>
-      <label class="block">
+      <label
+        for="default-password-input"
+        class="block"
+      >
         <span
           class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
         >
@@ -101,6 +116,7 @@
         </span>
         <div class="relative">
           <input
+            id="default-password-input"
             :type="
               showPassword ? 'text' : 'password'
             "
@@ -157,7 +173,10 @@
 
     <!-- Date Picker Input -->
     <div>
-      <label class="block">
+      <label
+        for="default-date-input"
+        class="block"
+      >
         <span
           class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
         >
@@ -165,6 +184,7 @@
         </span>
         <div class="relative">
           <flat-pickr
+            id="default-date-input"
             v-model="date"
             :config="flatpickrConfig"
             class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pl-4 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
@@ -195,7 +215,10 @@
 
     <!-- Time Select Input -->
     <div>
-      <label class="block">
+      <label
+        for="default-time-input"
+        class="block"
+      >
         <span
           class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
         >
@@ -203,6 +226,7 @@
         </span>
         <div class="relative">
           <flat-pickr
+            id="default-time-input"
             v-model="time"
             :config="flatpickrTimeConfig"
             class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pl-4 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
@@ -233,7 +257,10 @@
 
     <!-- Input with Payment -->
     <div>
-      <label class="block">
+      <label
+        for="default-card-input"
+        class="block"
+      >
         <span
           class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
         >
@@ -241,6 +268,7 @@
         </span>
         <div class="relative">
           <input
+            id="default-card-input"
             type="text"
             v-model="formData.cardNumber"
             placeholder="Card number"

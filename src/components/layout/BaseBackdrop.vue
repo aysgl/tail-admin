@@ -1,9 +1,11 @@
 <template>
-  <div
+  <button
     v-if="isMobileOpen"
-    class="fixed inset-0 bg-gray-900/50 z-9999 lg:hidden"
+    type="button"
+    class="fixed inset-0 w-full h-full bg-gray-900/50 z-9999 lg:hidden cursor-default border-none p-0 appearance-none"
+    aria-label="Close sidebar"
     @click="toggleMobileSidebar"
-  ></div>
+  />
 </template>
 
 <script setup lang="ts">

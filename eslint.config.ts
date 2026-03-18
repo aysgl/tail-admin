@@ -35,19 +35,14 @@ export default defineConfigWithVueTs(
     name: 'app/vue-a11y-label-has-for',
     rules: {
       'vuejs-accessibility/label-has-for': [
-        'error',
+        'warn',
         {
           required: { some: ['nesting', 'id'] },
           allowChildren: true,
-          controlComponents: [
-            'input',
-            'select',
-            'textarea',
-            'FlatPickr',
-            'flat-pickr',
-          ],
         },
       ],
+      'vuejs-accessibility/form-control-has-label':
+        'warn',
     },
   },
   skipFormatting,
