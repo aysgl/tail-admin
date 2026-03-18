@@ -1,22 +1,73 @@
 <template>
-  <div
-    class="fixed inset-0 flex items-center justify-center overflow-y-auto z-99999"
-  >
+  <Teleport to="body">
     <div
-      v-if="fullScreenBackdrop"
-      class="fixed inset-0 h-full w-full bg-gray-400/50 backdrop-blur-[32px]"
-      aria-hidden="true"
-      @click="$emit('close')"
-    ></div>
-    <slot name="body"></slot>
-  </div>
+      v-show="modelValue"
+      class="fixed inset-0 flex items-center justify-center overflow-y-auto z-99999"
+      role="dialog"
+      aria-modal="true"
+      :aria-hidden="!modelValue"
+    >
+      <div
+        v-if="fullScreenBackdrop"
+        class="fixed inset-0 h-full w-full bg-gray-400/50 backdrop-blur-[32px]"
+        aria-hidden="true"
+        @click="
+          $emit('update:modelValue', false)
+          $emit('close')
+        "
+      />
+      <slot name="body" />
+    </div>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-interface ModalProps {
+import {
+  onBeforeUnmount,
+  shallowRef,
+  watch,
+} from 'vue'
+
+interface Props {
+  modelValue: boolean
   fullScreenBackdrop?: boolean
+  /** Ana içeriğe inert uygulanacak eleman seçicisi (açıkken arka plan inert olur). */
+  inertTarget?: string
 }
 
-defineProps<ModalProps>()
-defineEmits(['close'])
+const props = withDefaults(defineProps<Props>(), {
+  fullScreenBackdrop: true,
+  inertTarget: '#app',
+})
+
+defineEmits<{
+  'update:modelValue': [value: boolean]
+  close: []
+}>()
+
+const inertEl = shallowRef<Element | null>(null)
+
+watch(
+  () => props.modelValue,
+  (open: boolean) => {
+    const target = props.inertTarget
+      ? document.querySelector(props.inertTarget)
+      : null
+    if (!target) return
+    if (open) {
+      target.setAttribute('inert', '')
+      inertEl.value = target
+    } else {
+      target.removeAttribute('inert')
+      inertEl.value = null
+    }
+  },
+  { immediate: true },
+)
+
+onBeforeUnmount(() => {
+  if (inertEl.value) {
+    inertEl.value.removeAttribute('inert')
+  }
+})
 </script>

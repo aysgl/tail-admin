@@ -1,4 +1,5 @@
 import pluginVue from 'eslint-plugin-vue'
+import pluginVueA11y from 'eslint-plugin-vuejs-accessibility'
 import {
   defineConfigWithVueTs,
   vueTsConfigs,
@@ -28,5 +29,7 @@ export default defineConfigWithVueTs(
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
+  // Vue erişilebilirlik (a11y) – button-name, form-label, alt-text vb.
+  ...pluginVueA11y.configs['flat/recommended'],
   skipFormatting,
 )

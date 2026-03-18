@@ -1,5 +1,9 @@
 <template>
+  <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -- expand on focus for keyboard a11y -->
   <aside
+    ref="sidebarRef"
+    aria-label="Sidebar navigation"
+    tabindex="-1"
     :class="[
       'fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-99999 border-r border-gray-200',
       {
@@ -15,6 +19,8 @@
       !isExpanded && (isHovered = true)
     "
     @mouseleave="isHovered = false"
+    @focusin="!isExpanded && (isHovered = true)"
+    @focusout="onSidebarFocusOut"
   >
     <div
       :class="[
@@ -97,6 +103,15 @@
               >
                 <button
                   v-if="item.subItems"
+                  type="button"
+                  :aria-label="
+                    isSubmenuOpen(
+                      groupIndex,
+                      index,
+                    )
+                      ? `${item.name} menüsünü kapat`
+                      : `${item.name} menüsünü aç`
+                  "
                   @click="
                     toggleSubmenu(
                       groupIndex,
@@ -295,6 +310,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import {
@@ -321,6 +337,21 @@ const {
   isHovered,
   openSubmenu,
 } = useSidebar()
+
+const sidebarRef = ref<HTMLElement | null>(null)
+
+function onSidebarFocusOut() {
+  setTimeout(() => {
+    if (
+      sidebarRef.value &&
+      !sidebarRef.value.contains(
+        document.activeElement,
+      )
+    ) {
+      isHovered.value = false
+    }
+  }, 0)
+}
 
 const menuGroups = [
   {

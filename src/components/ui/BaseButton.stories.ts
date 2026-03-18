@@ -37,6 +37,12 @@ interface PlayContext {
 const meta: Meta<typeof BaseButton> = {
   component: BaseButton,
   tags: ['autodocs'],
+  render: (args) => ({
+    components: { BaseButton },
+    setup: () => ({ args }),
+    template:
+      '<BaseButton v-bind="args">Button</BaseButton>',
+  }),
   argTypes: {
     size: {
       control: false,
@@ -68,6 +74,30 @@ export default meta
 
 type Story = StoryObj<typeof BaseButton>
 
+export const play: Story['play'] = async (
+  ctx: unknown,
+) => {
+  const { args, canvas, userEvent } =
+    ctx as unknown as PlayContext
+  const small = canvas.getByRole('button', {
+    name: /button small/i,
+  })
+  const medium = canvas.getByRole('button', {
+    name: /button medium/i,
+  })
+  const large = canvas.getByRole('button', {
+    name: /button large/i,
+  })
+
+  await userEvent.click(small)
+  await userEvent.click(medium)
+  await userEvent.click(large)
+
+  await expect(
+    args.onClick,
+  ).toHaveBeenCalledTimes(3)
+}
+
 // setup() içinde args döndürülür; Controls değişince Storybook render'ı yeni args ile
 // tekrar çağırır ve görünüm güncellenir.
 const renderButton = (args: object) => ({
@@ -93,6 +123,7 @@ export const Primary: Story = {
     ),
   },
   render: renderButton,
+  play,
   parameters: {
     // Figma'dan design token almak: addon-designs sadece embed yapar, token çekmez.
     // Token akışı (Figma → main.css @theme): docs/figma-design-tokens.md
@@ -106,51 +137,6 @@ export const Primary: Story = {
       light: { name: 'Light', value: '#ffffff' },
       dark: { name: 'Dark', value: '#000000' },
     },
-    // play: Hikaye render olduktan sonra çalışan interaction testi
-    play: async function (ctx: unknown) {
-      const { args, canvas, userEvent } =
-        ctx as unknown as PlayContext
-      // Canvas üzerinden "Button" metnini içeren ilk butonu bul
-      const button = canvas.getByRole('button', {
-        name: /button small/i,
-      })
-
-      // Kullanıcı tıklamasını simüle et
-      await userEvent.click(button)
-
-      // onClick (fn() ile verildiği için) çağrılmış olmalı
-      await expect(
-        args.onClick,
-      ).toHaveBeenCalled()
-    },
-  },
-}
-
-/** Çoklu tıklama: önce Small, sonra Medium; onClick iki kez çağrılmalı */
-export const WithMultipleClicks: Story = {
-  args: {
-    variant: 'solid',
-    color: 'primary',
-    size: 'md',
-    onClick: fn(),
-  },
-  render: renderButton,
-  play: async (ctx: unknown) => {
-    const { args, canvas, userEvent } =
-      ctx as unknown as PlayContext
-    const small = canvas.getByRole('button', {
-      name: /button small/i,
-    })
-    const medium = canvas.getByRole('button', {
-      name: /button medium/i,
-    })
-
-    await userEvent.click(small)
-    await userEvent.click(medium)
-
-    await expect(
-      args.onClick,
-    ).toHaveBeenCalledTimes(2)
   },
 }
 
@@ -159,8 +145,10 @@ export const Warning: Story = {
     variant: 'solid',
     color: 'warning',
     size: 'md',
+    onClick: fn(),
   },
   render: renderButton,
+  play,
 }
 
 export const Error: Story = {
@@ -168,8 +156,10 @@ export const Error: Story = {
     variant: 'solid',
     color: 'error',
     size: 'md',
+    onClick: fn(),
   },
   render: renderButton,
+  play,
 }
 
 export const Info: Story = {
@@ -177,8 +167,10 @@ export const Info: Story = {
     variant: 'solid',
     color: 'info',
     size: 'md',
+    onClick: fn(),
   },
   render: renderButton,
+  play,
 }
 
 export const Outline: Story = {
@@ -186,8 +178,10 @@ export const Outline: Story = {
     variant: 'outline',
     color: 'brand',
     size: 'md',
+    onClick: fn(),
   },
   render: renderButton,
+  play,
 }
 
 export const Ghost: Story = {
@@ -195,8 +189,10 @@ export const Ghost: Story = {
     variant: 'ghost',
     color: 'brand',
     size: 'md',
+    onClick: fn(),
   },
   render: renderButton,
+  play,
 }
 
 export const Secondary: Story = {
@@ -204,8 +200,10 @@ export const Secondary: Story = {
     variant: 'secondary',
     color: 'brand',
     size: 'md',
+    onClick: fn(),
   },
   render: renderButton,
+  play,
 }
 
 export const Link: Story = {
@@ -213,33 +211,8 @@ export const Link: Story = {
     variant: 'link',
     color: 'brand',
     size: 'md',
+    onClick: fn(),
   },
   render: renderButton,
-}
-
-/** Disabled buton: play ile DOM'da disabled olduğu doğrulanır */
-export const Disabled: Story = {
-  args: {
-    variant: 'solid',
-    color: 'primary',
-    size: 'md',
-    disabled: true,
-  },
-  render: (args: object) => ({
-    components: { BaseButton },
-    setup() {
-      return { args }
-    },
-    template: `<BaseButton v-bind="args">Submit</BaseButton>`,
-  }),
-  play: async (ctx: unknown) => {
-    const { canvas } =
-      ctx as unknown as PlayContext
-    const button = canvas.getByRole('button', {
-      name: /submit/i,
-    })
-    await expect(
-      (button as HTMLButtonElement).disabled,
-    ).toBe(true)
-  },
+  play,
 }

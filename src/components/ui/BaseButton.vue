@@ -9,28 +9,31 @@
         'cursor-not-allowed opacity-50': disabled,
       },
     ]"
-    aria-label="Button label"
+    :aria-label="
+      $slots.default
+        ? undefined
+        : (ariaLabel ?? 'Button')
+    "
     @click="onClick"
     :disabled="disabled"
   >
-    <span
+    <BaseButtonIcon
       v-if="startIcon"
-      class="flex items-center"
-    >
-      <component :is="startIcon" />
-    </span>
-    <slot></slot>
-    <span
+      :icon="startIcon"
+    />
+    <span class="inline-block"
+      ><slot></slot
+    ></span>
+    <BaseButtonIcon
       v-if="endIcon"
-      class="flex items-center"
-    >
-      <component :is="endIcon" />
-    </span>
+      :icon="endIcon"
+    />
   </button>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import BaseButtonIcon from './BaseButtonIcon.vue'
 
 type ButtonVariant =
   | 'solid'
@@ -55,6 +58,8 @@ interface ButtonProps {
   onClick?: () => void
   className?: string
   disabled?: boolean
+  /** Optional. When set, used as the accessible name (e.g. for icon-only buttons). When unset, the button text is used. */
+  ariaLabel?: string
 }
 
 const props = withDefaults(
@@ -65,6 +70,7 @@ const props = withDefaults(
     color: 'brand',
     className: '',
     disabled: false,
+    ariaLabel: undefined,
   },
 )
 

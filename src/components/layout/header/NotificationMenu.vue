@@ -4,6 +4,8 @@
     ref="dropdownRef"
   >
     <button
+      type="button"
+      aria-label="Bildirimleri aç"
       class="relative flex items-center justify-center text-gray-600 transition-colors bg-white border border-gray-200 rounded-full hover:text-dark-900 h-11 w-11 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
       @click="toggleDropdown"
     >
@@ -51,9 +53,9 @@
 
         <button
           type="button"
+          aria-label="Bildirimleri kapat"
           @click="closeDropdown"
           class="text-gray-600 dark:text-gray-400"
-          title="Close notification"
         >
           <svg
             class="fill-current"
@@ -79,11 +81,11 @@
         <li
           v-for="notification in notifications"
           :key="notification.id"
-          @click="handleItemClick"
         >
           <a
             class="flex gap-3 rounded-lg border-b border-gray-100 p-3 px-4.5 py-3 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-white/5"
             href="#"
+            @click.prevent="handleItemClick"
           >
             <span
               class="relative block w-full h-10 rounded-full z-1 max-w-10"
