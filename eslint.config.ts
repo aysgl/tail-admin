@@ -31,5 +31,24 @@ export default defineConfigWithVueTs(
   vueTsConfigs.recommended,
   // Vue erişilebilirlik (a11y) – button-name, form-label, alt-text vb.
   ...pluginVueA11y.configs['flat/recommended'],
+  {
+    name: 'app/vue-a11y-label-has-for',
+    rules: {
+      'vuejs-accessibility/label-has-for': [
+        'error',
+        {
+          required: { some: ['nesting', 'id'] },
+          allowChildren: true,
+          controlComponents: [
+            'input',
+            'select',
+            'textarea',
+            'FlatPickr',
+            'flat-pickr',
+          ],
+        },
+      ],
+    },
+  },
   skipFormatting,
 )
