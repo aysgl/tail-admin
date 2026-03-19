@@ -40,12 +40,26 @@
         </div>
 
         <div class="relative">
-          <flat-pickr
-            v-model="date"
-            :config="flatpickrConfig"
-            class="pl-3 sm:pl-9 dark:bg-dark-900 h-10 w-10 sm:w-40 rounded-lg border border-gray-200 bg-white text-transparent sm:text-theme-sm sm:text-gray-800 shadow-theme-xs placeholder:text-transparent sm:placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-800 dark:bg-white/[0.03] dark:text-transparent sm:dark:text-gray-400 dark:placeholder:text-transparent sm:dark:placeholder:text-gray-400 dark:focus:border-brand-800"
-            placeholder="Select Date"
-          />
+          <div
+            role="button"
+            tabindex="0"
+            @click="
+              showDatePicker = !showDatePicker
+            "
+            @keydown.enter="
+              showDatePicker = !showDatePicker
+            "
+            @keydown.space.prevent="
+              showDatePicker = !showDatePicker
+            "
+            class="flex cursor-pointer items-center gap-2 pl-3 sm:pl-9 dark:bg-dark-900 h-10 w-10 sm:w-40 rounded-lg border border-gray-200 bg-white text-transparent sm:text-theme-sm sm:text-gray-800 shadow-theme-xs focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-800 dark:bg-white/[0.03] dark:text-transparent sm:dark:text-gray-400 dark:focus:border-brand-800"
+          >
+            <span class="hidden sm:inline">
+              {{
+                dateRangeDisplay || 'Select Date'
+              }}
+            </span>
+          </div>
           <span
             class="absolute text-gray-600 -translate-y-1/2 pointer-events-none left-1/2 -translate-x-1/2 sm:left-3 sm:translate-x-0 top-1/2 dark:text-gray-400"
           >
@@ -65,6 +79,29 @@
               />
             </svg>
           </span>
+          <Teleport to="body">
+            <div
+              v-if="showDatePicker"
+              class="fixed inset-0 z-40"
+            >
+              <button
+                type="button"
+                class="absolute inset-0 w-full h-full cursor-default"
+                aria-label="Close date picker"
+                @click="showDatePicker = false"
+              />
+              <div
+                class="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-xl border border-gray-200 bg-white p-4 shadow-theme-xl dark:border-gray-800 dark:bg-gray-900"
+                @click.stop
+              >
+                <VDatePicker
+                  v-model.range="dateRange"
+                  mode="date"
+                  :masks="{ modelValue: 'MMM d' }"
+                />
+              </div>
+            </div>
+          </Teleport>
         </div>
       </div>
     </div>
@@ -73,22 +110,17 @@
     >
       <div
         id="chartThree"
-        class="-ml-4 min-w-[1000px] xl:min-w-full pl-2"
+        class="-ml-4 min-w-[1000px] xl:min-w-full pl-2 h-[310px]"
       >
-        <VueApexCharts
-          type="area"
-          height="310"
-          :options="chartOptions"
-          :series="series"
-        />
+        <ag-charts :options="chartOptions" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import flatPickr from 'vue-flatpickr-component'
+import type { AgChartOptions } from 'ag-charts-community'
+import { ref, computed } from 'vue'
 
 const options = [
   { value: 'optionOne', label: 'Monthly' },
@@ -97,121 +129,66 @@ const options = [
 ]
 
 const selected = ref('optionOne')
-const date = ref('')
+const showDatePicker = ref(false)
+const dateRange = ref({
+  start: new Date(
+    Date.now() - 7 * 24 * 60 * 60 * 1000,
+  ),
+  end: new Date(),
+})
 
-const flatpickrConfig = {
-  mode: 'range' as const,
-  dateFormat: 'M j',
-  defaultDate: [
-    new Date(
-      Date.now() - 7 * 24 * 60 * 60 * 1000,
-    ),
-    new Date(),
+const dateRangeDisplay = computed(() => {
+  if (!dateRange.value?.start) return ''
+  const start = dateRange.value.start
+  const end = dateRange.value.end ?? start
+  const fmt = (d: Date) =>
+    d.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+    })
+  return `${fmt(start)} - ${fmt(end)}`
+})
+import { AgCharts } from 'ag-charts-vue3'
+
+const chartData = [
+  { month: 'Jan', sales: 180, revenue: 40 },
+  { month: 'Feb', sales: 190, revenue: 30 },
+  { month: 'Mar', sales: 170, revenue: 50 },
+  { month: 'Apr', sales: 160, revenue: 40 },
+  { month: 'May', sales: 175, revenue: 55 },
+  { month: 'Jun', sales: 165, revenue: 40 },
+  { month: 'Jul', sales: 170, revenue: 70 },
+  { month: 'Aug', sales: 205, revenue: 100 },
+  { month: 'Sep', sales: 230, revenue: 110 },
+  { month: 'Oct', sales: 210, revenue: 120 },
+  { month: 'Nov', sales: 240, revenue: 150 },
+  { month: 'Dec', sales: 235, revenue: 140 },
+]
+
+const chartOptions = ref<AgChartOptions>({
+  data: chartData,
+  series: [
+    {
+      type: 'area',
+      xKey: 'month',
+      yKey: 'sales',
+      yName: 'Sales',
+      fill: '#465FFF',
+      fillOpacity: 0.55,
+      stroke: '#465FFF',
+    },
+    {
+      type: 'area',
+      xKey: 'month',
+      yKey: 'revenue',
+      yName: 'Revenue',
+      fill: '#9CB9FF',
+      fillOpacity: 0.55,
+      stroke: '#9CB9FF',
+    },
   ],
-}
-import VueApexCharts from 'vue3-apexcharts'
-
-const series = ref([
-  {
-    name: 'Sales',
-    data: [
-      180, 190, 170, 160, 175, 165, 170, 205, 230,
-      210, 240, 235,
-    ],
-  },
-  {
-    name: 'Revenue',
-    data: [
-      40, 30, 50, 40, 55, 40, 70, 100, 110, 120,
-      150, 140,
-    ],
-  },
-])
-
-const chartOptions = ref({
   legend: {
-    show: false,
-    position: 'top',
-    horizontalAlign: 'left',
-  },
-  colors: ['#465FFF', '#9CB9FF'],
-  chart: {
-    fontFamily: 'Outfit, sans-serif',
-    type: 'area',
-    toolbar: {
-      show: false,
-    },
-  },
-  fill: {
-    gradient: {
-      enabled: true,
-      opacityFrom: 0.55,
-      opacityTo: 0,
-    },
-  },
-  stroke: {
-    curve: 'straight',
-    width: [2, 2],
-  },
-  markers: {
-    size: 0,
-  },
-  labels: {
-    show: false,
-    position: 'top',
-  },
-  grid: {
-    xaxis: {
-      lines: {
-        show: false,
-      },
-    },
-    yaxis: {
-      lines: {
-        show: true,
-      },
-    },
-  },
-  dataLabels: {
     enabled: false,
-  },
-  tooltip: {
-    x: {
-      format: 'dd MMM yyyy',
-    },
-  },
-  xaxis: {
-    type: 'category',
-    categories: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ],
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-  },
-  yaxis: {
-    title: {
-      style: {
-        fontSize: '0px',
-      },
-    },
   },
 })
 </script>

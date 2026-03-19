@@ -183,13 +183,23 @@
           Date Picker Input
         </span>
         <div class="relative">
-          <flat-pickr
+          <div
             id="default-date-input"
-            v-model="date"
-            :config="flatpickrConfig"
-            class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pl-4 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-            placeholder="Select date"
-          />
+            role="button"
+            tabindex="0"
+            @click="
+              showDatePicker = !showDatePicker
+            "
+            @keydown.enter="
+              showDatePicker = !showDatePicker
+            "
+            @keydown.space.prevent="
+              showDatePicker = !showDatePicker
+            "
+            class="flex h-11 w-full cursor-pointer items-center rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+          >
+            {{ dateDisplay || 'Select date' }}
+          </div>
           <span
             class="absolute text-gray-600 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400"
           >
@@ -209,6 +219,31 @@
               />
             </svg>
           </span>
+          <Teleport to="body">
+            <div
+              v-if="showDatePicker"
+              class="fixed inset-0 z-40"
+            >
+              <button
+                type="button"
+                class="absolute inset-0 w-full h-full cursor-default"
+                aria-label="Close date picker"
+                @click="showDatePicker = false"
+              />
+              <div
+                class="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-xl border border-gray-200 bg-white p-4 shadow-theme-xl dark:border-gray-800 dark:bg-gray-900"
+                @click.stop
+              >
+                <VDatePicker
+                  v-model="date"
+                  mode="date"
+                  :masks="{
+                    modelValue: 'YYYY-MM-DD',
+                  }"
+                />
+              </div>
+            </div>
+          </Teleport>
         </div>
       </label>
     </div>
@@ -225,13 +260,23 @@
           Time Select Input
         </span>
         <div class="relative">
-          <flat-pickr
+          <div
             id="default-time-input"
-            v-model="time"
-            :config="flatpickrTimeConfig"
-            class="dark:bg-dark-900 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pl-4 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-            placeholder="Select time"
-          />
+            role="button"
+            tabindex="0"
+            @click="
+              showTimePicker = !showTimePicker
+            "
+            @keydown.enter="
+              showTimePicker = !showTimePicker
+            "
+            @keydown.space.prevent="
+              showTimePicker = !showTimePicker
+            "
+            class="flex h-11 w-full cursor-pointer items-center rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
+          >
+            {{ timeDisplay || 'Select time' }}
+          </div>
           <span
             class="absolute text-gray-600 -translate-y-1/2 right-3 top-1/2 dark:text-gray-400"
           >
@@ -251,6 +296,29 @@
               />
             </svg>
           </span>
+          <Teleport to="body">
+            <div
+              v-if="showTimePicker"
+              class="fixed inset-0 z-40"
+            >
+              <button
+                type="button"
+                class="absolute inset-0 w-full h-full cursor-default"
+                aria-label="Close time picker"
+                @click="showTimePicker = false"
+              />
+              <div
+                class="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-xl border border-gray-200 bg-white p-4 shadow-theme-xl dark:border-gray-800 dark:bg-gray-900"
+                @click.stop
+              >
+                <VDatePicker
+                  v-model="time"
+                  mode="time"
+                  :is24hr="false"
+                />
+              </div>
+            </div>
+          </Teleport>
         </div>
       </label>
     </div>
@@ -309,11 +377,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import flatPickr from 'vue-flatpickr-component'
-import 'flatpickr/dist/flatpickr.css'
+import { ref, reactive, computed } from 'vue'
 
 const showPassword = ref(false)
+const showDatePicker = ref(false)
+const showTimePicker = ref(false)
 
 const formData = reactive({
   input: '',
@@ -325,23 +393,24 @@ const formData = reactive({
   cardNumber: '',
 })
 
-const date = ref(null)
+const date = ref<Date | null>(null)
+const time = ref<Date | null>(null)
 
-const flatpickrConfig = {
-  dateFormat: 'Y-m-d',
-  altInput: true,
-  altFormat: 'F j, Y',
-  wrap: true,
-}
+const dateDisplay = computed(() => {
+  if (!date.value) return ''
+  return date.value.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+})
 
-const flatpickrTimeConfig = {
-  enableTime: true,
-  noCalendar: true,
-  dateFormat: 'H:i',
-  time_24hr: false,
-  minuteIncrement: 1,
-  wrap: false,
-}
-
-const time = ref(null)
+const timeDisplay = computed(() => {
+  if (!time.value) return ''
+  return time.value.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  })
+})
 </script>
