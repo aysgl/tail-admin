@@ -8,6 +8,35 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), vueJsx(), vueDevTools()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vue-vendor': ['vue', 'vue-router'],
+          fullcalendar: [
+            '@fullcalendar/core',
+            '@fullcalendar/vue3',
+            '@fullcalendar/daygrid',
+            '@fullcalendar/timegrid',
+            '@fullcalendar/list',
+            '@fullcalendar/interaction',
+          ],
+          charts: [
+            'apexcharts',
+            'vue3-apexcharts',
+          ],
+          'ui-libs': [
+            'flatpickr',
+            'vue-flatpickr-component',
+            'swiper',
+            'dropzone',
+            'jsvectormap',
+          ],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(

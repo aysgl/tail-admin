@@ -12,8 +12,8 @@
         class="fixed inset-0 h-full w-full bg-gray-400/50 backdrop-blur-[32px]"
         aria-hidden="true"
         @click="
-          $emit('update:modelValue', false)
-          $emit('close')
+          ($emit('update:modelValue', false),
+          $emit('close'))
         "
       />
       <slot name="body" />
