@@ -5,18 +5,19 @@
     />
     <div class="space-y-5 sm:space-y-6">
       <ComponentCard
-        title="With Light Background"
+        title="With Light Background (soft)"
       >
         <div
           class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
         >
-          <Badge
-            v-for="color in colors"
+          <UBadge
+            v-for="color in nuxtUiColors"
             :key="color"
             :color="color"
+            variant="soft"
           >
             {{ color }}
-          </Badge>
+          </UBadge>
         </div>
       </ComponentCard>
       <ComponentCard
@@ -25,14 +26,28 @@
         <div
           class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
         >
-          <Badge
-            v-for="color in colors"
+          <UBadge
+            v-for="color in nuxtUiColors"
             :key="color"
             :color="color"
             variant="solid"
           >
             {{ color }}
-          </Badge>
+          </UBadge>
+        </div>
+      </ComponentCard>
+      <ComponentCard title="Outline variant">
+        <div
+          class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
+        >
+          <UBadge
+            v-for="color in nuxtUiColors"
+            :key="color"
+            :color="color"
+            variant="outline"
+          >
+            {{ color }}
+          </UBadge>
         </div>
       </ComponentCard>
       <ComponentCard
@@ -41,14 +56,15 @@
         <div
           class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
         >
-          <Badge
-            v-for="color in colors"
+          <UBadge
+            v-for="color in nuxtUiColors"
             :key="color"
             :color="color"
-            :endIcon="PlusIcon"
+            variant="soft"
+            leading-icon="i-lucide-plus"
           >
             {{ color }}
-          </Badge>
+          </UBadge>
         </div>
       </ComponentCard>
       <ComponentCard
@@ -57,15 +73,15 @@
         <div
           class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
         >
-          <Badge
-            v-for="color in colors"
+          <UBadge
+            v-for="color in nuxtUiColors"
             :key="color"
             :color="color"
             variant="solid"
-            :startIcon="PlusIcon"
+            leading-icon="i-lucide-plus"
           >
             {{ color }}
-          </Badge>
+          </UBadge>
         </div>
       </ComponentCard>
       <ComponentCard
@@ -74,14 +90,15 @@
         <div
           class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
         >
-          <Badge
-            v-for="color in colors"
+          <UBadge
+            v-for="color in nuxtUiColors"
             :key="color"
             :color="color"
-            :endIcon="PlusIcon"
+            variant="soft"
+            trailing-icon="i-lucide-plus"
           >
             {{ color }}
-          </Badge>
+          </UBadge>
         </div>
       </ComponentCard>
       <ComponentCard
@@ -90,15 +107,30 @@
         <div
           class="flex flex-wrap gap-4 sm:items-center sm:justify-center"
         >
-          <Badge
-            v-for="color in colors"
+          <UBadge
+            v-for="color in nuxtUiColors"
             :key="color"
             :color="color"
             variant="solid"
-            :endIcon="PlusIcon"
+            trailing-icon="i-lucide-plus"
           >
             {{ color }}
-          </Badge>
+          </UBadge>
+        </div>
+      </ComponentCard>
+      <ComponentCard title="Sizes">
+        <div
+          class="flex flex-wrap items-center justify-center gap-4"
+        >
+          <UBadge
+            v-for="size in sizes"
+            :key="size"
+            color="primary"
+            variant="solid"
+            :size="size"
+          >
+            {{ size }}
+          </UBadge>
         </div>
       </ComponentCard>
     </div>
@@ -107,20 +139,27 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Badge from '../../components/ui/BaseBadge.vue'
-import PageBreadcrumb from '../../components/common/PageBreadcrumb.vue'
-import AdminLayout from '../../components/layout/AdminLayout.vue'
-import ComponentCard from '../../components/common/ComponentCard.vue'
-import { PlusIcon } from '@/icons'
+import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
+import AdminLayout from '@/components/layout/AdminLayout.vue'
+import ComponentCard from '@/components/common/ComponentCard.vue'
+
 const currentPageTitle = ref('Badge')
 
-const colors = [
+const nuxtUiColors = [
   'primary',
+  'secondary',
   'success',
-  'error',
-  'warning',
   'info',
-  'light',
-  'dark',
+  'warning',
+  'error',
+  'neutral',
+] as const
+
+const sizes = [
+  'xs',
+  'sm',
+  'md',
+  'lg',
+  'xl',
 ] as const
 </script>

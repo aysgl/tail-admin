@@ -1,9 +1,11 @@
 <template>
-  <ThemeProvider>
-    <SidebarProvider>
-      <RouterView />
-    </SidebarProvider>
-  </ThemeProvider>
+  <UApp>
+    <ThemeProvider>
+      <SidebarProvider>
+        <RouterView />
+      </SidebarProvider>
+    </ThemeProvider>
+  </UApp>
 </template>
 
 <script setup lang="ts">

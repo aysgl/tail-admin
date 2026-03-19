@@ -35,9 +35,9 @@
 </template>
 
 <script setup lang="ts">
-import { useTheme } from '../layout/ThemeProvider.vue'
+import { inject } from 'vue'
 
-const { toggleTheme } = useTheme() as {
+const { toggleTheme } = inject<{
   toggleTheme: () => void
-}
+}>('theme')!
 </script>

@@ -8,18 +8,27 @@
         <div
           class="flex flex-wrap items-center gap-5"
         >
-          <Button
+          <UButton
             size="sm"
             variant="solid"
             color="primary"
-            >Button Text</Button
           >
-          <Button
+            Button Text
+          </UButton>
+          <UButton
             size="md"
             variant="solid"
             color="primary"
-            >Button Text</Button
           >
+            Button Text
+          </UButton>
+          <UButton
+            size="lg"
+            variant="solid"
+            color="primary"
+          >
+            Button Text
+          </UButton>
         </div>
       </ComponentCard>
       <ComponentCard
@@ -28,52 +37,68 @@
         <div
           class="flex flex-wrap items-center gap-3"
         >
-          <Button
+          <UButton
             variant="solid"
             color="primary"
-            >Primary</Button
           >
-          <Button variant="secondary"
-            >Secondary</Button
+            Primary
+          </UButton>
+          <UButton
+            variant="outline"
+            color="neutral"
           >
-          <Button
+            Secondary
+          </UButton>
+          <UButton
             variant="solid"
             color="success"
-            >Success</Button
           >
-          <Button
+            Success
+          </UButton>
+          <UButton
             variant="solid"
             color="error"
-            >Error</Button
           >
-          <Button
+            Error
+          </UButton>
+          <UButton
             variant="solid"
             color="warning"
-            >Warning</Button
           >
-          <Button
+            Warning
+          </UButton>
+          <UButton
             variant="solid"
             color="info"
-            >Info</Button
           >
+            Info
+          </UButton>
         </div>
       </ComponentCard>
       <ComponentCard title="Button with Icons">
         <div
           class="flex flex-wrap items-center gap-5"
         >
-          <Button
+          <UButton
             variant="solid"
             color="primary"
-            :startIcon="BoxIcon"
-            >Left Icon</Button
+            leading-icon="i-lucide-box"
           >
-          <Button
+            Left Icon
+          </UButton>
+          <UButton
             variant="solid"
             color="primary"
-            :endIcon="BoxIcon"
-            >Right Icon</Button
+            trailing-icon="i-lucide-box"
           >
+            Right Icon
+          </UButton>
+          <UButton
+            variant="solid"
+            color="primary"
+            icon="i-lucide-search"
+            aria-label="Search"
+          />
         </div>
       </ComponentCard>
       <ComponentCard
@@ -82,26 +107,71 @@
         <div
           class="flex flex-wrap items-center gap-3"
         >
-          <Button
+          <UButton
             variant="outline"
             color="primary"
-            >Outline</Button
           >
-          <Button
+            Outline
+          </UButton>
+          <UButton
             variant="outline"
             color="success"
-            >Outline Success</Button
           >
-          <Button
+            Outline Success
+          </UButton>
+          <UButton
             variant="ghost"
             color="error"
-            >Ghost Error</Button
           >
-          <Button
+            Ghost Error
+          </UButton>
+          <UButton
             variant="link"
             color="info"
-            >Link Info</Button
           >
+            Link Info
+          </UButton>
+        </div>
+      </ComponentCard>
+      <ComponentCard
+        title="Soft & Subtle variants"
+      >
+        <div
+          class="flex flex-wrap items-center gap-3"
+        >
+          <UButton
+            variant="soft"
+            color="primary"
+          >
+            Soft Primary
+          </UButton>
+          <UButton
+            variant="subtle"
+            color="success"
+          >
+            Subtle Success
+          </UButton>
+        </div>
+      </ComponentCard>
+      <ComponentCard title="Loading state">
+        <div
+          class="flex flex-wrap items-center gap-3"
+        >
+          <UButton
+            variant="solid"
+            color="primary"
+            loading
+          >
+            Loading
+          </UButton>
+          <UButton
+            variant="outline"
+            color="neutral"
+            loading
+            trailing-icon="i-lucide-chevron-down"
+          >
+            Loading
+          </UButton>
         </div>
       </ComponentCard>
     </div>
@@ -113,9 +183,6 @@ import { ref } from 'vue'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import AdminLayout from '@/components/layout/AdminLayout.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
-import Button from '@/components/ui/BaseButton.vue'
-import { BoxIcon } from '@/icons'
+
 const currentPageTitle = ref('Buttons')
 </script>
-
-<style></style>

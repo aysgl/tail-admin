@@ -2,12 +2,15 @@
 layer(base);
 
 @import 'tailwindcss';
+@import '@nuxt/ui';
 
 /* Dark mode: class-based (ThemeProvider adds .dark to html), not system preference */
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Nuxt UI design tokens - font */
   --font-*: initial;
+  --font-sans: Outfit, system-ui, sans-serif;
   --font-outfit: Outfit, sans-serif;
 
   --breakpoint-*: initial;
@@ -195,6 +198,13 @@ layer(base);
       --color-gray-200,
       currentColor
     );
+  }
+
+  /* AG Grid: undo base border-color so theme variables apply */
+  [class^='ag-theme-'] *,
+  [class^='ag-theme-'] *::before,
+  [class^='ag-theme-'] *::after {
+    border-color: revert;
   }
 
   button:not(:disabled),
@@ -683,4 +693,46 @@ layer(base);
 
 .edit-button {
   @apply flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto;
+}
+
+/* AG Grid dark mode - .dark ile diğer componentlerle aynı pattern */
+.dark [class^='ag-theme-'] {
+  --ag-foreground-color: var(--color-gray-300);
+  --ag-background-color: color-mix(
+    in srgb,
+    var(--color-gray-9800) 100%,
+    transparent
+  );
+  --ag-header-background-color: var(
+    --color-gray-900
+  );
+  --ag-border-color: var(--color-gray-800);
+  --ag-header-cell-hover-background-color: color-mix(
+    in srgb,
+    var(--color-brand-500) 20%,
+    transparent
+  );
+  --ag-column-hover-color: color-mix(
+    in srgb,
+    var(--color-brand-500) 20%,
+    transparent
+  );
+  --ag-row-hover-color: color-mix(
+    in srgb,
+    var(--color-brand-500) 20%,
+    transparent
+  );
+  --ag-row-border-color: var(--color-gray-800);
+  --ag-header-row-border-color: var(
+    --color-gray-800
+  );
+  --ag-input-border-color: var(--color-gray-700);
+  --ag-input-focus-border-color: var(
+    --color-brand-500
+  );
+  --ag-selected-row-background-color: color-mix(
+    in srgb,
+    var(--color-brand-500) 15%,
+    transparent
+  );
 }

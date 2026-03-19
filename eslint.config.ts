@@ -43,6 +43,18 @@ export default defineConfigWithVueTs(
   // Vue erişilebilirlik (a11y) – button-name, form-label, alt-text vb.
   ...pluginVueA11y.configs['flat/recommended'],
   {
+    name: 'app/vue-parsing-error',
+    rules: {
+      'vue/no-parsing-error': [
+        'error',
+        {
+          'invalid-first-character-of-tag-name':
+            false,
+        },
+      ],
+    },
+  },
+  {
     name: 'app/vue-a11y-label-has-for',
     rules: {
       'vuejs-accessibility/label-has-for': [

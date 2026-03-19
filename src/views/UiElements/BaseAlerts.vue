@@ -3,69 +3,49 @@
     <PageBreadcrumb
       :pageTitle="currentPageTitle"
     />
-    <div className="space-y-5 sm:space-y-6">
+    <div class="space-y-5 sm:space-y-6">
       <ComponentCard title="Success Alert">
-        <Alert
-          variant="success"
-          title="Success Message"
-          message="Be cautious when performing this action."
-          :showLink="true"
-          linkHref="/"
-          linkText="Learn more"
-        />
-        <Alert
-          variant="success"
-          title="Success Message"
-          message="Be cautious when performing this action."
-          :showLink="false"
+        <UAlert
+          title="Heads up!"
+          description="You can change the primary color in your app config."
+          color="success"
+          variant="soft"
+          icon="i-lucide-flame"
+          class="border border-success-300 border-dashed hover:border-success-500 dark:border-success-500/40 dark:bg-success-500/15 dark:hover:border-success-500 transition-all duration-300"
+          close
         />
       </ComponentCard>
       <ComponentCard title="Warning Alert">
-        <Alert
-          variant="warning"
-          title="Warning  Message"
-          message="Be cautious when performing this action."
-          :showLink="true"
-          linkHref="/"
-          linkText="Learn more"
-        />
-        <Alert
-          variant="warning"
-          title="Warning Message Message"
-          message="Be cautious when performing this action."
-          :showLink="false"
+        <UAlert
+          title="Heads up!"
+          description="You can change the primary color in your app config."
+          color="warning"
+          variant="soft"
+          icon="i-lucide-siren"
+          class="border border-warning-300 border-dashed hover:border-warning-500 dark:border-warning-500/40 dark:hover:border-warning-500 transition-all duration-300"
+          close
         />
       </ComponentCard>
       <ComponentCard title="Error Alert">
-        <Alert
-          variant="error"
-          title="Error  Message"
-          message="Be cautious when performing this action."
-          :showLink="true"
-          linkHref="/"
-          linkText="Learn more"
-        />
-        <Alert
-          variant="error"
-          title="Error Message Message"
-          message="Be cautious when performing this action."
-          :showLink="false"
+        <UAlert
+          title="Heads up!"
+          description="You can change the primary color in your app config."
+          color="error"
+          variant="soft"
+          icon="i-lucide-bug"
+          class="border border-error-300 border-dashed hover:border-error-500 dark:border-error-500/40 dark:hover:border-error-500 transition-all duration-300"
+          close
         />
       </ComponentCard>
       <ComponentCard title="Info Alert">
-        <BaseAlert
-          variant="info"
-          title="Info  Message"
-          message="Be cautious when performing this action."
-          :showLink="true"
-          linkHref="/"
-          linkText="Learn more"
-        />
-        <BaseAlert
-          variant="info"
-          title="Info Message Message"
-          message="Be cautious when performing this action."
-          :showLink="false"
+        <UAlert
+          title="Heads up!"
+          description="You can change the primary color in your app config."
+          color="info"
+          variant="soft"
+          icon="i-lucide-rocket"
+          class="border border-info-300 border-dashed hover:border-info-500 dark:border-info-500/40 dark:bg-info-500/15 dark:hover:border-info-500 transition-all duration-300"
+          close
         />
       </ComponentCard>
     </div>
@@ -77,7 +57,6 @@ import { ref } from 'vue'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
 import AdminLayout from '@/components/layout/AdminLayout.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
-import BaseAlert from '@/components/ui/BaseAlert.vue'
 const currentPageTitle = ref('Alerts')
 </script>
 

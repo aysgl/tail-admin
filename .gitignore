@@ -17,6 +17,10 @@ coverage
 # TypeScript
 *.tsbuildinfo
 
+# Nuxt UI auto-generated
+auto-imports.d.ts
+components.d.ts
+
 # Storybook
 storybook-static
 
