@@ -100,7 +100,7 @@ const menuItems = [
     text: 'Edit profile',
   },
   {
-    href: '/chat',
+    href: '/account-settings',
     icon: SettingsIcon,
     text: 'Account settings',
   },

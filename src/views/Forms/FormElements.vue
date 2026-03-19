@@ -13,10 +13,10 @@
         <ComponentCard title="Select Inputs">
           <BaseSelectInput />
         </ComponentCard>
-        <ComponentCard title="Inputs States">
+        <ComponentCard title="Textarea">
           <BaseTextArea />
         </ComponentCard>
-        <ComponentCard title="Inputs States">
+        <ComponentCard title="Input States">
           <BaseInputState />
         </ComponentCard>
       </div>

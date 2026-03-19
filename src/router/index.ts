@@ -43,6 +43,17 @@ const router = createRouter({
       },
     },
     {
+      path: '/account-settings',
+      name: 'Account Settings',
+      component: () =>
+        import(
+          '../views/Others/AccountSettingsView.vue'
+        ),
+      meta: {
+        title: 'Account Settings',
+      },
+    },
+    {
       path: '/form-elements',
       name: 'Form Elements',
       component: () =>
@@ -55,7 +66,9 @@ const router = createRouter({
       path: '/basic-tables',
       name: 'Basic Tables',
       component: () =>
-        import('../views/Tables/BasicTables.vue'),
+        import(
+          '../views/Tables/DynamicTable.vue'
+        ),
       meta: {
         title: 'Basic Tables',
       },
@@ -122,28 +135,6 @@ const router = createRouter({
       },
     },
 
-    {
-      path: '/images',
-      name: 'Images',
-      component: () =>
-        import(
-          '../views/UiElements/BaseImages.vue'
-        ),
-      meta: {
-        title: 'Images',
-      },
-    },
-    {
-      path: '/videos',
-      name: 'Videos',
-      component: () =>
-        import(
-          '../views/UiElements/BaseVideos.vue'
-        ),
-      meta: {
-        title: 'Videos',
-      },
-    },
     {
       path: '/blank',
       name: 'Blank',
