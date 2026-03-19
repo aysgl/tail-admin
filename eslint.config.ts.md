@@ -2,6 +2,8 @@
 
 Bu doküman, projedeki `eslint.config.ts` yapılandırmasını ve kullanılan eklentileri açıklar. ESLint 9+ **flat config** formatı kullanılır. Vue 3, TypeScript ve Prettier ile uyumlu bir kurulum sağlanır.
 
+> **Sunum için kısa özet:** [docs/ESLINT-SUNUM-OZETI.md](./docs/ESLINT-SUNUM-OZETI.md) — 2 dakikada anlatım
+
 ---
 
 ## 1. Konfigürasyon Özeti
@@ -31,7 +33,11 @@ files: ['**/*.{ts,mts,tsx,vue}']
 ### `ignores` — Hariç Tutulan Dizinler
 
 ```ts
-ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**']
+ignores: [
+  '**/dist/**',
+  '**/dist-ssr/**',
+  '**/coverage/**',
+]
 ```
 
 | Dizin         | Açıklama                |
@@ -140,7 +146,9 @@ Belirli bir blokta kuralları geçici olarak kapatır.
 ```ts
 import { configureVueProject } from '@vue/eslint-config-typescript'
 
-configureVueProject({ scriptLangs: ['ts', 'tsx'] })
+configureVueProject({
+  scriptLangs: ['ts', 'tsx'],
+})
 ```
 
 Daha fazla bilgi: [eslint-config-typescript - Advanced Setup](https://github.com/vuejs/eslint-config-typescript/#advanced-setup)
@@ -154,7 +162,10 @@ Daha fazla bilgi: [eslint-config-typescript - Advanced Setup](https://github.com
 ```json
 {
   "lint-staged": {
-    "*.{ts,tsx,vue,js,jsx}": ["eslint --fix", "prettier --write"],
+    "*.{ts,tsx,vue,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
     "*.{json,css,scss,md}": ["prettier --write"]
   }
 }

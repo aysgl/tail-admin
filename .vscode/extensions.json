@@ -1,9 +1,10 @@
 {
-    "recommendations": [
-        "Vue.volar",
-        "Vue.vscode-typescript-vue-plugin",
-        "dbaeumer.vscode-eslint", // Kurulum sonrası dosya kaydedildiğinde veya manuel olarak lint uyarıları gösterilir.
-        "esbenp.prettier-vscode",
-        "editor.formatOnSave"
-    ]
+  "recommendations": [
+    "Vue.volar",
+    "Vue.vscode-typescript-vue-plugin",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "storybook.vscode-storybook"
+  ]
 }

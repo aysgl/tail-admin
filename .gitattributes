@@ -1,11 +1,13 @@
+# Satır sonları: tüm dosyalarda LF kullan (cross-platform tutarlılık)
 * text=auto eol=lf
 
-# Config dokümanları: merge sırasında her iki branch'in değişikliklerini birleştir (conflict azaltır)
-COMMITLINT.md merge=union
-EDITORCONFIG.md merge=union
-ESLINT.md merge=union
-POSTCSS.md merge=union
-PRETTIER.md merge=union
-STORYBOOK.md merge=union
-TSCONFIG.md merge=union
-VITE.md merge=union
+# Config dokümanları: merge conflict'te her iki branch'in içeriğini birleştir (union merge)
+# Böylece farklı branch'lerde eklenen açıklamalar kaybolmaz, manuel conflict çözümü azalır
+commitlint.config.js.md merge=union
+.editorconfig.md merge=union
+eslint.config.ts.md merge=union
+postcss.config.js.md merge=union
+.prettierrc.json.md merge=union
+.storybook/.storybook.md merge=union
+tsconfig.json.md merge=union
+vite.config.ts.md merge=union

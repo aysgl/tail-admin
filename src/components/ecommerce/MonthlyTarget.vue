@@ -44,13 +44,8 @@
           id="chartTwo"
           class="h-full"
         >
-          <div class="radial-bar-chart">
-            <VueApexCharts
-              type="radialBar"
-              height="330"
-              :options="chartOptions"
-              :series="series"
-            />
+          <div class="radial-bar-chart h-[330px]">
+            <ag-charts :options="chartOptions" />
           </div>
         </div>
         <span
@@ -162,6 +157,7 @@
 </template>
 
 <script setup lang="ts">
+import type { AgChartOptions } from 'ag-charts-community'
 import { computed } from 'vue'
 import DropdownMenu from '../common/DropdownMenu.vue'
 const menuItems: {
@@ -178,7 +174,7 @@ const menuItems: {
     onClick: () => console.log('Delete clicked'),
   },
 ]
-import VueApexCharts from 'vue3-apexcharts'
+import { AgCharts } from 'ag-charts-vue3'
 
 const props = defineProps({
   value: {
@@ -187,53 +183,37 @@ const props = defineProps({
   },
 })
 
-const series = computed(() => [props.value])
-
-const chartOptions = {
-  colors: ['#465FFF'],
-  chart: {
-    fontFamily: 'Outfit, sans-serif',
-    sparkline: {
-      enabled: true,
-    },
-  },
-  plotOptions: {
-    radialBar: {
-      startAngle: -90,
-      endAngle: 90,
-      hollow: {
-        size: '80%',
-      },
-      track: {
-        background: '#E4E7EC',
-        strokeWidth: '100%',
-        margin: 5,
-      },
-      dataLabels: {
-        name: {
-          show: false,
+const chartOptions = computed(
+  () =>
+    ({
+      data: [
+        { label: 'Progress', value: props.value },
+        {
+          label: 'Remaining',
+          value: 100 - props.value,
         },
-        value: {
-          fontSize: '36px',
-          fontWeight: '600',
-          offsetY: 60,
-          color: '#1D2939',
-          formatter: function (val: number) {
-            return val.toFixed(2) + '%'
-          },
+      ],
+      series: [
+        {
+          type: 'donut',
+          angleKey: 'value',
+          calloutLabelKey: 'label',
+          innerRadiusRatio: 0.8,
+          showInLegend: false,
+          fills: ['#465FFF', '#E4E7EC'],
+          strokes: ['#465FFF', '#E4E7EC'],
+          innerLabels: [
+            {
+              text: `${props.value.toFixed(2)}%`,
+              fontSize: 36,
+              fontWeight: '600',
+              color: '#1D2939',
+            },
+          ],
         },
-      },
-    },
-  },
-  fill: {
-    type: 'solid',
-    colors: ['#465FFF'],
-  },
-  stroke: {
-    lineCap: 'round',
-  },
-  labels: ['Progress'],
-}
+      ],
+    }) as unknown as AgChartOptions,
+)
 </script>
 
 <style scoped>

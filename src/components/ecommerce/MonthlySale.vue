@@ -38,21 +38,17 @@
     >
       <div
         id="chartOne"
-        class="-ml-5 min-w-[650px] xl:min-w-full pl-2"
+        class="-ml-5 min-w-[650px] xl:min-w-full pl-2 h-[180px]"
       >
-        <VueApexCharts
-          type="bar"
-          height="180"
-          :options="chartOptions"
-          :series="series"
-        />
+        <ag-charts :options="chartOptions" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import type { AgChartOptions } from 'ag-charts-community'
+import { ref } from 'vue'
 import DropdownMenu from '../common/DropdownMenu.vue'
 const menuItems = [
   {
@@ -66,100 +62,40 @@ const menuItems = [
   },
 ]
 
-import VueApexCharts from 'vue3-apexcharts'
+import { AgCharts } from 'ag-charts-vue3'
 
-const series = ref([
-  {
-    name: 'Sales',
-    data: [
-      168, 385, 201, 298, 187, 195, 291, 110, 215,
-      390, 280, 112,
-    ],
-  },
-])
+const chartData = [
+  { month: 'Jan', sales: 168 },
+  { month: 'Feb', sales: 385 },
+  { month: 'Mar', sales: 201 },
+  { month: 'Apr', sales: 298 },
+  { month: 'May', sales: 187 },
+  { month: 'Jun', sales: 195 },
+  { month: 'Jul', sales: 291 },
+  { month: 'Aug', sales: 110 },
+  { month: 'Sep', sales: 215 },
+  { month: 'Oct', sales: 390 },
+  { month: 'Nov', sales: 280 },
+  { month: 'Dec', sales: 112 },
+]
 
-const chartOptions = ref({
-  colors: ['#465fff'],
-  chart: {
-    fontFamily: 'Outfit, sans-serif',
-    type: 'bar',
-    toolbar: {
-      show: false,
+const chartOptions = ref<AgChartOptions>({
+  data: chartData,
+  series: [
+    {
+      type: 'bar',
+      xKey: 'month',
+      yKey: 'sales',
+      yName: 'Sales',
+      fill: '#465fff',
+      cornerRadius: 5,
     },
-  },
-  plotOptions: {
-    bar: {
-      horizontal: false,
-      columnWidth: '39%',
-      borderRadius: 5,
-      borderRadiusApplication: 'end',
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    show: true,
-    width: 4,
-    colors: ['transparent'],
-  },
-  xaxis: {
-    categories: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ],
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-  },
+  ],
   legend: {
-    show: true,
     position: 'top',
-    horizontalAlign: 'left',
-    fontFamily: 'Outfit',
-    markers: {
-      radius: 99,
+    item: {
+      marker: { shape: 'square' },
     },
   },
-  yaxis: {
-    title: false,
-  },
-  grid: {
-    yaxis: {
-      lines: {
-        show: true,
-      },
-    },
-  },
-  fill: {
-    opacity: 1,
-  },
-  tooltip: {
-    x: {
-      show: false,
-    },
-    y: {
-      formatter: function (val: number) {
-        return val.toString()
-      },
-    },
-  },
-})
-
-onMounted(() => {
-  // Any additional setup can be done here if needed
 })
 </script>

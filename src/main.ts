@@ -1,19 +1,26 @@
 import './assets/main.css'
-// Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 import 'jsvectormap/dist/jsvectormap.css'
-import 'flatpickr/dist/flatpickr.css'
+import 'v-calendar/style.css'
 
+import {
+  AllCommunityModule,
+  ModuleRegistry,
+} from 'ag-charts-community'
 import { createApp } from 'vue'
-import type { Plugin } from 'vue'
+import {
+  setupCalendar,
+  DatePicker,
+} from 'v-calendar'
 import App from './App.vue'
 import router from './router'
-import VueApexCharts from 'vue3-apexcharts'
+
+ModuleRegistry.registerModules([
+  AllCommunityModule,
+])
 
 const app = createApp(App)
 
+app.use(setupCalendar, {})
+app.component('VDatePicker', DatePicker)
 app.use(router)
-app.use(VueApexCharts as Plugin)
 app.mount('#app')

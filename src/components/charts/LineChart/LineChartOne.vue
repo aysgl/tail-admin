@@ -4,124 +4,57 @@
   >
     <div
       id="chartThree"
-      class="-ml-4 min-w-[1000px] xl:min-w-full pl-2"
+      class="-ml-4 min-w-[1000px] xl:min-w-full pl-2 h-[310px]"
     >
-      <VueApexCharts
-        type="area"
-        height="310"
-        :options="chartOptions"
-        :series="series"
-      />
+      <ag-charts :options="chartOptions" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { AgChartOptions } from 'ag-charts-community'
 import { ref } from 'vue'
+import { AgCharts } from 'ag-charts-vue3'
 
-import VueApexCharts from 'vue3-apexcharts'
+const chartData = [
+  { month: 'Jan', sales: 180, revenue: 40 },
+  { month: 'Feb', sales: 190, revenue: 30 },
+  { month: 'Mar', sales: 170, revenue: 50 },
+  { month: 'Apr', sales: 160, revenue: 40 },
+  { month: 'May', sales: 175, revenue: 55 },
+  { month: 'Jun', sales: 165, revenue: 40 },
+  { month: 'Jul', sales: 170, revenue: 70 },
+  { month: 'Aug', sales: 205, revenue: 100 },
+  { month: 'Sep', sales: 230, revenue: 110 },
+  { month: 'Oct', sales: 210, revenue: 120 },
+  { month: 'Nov', sales: 240, revenue: 150 },
+  { month: 'Dec', sales: 235, revenue: 140 },
+]
 
-const series = ref([
-  {
-    name: 'Sales',
-    data: [
-      180, 190, 170, 160, 175, 165, 170, 205, 230,
-      210, 240, 235,
-    ],
-  },
-  {
-    name: 'Revenue',
-    data: [
-      40, 30, 50, 40, 55, 40, 70, 100, 110, 120,
-      150, 140,
-    ],
-  },
-])
-
-const chartOptions = ref({
+const chartOptions = ref<AgChartOptions>({
+  data: chartData,
+  series: [
+    {
+      type: 'area',
+      xKey: 'month',
+      yKey: 'sales',
+      yName: 'Sales',
+      fill: '#465FFF',
+      fillOpacity: 0.55,
+      stroke: '#465FFF',
+    },
+    {
+      type: 'area',
+      xKey: 'month',
+      yKey: 'revenue',
+      yName: 'Revenue',
+      fill: '#9CB9FF',
+      fillOpacity: 0.55,
+      stroke: '#9CB9FF',
+    },
+  ],
   legend: {
-    show: false,
-    position: 'top',
-    horizontalAlign: 'left',
-  },
-  colors: ['#465FFF', '#9CB9FF'],
-  chart: {
-    fontFamily: 'Outfit, sans-serif',
-    type: 'area',
-    toolbar: {
-      show: false,
-    },
-  },
-  fill: {
-    gradient: {
-      enabled: true,
-      opacityFrom: 0.55,
-      opacityTo: 0,
-    },
-  },
-  stroke: {
-    curve: 'straight',
-    width: [2, 2],
-  },
-  markers: {
-    size: 0,
-  },
-  labels: {
-    show: false,
-    position: 'top',
-  },
-  grid: {
-    xaxis: {
-      lines: {
-        show: false,
-      },
-    },
-    yaxis: {
-      lines: {
-        show: true,
-      },
-    },
-  },
-  dataLabels: {
     enabled: false,
-  },
-  tooltip: {
-    x: {
-      format: 'dd MMM yyyy',
-    },
-  },
-  xaxis: {
-    type: 'category',
-    categories: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ],
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-  },
-  yaxis: {
-    title: {
-      style: {
-        fontSize: '0px',
-      },
-    },
   },
 })
 </script>

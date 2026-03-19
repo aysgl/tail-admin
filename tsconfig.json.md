@@ -221,7 +221,11 @@ Node 22 hedefli temel ayarlar.
 ### include
 
 ```json
-["vite.config.*", "vitest.config.*", "eslint.config.*"]
+[
+  "vite.config.*",
+  "vitest.config.*",
+  "eslint.config.*"
+]
 ```
 
 Bu pattern'lere uyan dosyalar Node projesine dahildir.

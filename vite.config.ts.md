@@ -57,11 +57,24 @@ test: {
   projects: [
     {
       extends: true,
-      plugins: [storybookTest({ configDir: path.join(dirname, '.storybook') })],
+      plugins: [
+        storybookTest({
+          configDir: path.join(
+            dirname,
+            '.storybook',
+          ),
+        }),
+      ],
       test: {
         name: 'storybook',
-        browser: { enabled: true, headless: true, provider: playwright({}) },
-        setupFiles: ['.storybook/vitest.setup.ts'],
+        browser: {
+          enabled: true,
+          headless: true,
+          provider: playwright({}),
+        },
+        setupFiles: [
+          '.storybook/vitest.setup.ts',
+        ],
       },
     },
   ]

@@ -1,3 +1,14 @@
+/**
+ * ESLint Flat Config — Vue 3 + TypeScript + Prettier
+ *
+ * Paketler:
+ *   eslint-plugin-vue              → Vue kuralları (.vue dosyaları)
+ *   eslint-plugin-vuejs-accessibility → Erişilebilirlik (a11y)
+ *   @vue/eslint-config-typescript   → TypeScript kuralları
+ *   @vue/eslint-config-prettier    → Prettier ile çakışmayı önler
+ *
+ * Sunum özeti: docs/ESLINT-SUNUM-OZETI.md
+ */
 import pluginVue from 'eslint-plugin-vue'
 import pluginVueA11y from 'eslint-plugin-vuejs-accessibility'
 import {
