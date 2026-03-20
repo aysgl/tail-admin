@@ -33,7 +33,8 @@
           size="sm"
           class="w-fit"
           @update:model-value="
-            (v) => setStatusFilter(String(v))
+            (v: unknown) =>
+              setStatusFilter(String(v))
           "
         />
       </div>
@@ -99,11 +100,9 @@
     <div class="relative min-h-[200px]">
       <div
         v-if="showEmptyOverlay"
-        class="empty-overlay absolute inset-0 z-10 flex items-center justify-center rounded-lg border border-gray-200 bg-gray-50/95 dark:border-gray-700 dark:bg-gray-900/95"
+        class="empty-overlay absolute inset-0 z-10 flex items-center justify-center rounded-lg border border-default bg-default/95"
       >
-        <p
-          class="text-center text-sm text-gray-600 dark:text-gray-400"
-        >
+        <p class="text-center text-sm text-muted">
           {{ emptyOverlayMessage }}
         </p>
       </div>

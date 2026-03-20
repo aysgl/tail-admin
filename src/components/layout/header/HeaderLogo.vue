@@ -1,22 +1,24 @@
 <template>
-  <router-link
+  <RouterLink
     to="/"
-    class="lg:hidden"
+    class="flex items-center"
     aria-label="Home"
   >
-    <img
-      class="dark:hidden"
-      src="/images/logo/logo.svg"
-      alt="Logo"
+    <Logo
+      :icon="collapsed"
+      :class="collapsed ? 'mx-auto' : ''"
     />
-    <img
-      class="hidden dark:block"
-      src="/images/logo/logo-dark.svg"
-      alt="Logo"
-    />
-  </router-link>
+  </RouterLink>
 </template>
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import Logo from '@/components/common/BrandLogo.vue'
+
+withDefaults(
+  defineProps<{
+    collapsed?: boolean
+  }>(),
+  { collapsed: false },
+)
 </script>

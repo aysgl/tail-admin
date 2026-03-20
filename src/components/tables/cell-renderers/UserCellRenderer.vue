@@ -1,24 +1,21 @@
 <template>
   <div class="flex items-center gap-3">
-    <div
+    <UAvatar
       v-if="!isCompact"
-      class="size-8 shrink-0 overflow-hidden rounded-full"
-    >
-      <img
-        :src="params.data?.avatar"
-        :alt="params.data?.name"
-        class="size-full object-cover"
-      />
-    </div>
+      :src="params.data?.avatar"
+      :alt="params.data?.name"
+      size="sm"
+      class="shrink-0"
+    />
     <div class="min-w-0">
       <span
-        class="block truncate font-medium text-gray-800 text-theme-sm dark:text-white/90"
+        class="block truncate font-medium text-theme-sm text-default"
       >
         {{ params.data?.name }}
       </span>
       <span
         v-if="!isCompact"
-        class="block truncate text-gray-600 text-theme-xs dark:text-gray-400"
+        class="block truncate text-theme-xs text-muted"
       >
         {{ params.data?.role }}
       </span>

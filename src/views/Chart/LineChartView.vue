@@ -1,7 +1,7 @@
 <template>
   <UPageHeader
-    headline="User Profile"
-    title="Profile"
+    headline="Charts"
+    title="Line Chart"
     class="py-0 border-none"
   >
     <template #headline>
@@ -9,20 +9,23 @@
     </template>
   </UPageHeader>
   <UPageBody>
-    <ProfileCard />
-    <PersonalInfoCard />
-    <AddressCard />
+    <UPageCard
+      title="Line Chart 1"
+      variant="outline"
+      :ui="pageCardUi"
+    >
+      <LineChartOne />
+    </UPageCard>
   </UPageBody>
 </template>
 
 <script setup lang="ts">
 import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
-import ProfileCard from '@/components/profile/ProfileCard.vue'
-import PersonalInfoCard from '@/components/profile/PersonalInfoCard.vue'
-import AddressCard from '@/components/profile/AddressCard.vue'
+import LineChartOne from '@/components/charts/LineChartOne.vue'
+import { pageCardUi } from '@/config/cardUi'
 
 const breadcrumbItems = usePageBreadcrumb(
-  'Profile',
-  'Profile',
+  'Charts',
+  'Line Chart',
 )
 </script>

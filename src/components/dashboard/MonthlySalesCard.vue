@@ -1,0 +1,103 @@
+<template>
+  <UPageCard
+    variant="outline"
+    :ui="pageCardUi"
+  >
+    <template #header>
+      <div
+        class="flex items-center justify-between"
+      >
+        <h3
+          class="text-lg font-semibold text-default"
+        >
+          Monthly Sales
+        </h3>
+        <UDropdownMenu
+          :items="chartMenuItems"
+          :content="{ align: 'end' }"
+        >
+          <UButton
+            color="neutral"
+            variant="ghost"
+            square
+            icon="i-lucide-more-vertical"
+            aria-label="Menu"
+          />
+        </UDropdownMenu>
+      </div>
+    </template>
+    <div
+      class="max-w-full overflow-x-auto custom-scrollbar"
+    >
+      <div
+        id="chartOne"
+        class="-ml-5 min-w-[650px] xl:min-w-full pl-2"
+      >
+        <AgCharts :options="chartOptions" />
+      </div>
+    </div>
+  </UPageCard>
+</template>
+
+<script setup lang="ts">
+import type { AgChartOptions } from 'ag-charts-community'
+import type { DropdownMenuItem } from '@nuxt/ui'
+import { AgCharts } from 'ag-charts-vue3'
+import { computed } from 'vue'
+import { useChartTheme } from '@/composables/useChartTheme'
+import { pageCardUi } from '@/config/cardUi'
+
+const { chartTheme } = useChartTheme()
+
+const chartMenuItems: DropdownMenuItem[][] = [
+  [
+    {
+      label: 'View More',
+      icon: 'i-lucide-eye',
+      onSelect: () =>
+        console.log('View More clicked'),
+    },
+    {
+      label: 'Delete',
+      icon: 'i-lucide-trash-2',
+      onSelect: () =>
+        console.log('Delete clicked'),
+    },
+  ],
+]
+
+const chartData = [
+  { month: 'Jan', sales: 168 },
+  { month: 'Feb', sales: 385 },
+  { month: 'Mar', sales: 201 },
+  { month: 'Apr', sales: 298 },
+  { month: 'May', sales: 187 },
+  { month: 'Jun', sales: 195 },
+  { month: 'Jul', sales: 291 },
+  { month: 'Aug', sales: 110 },
+  { month: 'Sep', sales: 215 },
+  { month: 'Oct', sales: 390 },
+  { month: 'Nov', sales: 280 },
+  { month: 'Dec', sales: 112 },
+]
+const chartOptions = computed<AgChartOptions>(
+  () => ({
+    theme: chartTheme.value,
+    data: chartData,
+    series: [
+      {
+        type: 'bar',
+        xKey: 'month',
+        yKey: 'sales',
+        yName: 'Sales',
+        fill: '#465fff',
+        cornerRadius: 5,
+      },
+    ],
+    legend: {
+      position: 'top',
+      item: { marker: { shape: 'square' } },
+    },
+  }),
+)
+</script>

@@ -1,11 +1,67 @@
 <template>
-  <AdminLayout>
-    <PageBreadcrumb
-      :pageTitle="currentPageTitle"
-    />
+  <UPageHeader
+    headline="Calendar"
+    title="Calendar"
+    class="py-0 border-none"
+  >
+    <template #headline>
+      <UBreadcrumb :items="breadcrumbItems" />
+    </template>
+  </UPageHeader>
+  <UPageBody>
     <div
-      class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/0.03"
+      class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]"
     >
+      <!-- Custom header with Nuxt UI -->
+      <div
+        class="flex flex-wrap items-center justify-between gap-4 border-b border-gray-200 px-4 py-3 dark:border-gray-800 sm:px-6"
+      >
+        <div class="flex items-center gap-3">
+          <UButton
+            color="neutral"
+            variant="outline"
+            size="sm"
+            square
+            icon="i-lucide-chevron-left"
+            aria-label="Previous"
+            @click="goPrev"
+          />
+          <UButton
+            color="neutral"
+            variant="outline"
+            size="sm"
+            square
+            icon="i-lucide-chevron-right"
+            aria-label="Next"
+            @click="goNext"
+          />
+          <span
+            class="text-lg font-semibold text-default"
+          >
+            {{ calendarTitle }}
+          </span>
+        </div>
+        <div class="flex items-center gap-3">
+          <UTabs
+            v-model="activeView"
+            :items="viewTabItems"
+            size="sm"
+            color="primary"
+            variant="pill"
+            class="flex h-9 w-fit items-center"
+            @update:model-value="onViewChange"
+          />
+          <UButton
+            label="Add Event"
+            color="primary"
+            size="sm"
+            leading-icon="i-lucide-plus"
+            class="h-9 shrink-0"
+            @click="openModal"
+          />
+        </div>
+      </div>
+
       <div class="custom-calendar">
         <FullCalendar
           ref="calendarRef"
@@ -15,169 +71,105 @@
       </div>
 
       <!-- Modal -->
-      <BaseModal
-        v-model="isOpen"
-        @close="closeModal"
+      <UModal
+        v-model:open="isOpen"
+        :title="
+          selectedEvent
+            ? 'Edit Event'
+            : 'Add Event'
+        "
+        description="Plan your next big moment: schedule or edit an event to stay on track"
+        :ui="{ content: 'w-full max-w-[700px]' }"
+        @update:open="
+          (v) => {
+            if (!v) resetModalFields()
+          }
+        "
       >
         <template #body>
-          <div
-            class="no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11"
-          >
-            <h5
-              class="mb-2 font-semibold text-gray-800 modal-title text-theme-xl dark:text-white/90 lg:text-2xl"
-            >
-              {{
-                selectedEvent
-                  ? 'Edit Event'
-                  : 'Add Event'
-              }}
-            </h5>
-            <p
-              class="text-sm text-gray-600 dark:text-gray-400"
-            >
-              Plan your next big moment: schedule
-              or edit an event to stay on track
-            </p>
+          <div class="space-y-6">
+            <UFormField label="Event Title">
+              <UInput
+                v-model="eventTitle"
+                placeholder="Enter event title"
+                variant="outline"
+                color="neutral"
+                class="w-full"
+              />
+            </UFormField>
 
-            <div class="mt-8">
-              <div>
-                <label
-                  for="eventTitle"
-                  class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
-                >
-                  Event Title
-                  <input
-                    id="eventTitle"
-                    name="eventTitle"
-                    v-model="eventTitle"
-                    type="text"
-                    class="dark:bg-dark-900 mt-1.5 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                  />
-                </label>
-              </div>
+            <UFormField label="Event Color">
+              <UTabs
+                v-model="eventLevel"
+                :items="colorTabItems"
+                size="sm"
+                variant="pill"
+                class="w-fit"
+              />
+            </UFormField>
 
-              <fieldset class="mt-6">
-                <legend
-                  class="block mb-4 text-sm font-medium text-gray-700 dark:text-gray-400"
-                >
-                  Event Color
-                </legend>
-                <div
-                  class="flex flex-wrap items-center gap-4 sm:gap-5"
-                >
-                  <div
-                    v-for="(
-                      value, key
-                    ) in calendarsEvents"
-                    :key="key"
-                    class="n-chk"
-                  >
-                    <div
-                      :class="`form-check form-check-${value} form-check-inline`"
-                    >
-                      <label
-                        class="flex items-center text-sm text-gray-700 form-check-label dark:text-gray-400"
-                        :for="`modal${key}`"
-                      >
-                        <span class="relative">
-                          <input
-                            type="radio"
-                            :name="'event-level'"
-                            :value="key"
-                            :id="`modal${key}`"
-                            v-model="eventLevel"
-                            class="sr-only form-check-input"
-                          />
-                          <span
-                            class="flex items-center justify-center w-5 h-5 mr-2 border border-gray-300 rounded-full box dark:border-gray-700"
-                          >
-                            <span
-                              class="w-2 h-2 bg-white rounded-full dark:bg-transparent"
-                            ></span>
-                          </span>
-                        </span>
-                        {{ key }}
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
+            <UFormField label="Enter Start Date">
+              <UInput
+                v-model="eventStartDate"
+                type="date"
+                variant="outline"
+                color="neutral"
+                class="w-full"
+              />
+            </UFormField>
 
-              <div class="mt-6">
-                <label
-                  for="eventStartDate"
-                  class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
-                >
-                  Enter Start Date
-                  <input
-                    id="eventStartDate"
-                    v-model="eventStartDate"
-                    type="date"
-                    class="dark:bg-dark-900 mt-1.5 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pl-4 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                  />
-                </label>
-              </div>
-
-              <div class="mt-6">
-                <label
-                  for="eventEndDate"
-                  class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
-                >
-                  Enter End Date
-                  <input
-                    id="eventEndDate"
-                    v-model="eventEndDate"
-                    type="date"
-                    class="dark:bg-dark-900 mt-1.5 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pl-4 pr-11 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800"
-                  />
-                </label>
-              </div>
-            </div>
-
-            <div
-              class="flex items-center gap-3 mt-6 modal-footer sm:justify-end"
-            >
-              <button
-                @click="closeModal"
-                class="flex w-full justify-center rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/0.03 sm:w-auto"
-              >
-                Close
-              </button>
-
-              <button
-                @click="handleAddOrUpdateEvent"
-                class="btn btn-success btn-update-event flex w-full justify-center rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-600 sm:w-auto"
-              >
-                {{
-                  selectedEvent
-                    ? 'Update Changes'
-                    : 'Add Event'
-                }}
-              </button>
-              <button
-                v-if="selectedEvent"
-                @click="handleDeleteEvent"
-                class="flex w-full justify-center rounded-lg border border-error-500 bg-error-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-error-600 sm:w-auto"
-              >
-                Delete Event
-              </button>
-            </div>
+            <UFormField label="Enter End Date">
+              <UInput
+                v-model="eventEndDate"
+                type="date"
+                variant="outline"
+                color="neutral"
+                class="w-full"
+              />
+            </UFormField>
           </div>
         </template>
-      </BaseModal>
+
+        <template #footer>
+          <div
+            class="flex flex-wrap items-center justify-end gap-3"
+          >
+            <UButton
+              label="Close"
+              color="neutral"
+              variant="outline"
+              @click="closeModal"
+            />
+            <UButton
+              :label="
+                selectedEvent
+                  ? 'Update Changes'
+                  : 'Add Event'
+              "
+              color="primary"
+              @click="handleAddOrUpdateEvent"
+            />
+            <UButton
+              v-if="selectedEvent"
+              label="Delete Event"
+              color="error"
+              variant="solid"
+              @click="handleDeleteEvent"
+            />
+          </div>
+        </template>
+      </UModal>
     </div>
-  </AdminLayout>
+  </UPageBody>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import AdminLayout from '@/components/layout/AdminLayout.vue'
-import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
+import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import BaseModal from '@/components/ui/BaseModal.vue'
 
 type CalendarEvent = {
   id: string
@@ -188,7 +180,10 @@ type CalendarEvent = {
   extendedProps: { calendar: string }
 }
 
-const currentPageTitle = ref('Calendar')
+const breadcrumbItems = usePageBreadcrumb(
+  'Calendar',
+  'Calendar',
+)
 const isOpen = ref(false)
 const selectedEvent = ref<{
   id?: string
@@ -203,12 +198,44 @@ const eventEndDate = ref('')
 const eventLevel = ref('')
 const events = ref<CalendarEvent[]>([])
 
-const calendarsEvents = reactive({
-  Danger: 'danger',
-  Success: 'success',
-  Primary: 'primary',
-  Warning: 'warning',
-})
+const colorTabItems = [
+  { label: 'Danger', value: 'Danger' },
+  { label: 'Success', value: 'Success' },
+  { label: 'Primary', value: 'Primary' },
+  { label: 'Warning', value: 'Warning' },
+]
+
+const calendarRef = ref<InstanceType<
+  typeof FullCalendar
+> | null>(null)
+const calendarTitle = ref('')
+const activeView = ref('dayGridMonth')
+
+const viewTabItems = [
+  { label: 'Month', value: 'dayGridMonth' },
+  { label: 'Week', value: 'timeGridWeek' },
+  { label: 'Day', value: 'timeGridDay' },
+]
+
+const goPrev = () => {
+  calendarRef.value?.getApi()?.prev()
+}
+
+const goNext = () => {
+  calendarRef.value?.getApi()?.next()
+}
+
+const onViewChange = (view: string | number) => {
+  calendarRef.value
+    ?.getApi()
+    ?.changeView(String(view))
+}
+
+const handleDatesSet = (dateInfo: {
+  view: { title: string }
+}) => {
+  calendarTitle.value = dateInfo.view.title
+}
 
 onMounted(() => {
   events.value = [
@@ -243,6 +270,10 @@ onMounted(() => {
 })
 
 const openModal = () => {
+  if (!selectedEvent.value) {
+    resetModalFields()
+    eventLevel.value = 'Primary'
+  }
   isOpen.value = true
 }
 
@@ -353,22 +384,12 @@ const calendarOptions = reactive({
     interactionPlugin,
   ],
   initialView: 'dayGridMonth',
-  headerToolbar: {
-    left: 'prev,next addEventButton',
-    center: 'title',
-    right:
-      'dayGridMonth,timeGridWeek,timeGridDay',
-  },
+  headerToolbar: false as const,
   events: events,
   selectable: true,
   select: handleDateSelect,
   eventClick: handleEventClick,
   eventContent: renderEventContent,
-  customButtons: {
-    addEventButton: {
-      text: 'Add Event +',
-      click: openModal,
-    },
-  },
+  datesSet: handleDatesSet,
 })
 </script>

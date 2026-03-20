@@ -1,77 +1,73 @@
 <template>
   <div>
-    <UCard
+    <UPageCard
+      title="Personal Information"
       variant="outline"
-      :ui="{ root: 'mb-6 rounded-2xl' }"
+      :ui="{ ...pageCardUi }"
     >
       <div
         class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between"
       >
         <div>
-          <h4
-            class="mb-6 text-lg font-semibold text-gray-800 dark:text-white/90 lg:mb-6"
-          >
-            Personal Information
-          </h4>
           <div
             class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32"
           >
             <div>
               <p
-                class="mb-2 text-xs leading-normal text-gray-600 dark:text-gray-400"
+                class="mb-2 text-xs leading-normal text-muted"
               >
                 First Name
               </p>
               <p
-                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                class="text-sm font-medium text-default"
               >
                 Musharof
               </p>
             </div>
             <div>
               <p
-                class="mb-2 text-xs leading-normal text-gray-600 dark:text-gray-400"
+                class="mb-2 text-xs leading-normal text-muted"
               >
                 Last Name
               </p>
               <p
-                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                class="text-sm font-medium text-default"
               >
                 Chowdhury
               </p>
             </div>
             <div>
               <p
-                class="mb-2 text-xs leading-normal text-gray-600 dark:text-gray-400"
+                class="mb-2 text-xs leading-normal text-muted"
               >
                 Email address
               </p>
               <p
-                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                class="text-sm font-medium text-default"
               >
                 randomuser@pimjo.com
               </p>
             </div>
             <div>
               <p
-                class="mb-2 text-xs leading-normal text-gray-600 dark:text-gray-400"
+                class="mb-2 text-xs leading-normal text-muted"
               >
                 Phone
               </p>
               <p
-                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                class="text-sm font-medium text-default"
               >
                 +09 363 398 46
               </p>
             </div>
             <div>
               <p
-                class="mb-2 text-xs leading-normal text-gray-600 dark:text-gray-400"
+                class="mb-2 text-xs leading-normal text-muted"
               >
                 Bio
               </p>
               <p
-                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                class="text-sm font-medium text-default"
               >
                 Team Manager
               </p>
@@ -82,13 +78,13 @@
           color="neutral"
           variant="outline"
           leading-icon="i-lucide-pencil"
-          class="edit-button"
+          class="w-full lg:w-auto"
           @click="isProfileInfoModal = true"
         >
           Edit
         </UButton>
       </div>
-    </UCard>
+    </UPageCard>
 
     <UModal
       v-model:open="isProfileInfoModal"
@@ -103,7 +99,7 @@
           >
             <div>
               <h5
-                class="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6"
+                class="mb-5 text-lg font-medium text-default lg:mb-6"
               >
                 Social Links
               </h5>
@@ -146,7 +142,7 @@
             </div>
             <div>
               <h5
-                class="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6"
+                class="mb-5 text-lg font-medium text-default lg:mb-6"
               >
                 Personal Information
               </h5>
@@ -215,6 +211,7 @@
             Close
           </UButton>
           <UButton
+            color="primary"
             class="flex-1 lg:flex-initial"
             @click="saveProfile(close)"
           >
@@ -227,6 +224,7 @@
 </template>
 
 <script setup lang="ts">
+import { pageCardUi } from '@/config/cardUi'
 import { ref, reactive } from 'vue'
 
 const isProfileInfoModal = ref(false)

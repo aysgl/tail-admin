@@ -1,16 +1,13 @@
 <template>
   <div class="flex -space-x-2">
-    <div
+    <UAvatar
       v-for="(member, index) in params.data?.team"
       :key="index"
-      class="size-6 overflow-hidden rounded-full border-2 border-white dark:border-gray-900"
-    >
-      <img
-        :src="member"
-        alt="team member"
-        class="size-full object-cover"
-      />
-    </div>
+      :src="member"
+      alt="team member"
+      size="xs"
+      class="size-6 shrink-0 border-2 border-white dark:border-gray-900"
+    />
   </div>
 </template>
 

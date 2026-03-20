@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import './assets/main.css'
 import 'jsvectormap/dist/jsvectormap.css'
 import 'v-calendar/style.css'

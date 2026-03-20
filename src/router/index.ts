@@ -13,11 +13,62 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'Dashboard',
+      component: () =>
+        import(
+          '../views/Dashboard/DashboardView.vue'
+        ),
+      meta: {
+        title: 'Dashboard',
+        layout: 'main',
+      },
+    },
+    {
+      path: '/ecommerce',
       name: 'Ecommerce',
       component: () =>
-        import('../views/Ecommerce.vue'),
+        import(
+          '../views/Dashboard/EcommerceView.vue'
+        ),
       meta: {
         title: 'eCommerce Dashboard',
+        layout: 'main',
+      },
+    },
+    {
+      path: '/analytics',
+      name: 'Analytics',
+      component: () =>
+        import(
+          '../views/Dashboard/AnalyticsView.vue'
+        ),
+      meta: {
+        title: 'Analytics',
+        layout: 'main',
+      },
+    },
+    {
+      path: '/sales',
+      name: 'Sales',
+      component: () =>
+        import(
+          '../views/Dashboard/SalesView.vue'
+        ),
+      meta: {
+        title: 'Sales',
+        layout: 'main',
+      },
+    },
+    {
+      path: '/reports',
+      name: 'Reports',
+      component: () =>
+        import(
+          '../views/Dashboard/ReportsView.vue'
+        ),
+      meta: {
+        title: 'Reports',
+        layout: 'main',
       },
     },
     {
@@ -29,6 +80,7 @@ const router = createRouter({
         ),
       meta: {
         title: 'Calendar',
+        layout: 'main',
       },
     },
     {
@@ -40,6 +92,7 @@ const router = createRouter({
         ),
       meta: {
         title: 'Profile',
+        layout: 'main',
       },
     },
     {
@@ -51,26 +104,43 @@ const router = createRouter({
         ),
       meta: {
         title: 'Account Settings',
+        layout: 'main',
       },
     },
     {
-      path: '/form-elements',
-      name: 'Form Elements',
-      component: () =>
-        import('../views/Forms/FormElements.vue'),
-      meta: {
-        title: 'Form Elements',
-      },
-    },
-    {
-      path: '/basic-tables',
-      name: 'Basic Tables',
+      path: '/compact-tables',
+      name: 'Compact Tables',
       component: () =>
         import(
-          '../views/Tables/DynamicTable.vue'
+          '../views/Tables/CompactTableView.vue'
         ),
       meta: {
-        title: 'Basic Tables',
+        title: 'Compact Tables',
+        layout: 'main',
+      },
+    },
+    {
+      path: '/relaxed-tables',
+      name: 'Relaxed Tables',
+      component: () =>
+        import(
+          '../views/Tables/RelaxedTableView.vue'
+        ),
+      meta: {
+        title: 'Relaxed Tables',
+        layout: 'main',
+      },
+    },
+    {
+      path: '/advance-tables',
+      name: 'Advance Tables',
+      component: () =>
+        import(
+          '../views/Tables/AdvanceTableView.vue'
+        ),
+      meta: {
+        title: 'Advance Tables',
+        layout: 'main',
       },
     },
     {
@@ -78,63 +148,23 @@ const router = createRouter({
       name: 'Line Chart',
       component: () =>
         import(
-          '../views/Chart/LineChart/LineChart.vue'
+          '../views/Chart/LineChartView.vue'
         ),
+      meta: {
+        title: 'Line Chart',
+        layout: 'main',
+      },
     },
     {
       path: '/bar-chart',
       name: 'Bar Chart',
       component: () =>
-        import(
-          '../views/Chart/BarChart/BarChart.vue'
-        ),
-    },
-    {
-      path: '/alerts',
-      name: 'Alerts',
-      component: () =>
-        import(
-          '../views/UiElements/BaseAlerts.vue'
-        ),
+        import('../views/Chart/BarChartView.vue'),
       meta: {
-        title: 'Alerts',
+        title: 'Bar Chart',
+        layout: 'main',
       },
     },
-    {
-      path: '/avatars',
-      name: 'Avatars',
-      component: () =>
-        import(
-          '../views/UiElements/BaseAvatars.vue'
-        ),
-      meta: {
-        title: 'Avatars',
-      },
-    },
-    {
-      path: '/badge',
-      name: 'Badge',
-      component: () =>
-        import(
-          '../views/UiElements/BaseBadges.vue'
-        ),
-      meta: {
-        title: 'Badge',
-      },
-    },
-
-    {
-      path: '/buttons',
-      name: 'Buttons',
-      component: () =>
-        import(
-          '../views/UiElements/BaseButtons.vue'
-        ),
-      meta: {
-        title: 'Buttons',
-      },
-    },
-
     {
       path: '/blank',
       name: 'Blank',
@@ -142,18 +172,28 @@ const router = createRouter({
         import('../views/Pages/BlankPage.vue'),
       meta: {
         title: 'Blank',
+        layout: 'main',
+      },
+    },
+    {
+      path: '/form-elements',
+      name: 'Form',
+      component: () =>
+        import('../views/Forms/FormView.vue'),
+      meta: {
+        title: 'Form',
+        layout: 'main',
       },
     },
 
     {
-      path: '/error-404',
-      name: '404 Error',
+      path: '/not-found',
+      name: 'Not Found',
       component: () =>
-        import(
-          '../views/Errors/FourZeroFour.vue'
-        ),
+        import('../views/Pages/NotFoundView.vue'),
       meta: {
-        title: '404 Error',
+        title: 'Not Found',
+        layout: 'none',
       },
     },
 
@@ -164,6 +204,7 @@ const router = createRouter({
         import('../views/Auth/SigninView.vue'),
       meta: {
         title: 'Signin',
+        layout: 'auth',
       },
     },
     {
@@ -173,6 +214,7 @@ const router = createRouter({
         import('../views/Auth/SignupView.vue'),
       meta: {
         title: 'Signup',
+        layout: 'auth',
       },
     },
   ],

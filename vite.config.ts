@@ -14,6 +14,11 @@ export default defineConfig({
     vueDevTools(),
     ui({
       ui: {
+        icons: {
+          system: 'i-lucide-monitor',
+          light: 'i-lucide-sun',
+          dark: 'i-lucide-moon',
+        },
         colors: {
           primary: 'brand',
           secondary: 'blue-light',
@@ -23,6 +28,12 @@ export default defineConfig({
           error: 'error',
           neutral: 'gray',
         },
+        pageBody: {
+          base: 'mt-8 pb-24 space-y-6',
+        },
+        pageGrid: {
+          base: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6',
+        },
       },
     }),
   ],
@@ -31,12 +42,10 @@ export default defineConfig({
       output: {
         manualChunks: {
           'vue-vendor': ['vue', 'vue-router'],
-          fullcalendar: [
-            '@fullcalendar/core',
-            '@fullcalendar/vue3',
-            '@fullcalendar/daygrid',
-            '@fullcalendar/timegrid',
-            '@fullcalendar/interaction',
+          'schedule-x': [
+            '@schedule-x/vue',
+            '@schedule-x/calendar',
+            '@schedule-x/theme-default',
           ],
           charts: [
             'ag-charts-vue3',

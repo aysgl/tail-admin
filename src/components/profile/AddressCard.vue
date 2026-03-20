@@ -1,65 +1,61 @@
 <template>
   <div>
-    <UCard
+    <UPageCard
+      title="Address"
       variant="outline"
-      :ui="{ root: 'rounded-2xl' }"
+      :ui="{ ...pageCardUi }"
     >
       <div
         class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between"
       >
         <div>
-          <h4
-            class="mb-6 text-lg font-semibold text-gray-800 dark:text-white/90 lg:mb-6"
-          >
-            Address
-          </h4>
           <div
             class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32"
           >
             <div>
               <p
-                class="mb-2 text-xs leading-normal text-gray-600 dark:text-gray-400"
+                class="mb-2 text-xs leading-normal text-muted"
               >
                 Country
               </p>
               <p
-                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                class="text-sm font-medium text-default"
               >
                 United States
               </p>
             </div>
             <div>
               <p
-                class="mb-2 text-xs leading-normal text-gray-600 dark:text-gray-400"
+                class="mb-2 text-xs leading-normal text-muted"
               >
                 City/State
               </p>
               <p
-                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                class="text-sm font-medium text-default"
               >
                 Phoenix, United States
               </p>
             </div>
             <div>
               <p
-                class="mb-2 text-xs leading-normal text-gray-600 dark:text-gray-400"
+                class="mb-2 text-xs leading-normal text-muted"
               >
                 Postal Code
               </p>
               <p
-                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                class="text-sm font-medium text-default"
               >
                 ERT 2489
               </p>
             </div>
             <div>
               <p
-                class="mb-2 text-xs leading-normal text-gray-600 dark:text-gray-400"
+                class="mb-2 text-xs leading-normal text-muted"
               >
                 TAX ID
               </p>
               <p
-                class="text-sm font-medium text-gray-800 dark:text-white/90"
+                class="text-sm font-medium text-default"
               >
                 AS4568384
               </p>
@@ -70,13 +66,13 @@
           color="neutral"
           variant="outline"
           leading-icon="i-lucide-pencil"
-          class="edit-button"
+          class="w-full lg:w-auto"
           @click="isProfileAddressModal = true"
         >
           Edit
         </UButton>
       </div>
-    </UCard>
+    </UPageCard>
 
     <UModal
       v-model:open="isProfileAddressModal"
@@ -141,6 +137,7 @@
             Close
           </UButton>
           <UButton
+            color="primary"
             class="flex-1 lg:flex-initial"
             @click="saveProfile(close)"
           >
@@ -153,6 +150,7 @@
 </template>
 
 <script setup lang="ts">
+import { pageCardUi } from '@/config/cardUi'
 import { ref, reactive } from 'vue'
 
 const isProfileAddressModal = ref(false)
