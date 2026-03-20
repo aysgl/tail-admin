@@ -8,7 +8,7 @@
     :ui="{ content: 'min-w-48' }"
   >
     <UButton
-      color="neutral"
+      color="primary"
       variant="ghost"
       class="gap-2"
     >

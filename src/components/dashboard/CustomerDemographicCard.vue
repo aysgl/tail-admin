@@ -1,19 +1,42 @@
 <template>
-  <UPageCard
-    title="Customers Demographic"
-    description="Number of customer based on country"
-    variant="outline"
-    :ui="pageCardUi"
-  >
-    <div
-      class="px-4 py-6 my-6 overflow-hidden border border-default rounded-2xl bg-default sm:px-6"
-    >
+  <UPageCard variant="outline">
+    <template #header>
+      <div
+        class="flex items-center justify-between"
+      >
+        <div>
+          <h3
+            class="text-lg font-semibold text-default"
+          >
+            Customers Demographic
+          </h3>
+          <p
+            class="mt-1 text-theme-sm text-muted"
+          >
+            Number of customer based on country
+          </p>
+        </div>
+        <UDropdownMenu
+          :items="chartMenuItems"
+          :content="{ align: 'end' }"
+        >
+          <UButton
+            color="primary"
+            variant="ghost"
+            square
+            icon="i-lucide-more-vertical"
+            aria-label="Menu"
+          />
+        </UDropdownMenu>
+      </div>
+    </template>
+    <UCard variant="outline">
       <div
         ref="mapRef"
         id="demographicMap"
         class="mapOne map-btn -mx-4 -my-6 h-[212px] w-[252px] 2xsm:w-[307px] xsm:w-[358px] sm:-mx-6 md:w-[668px] lg:w-[634px] xl:w-[393px] 2xl:w-[554px]"
       />
-    </div>
+    </UCard>
     <div class="space-y-5">
       <div
         v-for="country in countries"
@@ -50,10 +73,27 @@
 </template>
 
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
 import { ref, onMounted } from 'vue'
 import jsVectorMap from 'jsvectormap'
 import 'jsvectormap/dist/maps/world'
-import { pageCardUi } from '@/config/cardUi'
+
+const chartMenuItems: DropdownMenuItem[][] = [
+  [
+    {
+      label: 'View More',
+      icon: 'i-lucide-eye',
+      onSelect: () =>
+        console.log('View More clicked'),
+    },
+    {
+      label: 'Delete',
+      icon: 'i-lucide-trash-2',
+      onSelect: () =>
+        console.log('Delete clicked'),
+    },
+  ],
+]
 
 const countries = [
   {

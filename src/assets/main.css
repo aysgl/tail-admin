@@ -795,10 +795,15 @@ span.flatpickr-weekday,
   /* Changes the cursor to indicate dragging */
 }
 
-.custom-calendar .fc-h-event {
-  background-color: transparent;
-  border: none;
-  color: black;
+/* Calendar: UCard body padding kaldır */
+.calendar-card [data-slot='body'] {
+  padding: 0 !important;
+}
+
+/* FullCalendar: Event wrapper'daki varsayılan mavi arka planı kaldır */
+.fc .fc-h-event {
+  background-color: transparent !important;
+  border: none !important;
 }
 
 /* AG Grid dark mode - .dark ile diğer componentlerle aynı pattern */

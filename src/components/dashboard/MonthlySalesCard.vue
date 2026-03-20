@@ -1,8 +1,5 @@
 <template>
-  <UPageCard
-    variant="outline"
-    :ui="pageCardUi"
-  >
+  <UPageCard variant="outline">
     <template #header>
       <div
         class="flex items-center justify-between"
@@ -17,7 +14,7 @@
           :content="{ align: 'end' }"
         >
           <UButton
-            color="neutral"
+            color="primary"
             variant="ghost"
             square
             icon="i-lucide-more-vertical"
@@ -45,8 +42,6 @@ import type { DropdownMenuItem } from '@nuxt/ui'
 import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
 import { useChartTheme } from '@/composables/useChartTheme'
-import { pageCardUi } from '@/config/cardUi'
-
 const { chartTheme } = useChartTheme()
 
 const chartMenuItems: DropdownMenuItem[][] = [

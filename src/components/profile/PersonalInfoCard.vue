@@ -3,7 +3,6 @@
     <UPageCard
       title="Personal Information"
       variant="outline"
-      :ui="{ ...pageCardUi }"
     >
       <div
         class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between"
@@ -75,7 +74,7 @@
           </div>
         </div>
         <UButton
-          color="neutral"
+          color="primary"
           variant="outline"
           leading-icon="i-lucide-pencil"
           class="w-full lg:w-auto"
@@ -90,7 +89,6 @@
       v-model:open="isProfileInfoModal"
       title="Edit Personal Information"
       description="Update your details to keep your profile up-to-date."
-      :ui="{ content: 'max-w-[700px]' }"
     >
       <template #body>
         <form class="flex flex-col">
@@ -110,7 +108,7 @@
                   <UInput
                     v-model="form.facebook"
                     variant="outline"
-                    color="neutral"
+                    color="primary"
                     class="w-full"
                   />
                 </UFormField>
@@ -118,7 +116,7 @@
                   <UInput
                     v-model="form.x"
                     variant="outline"
-                    color="neutral"
+                    color="primary"
                     class="w-full"
                   />
                 </UFormField>
@@ -126,7 +124,7 @@
                   <UInput
                     v-model="form.linkedin"
                     variant="outline"
-                    color="neutral"
+                    color="primary"
                     class="w-full"
                   />
                 </UFormField>
@@ -134,7 +132,7 @@
                   <UInput
                     v-model="form.instagram"
                     variant="outline"
-                    color="neutral"
+                    color="primary"
                     class="w-full"
                   />
                 </UFormField>
@@ -153,7 +151,7 @@
                   <UInput
                     v-model="form.firstName"
                     variant="outline"
-                    color="neutral"
+                    color="primary"
                     class="w-full"
                   />
                 </UFormField>
@@ -161,7 +159,7 @@
                   <UInput
                     v-model="form.lastName"
                     variant="outline"
-                    color="neutral"
+                    color="primary"
                     class="w-full"
                   />
                 </UFormField>
@@ -170,7 +168,7 @@
                     v-model="form.email"
                     type="email"
                     variant="outline"
-                    color="neutral"
+                    color="primary"
                     class="w-full"
                   />
                 </UFormField>
@@ -178,7 +176,7 @@
                   <UInput
                     v-model="form.phone"
                     variant="outline"
-                    color="neutral"
+                    color="primary"
                     class="w-full"
                   />
                 </UFormField>
@@ -189,7 +187,7 @@
                   <UInput
                     v-model="form.bio"
                     variant="outline"
-                    color="neutral"
+                    color="primary"
                     class="w-full"
                   />
                 </UFormField>
@@ -203,7 +201,7 @@
           class="flex w-full gap-3 lg:justify-end"
         >
           <UButton
-            color="neutral"
+            color="primary"
             variant="outline"
             class="flex-1 lg:flex-initial"
             @click="close()"
@@ -224,7 +222,6 @@
 </template>
 
 <script setup lang="ts">
-import { pageCardUi } from '@/config/cardUi'
 import { ref, reactive } from 'vue'
 
 const isProfileInfoModal = ref(false)

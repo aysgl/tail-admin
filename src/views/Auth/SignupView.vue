@@ -1,263 +1,202 @@
 <template>
-  <UPageBody
-    :ui="{
-      base: 'h-full overflow-hidden p-0 m-0',
-    }"
-  >
-    <div class="flex h-full min-h-0 w-full">
-      <!-- Sol: Form -->
+  <AuthSplitLayout>
+    <ULink
+      to="/"
+      class="mb-6 inline-flex items-center gap-2 text-sm text-muted dark:text-gray-400 transition-colors hover:text-default dark:hover:text-gray-200"
+      aria-label="Back to dashboard"
+    >
+      <UIcon
+        name="i-lucide-arrow-left"
+        class="size-5"
+      />
+      Back to dashboard
+    </ULink>
+
+    <h1
+      class="mt-6 text-2xl font-bold text-highlighted"
+    >
+      Sign Up
+    </h1>
+    <p class="mt-1 text-muted dark:text-gray-400">
+      Enter your email and password to sign up!
+    </p>
+
+    <AuthFormCard
+      :state="state"
+      @submit="handleSubmit"
+    >
+      <template #social>
+        <UButton
+          color="primary"
+          variant="soft"
+          block
+          class="gap-3 dark:bg-primary-500/20 dark:text-primary-200 dark:hover:bg-primary-500/30 dark:border dark:border-primary-500/30"
+        >
+          <UIcon
+            name="i-simple-icons-google"
+            class="size-5"
+          />
+          Sign up with Google
+        </UButton>
+        <UButton
+          color="primary"
+          variant="soft"
+          block
+          class="gap-3 dark:bg-primary-500/20 dark:text-primary-200 dark:hover:bg-primary-500/30 dark:border dark:border-primary-500/30"
+        >
+          <UIcon
+            name="i-simple-icons-x"
+            class="size-5"
+          />
+          Sign up with X
+        </UButton>
+      </template>
+
       <div
-        class="flex flex-1 min-w-0 h-full flex-col items-center justify-center overflow-y-auto p-6 lg:p-12"
+        class="grid grid-cols-1 gap-5 sm:grid-cols-2"
       >
-        <div class="w-full max-w-md">
-          <ULink
-            to="/"
-            class="mb-6 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-default"
-            aria-label="Back to dashboard"
+        <UFormField
+          label="First Name"
+          required
+        >
+          <UInput
+            v-model="state.firstName"
+            placeholder="Enter your first name"
+            variant="outline"
+            color="primary"
+            class="w-full"
+          />
+        </UFormField>
+        <UFormField
+          label="Last Name"
+          required
+        >
+          <UInput
+            v-model="state.lastName"
+            placeholder="Enter your last name"
+            variant="outline"
+            color="primary"
+            class="w-full"
+          />
+        </UFormField>
+      </div>
+
+      <UFormField
+        label="Email"
+        required
+      >
+        <UInput
+          v-model="state.email"
+          type="email"
+          placeholder="Enter your email"
+          variant="outline"
+          color="primary"
+          class="w-full"
+        />
+      </UFormField>
+
+      <UFormField
+        label="Password"
+        required
+      >
+        <div class="relative">
+          <UInput
+            v-model="state.password"
+            :type="
+              showPassword ? 'text' : 'password'
+            "
+            placeholder="Enter your password"
+            variant="outline"
+            color="primary"
+            class="w-full pr-11"
+          />
+          <UButton
+            type="button"
+            color="primary"
+            variant="ghost"
+            square
+            size="sm"
+            class="absolute right-1 top-1/2 -translate-y-1/2 dark:text-gray-400 dark:hover:bg-gray-800"
+            aria-label="Toggle password visibility"
+            @click="showPassword = !showPassword"
           >
             <UIcon
-              name="i-lucide-arrow-left"
+              :name="
+                showPassword
+                  ? 'i-lucide-eye-off'
+                  : 'i-lucide-eye'
+              "
               class="size-5"
             />
-            Back to dashboard
-          </ULink>
-
-          <h1
-            class="mt-6 text-2xl font-bold text-highlighted"
-          >
-            Sign Up
-          </h1>
-          <p class="mt-1 text-muted">
-            Enter your email and password to sign
-            up!
-          </p>
-
-          <UPageCard
-            variant="outline"
-            :ui="pageCardUi"
-            class="mt-6"
-          >
-            <div
-              class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5"
-            >
-              <UButton
-                color="neutral"
-                variant="subtle"
-                block
-                class="gap-3"
-              >
-                <UIcon
-                  name="i-simple-icons-google"
-                  class="size-5"
-                />
-                Sign up with Google
-              </UButton>
-              <UButton
-                color="neutral"
-                variant="subtle"
-                block
-                class="gap-3"
-              >
-                <UIcon
-                  name="i-simple-icons-x"
-                  class="size-5"
-                />
-                Sign up with X
-              </UButton>
-            </div>
-
-            <div class="relative py-3 sm:py-5">
-              <USeparator />
-              <span
-                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-default px-3 text-sm text-muted"
-              >
-                Or
-              </span>
-            </div>
-
-            <form
-              class="space-y-5"
-              @submit.prevent="handleSubmit"
-            >
-              <div
-                class="grid grid-cols-1 gap-5 sm:grid-cols-2"
-              >
-                <UFormField
-                  label="First Name"
-                  required
-                >
-                  <UInput
-                    v-model="firstName"
-                    placeholder="Enter your first name"
-                    variant="outline"
-                    color="neutral"
-                    class="w-full"
-                  />
-                </UFormField>
-                <UFormField
-                  label="Last Name"
-                  required
-                >
-                  <UInput
-                    v-model="lastName"
-                    placeholder="Enter your last name"
-                    variant="outline"
-                    color="neutral"
-                    class="w-full"
-                  />
-                </UFormField>
-              </div>
-              <UFormField
-                label="Email"
-                required
-              >
-                <UInput
-                  v-model="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  variant="outline"
-                  color="neutral"
-                  class="w-full"
-                />
-              </UFormField>
-              <UFormField
-                label="Password"
-                required
-              >
-                <div class="relative">
-                  <UInput
-                    v-model="password"
-                    :type="
-                      showPassword
-                        ? 'text'
-                        : 'password'
-                    "
-                    placeholder="Enter your password"
-                    variant="outline"
-                    color="neutral"
-                    class="w-full pr-11"
-                  />
-                  <UButton
-                    type="button"
-                    color="neutral"
-                    variant="ghost"
-                    square
-                    size="sm"
-                    class="absolute right-1 top-1/2 -translate-y-1/2"
-                    aria-label="Toggle password visibility"
-                    @click="
-                      showPassword = !showPassword
-                    "
-                  >
-                    <UIcon
-                      :name="
-                        showPassword
-                          ? 'i-lucide-eye-off'
-                          : 'i-lucide-eye'
-                      "
-                      class="size-5"
-                    />
-                  </UButton>
-                </div>
-              </UFormField>
-              <div class="flex items-start gap-3">
-                <UCheckbox
-                  v-model="agreeToTerms"
-                  color="primary"
-                  class="mt-0.5"
-                />
-                <p class="text-sm text-muted">
-                  By creating an account means you
-                  agree to the
-                  <span
-                    class="font-medium text-default"
-                    >Terms and Conditions</span
-                  >, and our
-                  <span
-                    class="font-medium text-default"
-                    >Privacy Policy</span
-                  >
-                </p>
-              </div>
-              <UButton
-                type="submit"
-                block
-                color="primary"
-                size="lg"
-              >
-                Sign Up
-              </UButton>
-            </form>
-
-            <p
-              class="mt-5 text-center text-sm text-muted sm:text-start"
-            >
-              Already have an account?
-              <ULink
-                to="/signin"
-                class="text-primary hover:text-primary/80"
-              >
-                Sign In
-              </ULink>
-            </p>
-          </UPageCard>
+          </UButton>
         </div>
+      </UFormField>
+
+      <div class="flex items-start gap-3">
+        <UCheckbox
+          v-model="state.agreeToTerms"
+          color="primary"
+          class="mt-0.5"
+        />
+        <p
+          class="text-sm text-muted dark:text-gray-400"
+        >
+          By creating an account means you agree
+          to the
+          <span
+            class="font-medium text-default dark:text-gray-200"
+            >Terms and Conditions</span
+          >, and our
+          <span
+            class="font-medium text-default dark:text-gray-200"
+            >Privacy Policy</span
+          >
+        </p>
       </div>
 
-      <!-- Sağ: Branding - üst/alt sıfıra sıfır -->
-      <div
-        class="relative hidden lg:flex lg:w-1/2 h-full min-h-0 flex-col items-center justify-center bg-brand-950 dark:bg-white/5 self-stretch"
-        aria-label="Branding"
+      <UButton
+        type="submit"
+        block
+        color="primary"
+        variant="solid"
+        size="lg"
+        class="bg-primary-500! text-white! hover:bg-primary-600! dark:bg-primary-500! dark:text-white!"
       >
-        <div
-          class="absolute inset-0 overflow-hidden"
+        Sign Up
+      </UButton>
+
+      <template #footer>
+        <p
+          class="mt-5 text-center text-sm text-muted dark:text-gray-400 sm:text-start"
         >
-          <AuthCover />
-        </div>
-        <div
-          class="relative z-1 flex flex-col items-center justify-center max-w-xs"
-        >
+          Already have an account?
           <ULink
-            to="/"
-            class="mb-4 block"
-            aria-label="Home"
+            to="/signin"
+            class="text-primary hover:text-primary/80"
           >
-            <img
-              width="231"
-              height="48"
-              src="/images/logo/auth-logo.svg"
-              alt="Logo"
-            />
+            Sign In
           </ULink>
-          <p class="text-center text-muted">
-            Free and Open-Source Tailwind CSS
-            Admin Dashboard Template
-          </p>
-        </div>
-      </div>
-    </div>
-  </UPageBody>
+        </p>
+      </template>
+    </AuthFormCard>
+  </AuthSplitLayout>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import AuthCover from '@/components/auth/AuthCover.vue'
-import { pageCardUi } from '@/config/cardUi'
+import { reactive, ref } from 'vue'
+import AuthFormCard from '@/components/auth/AuthFormCard.vue'
+import AuthSplitLayout from '@/components/auth/AuthSplitLayout.vue'
 
-const firstName = ref('')
-const lastName = ref('')
-const email = ref('')
-const password = ref('')
+const state = reactive({
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  agreeToTerms: false,
+})
 const showPassword = ref(false)
-const agreeToTerms = ref(false)
 
 const handleSubmit = () => {
-  console.log('Form submitted', {
-    firstName: firstName.value,
-    lastName: lastName.value,
-    email: email.value,
-    password: password.value,
-    agreeToTerms: agreeToTerms.value,
-  })
+  console.log('Form submitted', state)
 }
 </script>

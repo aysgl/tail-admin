@@ -10,15 +10,10 @@
     </template>
   </UPageHeader>
   <UPageBody>
-    <!-- Email Section -->
-    <div
-      class="rounded-2xl border border-default bg-default p-5 lg:p-6"
+    <UPageCard
+      title="Email Address"
+      variant="outline"
     >
-      <h4
-        class="mb-6 text-lg font-semibold text-gray-800 dark:text-white/90"
-      >
-        Email Address
-      </h4>
       <div class="space-y-4 max-w-md">
         <UFormField label="Current email">
           <UInput
@@ -26,7 +21,7 @@
             type="email"
             placeholder="your@email.com"
             variant="outline"
-            color="neutral"
+            color="primary"
             class="w-full"
           />
         </UFormField>
@@ -38,17 +33,12 @@
           Update email
         </UButton>
       </div>
-    </div>
+    </UPageCard>
 
-    <!-- Password Section -->
-    <div
-      class="rounded-2xl border border-default bg-default p-5 lg:p-6"
+    <UPageCard
+      title="Change Password"
+      variant="outline"
     >
-      <h4
-        class="mb-6 text-lg font-semibold text-gray-800 dark:text-white/90"
-      >
-        Change Password
-      </h4>
       <div class="space-y-4 max-w-md">
         <UFormField label="Current password">
           <UInput
@@ -56,7 +46,7 @@
             type="password"
             placeholder="••••••••"
             variant="outline"
-            color="neutral"
+            color="primary"
             class="w-full"
           />
         </UFormField>
@@ -66,7 +56,7 @@
             type="password"
             placeholder="••••••••"
             variant="outline"
-            color="neutral"
+            color="primary"
             class="w-full"
           />
         </UFormField>
@@ -76,7 +66,7 @@
             type="password"
             placeholder="••••••••"
             variant="outline"
-            color="neutral"
+            color="primary"
             class="w-full"
           />
         </UFormField>
@@ -88,17 +78,12 @@
           Update password
         </UButton>
       </div>
-    </div>
+    </UPageCard>
 
-    <!-- Notifications Section -->
-    <div
-      class="rounded-2xl border border-default bg-default p-5 lg:p-6"
+    <UPageCard
+      title="Notifications"
+      variant="outline"
     >
-      <h4
-        class="mb-6 text-lg font-semibold text-gray-800 dark:text-white/90"
-      >
-        Notifications
-      </h4>
       <div class="space-y-4 max-w-md">
         <div
           class="flex items-center justify-between"
@@ -143,7 +128,7 @@
           />
         </div>
       </div>
-    </div>
+    </UPageCard>
   </UPageBody>
 </template>
 

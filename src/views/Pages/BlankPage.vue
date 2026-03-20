@@ -9,11 +9,7 @@
     </template>
   </UPageHeader>
   <UPageBody>
-    <UPageCard
-      variant="outline"
-      :ui="pageCardUi"
-      class="w-full py-7 text-center xl:py-12 text-sm text-muted"
-    >
+    <UPageCard variant="outline">
       Add your content here.
     </UPageCard>
   </UPageBody>
@@ -21,8 +17,6 @@
 
 <script setup lang="ts">
 import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
-import { pageCardUi } from '@/config/cardUi'
-
 const breadcrumbItems = usePageBreadcrumb(
   'Pages',
   'Blank Page',

@@ -10,7 +10,7 @@
     }"
   >
     <UButton
-      color="neutral"
+      color="primary"
       variant="ghost"
       square
       aria-label="Bildirimler"
@@ -70,7 +70,7 @@
       <div class="border-t border-default p-2">
         <UButton
           block
-          color="neutral"
+          color="primary"
           variant="outline"
           size="sm"
         >

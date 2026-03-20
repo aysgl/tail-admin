@@ -66,10 +66,9 @@ export function useNavigationItems() {
       {
         label: 'Dashboard',
         icon: 'i-lucide-layout-grid',
-        to: '/',
+        to: '/ecommerce',
         type: 'trigger',
         defaultOpen:
-          route.path === '/' ||
           route.path.startsWith('/ecommerce') ||
           route.path.startsWith('/analytics') ||
           route.path.startsWith('/sales') ||
@@ -81,11 +80,6 @@ export function useNavigationItems() {
           route.path.startsWith('/sales') ||
           route.path.startsWith('/reports'),
         children: [
-          {
-            label: 'Overview',
-            to: '/',
-            icon: 'i-lucide-layout-dashboard',
-          },
           {
             label: 'Ecommerce',
             to: '/ecommerce',

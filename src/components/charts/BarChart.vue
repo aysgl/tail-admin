@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="max-w-full overflow-x-auto custom-scrollbar -ml-5 min-w-[650px] xl:min-w-full pl-2"
-  >
-    <AgCharts :options="chartOptions" />
-  </div>
+  <AgCharts :options="chartOptions" />
 </template>
 
 <script setup lang="ts">

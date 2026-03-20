@@ -27,6 +27,7 @@ import UserCellRenderer from '@/components/tables/cell-renderers/UserCellRendere
 import TeamCellRenderer from '@/components/tables/cell-renderers/TeamCellRenderer.vue'
 import StatusCellRenderer from '@/components/tables/cell-renderers/StatusCellRenderer.vue'
 import SkeletonLoadingCellRenderer from '@/components/tables/cell-renderers/SkeletonLoadingCellRenderer.vue'
+import SkeletonLoadingOverlay from '@/components/tables/SkeletonLoadingOverlay.vue'
 
 ModuleRegistry.registerModules([
   AllCommunityModule,
@@ -54,6 +55,10 @@ app.component(
 app.component(
   'SkeletonLoadingCellRenderer',
   SkeletonLoadingCellRenderer,
+)
+app.component(
+  'SkeletonLoadingOverlay',
+  SkeletonLoadingOverlay,
 )
 
 app.use(setupCalendar, {})

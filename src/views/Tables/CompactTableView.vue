@@ -13,11 +13,11 @@
       title="table-compact"
       description="Yoğun, sıkı görünüm. Küçük satır yüksekliği ve dar padding ile daha fazla veri sığar."
       variant="outline"
-      :ui="pageCardUi"
     >
       <TableTheme
         theme="compact"
         :show-toolbar="false"
+        :datasource-delay-ms="2000"
       />
     </UPageCard>
   </UPageBody>
@@ -25,7 +25,6 @@
 
 <script setup lang="ts">
 import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
-import { pageCardUi } from '@/config/cardUi'
 import TableTheme from '@/components/tables/TableTheme.vue'
 
 const breadcrumbItems = usePageBreadcrumb(

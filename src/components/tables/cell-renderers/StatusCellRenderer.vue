@@ -22,6 +22,6 @@ const statusColor = computed(() => {
   if (status === 'Active') return 'success'
   if (status === 'Pending') return 'warning'
   if (status === 'Cancel') return 'error'
-  return 'neutral'
+  return 'primary'
 })
 </script>

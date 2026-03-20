@@ -10,20 +10,17 @@
   </UPageHeader>
   <UPageBody>
     <UPageCard
-      title="Bar Chart 1"
+      title="Bar Chart"
       variant="outline"
-      :ui="pageCardUi"
     >
-      <BarChartOne />
+      <BarChart />
     </UPageCard>
   </UPageBody>
 </template>
 
 <script setup lang="ts">
 import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
-import BarChartOne from '@/components/charts/BarChartOne.vue'
-import { pageCardUi } from '@/config/cardUi'
-
+import BarChart from '@/components/charts/BarChart.vue'
 const breadcrumbItems = usePageBreadcrumb(
   'Charts',
   'Bar Chart',

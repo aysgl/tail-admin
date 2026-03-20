@@ -13,7 +13,6 @@
       title="table-advance"
       description="Theme seçimi, global arama, status tab'ları, satır seçimi, kolon göster/gizle ve filtreler."
       variant="outline"
-      :ui="pageCardUi"
     >
       <TableTheme
         v-model:theme="advanceTheme"
@@ -24,6 +23,7 @@
         :show-theme-selector="true"
         :show-status-tabs="true"
         :show-floating-filter="true"
+        datasource-mode="server"
         :datasource-delay-ms="2000"
       />
     </UPageCard>
@@ -33,7 +33,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
-import { pageCardUi } from '@/config/cardUi'
 import TableTheme from '@/components/tables/TableTheme.vue'
 
 const breadcrumbItems = usePageBreadcrumb(

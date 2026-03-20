@@ -11,7 +11,7 @@
           {
             label: 'Back to Home Page',
             to: '/',
-            color: 'neutral',
+            color: 'primary',
             variant: 'outline',
             size: 'lg',
           },

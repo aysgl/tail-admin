@@ -16,14 +16,13 @@
         <UPageCard
           title="Default Inputs"
           variant="outline"
-          :ui="pageCardUi"
         >
           <div class="space-y-6">
             <UFormField label="Input">
               <UInput
                 v-model="formData.input"
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -36,7 +35,7 @@
                 "
                 placeholder="info@gmail.com"
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -46,7 +45,7 @@
                 :items="selectItems"
                 placeholder="Select Option"
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -61,13 +60,13 @@
                   "
                   placeholder="Enter your password"
                   variant="outline"
-                  color="neutral"
+                  color="primary"
                   class="w-full pr-11"
                 />
                 <UButton
                   type="button"
                   variant="ghost"
-                  color="neutral"
+                  color="primary"
                   size="sm"
                   square
                   :icon="
@@ -86,7 +85,7 @@
             <UFormField label="Date Picker Input">
               <UPopover>
                 <UButton
-                  color="neutral"
+                  color="primary"
                   variant="outline"
                   trailing-icon="i-lucide-chevron-down"
                   class="w-full justify-between"
@@ -113,7 +112,7 @@
             <UFormField label="Time Select Input">
               <UPopover>
                 <UButton
-                  color="neutral"
+                  color="primary"
                   variant="outline"
                   trailing-icon="i-lucide-chevron-down"
                   class="w-full justify-between"
@@ -143,7 +142,7 @@
                 placeholder="Card number"
                 leading-icon="i-lucide-credit-card"
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -153,7 +152,6 @@
         <UPageCard
           title="Select Inputs"
           variant="outline"
-          :ui="pageCardUi"
         >
           <div class="space-y-6">
             <UFormField label="Select Input">
@@ -162,7 +160,7 @@
                 :items="selectItems"
                 placeholder="Select Option"
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -173,7 +171,7 @@
                 multiple
                 placeholder="Select items..."
                 variant="outline"
-                color="neutral"
+                color="primary"
                 value-key="value"
                 class="w-full"
               />
@@ -184,7 +182,6 @@
         <UPageCard
           title="Textarea"
           variant="outline"
-          :ui="pageCardUi"
         >
           <div class="space-y-6">
             <UFormField label="Description">
@@ -193,7 +190,7 @@
                 placeholder="Enter a description..."
                 :rows="6"
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -204,7 +201,7 @@
                 :rows="6"
                 disabled
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -227,7 +224,6 @@
         <UPageCard
           title="Input States"
           variant="outline"
-          :ui="pageCardUi"
         >
           <div class="space-y-6">
             <UFormField
@@ -259,7 +255,7 @@
                 placeholder="info@gmail.com"
                 disabled
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -271,7 +267,6 @@
         <UPageCard
           title="Inputs Group"
           variant="outline"
-          :ui="pageCardUi"
         >
           <div class="space-y-6">
             <UFormField label="Email">
@@ -280,7 +275,7 @@
                 placeholder="info@gmail.com"
                 leading-icon="i-lucide-mail"
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -355,7 +350,7 @@
                   class="min-w-0 flex-1 rounded-none border-0 focus:ring-0"
                 />
                 <UButton
-                  color="neutral"
+                  color="primary"
                   variant="ghost"
                   size="sm"
                   class="shrink-0 rounded-none border-l border-gray-200 dark:border-gray-800"
@@ -375,13 +370,12 @@
         <UPageCard
           title="File Input"
           variant="outline"
-          :ui="pageCardUi"
         >
           <UFormField label="Upload file">
             <UInput
               type="file"
               variant="outline"
-              color="neutral"
+              color="primary"
               class="w-full file:mr-4 file:rounded-lg file:border-0 file:bg-gray-100 file:px-4 file:py-2.5 file:text-sm file:font-medium file:text-gray-700 hover:file:bg-gray-200 dark:file:bg-gray-800 dark:file:text-gray-300 dark:hover:file:bg-gray-700"
             />
           </UFormField>
@@ -390,7 +384,6 @@
         <UPageCard
           title="Checkboxes"
           variant="outline"
-          :ui="pageCardUi"
         >
           <div
             class="flex flex-wrap items-center gap-8"
@@ -417,7 +410,6 @@
         <UPageCard
           title="Dropzone"
           variant="outline"
-          :ui="pageCardUi"
         >
           <UFileUpload
             v-model="dropzoneFiles"
@@ -426,7 +418,7 @@
             accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml"
             icon="i-lucide-upload"
             variant="area"
-            color="neutral"
+            color="primary"
             class="w-full min-h-48"
           />
         </UPageCard>
@@ -438,8 +430,6 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
-import { pageCardUi } from '@/config/cardUi'
-
 const breadcrumbItems = usePageBreadcrumb(
   'Form',
   'Form',

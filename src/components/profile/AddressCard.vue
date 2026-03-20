@@ -3,7 +3,6 @@
     <UPageCard
       title="Address"
       variant="outline"
-      :ui="{ ...pageCardUi }"
     >
       <div
         class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between"
@@ -63,7 +62,7 @@
           </div>
         </div>
         <UButton
-          color="neutral"
+          color="primary"
           variant="outline"
           leading-icon="i-lucide-pencil"
           class="w-full lg:w-auto"
@@ -78,7 +77,6 @@
       v-model:open="isProfileAddressModal"
       title="Edit Address"
       description="Update your details to keep your profile up-to-date."
-      :ui="{ content: 'max-w-[700px]' }"
     >
       <template #body>
         <form class="flex flex-col">
@@ -92,7 +90,7 @@
                 <UInput
                   v-model="form.country"
                   variant="outline"
-                  color="neutral"
+                  color="primary"
                   class="w-full"
                 />
               </UFormField>
@@ -100,7 +98,7 @@
                 <UInput
                   v-model="form.cityState"
                   variant="outline"
-                  color="neutral"
+                  color="primary"
                   class="w-full"
                 />
               </UFormField>
@@ -108,7 +106,7 @@
                 <UInput
                   v-model="form.postalCode"
                   variant="outline"
-                  color="neutral"
+                  color="primary"
                   class="w-full"
                 />
               </UFormField>
@@ -116,7 +114,7 @@
                 <UInput
                   v-model="form.taxId"
                   variant="outline"
-                  color="neutral"
+                  color="primary"
                   class="w-full"
                 />
               </UFormField>
@@ -129,7 +127,7 @@
           class="flex w-full gap-3 lg:justify-end"
         >
           <UButton
-            color="neutral"
+            color="primary"
             variant="outline"
             class="flex-1 lg:flex-initial"
             @click="close()"
@@ -150,7 +148,6 @@
 </template>
 
 <script setup lang="ts">
-import { pageCardUi } from '@/config/cardUi'
 import { ref, reactive } from 'vue'
 
 const isProfileAddressModal = ref(false)

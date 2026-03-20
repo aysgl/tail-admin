@@ -9,30 +9,35 @@
     </template>
   </UPageHeader>
   <UPageBody>
-    <UPageGrid>
+    <div class="grid grid-cols-12 gap-4 md:gap-6">
       <div
-        class="col-span-1 sm:col-span-2 lg:col-span-3"
+        class="col-span-12 space-y-6 xl:col-span-7"
       >
         <EcommerceMetrics />
-      </div>
-      <div class="lg:col-span-2">
-        <MonthlyTargetCard />
-      </div>
-      <div class="lg:col-span-1">
         <MonthlySalesCard />
       </div>
-      <div
-        class="col-span-1 sm:col-span-2 lg:col-span-3"
-      >
+      <div class="col-span-12 flex xl:col-span-5">
+        <MonthlyTargetCard
+          class="min-h-0 flex-1"
+        />
+      </div>
+
+      <div class="col-span-12">
         <StatisticsCard />
       </div>
-      <div class="lg:col-span-1">
-        <CustomerDemographicCard />
+
+      <div class="col-span-12 flex xl:col-span-5">
+        <CustomerDemographicCard
+          class="min-h-0 flex-1"
+        />
       </div>
-      <div class="lg:col-span-2">
-        <RecentOrdersCard />
+
+      <div class="col-span-12 flex xl:col-span-7">
+        <RecentOrdersCard
+          class="min-h-0 flex-1"
+        />
       </div>
-    </UPageGrid>
+    </div>
   </UPageBody>
 </template>
 

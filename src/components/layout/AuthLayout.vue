@@ -1,6 +1,10 @@
 <template>
-  <UMain class="h-screen overflow-hidden p-0">
-    <UPage class="h-full w-full p-0">
+  <UMain
+    class="h-screen overflow-hidden bg-default p-0"
+  >
+    <UPage
+      class="flex h-full w-full flex-col bg-default p-0"
+    >
       <slot />
     </UPage>
   </UMain>

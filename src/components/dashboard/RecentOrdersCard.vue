@@ -1,27 +1,26 @@
 <template>
-  <UPageCard
-    variant="outline"
-    :ui="pageCardUi"
-  >
+  <UPageCard variant="outline">
     <template #header>
       <div
-        class="flex items-center justify-between"
+        class="grid w-full grid-cols-[1fr_auto] items-center gap-4"
       >
         <h3
-          class="text-lg font-semibold text-default"
+          class="text-lg font-semibold text-default min-w-0"
         >
           Recent Orders
         </h3>
-        <div class="flex items-center gap-3">
+        <div
+          class="flex shrink-0 items-center justify-end gap-3"
+        >
           <UButton
-            color="neutral"
+            color="primary"
             variant="outline"
             icon="i-lucide-sliders-horizontal"
           >
             Filter
           </UButton>
           <UButton
-            color="neutral"
+            color="primary"
             variant="outline"
           >
             See all
@@ -92,9 +91,7 @@
                   <span
                     class="text-theme-xs text-muted"
                   >
-                    {{
-                      product.variants
-                    }}
+                    {{ product.variants }}
                     Variants
                   </span>
                 </div>
@@ -134,8 +131,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { pageCardUi } from '@/config/cardUi'
-
 const products = ref([
   {
     name: 'Macbook pro 13"',

@@ -6,7 +6,6 @@
       v-for="metric in metrics"
       :key="metric.label"
       variant="outline"
-      :ui="pageCardUi"
     >
       <div
         class="flex h-12 w-12 items-center justify-center rounded-xl bg-muted"
@@ -51,8 +50,6 @@
 </template>
 
 <script setup lang="ts">
-import { pageCardUi } from '@/config/cardUi'
-
 const metrics = [
   {
     label: 'Customers',

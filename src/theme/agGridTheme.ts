@@ -76,7 +76,7 @@ export const tableThemeCompact =
     rowHoverColor: ACCENT_COLOR,
   })
 
-/** table-relaxed - Rahat, sakin, minimal hover */
+/** table-relaxed - Rahat, sakin görünüm */
 export const tableThemeRelaxed =
   baseTheme.withParams({
     ...baseParams,
@@ -86,9 +86,9 @@ export const tableThemeRelaxed =
     cellHorizontalPaddingScale: 0.9,
     headerVerticalPaddingScale: 0.9,
     rowVerticalPaddingScale: 0.9,
-    columnHoverColor: 'transparent',
-    headerCellHoverBackgroundColor: 'transparent',
-    rowHoverColor: 'transparent',
+    columnHoverColor: ACCENT_COLOR,
+    headerCellHoverBackgroundColor: ACCENT_COLOR,
+    rowHoverColor: ACCENT_COLOR,
   })
 
 /** table-advance - Gelişmiş, interaktif */

@@ -1,52 +1,58 @@
 <template>
-  <UPageCard
-    variant="outline"
-    :ui="pageCardUi"
-  >
-    <div
-      class="mb-6 flex flex-col gap-5 sm:flex-row sm:justify-between"
-    >
-      <div class="w-full">
-        <h3
-          class="text-lg font-semibold text-default"
+  <UPageCard variant="outline">
+    <template #header>
+      <div
+        class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <div>
+          <h3
+            class="text-lg font-semibold text-default"
+          >
+            Statistics
+          </h3>
+          <p
+            class="mt-1 text-theme-sm text-muted"
+          >
+            Target you've set for each month
+          </p>
+        </div>
+        <div
+          class="grid shrink-0 grid-cols-[auto_auto] items-center gap-3"
         >
-          Statistics
-        </h3>
-        <p class="mt-1 text-theme-sm text-muted">
-          Target you've set for each month
-        </p>
-      </div>
-      <div class="flex items-center gap-3">
-        <UTabs
-          v-model="statisticsSelected"
-          :items="statisticsOptions"
-          size="sm"
-        />
-        <UPopover>
-          <UButton
-            color="neutral"
-            variant="outline"
-            :label="
-              statisticsDateRangeDisplay ||
-              'Select Date'
-            "
-            icon="i-lucide-calendar"
-            class="min-w-40"
+          <UTabs
+            v-model="statisticsSelected"
+            :items="statisticsOptions"
+            :content="false"
           />
-          <template #content>
-            <VDatePicker
-              v-model.range="statisticsDateRange"
-              mode="date"
-              :masks="{ modelValue: 'MMM d' }"
-              :is-dark="{
-                selector: 'html',
-                darkClass: 'dark',
-              }"
+          <UPopover>
+            <UButton
+              color="primary"
+              variant="outline"
+              :label="
+                statisticsDateRangeDisplay ||
+                'Select Date'
+              "
+              icon="i-lucide-calendar"
+              class="min-w-40"
+              size="lg"
             />
-          </template>
-        </UPopover>
+            <template #content>
+              <VDatePicker
+                v-model.range="
+                  statisticsDateRange
+                "
+                mode="date"
+                :masks="{ modelValue: 'MMM d' }"
+                :is-dark="{
+                  selector: 'html',
+                  darkClass: 'dark',
+                }"
+              />
+            </template>
+          </UPopover>
+        </div>
       </div>
-    </div>
+    </template>
     <div
       class="max-w-full overflow-x-auto custom-scrollbar"
     >
@@ -65,8 +71,6 @@ import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
 import { ref, computed } from 'vue'
 import { useChartTheme } from '@/composables/useChartTheme'
-import { pageCardUi } from '@/config/cardUi'
-
 const { chartTheme } = useChartTheme()
 
 const statisticsOptions = [

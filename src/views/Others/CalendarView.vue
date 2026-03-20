@@ -9,59 +9,55 @@
     </template>
   </UPageHeader>
   <UPageBody>
-    <div
-      class="rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]"
+    <UCard
+      variant="outline"
+      class="calendar-card"
     >
-      <!-- Custom header with Nuxt UI -->
-      <div
-        class="flex flex-wrap items-center justify-between gap-4 border-b border-gray-200 px-4 py-3 dark:border-gray-800 sm:px-6"
-      >
-        <div class="flex items-center gap-3">
-          <UButton
-            color="neutral"
-            variant="outline"
-            size="sm"
-            square
-            icon="i-lucide-chevron-left"
-            aria-label="Previous"
-            @click="goPrev"
-          />
-          <UButton
-            color="neutral"
-            variant="outline"
-            size="sm"
-            square
-            icon="i-lucide-chevron-right"
-            aria-label="Next"
-            @click="goNext"
-          />
-          <span
-            class="text-lg font-semibold text-default"
-          >
-            {{ calendarTitle }}
-          </span>
+      <template #header>
+        <div
+          class="flex flex-wrap items-center justify-between gap-4"
+        >
+          <div class="flex items-center gap-3">
+            <UButton
+              color="primary"
+              variant="outline"
+              size="sm"
+              square
+              icon="i-lucide-chevron-left"
+              aria-label="Previous"
+              @click="goPrev"
+            />
+            <UButton
+              color="primary"
+              variant="outline"
+              size="sm"
+              square
+              icon="i-lucide-chevron-right"
+              aria-label="Next"
+              @click="goNext"
+            />
+            <span>{{ calendarTitle }}</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <UTabs
+              v-model="activeView"
+              :items="viewTabItems"
+              size="sm"
+              color="primary"
+              variant="pill"
+              :content="false"
+              @update:model-value="onViewChange"
+            />
+            <UButton
+              label="Add Event"
+              color="primary"
+              size="md"
+              leading-icon="i-lucide-plus"
+              @click="openModal"
+            />
+          </div>
         </div>
-        <div class="flex items-center gap-3">
-          <UTabs
-            v-model="activeView"
-            :items="viewTabItems"
-            size="sm"
-            color="primary"
-            variant="pill"
-            class="flex h-9 w-fit items-center"
-            @update:model-value="onViewChange"
-          />
-          <UButton
-            label="Add Event"
-            color="primary"
-            size="sm"
-            leading-icon="i-lucide-plus"
-            class="h-9 shrink-0"
-            @click="openModal"
-          />
-        </div>
-      </div>
-
+      </template>
       <div class="custom-calendar">
         <FullCalendar
           ref="calendarRef"
@@ -79,7 +75,6 @@
             : 'Add Event'
         "
         description="Plan your next big moment: schedule or edit an event to stay on track"
-        :ui="{ content: 'w-full max-w-[700px]' }"
         @update:open="
           (v) => {
             if (!v) resetModalFields()
@@ -93,7 +88,7 @@
                 v-model="eventTitle"
                 placeholder="Enter event title"
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -113,7 +108,7 @@
                 v-model="eventStartDate"
                 type="date"
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -123,7 +118,7 @@
                 v-model="eventEndDate"
                 type="date"
                 variant="outline"
-                color="neutral"
+                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -136,7 +131,7 @@
           >
             <UButton
               label="Close"
-              color="neutral"
+              color="primary"
               variant="outline"
               @click="closeModal"
             />
@@ -159,7 +154,7 @@
           </div>
         </template>
       </UModal>
-    </div>
+    </UCard>
   </UPageBody>
 </template>
 

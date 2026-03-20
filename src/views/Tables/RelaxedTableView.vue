@@ -13,11 +13,11 @@
       title="table-relaxed"
       description="Rahat, sakin görünüm. Bol padding, minimal hover. Okunabilirlik odaklı."
       variant="outline"
-      :ui="pageCardUi"
     >
       <TableTheme
         theme="relaxed"
         :show-toolbar="false"
+        :datasource-delay-ms="2000"
       />
     </UPageCard>
   </UPageBody>
@@ -25,7 +25,6 @@
 
 <script setup lang="ts">
 import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
-import { pageCardUi } from '@/config/cardUi'
 import TableTheme from '@/components/tables/TableTheme.vue'
 
 const breadcrumbItems = usePageBreadcrumb(

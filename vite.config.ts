@@ -19,6 +19,7 @@ export default defineConfig({
           light: 'i-lucide-sun',
           dark: 'i-lucide-moon',
         },
+
         colors: {
           primary: 'brand',
           secondary: 'blue-light',
@@ -33,6 +34,11 @@ export default defineConfig({
         },
         pageGrid: {
           base: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6',
+        },
+        pageCard: {
+          slots: {
+            header: 'mb-4 w-full',
+          },
         },
       },
     }),

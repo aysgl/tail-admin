@@ -13,15 +13,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Dashboard',
-      component: () =>
-        import(
-          '../views/Dashboard/DashboardView.vue'
-        ),
-      meta: {
-        title: 'Dashboard',
-        layout: 'main',
-      },
+      redirect: '/ecommerce',
     },
     {
       path: '/ecommerce',

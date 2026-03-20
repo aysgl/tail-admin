@@ -17,7 +17,7 @@
         >
           <UButton
             :label="themeLabels[theme]"
-            color="neutral"
+            color="primary"
             variant="outline"
             trailing-icon="i-lucide-chevron-down"
             aria-label="Select theme"
@@ -45,13 +45,13 @@
           placeholder="Filter..."
           size="md"
           variant="outline"
-          color="neutral"
+          color="primary"
           aria-label="Filter table"
           class="min-w-[200px] max-w-sm"
         />
         <UPopover v-if="showStatusTabs">
           <UButton
-            color="neutral"
+            color="primary"
             variant="outline"
             leading-icon="i-lucide-calendar"
             trailing-icon="i-lucide-chevron-down"
@@ -75,7 +75,7 @@
         >
           <UButton
             label="Columns"
-            color="neutral"
+            color="primary"
             variant="outline"
             trailing-icon="i-lucide-chevron-down"
             aria-label="Columns visibility"
@@ -88,7 +88,7 @@
         >
           <UButton
             label="Export"
-            color="neutral"
+            color="primary"
             variant="outline"
             trailing-icon="i-lucide-chevron-down"
             leading-icon="i-lucide-download"
@@ -99,7 +99,15 @@
     </div>
     <div class="relative min-h-[200px]">
       <div
-        v-if="showEmptyOverlay"
+        v-if="gridLoading && !useClientSide"
+        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg bg-default/95"
+      >
+        <SkeletonLoadingOverlay
+          class="h-full w-full"
+        />
+      </div>
+      <div
+        v-else-if="showEmptyOverlay"
         class="empty-overlay absolute inset-0 z-10 flex items-center justify-center rounded-lg border border-default bg-default/95"
       >
         <p class="text-center text-sm text-muted">
@@ -107,6 +115,12 @@
         </p>
       </div>
       <AgGridVue
+        :loading="gridLoading"
+        :loading-overlay-component="
+          useClientSide
+            ? undefined
+            : 'SkeletonLoadingOverlay'
+        "
         :default-col-group-def="
           defaultColGroupDef
         "
@@ -380,6 +394,8 @@ const props = withDefaults(
     quickFilterText?: string
     /** Server datasource gecikmesi (ms) - skeleton görünürlüğü için */
     datasourceDelayMs?: number
+    /** 'server' = server-side + loading overlay, 'client' = client-side (varsayılan: showToolbar'a göre) */
+    datasourceMode?: 'client' | 'server'
   }>(),
   {
     theme: 'advance',
@@ -390,6 +406,7 @@ const props = withDefaults(
     showFloatingFilter: true,
     quickFilterText: '',
     datasourceDelayMs: 2000,
+    datasourceMode: undefined,
   },
 )
 
@@ -462,11 +479,16 @@ const gridTheme = computed(
   () => themeMap[props.theme],
 )
 
-const useClientSide = computed(
-  () => props.showToolbar,
-)
+const useClientSide = computed(() => {
+  if (props.datasourceMode === 'server')
+    return false
+  if (props.datasourceMode === 'client')
+    return true
+  return props.showToolbar
+})
 const serverSideDisplayedCount = ref<number>(-1)
 const serverSideDataLoaded = ref(false)
+const gridLoading = ref(!useClientSide.value)
 
 const displayedRowsForClient = computed(() =>
   filterByQuickText(
@@ -595,6 +617,7 @@ const themeItems = [
 function onGridReady(params: GridReadyEvent) {
   gridApi.value = params.api
   if (!useClientSide.value) {
+    gridLoading.value = true
     const server = getFakeServer(
       users.value,
       () => searchText.value,
@@ -612,18 +635,26 @@ function onGridReady(params: GridReadyEvent) {
       serverSideDisplayedCount.value =
         params.api.getDisplayedRowCount() ?? -1
     }
+    const onServerDataReady = () => {
+      gridLoading.value = false
+      serverSideDataLoaded.value = true
+      updateDisplayedCount()
+    }
     params.api.addEventListener(
       'firstDataRendered',
-      () => {
-        serverSideDataLoaded.value = true
-        updateDisplayedCount()
-      },
+      onServerDataReady,
     )
     params.api.addEventListener(
       'modelUpdated',
-      updateDisplayedCount,
+      () => {
+        updateDisplayedCount()
+        if (gridLoading.value) {
+          onServerDataReady()
+        }
+      },
     )
   } else {
+    gridLoading.value = false
     serverSideDisplayedCount.value = -1
   }
 }
@@ -638,6 +669,7 @@ watch(
     if (refreshTimeout)
       clearTimeout(refreshTimeout)
     refreshTimeout = setTimeout(() => {
+      gridLoading.value = true
       gridApi.value?.refreshServerSide({
         purge: true,
       })
@@ -698,6 +730,7 @@ function setStatusFilter(status: string) {
   activeStatusTab.value = status
   if (useClientSide.value) return
   if (!gridApi.value) return
+  gridLoading.value = true
   if (status === 'all') {
     gridApi.value.setFilterModel(null)
   } else {
@@ -709,6 +742,7 @@ function setStatusFilter(status: string) {
       },
     })
   }
+  gridApi.value.refreshServerSide({ purge: true })
 }
 
 const users = ref<UserRow[]>([
