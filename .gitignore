@@ -12,6 +12,7 @@ coverage
 # Editor
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 .idea
 
 # TypeScript
