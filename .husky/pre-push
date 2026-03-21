@@ -4,3 +4,5 @@ echo ""
 echo "🔍 Push öncesi build kontrolü..."
 echo ""
 npm run build
+echo ""
+echo "✓ Build başarılı, push devam ediyor"

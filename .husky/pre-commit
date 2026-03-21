@@ -1,4 +1,9 @@
 #!/usr/bin/env sh
 
+echo "📋 Prettier + ESLint (staged files)..."
 npx lint-staged --quiet
+echo "✓ Lint geçti"
+
+echo "📋 TypeScript kontrolü..."
 npm run type-check
+echo "✓ Pre-commit kontrolleri başarılı"
