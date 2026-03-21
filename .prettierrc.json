@@ -5,11 +5,8 @@
   "printWidth": 50,
   "trailingComma": "all",
   "tabWidth": 2,
-  "useTabs": false,
   "singleAttributePerLine": true,
-  "bracketSpacing": true,
-  "arrowParens": "always",
+  "bracketSameLine": true,
   "endOfLine": "lf",
-  "quoteProps": "as-needed",
   "jsxSingleQuote": true
 }

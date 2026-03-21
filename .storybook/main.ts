@@ -1,5 +1,6 @@
 import type { StorybookConfig } from '@storybook/vue3-vite'
 import type { PluginOption } from 'vite'
+import ui from '@nuxt/ui/vite'
 
 const config: StorybookConfig = {
   stories: [
@@ -13,8 +14,17 @@ const config: StorybookConfig = {
   ],
   framework: '@storybook/vue3-vite',
   async viteFinal(config) {
+    // @nuxt/ui: .nuxt-ui/ui.css oluşturulması için gerekli (main.css @import '@nuxt/ui' çözümler)
+    const uiPlugin = ui({
+      ui: {
+        colors: {
+          primary: 'indigo',
+          success: 'green',
+        },
+      },
+    })
     // Play fonksiyonları çalışırken Vue DevTools'un app'e erişmesi (undefined) hataya yol açıyor.
-    // 1) Vue DevTools eklentisini Storybook build'inden çıkar
+    // Vue DevTools eklentisini Storybook build'inden çıkar
     const isDevtoolsPlugin = (
       p: PluginOption,
     ): boolean => {
@@ -40,9 +50,10 @@ const config: StorybookConfig = {
     const raw = flatten(
       (config.plugins ?? []) as PluginOption[],
     )
-    const plugins = raw.filter(
-      (p) => !isDevtoolsPlugin(p),
-    )
+    const plugins = [
+      uiPlugin,
+      ...raw.filter((p) => !isDevtoolsPlugin(p)),
+    ]
     // 2) Tarayıcıda Vue devtools'un devre dışı kalması için define
     const define = {
       ...config.define,

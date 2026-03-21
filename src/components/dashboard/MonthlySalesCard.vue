@@ -1,43 +1,38 @@
 <template>
-  <UPageCard variant="outline">
+  <UPageCard
+    variant="outline"
+    :class="[props.class, 'flex flex-col']">
     <template #header>
       <DashboardCardHeader
         title="Monthly Sales"
-        description="Monthly sales performance"
-      >
+        description="Monthly sales performance">
         <template #actions>
           <UDropdownMenu
-            :items="chartMenuItems"
-            :content="{ align: 'end' }"
-          >
+            :items="CHART_CARD_MENU_ITEMS"
+            :content="{ align: 'end' }">
             <UButton
               color="primary"
               variant="ghost"
               square
               icon="i-lucide-more-vertical"
-              aria-label="Menu"
-            />
+              aria-label="Menu" />
           </UDropdownMenu>
         </template>
       </DashboardCardHeader>
     </template>
     <div
-      class="relative min-h-[280px] max-w-full overflow-x-auto"
-    >
+      class="relative min-h-[280px] flex-1 max-w-full overflow-x-auto">
       <div
         v-if="loading"
-        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg"
-      >
+        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg">
         <ChartSkeletonOverlay
           variant="bar"
-          class="h-[280px] w-full"
-        />
+          class="h-[280px] w-full" />
       </div>
       <div
         id="chartOne"
         class="-ml-5 min-w-[650px] xl:min-w-full pl-2"
-        :class="{ 'opacity-0': loading }"
-      >
+        :class="{ 'opacity-0': loading }">
         <AgCharts :options="chartOptions" />
       </div>
     </div>
@@ -46,39 +41,24 @@
 
 <script setup lang="ts">
 import type { AgChartOptions } from 'ag-charts-community'
-import type { DropdownMenuItem } from '@nuxt/ui'
 import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
+import { CHART_CARD_MENU_ITEMS } from '@/constants/dashboardCardMenu'
 import { useChartTheme } from '@/composables/useChartTheme'
+
 const {
   chartTheme,
   chartColors,
   chartBackground,
 } = useChartTheme()
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
+    class?: string
     loading?: boolean
   }>(),
   { loading: false },
 )
-
-const chartMenuItems: DropdownMenuItem[][] = [
-  [
-    {
-      label: 'View More',
-      icon: 'i-lucide-eye',
-      onSelect: () =>
-        console.log('View More clicked'),
-    },
-    {
-      label: 'Delete',
-      icon: 'i-lucide-trash-2',
-      onSelect: () =>
-        console.log('Delete clicked'),
-    },
-  ],
-]
 
 const chartData = [
   { month: 'Jan', sales: 168, target: 200 },

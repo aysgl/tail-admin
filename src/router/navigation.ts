@@ -10,6 +10,59 @@ function toPath(
     : (to?.path ?? '')
 }
 
+const NAV_TRIGGER_VALUES = {
+  dashboard: 'nav-dashboard',
+  tables: 'nav-tables',
+  pages: 'nav-pages',
+} as const
+
+function pathMatchesPrefix(
+  path: string,
+  prefixes: string[],
+): boolean {
+  return prefixes.some((p) => path.startsWith(p))
+}
+
+function pathMatchesOne(
+  path: string,
+  paths: string[],
+): boolean {
+  return paths.some(
+    (p) => path === p || path.startsWith(p),
+  )
+}
+
+const DASHBOARD_PREFIXES = [
+  '/ecommerce',
+  '/analytics',
+  '/sales',
+  '/reports',
+]
+const TABLES_PREFIXES = [
+  '/compact-tables',
+  '/relaxed-tables',
+  '/advance-tables',
+]
+const PAGES_PATHS = [
+  '/blank',
+  '/not-found',
+  '/signin',
+  '/signup',
+]
+
+export function getOpenSectionsForPath(
+  path: string,
+): string[] {
+  const sections: string[] = []
+  if (pathMatchesPrefix(path, DASHBOARD_PREFIXES))
+    sections.push(NAV_TRIGGER_VALUES.dashboard)
+  if (pathMatchesPrefix(path, TABLES_PREFIXES))
+    sections.push(NAV_TRIGGER_VALUES.tables)
+  if (pathMatchesOne(path, PAGES_PATHS))
+    sections.push(NAV_TRIGGER_VALUES.pages)
+  return sections
+}
+
 function flattenNavItems(
   items: NavigationMenuItem[],
 ): {
@@ -69,17 +122,16 @@ export function useNavigationItems() {
         icon: 'i-lucide-layout-grid',
         to: '/ecommerce',
         type: 'trigger',
-        defaultOpen:
-          route.path.startsWith('/ecommerce') ||
-          route.path.startsWith('/analytics') ||
-          route.path.startsWith('/sales') ||
-          route.path.startsWith('/reports'),
+        defaultOpen: pathMatchesPrefix(
+          route.path,
+          DASHBOARD_PREFIXES,
+        ),
         active:
           route.path === '/' ||
-          route.path.startsWith('/ecommerce') ||
-          route.path.startsWith('/analytics') ||
-          route.path.startsWith('/sales') ||
-          route.path.startsWith('/reports'),
+          pathMatchesPrefix(
+            route.path,
+            DASHBOARD_PREFIXES,
+          ),
         children: [
           {
             label: 'Ecommerce',
@@ -121,26 +173,14 @@ export function useNavigationItems() {
         icon: 'i-lucide-table',
         to: '/compact-tables',
         type: 'trigger',
-        defaultOpen:
-          route.path.startsWith(
-            '/compact-tables',
-          ) ||
-          route.path.startsWith(
-            '/relaxed-tables',
-          ) ||
-          route.path.startsWith(
-            '/advance-tables',
-          ),
-        active:
-          route.path.startsWith(
-            '/compact-tables',
-          ) ||
-          route.path.startsWith(
-            '/relaxed-tables',
-          ) ||
-          route.path.startsWith(
-            '/advance-tables',
-          ),
+        defaultOpen: pathMatchesPrefix(
+          route.path,
+          TABLES_PREFIXES,
+        ),
+        active: pathMatchesPrefix(
+          route.path,
+          TABLES_PREFIXES,
+        ),
         children: [
           {
             label: 'Compact Tables',
@@ -150,12 +190,12 @@ export function useNavigationItems() {
           {
             label: 'Relaxed Tables',
             to: '/relaxed-tables',
-            icon: 'i-lucide-table-2',
+            icon: 'i-lucide-table-properties',
           },
           {
             label: 'Advance Tables',
             to: '/advance-tables',
-            icon: 'i-lucide-table-2',
+            icon: 'i-lucide-table-cells-split',
           },
         ],
       },
@@ -171,16 +211,14 @@ export function useNavigationItems() {
         icon: 'i-lucide-file-text',
         to: '/blank',
         type: 'trigger',
-        defaultOpen:
-          route.path === '/blank' ||
-          route.path === '/not-found' ||
-          route.path.startsWith('/signin') ||
-          route.path.startsWith('/signup'),
-        active:
-          route.path === '/blank' ||
-          route.path === '/not-found' ||
-          route.path.startsWith('/signin') ||
-          route.path.startsWith('/signup'),
+        defaultOpen: pathMatchesOne(
+          route.path,
+          PAGES_PATHS,
+        ),
+        active: pathMatchesOne(
+          route.path,
+          PAGES_PATHS,
+        ),
         children: [
           {
             label: 'Blank Page',

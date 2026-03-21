@@ -28,6 +28,7 @@ const router = createRouter({
         ),
       meta: {
         title: 'Ecommerce',
+        headline: 'Dashboard',
         layout: 'main',
       },
     },
@@ -40,6 +41,7 @@ const router = createRouter({
         ),
       meta: {
         title: 'Analytics',
+        headline: 'Dashboard',
         layout: 'main',
       },
     },
@@ -52,6 +54,7 @@ const router = createRouter({
         ),
       meta: {
         title: 'Sales',
+        headline: 'Dashboard',
         layout: 'main',
       },
     },
@@ -64,6 +67,7 @@ const router = createRouter({
         ),
       meta: {
         title: 'Reports',
+        headline: 'Dashboard',
         layout: 'main',
       },
     },
@@ -88,6 +92,7 @@ const router = createRouter({
         ),
       meta: {
         title: 'Profile',
+        headline: 'User Profile',
         layout: 'main',
       },
     },
@@ -100,6 +105,9 @@ const router = createRouter({
         ),
       meta: {
         title: 'Account Settings',
+        headline: 'Account',
+        description:
+          'Manage your account preferences and security settings.',
         layout: 'main',
       },
     },
@@ -112,6 +120,7 @@ const router = createRouter({
         ),
       meta: {
         title: 'Compact Tables',
+        headline: 'Tables',
         layout: 'main',
       },
     },
@@ -124,6 +133,7 @@ const router = createRouter({
         ),
       meta: {
         title: 'Relaxed Tables',
+        headline: 'Tables',
         layout: 'main',
       },
     },
@@ -136,6 +146,7 @@ const router = createRouter({
         ),
       meta: {
         title: 'Advance Tables',
+        headline: 'Tables',
         layout: 'main',
       },
     },
@@ -145,7 +156,8 @@ const router = createRouter({
       component: () =>
         import('../views/Pages/BlankPage.vue'),
       meta: {
-        title: 'Blank',
+        title: 'Blank Page',
+        headline: 'Pages',
         layout: 'main',
       },
     },
@@ -156,6 +168,7 @@ const router = createRouter({
         import('../views/Forms/FormView.vue'),
       meta: {
         title: 'Form',
+        headline: 'Form',
         layout: 'main',
       },
     },
@@ -187,7 +200,7 @@ const router = createRouter({
         import('../views/Pages/NotFoundView.vue'),
       meta: {
         title: 'Not Found',
-        layout: 'auth',
+        layout: 'none',
       },
     },
   ],

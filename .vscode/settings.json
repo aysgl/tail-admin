@@ -1,43 +1,50 @@
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true, // Kaydetmede otomatik biçimlendirme (Prettier)
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // Genel varsayılan formatter
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit" // Kaydetmede ESLint auto-fix çalıştırır
   },
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
+  "editor.tabSize": 2, // Sekme genişliği (2 boşluk)
+  "editor.insertSpaces": true, // Tab yerine boşluk kullan
 
   "eslint.validate": [
     "javascript",
-    "javascriptreact",
     "typescript",
-    "typescriptreact",
     "vue"
-  ],
+  ], // ESLint'in lint yapacağı dosya türleri (Vue + TS projesi)
 
   "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // Vue dosyaları için Prettier
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // TypeScript dosyaları için Prettier
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // JavaScript dosyaları için Prettier
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // JSON dosyaları için Prettier
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // JSONC dosyaları için Prettier
   },
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // CSS dosyaları için Prettier
+  },
+  "[tailwindcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // Tailwind CSS (@apply) formatlaması
+  },
+  "[markdown]": {
+    "editor.wordWrap": "off" // MD: sarma kapalı, uzun satırlar yatay scroll ile
   },
 
-  "css.lint.unknownAtRules": "ignore",
-  "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
+  "css.lint.unknownAtRules": "ignore", // Tailwind @apply, @layer vb. hatalarını gizler (yedek)
+  "tailwindCSS.lint.suggestCanonicalClasses": "ignore", // Tailwind canonical sınıf uyarılarını kapatır
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }, // .css dosyalarını Tailwind dil modunda aç → @apply, @layer tanınır
 
-  "files.eol": "\n",
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true
+  "files.eol": "\n", // Satır sonu karakteri (LF, Unix/Mac uyumlu)
+  "files.trimTrailingWhitespace": true, // Satır sonundaki gereksiz boşlukları sil
+  "files.insertFinalNewline": true // Dosya sonuna otomatik boş satır ekle
 }

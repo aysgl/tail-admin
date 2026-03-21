@@ -47,7 +47,7 @@ Tüm bağımlılıklar ve script'ler için `package.json` dosyasına bakın.
 
 To get started with TailAdmin, ensure you have the following prerequisites installed and set up:
 
-- **Node.js:** Minimum 22.x (proje `@tsconfig/node22` kullanır; Node 24 ile de uyumludur)
+- **Node.js:** Minimum 22.x (Node 24 ile de uyumludur)
 - **Paket yöneticisi:** `npm` kullanın — `package-lock.json` commit edilir, tutarlılık için yarn/pnpm karıştırmayın
 - **IDE:** [VSCode](https://code.visualstudio.com/) veya [Cursor](https://cursor.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) önerilir (Vetur devre dışı)
 
@@ -104,7 +104,7 @@ Bu projedeki tüm yapılandırma dosyalarının dokümantasyonu. **Merge conflic
 
 ### Takım Gereksinimleri
 
-- **Node.js:** Minimum Node 22.x (proje `@tsconfig/node22` kullanır; Node 24 ile de uyumludur)
+- **Node.js:** Minimum Node 22.x (Node 24 ile de uyumludur)
 - **Paket yöneticisi:** `npm` kullanın — `package-lock.json` commit edilir, tutarlılık için yarn/pnpm karıştırmayın
 - **IDE:** VSCode veya Cursor + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) önerilir (Vetur devre dışı)
 

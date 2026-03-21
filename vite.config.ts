@@ -2,7 +2,6 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import ui from '@nuxt/ui/vite'
 
@@ -10,7 +9,6 @@ import ui from '@nuxt/ui/vite'
 export default defineConfig({
   plugins: [
     vue(),
-    vueJsx(),
     vueDevTools(),
     ui({
       ui: {
@@ -24,6 +22,22 @@ export default defineConfig({
             wrapper:
               'flex flex-col flex-1 w-full items-stretch',
           },
+          variants: {
+            variant: {
+              outline: {
+                root: 'bg-default border border-muted border-[1px] ring-0',
+              },
+            },
+          },
+        },
+        card: {
+          variants: {
+            variant: {
+              outline: {
+                root: 'bg-default border border-muted border-[1px] ring-0 divide-y divide-muted',
+              },
+            },
+          },
         },
       },
     }),
@@ -33,11 +47,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           'vue-vendor': ['vue', 'vue-router'],
-          'schedule-x': [
-            '@schedule-x/vue',
-            '@schedule-x/calendar',
-            '@schedule-x/theme-default',
-          ],
           charts: [
             'ag-charts-vue3',
             'ag-charts-community',
@@ -46,7 +55,7 @@ export default defineConfig({
             'ag-grid-vue3',
             'ag-grid-community',
           ],
-          'ui-libs': ['v-calendar', 'dropzone'],
+          'ui-libs': ['v-calendar'],
         },
       },
     },
@@ -56,6 +65,13 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(
         new URL('./src', import.meta.url),
+      ),
+      // Fallback for #build/ui.css if .nuxt-ui not yet generated (Nuxt UI plugin overrides when ready)
+      '#build/ui.css': fileURLToPath(
+        new URL(
+          './node_modules/@nuxt/ui/.nuxt/ui.css',
+          import.meta.url,
+        ),
       ),
     },
   },

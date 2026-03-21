@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run type-check && npm run build-only",
-    "preview": "vite preview",
-    "build-only": "vite build",
+    "build": "npm run lint && npm run type-check && vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --format stylish",
     "lint:fix": "prettier --write src/ && eslint . --fix",
@@ -15,14 +13,12 @@
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "stash": "./scripts/pre-stash-check.sh",
-    "stash:setup": "git config --local alias.stash '!./scripts/pre-stash-check.sh'",
     "chromatic": "npx chromatic --project-token=chpt_a654caf7d2b2fa0"
   },
   "lint-staged": {
     "*.{ts,tsx,vue,js,jsx}": [
-      "eslint --fix --no-warn-ignored",
-      "prettier --write"
+      "prettier --write",
+      "eslint --fix --no-warn-ignored"
     ],
     "*.{json,css,md}": [
       "prettier --write"
@@ -36,16 +32,8 @@
     "@fullcalendar/vue3": "^6.1.20",
     "@nuxt/ui": "^4.5.1",
     "@popperjs/core": "^2.11.8",
-    "@preact/signals": "^2.8.2",
-    "@schedule-x/calendar": "^4.3.1",
-    "@schedule-x/theme-default": "^4.3.1",
-    "@schedule-x/vue": "^4.1.0",
     "ag-charts-vue3": "^13.1.0",
-    "ag-grid-enterprise": "^33.3.2",
     "ag-grid-vue3": "^33.0.0",
-    "dropzone": "^6.0.0-beta.2",
-    "preact": "^10.29.0",
-    "temporal-polyfill": "^0.3.2",
     "v-calendar": "^3.1.2",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
@@ -54,17 +42,12 @@
     "@commitlint/cli": "^20.4.4",
     "@commitlint/config-conventional": "^20.4.4",
     "@iconify-json/lucide": "^1.2.14",
-    "@iconify-json/simple-icons": "^1.2.74",
     "@storybook/addon-a11y": "^10.2.19",
     "@storybook/addon-designs": "^11.1.2",
     "@storybook/addon-docs": "^10.2.19",
     "@storybook/vue3-vite": "^10.2.19",
-    "@tailwindcss/postcss": "^4.0.0",
-    "@tsconfig/node22": "^22.0.0",
-    "@types/dropzone": "^5.7.9",
     "@types/node": "^22.10.7",
     "@vitejs/plugin-vue": "^5.2.1",
-    "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/eslint-config-typescript": "^14.3.0",
     "@vue/tsconfig": "^0.7.0",

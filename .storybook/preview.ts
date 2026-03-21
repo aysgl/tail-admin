@@ -3,7 +3,7 @@ import { vueRouter } from 'storybook-vue3-router'
 import '../src/assets/main.css'
 import SidebarProvider from '../src/components/layout/SidebarProvider.vue'
 import ThemeProvider from '../src/components/layout/ThemeProvider.vue'
-import { storybookRoutes } from './storybook-routes'
+import { storybookRoutes } from './routes'
 
 const preview: Preview = {
   decorators: [

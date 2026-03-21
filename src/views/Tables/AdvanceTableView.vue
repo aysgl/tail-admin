@@ -1,49 +1,31 @@
 <template>
-  <UPageHeader
-    headline="Tables"
+  <UPageCard
     title="Advance Tables"
-    class="py-0 border-none"
-  >
-    <template #headline>
-      <UBreadcrumb :items="breadcrumbItems" />
-    </template>
-  </UPageHeader>
-  <UPageBody>
-    <UPageCard
-      title="Advance Tables"
-      description="Theme selection, global search, status tabs, row selection, column show/hide, and filters."
-      variant="outline"
-      :ui="{
-        title:
-          'text-lg font-semibold text-highlighted',
-        description: 'mt-1 text-sm text-muted',
-      }"
-    >
-      <TableTheme
-        v-model:theme="advanceTheme"
-        v-model:quick-filter-text="
-          advanceQuickFilter
-        "
-        :show-toolbar="true"
-        :show-theme-selector="true"
-        :show-status-tabs="true"
-        :show-floating-filter="true"
-        datasource-mode="server"
-        :datasource-delay-ms="2000"
-      />
-    </UPageCard>
-  </UPageBody>
+    description="Theme selection, global search, status tabs, row selection, column show/hide, and filters."
+    variant="outline"
+    :ui="{
+      title:
+        'text-lg font-semibold text-highlighted',
+      description: 'mt-1 text-sm text-muted',
+    }">
+    <TableTheme
+      v-model:theme="advanceTheme"
+      v-model:quick-filter-text="
+        advanceQuickFilter
+      "
+      :show-toolbar="true"
+      :show-theme-selector="true"
+      :show-status-tabs="true"
+      :show-floating-filter="true"
+      datasource-mode="server"
+      :datasource-delay-ms="2000" />
+  </UPageCard>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
 import TableTheme from '@/components/tables/TableTheme.vue'
 
-const breadcrumbItems = usePageBreadcrumb(
-  'Tables',
-  'Advance Tables',
-)
 const advanceTheme = ref<
   'compact' | 'relaxed' | 'advance'
 >('advance')

@@ -1,100 +1,77 @@
 <template>
   <div
-    class="skeleton-loading-overlay w-full overflow-hidden rounded-lg px-4 pt-6 pb-4"
-  >
+    class="skeleton-loading-overlay w-full overflow-hidden rounded-lg px-4 pt-6 pb-4">
     <!-- Header -->
     <div
       class="skeleton-grid skeleton-header mb-4 gap-x-4 gap-y-0 border-b border-muted pb-3"
-      :class="variant"
-    >
-      <div
+      :class="variant">
+      <USkeleton
         v-for="i in cols"
         :key="i"
-        class="h-4 min-w-0 animate-pulse rounded bg-accented"
-      />
+        class="h-4 min-w-0 bg-accented" />
     </div>
     <!-- Rows -->
     <div
-      class="flex flex-col divide-y divide-muted"
-    >
+      class="flex flex-col divide-y divide-muted">
       <div
         v-for="row in 3"
         :key="row"
         class="skeleton-grid skeleton-row gap-x-4 gap-y-0 py-4 first:pt-0 last:pb-0"
-        :class="variant"
-      >
+        :class="variant">
         <template v-if="variant === 'tables'">
           <!-- User: avatar + 2 lines -->
           <div
-            class="flex min-w-0 items-center gap-2"
-          >
+            class="flex min-w-0 items-center gap-2">
+            <USkeleton
+              class="size-8 shrink-0 rounded-full bg-accented" />
             <div
-              class="size-8 shrink-0 animate-pulse rounded-full bg-accented"
-            />
-            <div
-              class="flex min-w-0 flex-1 flex-col gap-1.5"
-            >
-              <div
-                class="h-3.5 w-20 min-w-0 animate-pulse rounded bg-accented"
-              />
-              <div
-                class="h-2.5 w-14 min-w-0 animate-pulse rounded bg-accented"
-              />
+              class="flex min-w-0 flex-1 flex-col gap-1.5">
+              <USkeleton
+                class="h-3.5 w-20 min-w-0 bg-accented" />
+              <USkeleton
+                class="h-2.5 w-14 min-w-0 bg-accented" />
             </div>
           </div>
           <!-- Project -->
-          <div
-            class="h-4 min-w-0 animate-pulse rounded bg-accented"
-          />
+          <USkeleton
+            class="h-4 min-w-0 bg-accented" />
           <!-- Team: 3 avatars -->
           <div class="flex min-w-0 -space-x-2">
-            <div
+            <USkeleton
               v-for="j in 3"
               :key="j"
-              class="size-6 shrink-0 animate-pulse rounded-full bg-accented"
-            />
+              class="size-6 shrink-0 rounded-full bg-accented" />
           </div>
           <!-- Status pill -->
-          <div
-            class="h-5 w-14 min-w-0 animate-pulse rounded-full bg-accented"
-          />
+          <USkeleton
+            class="h-5 w-14 min-w-0 rounded-full bg-accented" />
           <!-- Date -->
-          <div
-            class="h-4 min-w-0 animate-pulse rounded bg-accented"
-          />
+          <USkeleton
+            class="h-4 min-w-0 bg-accented" />
           <!-- Budget -->
-          <div
-            class="h-4 min-w-0 animate-pulse rounded bg-accented"
-          />
+          <USkeleton
+            class="h-4 min-w-0 bg-accented" />
         </template>
         <template v-else>
           <!-- Orders: Product (img+text), Category, Price, Status -->
           <div
-            class="flex min-w-0 items-center gap-2"
-          >
+            class="flex min-w-0 items-center gap-2">
+            <USkeleton
+              class="size-10 shrink-0 bg-accented" />
             <div
-              class="size-10 shrink-0 animate-pulse rounded-md bg-accented"
-            />
-            <div
-              class="flex min-w-0 flex-1 flex-col gap-1.5"
-            >
-              <div
-                class="h-3.5 w-24 min-w-0 animate-pulse rounded bg-accented"
-              />
-              <div
-                class="h-2.5 w-16 min-w-0 animate-pulse rounded bg-accented"
-              />
+              class="flex min-w-0 flex-1 flex-col gap-1.5">
+              <USkeleton
+                class="h-3.5 w-24 min-w-0 bg-accented" />
+              <USkeleton
+                class="h-2.5 w-16 min-w-0 bg-accented" />
             </div>
           </div>
-          <div
-            class="h-4 min-w-0 animate-pulse rounded bg-accented"
-          />
-          <div
-            class="h-4 min-w-0 animate-pulse rounded bg-accented"
-          />
-          <div
-            class="h-5 w-14 min-w-0 animate-pulse rounded-full bg-accented"
-          />
+          <USkeleton
+            class="h-4 min-w-0 bg-accented" />
+          <USkeleton
+            class="h-4 min-w-0 bg-accented" />
+          <USkeleton
+            class="h-5 w-14 min-w-0 rounded-full bg-accented" />
         </template>
       </div>
     </div>

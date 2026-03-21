@@ -2,75 +2,27 @@
   <div>
     <UPageCard
       title="Personal Information"
-      variant="outline"
-    >
+      variant="outline">
       <div
-        class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between"
-      >
+        class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <div
-            class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32"
-          >
-            <div>
-              <p
-                class="mb-2 text-xs leading-normal text-muted"
-              >
-                First Name
-              </p>
-              <p
-                class="text-sm font-medium text-highlighted"
-              >
-                Musharof
-              </p>
-            </div>
-            <div>
-              <p
-                class="mb-2 text-xs leading-normal text-muted"
-              >
-                Last Name
-              </p>
-              <p
-                class="text-sm font-medium text-highlighted"
-              >
-                Chowdhury
-              </p>
-            </div>
-            <div>
-              <p
-                class="mb-2 text-xs leading-normal text-muted"
-              >
-                Email address
-              </p>
-              <p
-                class="text-sm font-medium text-highlighted"
-              >
-                randomuser@pimjo.com
-              </p>
-            </div>
-            <div>
-              <p
-                class="mb-2 text-xs leading-normal text-muted"
-              >
-                Phone
-              </p>
-              <p
-                class="text-sm font-medium text-highlighted"
-              >
-                +09 363 398 46
-              </p>
-            </div>
-            <div>
-              <p
-                class="mb-2 text-xs leading-normal text-muted"
-              >
-                Bio
-              </p>
-              <p
-                class="text-sm font-medium text-highlighted"
-              >
-                Team Manager
-              </p>
-            </div>
+            class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-7 2xl:gap-x-32">
+            <ProfileInfoField
+              label="First Name"
+              value="Musharof" />
+            <ProfileInfoField
+              label="Last Name"
+              value="Chowdhury" />
+            <ProfileInfoField
+              label="Email address"
+              value="randomuser@pimjo.com" />
+            <ProfileInfoField
+              label="Phone"
+              value="+09 363 398 46" />
+            <ProfileInfoField
+              label="Bio"
+              value="Team Manager" />
           </div>
         </div>
         <UButton
@@ -78,8 +30,7 @@
           variant="outline"
           leading-icon="i-lucide-pencil"
           class="w-full lg:w-auto"
-          @click="isProfileInfoModal = true"
-        >
+          @click="isProfileInfoModal = true">
           Edit
         </UButton>
       </div>
@@ -88,80 +39,68 @@
     <UModal
       v-model:open="isProfileInfoModal"
       title="Edit Personal Information"
-      description="Update your details to keep your profile up-to-date."
-    >
+      description="Update your details to keep your profile up-to-date.">
       <template #body>
         <form class="flex flex-col">
           <div
-            class="max-h-[458px] space-y-7 overflow-y-auto p-2"
-          >
+            class="max-h-[458px] space-y-7 overflow-y-auto p-2">
             <div>
               <h5
-                class="mb-5 text-lg font-medium text-highlighted lg:mb-6"
-              >
+                class="mb-5 text-lg font-medium text-highlighted lg:mb-6">
                 Social Links
               </h5>
               <div
-                class="grid grid-cols-1 gap-5 gap-x-6 lg:grid-cols-2"
-              >
+                class="grid grid-cols-1 gap-5 gap-x-6 lg:grid-cols-2">
                 <UFormField label="Facebook">
                   <UInput
                     v-model="form.facebook"
                     variant="outline"
                     color="primary"
-                    class="w-full"
-                  />
+                    class="w-full" />
                 </UFormField>
                 <UFormField label="X.com">
                   <UInput
                     v-model="form.x"
                     variant="outline"
                     color="primary"
-                    class="w-full"
-                  />
+                    class="w-full" />
                 </UFormField>
                 <UFormField label="Linkedin">
                   <UInput
                     v-model="form.linkedin"
                     variant="outline"
                     color="primary"
-                    class="w-full"
-                  />
+                    class="w-full" />
                 </UFormField>
                 <UFormField label="Instagram">
                   <UInput
                     v-model="form.instagram"
                     variant="outline"
                     color="primary"
-                    class="w-full"
-                  />
+                    class="w-full" />
                 </UFormField>
               </div>
             </div>
             <div>
               <h5
-                class="mb-5 text-lg font-medium text-highlighted lg:mb-6"
-              >
+                class="mb-5 text-lg font-medium text-highlighted lg:mb-6">
                 Personal Information
               </h5>
               <div
-                class="grid grid-cols-1 gap-5 gap-x-6 lg:grid-cols-2"
-              >
+                class="grid grid-cols-1 gap-5 gap-x-6 lg:grid-cols-2">
                 <UFormField label="First Name">
                   <UInput
                     v-model="form.firstName"
                     variant="outline"
                     color="primary"
-                    class="w-full"
-                  />
+                    class="w-full" />
                 </UFormField>
                 <UFormField label="Last Name">
                   <UInput
                     v-model="form.lastName"
                     variant="outline"
                     color="primary"
-                    class="w-full"
-                  />
+                    class="w-full" />
                 </UFormField>
                 <UFormField label="Email Address">
                   <UInput
@@ -169,27 +108,23 @@
                     type="email"
                     variant="outline"
                     color="primary"
-                    class="w-full"
-                  />
+                    class="w-full" />
                 </UFormField>
                 <UFormField label="Phone">
                   <UInput
                     v-model="form.phone"
                     variant="outline"
                     color="primary"
-                    class="w-full"
-                  />
+                    class="w-full" />
                 </UFormField>
                 <UFormField
                   label="Bio"
-                  class="col-span-2"
-                >
+                  class="col-span-2">
                   <UInput
                     v-model="form.bio"
                     variant="outline"
                     color="primary"
-                    class="w-full"
-                  />
+                    class="w-full" />
                 </UFormField>
               </div>
             </div>
@@ -197,25 +132,9 @@
         </form>
       </template>
       <template #footer="{ close }">
-        <div
-          class="flex w-full gap-3 lg:justify-end"
-        >
-          <UButton
-            color="primary"
-            variant="outline"
-            class="flex-1 lg:flex-initial"
-            @click="close()"
-          >
-            Close
-          </UButton>
-          <UButton
-            color="primary"
-            class="flex-1 lg:flex-initial"
-            @click="saveProfile(close)"
-          >
-            Save Changes
-          </UButton>
-        </div>
+        <ProfileEditModalFooter
+          :close="close"
+          @save="saveProfile" />
       </template>
     </UModal>
   </div>
@@ -223,6 +142,8 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import ProfileEditModalFooter from './ProfileEditModalFooter.vue'
+import ProfileInfoField from './ProfileInfoField.vue'
 
 const isProfileInfoModal = ref(false)
 
@@ -240,7 +161,6 @@ const form = reactive({
 })
 
 const saveProfile = (close: () => void) => {
-  console.log('Profile saved')
   close()
 }
 </script>

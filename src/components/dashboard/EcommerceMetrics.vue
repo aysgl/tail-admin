@@ -1,30 +1,23 @@
 <template>
   <div
-    class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6"
-  >
+    class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
     <template v-if="loading">
       <UPageCard
         v-for="i in 2"
         :key="`skeleton-${i}`"
-        variant="outline"
-      >
+        variant="outline">
+        <USkeleton
+          class="h-12 w-12 rounded-xl bg-accented" />
         <div
-          class="h-12 w-12 animate-pulse rounded-xl bg-accented"
-        />
-        <div
-          class="mt-5 flex items-end justify-between"
-        >
+          class="mt-5 flex items-end justify-between">
           <div class="flex-1">
-            <div
-              class="h-4 w-20 animate-pulse rounded bg-accented"
-            />
-            <div
-              class="mt-2 h-6 w-16 animate-pulse rounded bg-accented"
-            />
+            <USkeleton
+              class="h-4 w-20 bg-accented" />
+            <USkeleton
+              class="mt-2 h-6 w-16 bg-accented" />
           </div>
-          <div
-            class="h-6 w-12 animate-pulse rounded-full bg-accented"
-          />
+          <USkeleton
+            class="h-6 w-12 rounded-full bg-accented" />
         </div>
       </UPageCard>
     </template>
@@ -32,26 +25,21 @@
       v-else
       v-for="metric in metrics"
       :key="metric.label"
-      variant="outline"
-    >
+      variant="outline">
       <div
-        class="flex h-12 w-12 items-center justify-center rounded-xl bg-muted"
-      >
+        class="flex h-12 w-12 items-center justify-center rounded-xl bg-muted">
         <UIcon
           :name="metric.icon"
-          class="size-6 text-highlighted"
-        />
+          class="size-6 text-highlighted" />
       </div>
       <div
-        class="mt-5 flex items-end justify-between"
-      >
+        class="mt-5 flex items-end justify-between">
         <div>
           <span class="text-sm text-muted">{{
             metric.label
           }}</span>
           <h4
-            class="mt-2 font-bold text-2xl text-highlighted"
-          >
+            class="mt-2 font-bold text-2xl text-highlighted">
             {{ metric.value }}
           </h4>
         </div>
@@ -67,8 +55,7 @@
             metric.trend === 'up'
               ? 'i-lucide-trending-up'
               : 'i-lucide-trending-down'
-          "
-        >
+          ">
           {{ metric.percent }}%
         </UBadge>
       </div>

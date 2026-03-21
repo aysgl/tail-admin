@@ -3,20 +3,17 @@
     <template #header>
       <DashboardCardHeader
         title="Customers Demographic"
-        description="Number of customer based on country"
-      >
+        description="Number of customer based on country">
         <template #actions>
           <UDropdownMenu
-            :items="chartMenuItems"
-            :content="{ align: 'end' }"
-          >
+            :items="CHART_CARD_MENU_ITEMS"
+            :content="{ align: 'end' }">
             <UButton
               color="primary"
               variant="ghost"
               square
               icon="i-lucide-more-vertical"
-              aria-label="Menu"
-            />
+              aria-label="Menu" />
           </UDropdownMenu>
         </template>
       </DashboardCardHeader>
@@ -25,17 +22,14 @@
       <div class="relative -mx-4 -my-6">
         <div
           v-if="loading"
-          class="loading-overlay absolute inset-0 z-20 flex items-center justify-center overflow-hidden rounded-lg bg/95"
-        >
+          class="loading-overlay absolute inset-0 z-20 flex items-center justify-center overflow-hidden rounded-lg bg/95">
           <ChartSkeletonOverlay
             variant="line"
-            class="h-[212px] w-full max-w-[358px]"
-          />
+            class="h-[212px] w-full max-w-[358px]" />
         </div>
         <div
           class="h-[212px] w-full min-w-[252px] sm:-mx-6 md:w-[668px] lg:w-[634px] xl:w-[393px] 2xl:w-[554px]"
-          :class="{ 'opacity-0': loading }"
-        >
+          :class="{ 'opacity-0': loading }">
           <AgCharts :options="chartOptions" />
         </div>
       </div>
@@ -45,32 +39,26 @@
         <div
           v-for="i in 2"
           :key="`sk-${i}`"
-          class="flex items-center justify-between"
-        >
+          class="flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div
-              class="size-8 animate-pulse rounded-full bg-accented"
-            />
+              class="size-8 animate-pulse rounded-full bg-accented" />
             <div class="flex flex-col gap-2">
               <div
-                class="h-4 w-16 animate-pulse rounded bg-accented"
-              />
+                class="h-4 w-16 animate-pulse rounded bg-accented" />
               <div
-                class="h-3 w-20 animate-pulse rounded bg-accented"
-              />
+                class="h-3 w-20 animate-pulse rounded bg-accented" />
             </div>
           </div>
           <div
-            class="h-2 w-24 animate-pulse rounded-full bg-accented"
-          />
+            class="h-2 w-24 animate-pulse rounded-full bg-accented" />
         </div>
       </template>
       <div
         v-else
         v-for="country in countries"
         :key="country.name"
-        class="flex items-center justify-between"
-      >
+        class="flex items-center justify-between">
         <UUser
           :name="country.name"
           :description="`${country.customers} Customers`"
@@ -78,20 +66,16 @@
             src: country.flag,
             alt: country.name,
           }"
-          size="sm"
-        />
+          size="sm" />
         <div
-          class="flex w-full max-w-[140px] items-center gap-3"
-        >
+          class="flex w-full max-w-[140px] items-center gap-3">
           <UProgress
             :model-value="country.percent"
             color="primary"
             size="sm"
-            class="max-w-[100px]"
-          />
+            class="max-w-[100px]" />
           <p
-            class="font-medium text-sm text-highlighted shrink-0"
-          >
+            class="font-medium text-sm text-highlighted shrink-0">
             {{ country.percent }}%
           </p>
         </div>
@@ -102,27 +86,10 @@
 
 <script setup lang="ts">
 import type { AgChartOptions } from 'ag-charts-community'
-import type { DropdownMenuItem } from '@nuxt/ui'
 import { computed } from 'vue'
 import { AgCharts } from 'ag-charts-vue3'
+import { CHART_CARD_MENU_ITEMS } from '@/constants/dashboardCardMenu'
 import { useChartTheme } from '@/composables/useChartTheme'
-
-const chartMenuItems: DropdownMenuItem[][] = [
-  [
-    {
-      label: 'View More',
-      icon: 'i-lucide-eye',
-      onSelect: () =>
-        console.log('View More clicked'),
-    },
-    {
-      label: 'Delete',
-      icon: 'i-lucide-trash-2',
-      onSelect: () =>
-        console.log('Delete clicked'),
-    },
-  ],
-]
 
 const countries = [
   {

@@ -5,8 +5,7 @@
         <RouterLink
           to="/"
           class="flex items-center gap-2"
-          aria-label="TailAdmin"
-        >
+          aria-label="TailAdmin">
           <Logo />
         </RouterLink>
       </template>
@@ -17,9 +16,28 @@
         layout === 'auth'
           ? 'min-h-screen h-screen pt-0'
           : ''
-      "
-    >
-      <RootLayout />
+      ">
+      <MainLayout v-if="layout === 'main'">
+        <RouterView v-slot="{ Component }">
+          <component
+            :is="Component"
+            :key="route.path" />
+        </RouterView>
+      </MainLayout>
+      <AuthLayout v-else-if="layout === 'auth'">
+        <RouterView v-slot="{ Component }">
+          <component
+            :is="Component"
+            :key="route.path" />
+        </RouterView>
+      </AuthLayout>
+      <RouterView
+        v-else
+        v-slot="{ Component }">
+        <component
+          :is="Component"
+          :key="route.path" />
+      </RouterView>
     </UMain>
   </UApp>
 </template>
@@ -27,7 +45,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import RootLayout from '@/components/layout/RootLayout.vue'
+import MainLayout from '@/components/layout/MainLayout.vue'
+import AuthLayout from '@/components/layout/AuthLayout.vue'
 import Logo from '@/components/common/BrandLogo.vue'
 
 const route = useRoute()

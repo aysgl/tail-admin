@@ -1,166 +1,136 @@
 <template>
-  <UPageHeader
-    headline="Calendar"
-    title="Calendar"
-    class="py-0 border-none"
-  >
-    <template #headline>
-      <UBreadcrumb :items="breadcrumbItems" />
+  <UCard
+    variant="outline"
+    class="calendar-card">
+    <template #header>
+      <div
+        class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <UButton
+            color="primary"
+            variant="outline"
+            size="sm"
+            square
+            icon="i-lucide-chevron-left"
+            aria-label="Previous"
+            @click="goPrev" />
+          <UButton
+            color="primary"
+            variant="outline"
+            size="sm"
+            square
+            icon="i-lucide-chevron-right"
+            aria-label="Next"
+            @click="goNext" />
+          <span>{{ calendarTitle }}</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <UTabs
+            v-model="activeView"
+            :items="viewTabItems"
+            size="sm"
+            color="primary"
+            variant="pill"
+            :content="false"
+            @update:model-value="onViewChange" />
+          <UButton
+            label="Add Event"
+            color="primary"
+            size="md"
+            leading-icon="i-lucide-plus"
+            @click="openModal" />
+        </div>
+      </div>
     </template>
-  </UPageHeader>
-  <UPageBody>
-    <UPageCard
-      variant="outline"
-      class="calendar-card"
-    >
-      <template #header>
-        <div
-          class="flex flex-wrap items-center justify-between gap-4"
-        >
-          <div class="flex items-center gap-3">
-            <UButton
-              color="primary"
+    <div class="custom-calendar">
+      <FullCalendar
+        ref="calendarRef"
+        class="min-h-screen"
+        :options="calendarOptions" />
+    </div>
+
+    <!-- Modal -->
+    <UModal
+      v-model:open="isOpen"
+      :title="
+        selectedEvent ? 'Edit Event' : 'Add Event'
+      "
+      description="Plan your next big moment: schedule or edit an event to stay on track"
+      @update:open="
+        (v) => {
+          if (!v) resetModalFields()
+        }
+      ">
+      <template #body>
+        <div class="space-y-6">
+          <UFormField label="Event Title">
+            <UInput
+              v-model="eventTitle"
+              placeholder="Enter event title"
               variant="outline"
-              size="sm"
-              square
-              icon="i-lucide-chevron-left"
-              aria-label="Previous"
-              @click="goPrev"
-            />
-            <UButton
               color="primary"
-              variant="outline"
-              size="sm"
-              square
-              icon="i-lucide-chevron-right"
-              aria-label="Next"
-              @click="goNext"
-            />
-            <span>{{ calendarTitle }}</span>
-          </div>
-          <div class="flex items-center gap-3">
+              class="w-full" />
+          </UFormField>
+
+          <UFormField label="Event Color">
             <UTabs
-              v-model="activeView"
-              :items="viewTabItems"
+              v-model="eventLevel"
+              :items="colorTabItems"
               size="sm"
-              color="primary"
               variant="pill"
-              :content="false"
-              @update:model-value="onViewChange"
-            />
-            <UButton
-              label="Add Event"
+              class="w-fit" />
+          </UFormField>
+
+          <UFormField label="Enter Start Date">
+            <UInput
+              v-model="eventStartDate"
+              type="date"
+              variant="outline"
               color="primary"
-              size="md"
-              leading-icon="i-lucide-plus"
-              @click="openModal"
-            />
-          </div>
+              class="w-full" />
+          </UFormField>
+
+          <UFormField label="Enter End Date">
+            <UInput
+              v-model="eventEndDate"
+              type="date"
+              variant="outline"
+              color="primary"
+              class="w-full" />
+          </UFormField>
         </div>
       </template>
-      <div class="custom-calendar">
-        <FullCalendar
-          ref="calendarRef"
-          class="min-h-screen"
-          :options="calendarOptions"
-        />
-      </div>
 
-      <!-- Modal -->
-      <UModal
-        v-model:open="isOpen"
-        :title="
-          selectedEvent
-            ? 'Edit Event'
-            : 'Add Event'
-        "
-        description="Plan your next big moment: schedule or edit an event to stay on track"
-        @update:open="
-          (v) => {
-            if (!v) resetModalFields()
-          }
-        "
-      >
-        <template #body>
-          <div class="space-y-6">
-            <UFormField label="Event Title">
-              <UInput
-                v-model="eventTitle"
-                placeholder="Enter event title"
-                variant="outline"
-                color="primary"
-                class="w-full"
-              />
-            </UFormField>
-
-            <UFormField label="Event Color">
-              <UTabs
-                v-model="eventLevel"
-                :items="colorTabItems"
-                size="sm"
-                variant="pill"
-                class="w-fit"
-              />
-            </UFormField>
-
-            <UFormField label="Enter Start Date">
-              <UInput
-                v-model="eventStartDate"
-                type="date"
-                variant="outline"
-                color="primary"
-                class="w-full"
-              />
-            </UFormField>
-
-            <UFormField label="Enter End Date">
-              <UInput
-                v-model="eventEndDate"
-                type="date"
-                variant="outline"
-                color="primary"
-                class="w-full"
-              />
-            </UFormField>
-          </div>
-        </template>
-
-        <template #footer>
-          <div
-            class="flex flex-wrap items-center justify-end gap-3"
-          >
-            <UButton
-              label="Close"
-              color="primary"
-              variant="outline"
-              @click="closeModal"
-            />
-            <UButton
-              :label="
-                selectedEvent
-                  ? 'Update Changes'
-                  : 'Add Event'
-              "
-              color="primary"
-              @click="handleAddOrUpdateEvent"
-            />
-            <UButton
-              v-if="selectedEvent"
-              label="Delete Event"
-              color="error"
-              variant="solid"
-              @click="handleDeleteEvent"
-            />
-          </div>
-        </template>
-      </UModal>
-    </UPageCard>
-  </UPageBody>
+      <template #footer>
+        <div
+          class="flex flex-wrap items-center justify-end gap-3">
+          <UButton
+            label="Close"
+            color="primary"
+            variant="outline"
+            @click="closeModal" />
+          <UButton
+            :label="
+              selectedEvent
+                ? 'Update Changes'
+                : 'Add Event'
+            "
+            color="primary"
+            @click="handleAddOrUpdateEvent" />
+          <UButton
+            v-if="selectedEvent"
+            label="Delete Event"
+            color="error"
+            variant="solid"
+            @click="handleDeleteEvent" />
+        </div>
+      </template>
+    </UModal>
+  </UCard>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -175,10 +145,6 @@ type CalendarEvent = {
   extendedProps: { calendar: string }
 }
 
-const breadcrumbItems = usePageBreadcrumb(
-  'Calendar',
-  'Calendar',
-)
 const isOpen = ref(false)
 const selectedEvent = ref<{
   id?: string

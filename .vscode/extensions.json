@@ -1,10 +1,10 @@
 {
   "recommendations": [
-    "Vue.volar",
-    "Vue.vscode-typescript-vue-plugin",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "bradlc.vscode-tailwindcss",
-    "storybook.vscode-storybook"
+    "Vue.volar", // Vue 3 için dil desteği, IntelliSense ve sözdizimi vurgulama.
+    "Vue.vscode-typescript-vue-plugin", // .vue dosyalarında TypeScript desteği sağlar.
+    "dbaeumer.vscode-eslint", // Kurulum sonrası dosya kaydedildiğinde veya manuel olarak lint uyarıları gösterilir.
+    "esbenp.prettier-vscode", // Kod formatlamayı otomatikleştirir; format on save ile kaydettiğinizde uygular.
+    "bradlc.vscode-tailwindcss", // Tailwind CSS sınıfları için IntelliSense ve autocomplete.
+    "storybook.vscode-storybook" // Storybook bileşenlerine hızlı geçiş ve önizleme.
   ]
 }

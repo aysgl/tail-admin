@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
 echo ""
-echo "⚠️  Push öncesi: npm run lint ve npm run build çalıştırdığınızdan emin olun."
+echo "🔍 Push öncesi build kontrolü..."
 echo ""
+npm run build

@@ -2,7 +2,11 @@ import {
   themeQuartz,
   iconSetQuartzBold,
 } from 'ag-grid-community'
-import type { ColGroupDef } from 'ag-grid-community'
+import type {
+  ColDef,
+  ColGroupDef,
+  ValueFormatterParams,
+} from 'ag-grid-community'
 
 /** Nuxt UI primary */
 const ACCENT_COLOR =
@@ -107,3 +111,100 @@ export const tableThemeAdvance =
     headerCellHoverBackgroundColor: ACCENT_COLOR,
     rowHoverColor: ACCENT_COLOR,
   })
+
+const loadingCell = 'SkeletonLoadingCellRenderer'
+const dateValueFormatter = (
+  params: ValueFormatterParams,
+) =>
+  params.value
+    ? new Date(params.value).toLocaleDateString(
+        'tr-TR',
+        {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        },
+      )
+    : ''
+
+const baseCol: Partial<ColDef> = {
+  loadingCellRenderer: loadingCell,
+}
+
+const userCol: ColDef = {
+  ...baseCol,
+  headerName: 'User',
+  field: 'name',
+  flex: 2,
+  cellRenderer: 'UserCellRenderer',
+  sortable: true,
+}
+
+const projectCol: ColDef = {
+  ...baseCol,
+  headerName: 'Project Name',
+  field: 'project',
+  flex: 1.5,
+  sortable: true,
+}
+
+const teamCol: ColDef = {
+  ...baseCol,
+  headerName: 'Team',
+  field: 'team',
+  flex: 1.5,
+  cellRenderer: 'TeamCellRenderer',
+}
+
+const statusCol: ColDef = {
+  ...baseCol,
+  headerName: 'Status',
+  field: 'status',
+  colId: 'status',
+  flex: 1,
+  cellRenderer: 'StatusCellRenderer',
+  filter: true,
+}
+
+const dateCol: ColDef = {
+  ...baseCol,
+  headerName: 'Tarih',
+  field: 'date',
+  colId: 'date',
+  flex: 1,
+  sortable: true,
+  filter: 'agDateColumnFilter',
+  valueFormatter: dateValueFormatter,
+}
+
+const budgetCol: ColDef = {
+  ...baseCol,
+  headerName: 'Budget',
+  field: 'budget',
+  flex: 1,
+  sortable: true,
+}
+
+export const flatColumnDefs: ColDef[] = [
+  userCol,
+  projectCol,
+  teamCol,
+  statusCol,
+  dateCol,
+  budgetCol,
+]
+
+export const groupedColumnDefs: (
+  | ColDef
+  | ColGroupDef
+)[] = [
+  {
+    headerName: 'User & Project',
+    children: [userCol, projectCol],
+  },
+  { headerName: 'Team', children: [teamCol] },
+  {
+    headerName: 'Status, Tarih & Budget',
+    children: [statusCol, dateCol, budgetCol],
+  },
+]

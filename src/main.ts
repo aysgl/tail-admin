@@ -1,4 +1,3 @@
-import 'temporal-polyfill/global'
 import './assets/main.css'
 import 'v-calendar/style.css'
 
@@ -10,10 +9,6 @@ import {
   AllCommunityModule as AgGridAllCommunityModule,
   ModuleRegistry as AgGridModuleRegistry,
 } from 'ag-grid-community'
-import {
-  ExcelExportModule,
-  ServerSideRowModelModule,
-} from 'ag-grid-enterprise'
 import { createApp } from 'vue'
 import {
   setupCalendar,
@@ -34,8 +29,6 @@ ModuleRegistry.registerModules([
 ])
 AgGridModuleRegistry.registerModules([
   AgGridAllCommunityModule,
-  ExcelExportModule,
-  ServerSideRowModelModule,
 ])
 
 const app = createApp(App)

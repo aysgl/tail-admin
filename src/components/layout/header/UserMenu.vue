@@ -5,25 +5,21 @@
       align: 'end',
       collisionPadding: 12,
     }"
-    :ui="{ content: 'min-w-48' }"
-  >
+    :ui="{ content: 'min-w-48' }">
     <UButton
       color="primary"
       variant="soft"
-      class="gap-2"
-    >
+      class="gap-2">
       <UAvatar
         src="/images/user/owner.jpg"
         alt="User"
-        size="sm"
-      />
+        size="sm" />
       <span class="hidden font-medium sm:inline"
         >Musharof</span
       >
       <UIcon
         name="i-lucide-chevrons-up-down"
-        class="size-4 text-dimmed"
-      />
+        class="size-4 text-dimmed" />
     </UButton>
   </UDropdownMenu>
 </template>
@@ -68,8 +64,7 @@ const userMenuItems = computed<
       icon: 'i-lucide-log-out',
       to: '/signin',
       onSelect: () => {
-        // Implement sign out logic
-        console.log('Signing out...')
+        // TODO: Implement sign out logic
       },
     },
   ],
