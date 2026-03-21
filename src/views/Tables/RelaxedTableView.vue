@@ -10,9 +10,14 @@
   </UPageHeader>
   <UPageBody>
     <UPageCard
-      title="table-relaxed"
-      description="Rahat, sakin görünüm. Bol padding, minimal hover. Okunabilirlik odaklı."
+      title="Relaxed Tables"
+      description="Relaxed, calm view. Generous padding, minimal hover. Readability focused."
       variant="outline"
+      :ui="{
+        title:
+          'text-lg font-semibold text-highlighted',
+        description: 'mt-1 text-sm text-muted',
+      }"
     >
       <TableTheme
         theme="relaxed"

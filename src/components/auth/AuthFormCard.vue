@@ -15,7 +15,7 @@
     >
       <USeparator />
       <span
-        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-default px-3 text-sm text-muted dark:text-gray-400"
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg px-3 text-sm text-muted"
       >
         Or
       </span>

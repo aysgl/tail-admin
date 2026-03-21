@@ -18,7 +18,7 @@
                 Country
               </p>
               <p
-                class="text-sm font-medium text-default"
+                class="text-sm font-medium text-highlighted"
               >
                 United States
               </p>
@@ -30,7 +30,7 @@
                 City/State
               </p>
               <p
-                class="text-sm font-medium text-default"
+                class="text-sm font-medium text-highlighted"
               >
                 Phoenix, United States
               </p>
@@ -42,7 +42,7 @@
                 Postal Code
               </p>
               <p
-                class="text-sm font-medium text-default"
+                class="text-sm font-medium text-highlighted"
               >
                 ERT 2489
               </p>
@@ -54,7 +54,7 @@
                 TAX ID
               </p>
               <p
-                class="text-sm font-medium text-default"
+                class="text-sm font-medium text-highlighted"
               >
                 AS4568384
               </p>
@@ -80,9 +80,7 @@
     >
       <template #body>
         <form class="flex flex-col">
-          <div
-            class="custom-scrollbar overflow-y-auto p-2"
-          >
+          <div class="overflow-y-auto p-2">
             <div
               class="grid grid-cols-1 gap-5 gap-x-6 lg:grid-cols-2"
             >

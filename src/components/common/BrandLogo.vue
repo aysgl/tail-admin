@@ -1,26 +1,23 @@
 <template>
   <span
-    :class="['inline-flex shrink-0', props.class]"
+    :class="[
+      'inline-flex shrink-0 text-primary-500',
+      props.class,
+    ]"
   >
     <template v-if="icon">
-      <img
-        class="h-8 w-8 shrink-0"
-        src="/images/logo/logo-icon.svg"
-        alt="Logo"
-      />
+      <LogoIcon class="h-8 w-8 shrink-0" />
     </template>
     <template v-else>
-      <UColorModeImage
-        light="/images/logo/logo.svg"
-        dark="/images/logo/logo-dark.svg"
-        alt="Logo"
-        class="h-8 w-auto shrink-0"
-      />
+      <LogoFull class="h-8 w-auto shrink-0" />
     </template>
   </span>
 </template>
 
 <script setup lang="ts">
+import LogoFull from './LogoFull.vue'
+import LogoIcon from './LogoIcon.vue'
+
 const props = withDefaults(
   defineProps<{
     class?: string

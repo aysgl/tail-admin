@@ -4,18 +4,20 @@ import {
 } from 'ag-grid-community'
 import type { ColGroupDef } from 'ag-grid-community'
 
-/** Site primary color */
+/** Nuxt UI primary */
 const ACCENT_COLOR =
-  'color-mix(in srgb, var(--color-brand-500) 20%, transparent)'
+  'color-mix(in srgb, var(--ui-color-primary-500) 20%, transparent)'
 
 const baseParams = {
   accentColor: ACCENT_COLOR,
-  borderColor: '#6D6D6D26',
+  borderColor:
+    'color-mix(in srgb, var(--ui-color-neutral-600) 15%, transparent)',
   borderRadius: 4,
   columnBorder: false,
   fontFamily: 'inherit',
-  foregroundColor: 'var(--color-gray-800)',
-  headerBackgroundColor: 'var(--color-gray-100)',
+  foregroundColor: 'var(--ui-color-neutral-800)',
+  headerBackgroundColor:
+    'var(--ui-color-neutral-100)',
   headerFontFamily: 'inherit',
   headerRowBorder: true,
   iconSize: 14,

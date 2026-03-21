@@ -14,30 +14,15 @@ export default defineConfig({
     vueDevTools(),
     ui({
       ui: {
-        icons: {
-          system: 'i-lucide-monitor',
-          light: 'i-lucide-sun',
-          dark: 'i-lucide-moon',
-        },
-
         colors: {
-          primary: 'brand',
-          secondary: 'blue-light',
-          success: 'success',
-          info: 'blue-light',
-          warning: 'warning',
-          error: 'error',
-          neutral: 'gray',
-        },
-        pageBody: {
-          base: 'mt-8 pb-24 space-y-6',
-        },
-        pageGrid: {
-          base: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6',
+          primary: 'indigo',
+          success: 'green',
         },
         pageCard: {
           slots: {
-            header: 'mb-4 w-full',
+            header: 'mb-4 w-full self-stretch',
+            wrapper:
+              'flex flex-col flex-1 w-full items-stretch',
           },
         },
       },
@@ -61,11 +46,7 @@ export default defineConfig({
             'ag-grid-vue3',
             'ag-grid-community',
           ],
-          'ui-libs': [
-            'v-calendar',
-            'dropzone',
-            'jsvectormap',
-          ],
+          'ui-libs': ['v-calendar', 'dropzone'],
         },
       },
     },

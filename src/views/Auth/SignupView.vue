@@ -2,7 +2,7 @@
   <AuthSplitLayout>
     <ULink
       to="/"
-      class="mb-6 inline-flex items-center gap-2 text-sm text-muted dark:text-gray-400 transition-colors hover:text-default dark:hover:text-gray-200"
+      class="mb-6 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-highlighted"
       aria-label="Back to dashboard"
     >
       <UIcon
@@ -17,7 +17,7 @@
     >
       Sign Up
     </h1>
-    <p class="mt-1 text-muted dark:text-gray-400">
+    <p class="mt-1 text-muted">
       Enter your email and password to sign up!
     </p>
 
@@ -27,27 +27,21 @@
     >
       <template #social>
         <UButton
-          color="primary"
+          color="neutral"
           variant="soft"
           block
-          class="gap-3 dark:bg-primary-500/20 dark:text-primary-200 dark:hover:bg-primary-500/30 dark:border dark:border-primary-500/30"
+          class="gap-3"
         >
-          <UIcon
-            name="i-simple-icons-google"
-            class="size-5"
-          />
+          <SocialIconGoogle />
           Sign up with Google
         </UButton>
         <UButton
-          color="primary"
+          color="neutral"
           variant="soft"
           block
-          class="gap-3 dark:bg-primary-500/20 dark:text-primary-200 dark:hover:bg-primary-500/30 dark:border dark:border-primary-500/30"
+          class="gap-3"
         >
-          <UIcon
-            name="i-simple-icons-x"
-            class="size-5"
-          />
+          <SocialIconX />
           Sign up with X
         </UButton>
       </template>
@@ -116,7 +110,7 @@
             variant="ghost"
             square
             size="sm"
-            class="absolute right-1 top-1/2 -translate-y-1/2 dark:text-gray-400 dark:hover:bg-gray-800"
+            class="absolute right-1 top-1/2 -translate-y-1/2 text-muted hover:bg-accented"
             aria-label="Toggle password visibility"
             @click="showPassword = !showPassword"
           >
@@ -138,17 +132,15 @@
           color="primary"
           class="mt-0.5"
         />
-        <p
-          class="text-sm text-muted dark:text-gray-400"
-        >
+        <p class="text-sm text-muted">
           By creating an account means you agree
           to the
           <span
-            class="font-medium text-default dark:text-gray-200"
+            class="font-medium text-highlighted"
             >Terms and Conditions</span
           >, and our
           <span
-            class="font-medium text-default dark:text-gray-200"
+            class="font-medium text-highlighted"
             >Privacy Policy</span
           >
         </p>
@@ -160,19 +152,19 @@
         color="primary"
         variant="solid"
         size="lg"
-        class="bg-primary-500! text-white! hover:bg-primary-600! dark:bg-primary-500! dark:text-white!"
+        class="bg-primary-500! text-white! hover:bg-primary-600!"
       >
         Sign Up
       </UButton>
 
       <template #footer>
         <p
-          class="mt-5 text-center text-sm text-muted dark:text-gray-400 sm:text-start"
+          class="mt-5 text-center text-sm text-muted sm:text-start"
         >
           Already have an account?
           <ULink
             to="/signin"
-            class="text-primary hover:text-primary/80"
+            class="text-highlighted hover:opacity-80"
           >
             Sign In
           </ULink>
@@ -186,6 +178,8 @@
 import { reactive, ref } from 'vue'
 import AuthFormCard from '@/components/auth/AuthFormCard.vue'
 import AuthSplitLayout from '@/components/auth/AuthSplitLayout.vue'
+import SocialIconGoogle from '@/components/icons/SocialIconGoogle.vue'
+import SocialIconX from '@/components/icons/SocialIconX.vue'
 
 const state = reactive({
   firstName: '',

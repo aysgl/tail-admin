@@ -9,7 +9,7 @@
   >
     <UButton
       color="primary"
-      variant="ghost"
+      variant="soft"
       class="gap-2"
     >
       <UAvatar

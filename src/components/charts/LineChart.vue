@@ -1,5 +1,19 @@
 <template>
-  <AgCharts :options="chartOptions" />
+  <div class="relative min-h-[280px]">
+    <div
+      v-if="loading"
+      class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg"
+    >
+      <ChartSkeletonOverlay
+        variant="area"
+        class="h-full w-full"
+      />
+    </div>
+    <AgCharts
+      v-show="!loading"
+      :options="chartOptions"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -8,7 +22,11 @@ import { computed } from 'vue'
 import { AgCharts } from 'ag-charts-vue3'
 import { useChartTheme } from '@/composables/useChartTheme'
 
-const { chartTheme } = useChartTheme()
+const {
+  chartTheme,
+  chartColors,
+  chartBackground,
+} = useChartTheme()
 
 const chartData = [
   { month: 'Jan', sales: 180, revenue: 40 },
@@ -25,9 +43,17 @@ const chartData = [
   { month: 'Dec', sales: 235, revenue: 140 },
 ]
 
+withDefaults(
+  defineProps<{
+    loading?: boolean
+  }>(),
+  { loading: false },
+)
+
 const chartOptions = computed<AgChartOptions>(
   () => ({
     theme: chartTheme.value,
+    background: { fill: chartBackground },
     data: chartData,
     series: [
       {
@@ -35,18 +61,18 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'month',
         yKey: 'sales',
         yName: 'Sales',
-        fill: '#465FFF',
+        fill: chartColors.value.primary,
         fillOpacity: 0.55,
-        stroke: '#465FFF',
+        stroke: chartColors.value.primary,
       },
       {
         type: 'area',
         xKey: 'month',
         yKey: 'revenue',
         yName: 'Revenue',
-        fill: '#9CB9FF',
+        fill: chartColors.value.primaryLight,
         fillOpacity: 0.55,
-        stroke: '#9CB9FF',
+        stroke: chartColors.value.primaryLight,
       },
     ],
     legend: {

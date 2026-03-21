@@ -9,7 +9,7 @@
     </template>
   </UPageHeader>
   <UPageBody>
-    <UCard
+    <UPageCard
       variant="outline"
       class="calendar-card"
     >
@@ -154,7 +154,7 @@
           </div>
         </template>
       </UModal>
-    </UCard>
+    </UPageCard>
   </UPageBody>
 </template>
 

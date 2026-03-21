@@ -1,20 +1,27 @@
 <template>
   <UPageBody
     :ui="{
-      base: '!m-0 !p-0 grid grid-cols-1 lg:grid-cols-2 min-h-0 flex-1 h-full bg-default',
+      base: '!m-0 !p-0 grid grid-cols-1 lg:grid-cols-2 min-h-0 flex-1 h-full bg',
     }"
   >
     <div
-      class="flex min-h-0 min-w-0 flex-col items-start justify-center overflow-y-auto bg-default p-6 lg:p-12 max-w-xl w-full justify-self-center"
+      class="flex min-h-0 min-w-0 flex-col items-start justify-center overflow-y-auto bg p-6 lg:p-12 max-w-xl w-full justify-self-center"
     >
+      <ULink
+        to="/"
+        class="mb-4 block lg:hidden"
+        aria-label="Home"
+      >
+        <LogoFull class="h-8 w-auto shrink-0" />
+      </ULink>
       <slot />
     </div>
     <div
-      class="relative hidden lg:flex min-h-0 flex-col items-center justify-center bg-primary-950 dark:bg-white/5 self-stretch w-full"
+      class="relative hidden lg:flex min-h-0 flex-col items-center justify-center bg-inverted self-stretch w-full overflow-hidden"
     >
       <AuthCover />
       <div
-        class="relative z-1 flex flex-col items-center justify-center max-w-xs"
+        class="relative z-0 flex flex-col items-center justify-center max-w-xs"
       >
         <slot name="branding">
           <ULink
@@ -22,16 +29,12 @@
             class="mb-4 block"
             aria-label="Home"
           >
-            <img
-              width="231"
-              height="48"
-              src="/images/logo/auth-logo.svg"
-              alt="Logo"
+            <LogoFull
+              :inverted="isDark"
+              class="h-10 w-auto"
             />
           </ULink>
-          <p
-            class="text-center text-white dark:text-primary-300"
-          >
+          <p class="text-center text-inverted">
             Free and Open-Source Tailwind CSS
             Admin Dashboard Template
           </p>
@@ -42,5 +45,13 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useColorMode } from '@vueuse/core'
 import AuthCover from './AuthCover.vue'
+import LogoFull from '@/components/common/LogoFull.vue'
+
+const colorMode = useColorMode()
+const isDark = computed(
+  () => colorMode.value === 'light',
+)
 </script>

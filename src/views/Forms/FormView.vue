@@ -21,8 +21,6 @@
             <UFormField label="Input">
               <UInput
                 v-model="formData.input"
-                variant="outline"
-                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -34,8 +32,6 @@
                   formData.inputWithPlaceholder
                 "
                 placeholder="info@gmail.com"
-                variant="outline"
-                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -44,8 +40,6 @@
                 v-model="formData.selectInput"
                 :items="selectItems"
                 placeholder="Select Option"
-                variant="outline"
-                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -59,8 +53,6 @@
                       : 'password'
                   "
                   placeholder="Enter your password"
-                  variant="outline"
-                  color="primary"
                   class="w-full pr-11"
                 />
                 <UButton
@@ -74,7 +66,7 @@
                       ? 'i-lucide-eye-off'
                       : 'i-lucide-eye'
                   "
-                  class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text"
                   aria-label="Toggle password visibility"
                   @click="
                     showPassword = !showPassword
@@ -141,8 +133,6 @@
                 v-model="formData.cardNumber"
                 placeholder="Card number"
                 leading-icon="i-lucide-credit-card"
-                variant="outline"
-                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -159,8 +149,6 @@
                 v-model="singleSelect"
                 :items="selectItems"
                 placeholder="Select Option"
-                variant="outline"
-                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -170,8 +158,6 @@
                 :items="multiSelectOptions"
                 multiple
                 placeholder="Select items..."
-                variant="outline"
-                color="primary"
                 value-key="value"
                 class="w-full"
               />
@@ -189,8 +175,6 @@
                 v-model="normalDescription"
                 placeholder="Enter a description..."
                 :rows="6"
-                variant="outline"
-                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -200,8 +184,6 @@
                 placeholder="Enter a description..."
                 :rows="6"
                 disabled
-                variant="outline"
-                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -214,7 +196,6 @@
                 placeholder="Enter a description..."
                 :rows="6"
                 color="error"
-                variant="outline"
                 class="w-full"
               />
             </UFormField>
@@ -233,7 +214,6 @@
               <UInput
                 v-model="errorEmail"
                 color="error"
-                variant="outline"
                 trailing-icon="i-lucide-circle-alert"
                 class="w-full"
               />
@@ -245,7 +225,6 @@
               <UInput
                 v-model="successEmail"
                 color="success"
-                variant="outline"
                 trailing-icon="i-lucide-circle-check"
                 class="w-full"
               />
@@ -254,8 +233,6 @@
               <UInput
                 placeholder="info@gmail.com"
                 disabled
-                variant="outline"
-                color="primary"
                 class="w-full"
               />
             </UFormField>
@@ -274,19 +251,17 @@
                 v-model="email"
                 placeholder="info@gmail.com"
                 leading-icon="i-lucide-mail"
-                variant="outline"
-                color="primary"
                 class="w-full"
               />
             </UFormField>
             <UFormField label="Phone">
               <div
-                class="flex w-full overflow-hidden rounded-lg border border-gray-300 dark:border-gray-700"
+                class="flex w-full overflow-hidden rounded-lg border border-muted"
               >
                 <USelect
                   v-model="selectedCountry"
                   :items="countrySelectItems"
-                  class="w-24 shrink-0 border-0 border-r border-gray-200 dark:border-gray-800 [&_[data-slot=trigger]]:rounded-none [&_[data-slot=trigger]]:border-0"
+                  class="w-24 shrink-0 border-0 border-r border-muted [&_[data-slot=trigger]]:rounded-none [&_[data-slot=trigger]]:border-0"
                   @update:model-value="
                     updatePhoneNumber
                   "
@@ -302,7 +277,7 @@
             </UFormField>
             <UFormField label="Phone">
               <div
-                class="flex w-full overflow-hidden rounded-lg border border-gray-300 dark:border-gray-700"
+                class="flex w-full overflow-hidden rounded-lg border border-muted"
               >
                 <UInput
                   v-model="phoneNumber2"
@@ -314,7 +289,7 @@
                 <USelect
                   v-model="selectedCountry2"
                   :items="countrySelectItems"
-                  class="w-24 shrink-0 border-0 border-l border-gray-200 dark:border-gray-800 [&_[data-slot=trigger]]:rounded-none [&_[data-slot=trigger]]:border-0"
+                  class="w-24 shrink-0 border-0 border-l border-muted [&_[data-slot=trigger]]:rounded-none [&_[data-slot=trigger]]:border-0"
                   @update:model-value="
                     updatePhoneNumber2
                   "
@@ -323,10 +298,10 @@
             </UFormField>
             <UFormField label="URL">
               <div
-                class="flex w-full overflow-hidden rounded-lg border border-gray-300 dark:border-gray-700"
+                class="flex w-full overflow-hidden rounded-lg border border-muted"
               >
                 <span
-                  class="flex items-center border-r border-gray-200 bg-transparent px-4 py-2.5 text-sm text-gray-600 dark:border-gray-800 dark:text-gray-400"
+                  class="flex items-center border-r border-muted bg-transparent px-4 py-2.5 text-sm text-muted"
                 >
                   http://
                 </span>
@@ -341,7 +316,7 @@
             </UFormField>
             <UFormField label="Website">
               <div
-                class="flex w-full overflow-hidden rounded-lg border border-gray-300 dark:border-gray-700"
+                class="flex w-full overflow-hidden rounded-lg border border-muted"
               >
                 <UInput
                   v-model="website"
@@ -353,7 +328,7 @@
                   color="primary"
                   variant="ghost"
                   size="sm"
-                  class="shrink-0 rounded-none border-l border-gray-200 dark:border-gray-800"
+                  class="shrink-0 rounded-none border-l border-muted"
                   @click="copyWebsite"
                 >
                   <UIcon
@@ -374,9 +349,7 @@
           <UFormField label="Upload file">
             <UInput
               type="file"
-              variant="outline"
-              color="primary"
-              class="w-full file:mr-4 file:rounded-lg file:border-0 file:bg-gray-100 file:px-4 file:py-2.5 file:text-sm file:font-medium file:text-gray-700 hover:file:bg-gray-200 dark:file:bg-gray-800 dark:file:text-gray-300 dark:hover:file:bg-gray-700"
+              class="w-full file:mr-4 file:rounded-lg file:border-0 file:bg-muted file:px-4 file:py-2.5 file:text-sm file:font-medium file:text hover:file:bg-accented"
             />
           </UFormField>
         </UPageCard>

@@ -1,0 +1,53 @@
+/**
+ * AG Grid tema stilleri
+ * Base border revert + dark mode
+ */
+
+@layer base {
+  /* AG Grid: undo base border-color so theme variables apply */
+  [class^='ag-theme-'] *,
+  [class^='ag-theme-'] *::before,
+  [class^='ag-theme-'] *::after {
+    border-color: revert;
+  }
+}
+
+/* AG Grid dark mode - Nuxt UI --ui-* */
+.dark [class^='ag-theme-'] {
+  --ag-foreground-color: var(
+    --ui-color-neutral-300
+  );
+  --ag-background-color: var(--ui-bg);
+  --ag-header-background-color: var(
+    --ui-bg-elevated
+  );
+  --ag-border-color: var(--ui-border);
+  --ag-header-cell-hover-background-color: color-mix(
+    in srgb,
+    var(--ui-color-primary-500) 20%,
+    transparent
+  );
+  --ag-column-hover-color: color-mix(
+    in srgb,
+    var(--ui-color-primary-500) 20%,
+    transparent
+  );
+  --ag-row-hover-color: color-mix(
+    in srgb,
+    var(--ui-color-primary-500) 20%,
+    transparent
+  );
+  --ag-row-border-color: var(--ui-border);
+  --ag-header-row-border-color: var(--ui-border);
+  --ag-input-border-color: var(
+    --ui-border-accented
+  );
+  --ag-input-focus-border-color: var(
+    --ui-color-primary-500
+  );
+  --ag-selected-row-background-color: color-mix(
+    in srgb,
+    var(--ui-color-primary-500) 15%,
+    transparent
+  );
+}

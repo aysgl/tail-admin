@@ -12,7 +12,7 @@
       :default-size="16"
       :collapsed-size="4"
       :ui="{
-        root: 'transition-[width] duration-200 ease-in-out bg-default',
+        root: 'transition-[width] duration-200 ease-in-out bg',
       }"
     >
       <template #header="{ collapsed }">
@@ -20,6 +20,12 @@
       </template>
 
       <UNavigationMenu
+        :model-value="
+          unref(navOpenState.openSections)
+        "
+        @update:model-value="
+          navOpenState.handleModelUpdate
+        "
         :items="items"
         orientation="vertical"
         :collapsed="sidebarCollapsed"
@@ -34,7 +40,7 @@
         <UDashboardNavbar
           toggle-side="left"
           :toggle="{ class: 'lg:hidden' }"
-          :ui="{ root: 'bg-default' }"
+          :ui="{ root: 'bg' }"
         >
           <template #leading>
             <UDashboardSidebarCollapse
@@ -43,10 +49,10 @@
           </template>
           <template #right>
             <UDashboardSearchButton
-              class="hidden w-full max-w-[200px] justify-start gap-2 text-muted lg:flex xl:max-w-[280px]"
+              class="hidden h-10 w-full max-w-[200px] justify-start gap-2 text-muted lg:flex xl:max-w-[280px]"
               label="Search or type command..."
             />
-            <UColorModeSelect />
+            <UColorModeSelect class="h-10" />
             <NotificationMenu />
             <UserMenu />
           </template>
@@ -54,28 +60,35 @@
       </template>
 
       <template #body>
-        <UPage
-          class="flex-1 mx-auto w-full max-w-(--breakpoint-2xl) mt-0"
+        <div
+          id="main-scroll-container"
+          class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden flex flex-col"
         >
-          <slot />
-        </UPage>
+          <UPage
+            class="flex-1 mx-auto w-full max-w-(--breakpoint-2xl) mt-0"
+          >
+            <slot />
+          </UPage>
+        </div>
       </template>
     </UDashboardPanel>
   </UDashboardGroup>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, unref } from 'vue'
 import {
   useNavigationItems,
   useSearchGroups,
 } from '@/config/navigation'
+import { useNavigationOpenState } from '@/composables/useNavigationOpenState'
 import HeaderLogo from './header/HeaderLogo.vue'
 import NotificationMenu from './header/NotificationMenu.vue'
 import UserMenu from './header/UserMenu.vue'
 
 const { items } = useNavigationItems()
 const searchGroups = useSearchGroups()
+const navOpenState = useNavigationOpenState()
 const sidebarOpen = ref(true)
 const sidebarCollapsed = ref(false)
 </script>

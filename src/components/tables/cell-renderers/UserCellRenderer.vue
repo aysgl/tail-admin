@@ -9,13 +9,13 @@
     />
     <div class="min-w-0">
       <span
-        class="block truncate font-medium text-theme-sm text-default"
+        class="block truncate font-medium text-sm text-highlighted"
       >
         {{ params.data?.name }}
       </span>
       <span
         v-if="!isCompact"
-        class="block truncate text-theme-xs text-muted"
+        class="block truncate text-xs text-muted"
       >
         {{ params.data?.role }}
       </span>

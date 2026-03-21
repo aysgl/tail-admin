@@ -8,41 +8,41 @@
       <UBreadcrumb :items="breadcrumbItems" />
     </template>
   </UPageHeader>
-  <UPageBody class="h-screen">
-    <UPageCard
-      title="Sales"
-      variant="outline"
+  <UPageBody>
+    <div
+      class="grid grid-cols-12 gap-4 md:gap-6 h-full"
     >
       <div
-        class="flex flex-col items-center justify-center py-16 text-center"
+        class="col-span-12 xl:col-span-7 h-full"
       >
-        <div
-          class="mb-4 flex size-16 items-center justify-center rounded-full bg-muted"
-        >
-          <UIcon
-            name="i-lucide-trending-up"
-            class="size-8 text-muted"
-          />
-        </div>
-        <h4
-          class="mb-2 text-lg font-semibold text-default"
-        >
-          Satış Raporları
-        </h4>
-        <p class="max-w-md text-sm text-muted">
-          Satış performansı, hedefler ve
-          karşılaştırmalar burada görüntülenecek.
-          İçerik yakında eklenecek.
-        </p>
+        <SalesTrendCard :loading="pageLoading" />
       </div>
-    </UPageCard>
+      <div class="col-span-12 flex xl:col-span-5">
+        <SalesTargetDonutCard
+          class="min-h-0 flex-1"
+          :loading="pageLoading"
+        />
+      </div>
+    </div>
   </UPageBody>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
+import SalesTrendCard from '@/components/dashboard/SalesTrendCard.vue'
+import SalesTargetDonutCard from '@/components/dashboard/SalesTargetDonutCard.vue'
+
 const breadcrumbItems = usePageBreadcrumb(
   'Dashboard',
   'Sales',
 )
+
+const pageLoading = ref(true)
+
+onMounted(() => {
+  setTimeout(() => {
+    pageLoading.value = false
+  }, 1500)
+})
 </script>

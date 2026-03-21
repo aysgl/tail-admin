@@ -89,14 +89,12 @@
           class="flex items-center justify-between"
         >
           <div>
-            <p
-              class="font-medium text-gray-800 dark:text-white/90"
+            <h3
+              class="text-lg font-semibold text-highlighted"
             >
               Email notifications
-            </p>
-            <p
-              class="text-sm text-gray-600 dark:text-gray-400"
-            >
+            </h3>
+            <p class="text-sm text-muted">
               Receive emails about your account
               activity
             </p>
@@ -110,14 +108,12 @@
           class="flex items-center justify-between"
         >
           <div>
-            <p
-              class="font-medium text-gray-800 dark:text-white/90"
+            <h3
+              class="text-lg font-semibold text-highlighted"
             >
               Marketing emails
-            </p>
-            <p
-              class="text-sm text-gray-600 dark:text-gray-400"
-            >
+            </h3>
+            <p class="text-sm text-muted">
               Receive emails about new features
               and offers
             </p>

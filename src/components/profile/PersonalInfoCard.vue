@@ -18,7 +18,7 @@
                 First Name
               </p>
               <p
-                class="text-sm font-medium text-default"
+                class="text-sm font-medium text-highlighted"
               >
                 Musharof
               </p>
@@ -30,7 +30,7 @@
                 Last Name
               </p>
               <p
-                class="text-sm font-medium text-default"
+                class="text-sm font-medium text-highlighted"
               >
                 Chowdhury
               </p>
@@ -42,7 +42,7 @@
                 Email address
               </p>
               <p
-                class="text-sm font-medium text-default"
+                class="text-sm font-medium text-highlighted"
               >
                 randomuser@pimjo.com
               </p>
@@ -54,7 +54,7 @@
                 Phone
               </p>
               <p
-                class="text-sm font-medium text-default"
+                class="text-sm font-medium text-highlighted"
               >
                 +09 363 398 46
               </p>
@@ -66,7 +66,7 @@
                 Bio
               </p>
               <p
-                class="text-sm font-medium text-default"
+                class="text-sm font-medium text-highlighted"
               >
                 Team Manager
               </p>
@@ -93,11 +93,11 @@
       <template #body>
         <form class="flex flex-col">
           <div
-            class="custom-scrollbar max-h-[458px] space-y-7 overflow-y-auto p-2"
+            class="max-h-[458px] space-y-7 overflow-y-auto p-2"
           >
             <div>
               <h5
-                class="mb-5 text-lg font-medium text-default lg:mb-6"
+                class="mb-5 text-lg font-medium text-highlighted lg:mb-6"
               >
                 Social Links
               </h5>
@@ -140,7 +140,7 @@
             </div>
             <div>
               <h5
-                class="mb-5 text-lg font-medium text-default lg:mb-6"
+                class="mb-5 text-lg font-medium text-highlighted lg:mb-6"
               >
                 Personal Information
               </h5>

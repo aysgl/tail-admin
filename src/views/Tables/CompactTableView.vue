@@ -10,9 +10,14 @@
   </UPageHeader>
   <UPageBody>
     <UPageCard
-      title="table-compact"
-      description="Yoğun, sıkı görünüm. Küçük satır yüksekliği ve dar padding ile daha fazla veri sığar."
+      title="Compact Tables"
+      description="Dense, compact view. Small row height and narrow padding fit more data."
       variant="outline"
+      :ui="{
+        title:
+          'text-lg font-semibold text-highlighted',
+        description: 'mt-1 text-sm text-muted',
+      }"
     >
       <TableTheme
         theme="compact"

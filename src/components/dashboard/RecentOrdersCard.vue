@@ -5,7 +5,7 @@
         class="grid w-full grid-cols-[1fr_auto] items-center gap-4"
       >
         <h3
-          class="text-lg font-semibold text-default min-w-0"
+          class="text-lg font-semibold text-highlighted min-w-0"
         >
           Recent Orders
         </h3>
@@ -29,108 +29,128 @@
       </div>
     </template>
     <div
-      class="max-w-full overflow-x-auto custom-scrollbar"
+      class="relative max-w-full overflow-x-auto"
     >
-      <table class="min-w-full">
-        <thead>
-          <tr class="border-t border-default">
-            <th class="py-3 text-left">
-              <p
-                class="font-medium text-theme-xs text-muted"
-              >
-                Products
-              </p>
-            </th>
-            <th class="py-3 text-left">
-              <p
-                class="font-medium text-theme-xs text-muted"
-              >
-                Category
-              </p>
-            </th>
-            <th class="py-3 text-left">
-              <p
-                class="font-medium text-theme-xs text-muted"
-              >
-                Price
-              </p>
-            </th>
-            <th class="py-3 text-left">
-              <p
-                class="font-medium text-theme-xs text-muted"
-              >
-                Status
-              </p>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(product, index) in products"
-            :key="index"
-            class="border-t border-default"
-          >
-            <td class="whitespace-nowrap py-3">
-              <div
-                class="flex items-center gap-3"
-              >
-                <div
-                  class="h-[50px] w-[50px] overflow-hidden rounded-md"
+      <div
+        v-if="loading"
+        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg"
+      >
+        <SkeletonLoadingOverlay
+          variant="orders"
+          class="h-full w-full"
+        />
+      </div>
+      <div :class="{ 'opacity-0': loading }">
+        <table class="min-w-full">
+          <thead>
+            <tr class="border-t border-muted">
+              <th class="py-3 text-left">
+                <p
+                  class="font-medium text-xs text-muted"
                 >
-                  <img
-                    :src="product.image"
-                    :alt="product.name"
-                  />
-                </div>
-                <div>
-                  <p
-                    class="font-medium text-theme-sm text-default"
+                  Products
+                </p>
+              </th>
+              <th class="py-3 text-left">
+                <p
+                  class="font-medium text-xs text-muted"
+                >
+                  Category
+                </p>
+              </th>
+              <th class="py-3 text-left">
+                <p
+                  class="font-medium text-xs text-muted"
+                >
+                  Price
+                </p>
+              </th>
+              <th class="py-3 text-left">
+                <p
+                  class="font-medium text-xs text-muted"
+                >
+                  Status
+                </p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(product, index) in products"
+              :key="index"
+              class="border-t border-muted"
+            >
+              <td class="whitespace-nowrap py-3">
+                <div
+                  class="flex items-center gap-3"
+                >
+                  <div
+                    class="h-[50px] w-[50px] overflow-hidden rounded-md"
                   >
-                    {{ product.name }}
-                  </p>
-                  <span
-                    class="text-theme-xs text-muted"
-                  >
-                    {{ product.variants }}
-                    Variants
-                  </span>
+                    <img
+                      :src="product.image"
+                      :alt="product.name"
+                    />
+                  </div>
+                  <div>
+                    <p
+                      class="font-medium text-sm text-highlighted"
+                    >
+                      {{ product.name }}
+                    </p>
+                    <span
+                      class="text-xs text-muted"
+                    >
+                      {{ product.variants }}
+                      Variants
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td class="whitespace-nowrap py-3">
-              <p class="text-theme-sm text-muted">
-                {{ product.category }}
-              </p>
-            </td>
-            <td class="whitespace-nowrap py-3">
-              <p class="text-theme-sm text-muted">
-                {{ product.price }}
-              </p>
-            </td>
-            <td class="whitespace-nowrap py-3">
-              <UBadge
-                :color="
-                  product.status === 'Delivered'
-                    ? 'success'
-                    : product.status === 'Pending'
-                      ? 'warning'
-                      : 'error'
-                "
-                variant="subtle"
-                size="sm"
-              >
-                {{ product.status }}
-              </UBadge>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+              <td class="whitespace-nowrap py-3">
+                <p class="text-sm text-muted">
+                  {{ product.category }}
+                </p>
+              </td>
+              <td class="whitespace-nowrap py-3">
+                <p class="text-sm text-muted">
+                  {{ product.price }}
+                </p>
+              </td>
+              <td class="whitespace-nowrap py-3">
+                <UBadge
+                  :color="
+                    product.status === 'Delivered'
+                      ? 'success'
+                      : product.status ===
+                          'Pending'
+                        ? 'warning'
+                        : 'error'
+                  "
+                  variant="subtle"
+                  size="sm"
+                >
+                  {{ product.status }}
+                </UBadge>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </UPageCard>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+
+withDefaults(
+  defineProps<{
+    loading?: boolean
+  }>(),
+  { loading: false },
+)
+
 const products = ref([
   {
     name: 'Macbook pro 13"',

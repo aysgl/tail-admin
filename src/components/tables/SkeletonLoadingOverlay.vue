@@ -1,78 +1,134 @@
 <template>
   <div
-    class="skeleton-loading-overlay flex w-full flex-col gap-0 overflow-hidden rounded-lg bg-default/95 px-4 py-6"
+    class="skeleton-loading-overlay w-full overflow-hidden rounded-lg px-4 pt-6 pb-4"
   >
-    <!-- Skeleton header -->
+    <!-- Header -->
     <div
-      class="mb-4 flex gap-4 border-b border-default pb-4"
+      class="skeleton-grid skeleton-header mb-4 gap-x-4 gap-y-0 border-b border-muted pb-3"
+      :class="variant"
     >
       <div
-        v-for="i in 5"
+        v-for="i in cols"
         :key="i"
-        class="h-4 flex-1 animate-pulse rounded bg-gray-200 dark:bg-gray-600"
-        :style="{
-          maxWidth:
-            i === 1
-              ? '180px'
-              : i === 2
-                ? '120px'
-                : '80px',
-        }"
+        class="h-4 min-w-0 animate-pulse rounded bg-accented"
       />
     </div>
-    <!-- Skeleton rows -->
+    <!-- Rows -->
     <div
-      v-for="row in 5"
-      :key="row"
-      class="flex items-center gap-4 py-3"
+      class="flex flex-col divide-y divide-muted"
     >
-      <!-- User column -->
       <div
-        class="flex min-w-0 flex-1 items-center gap-3"
+        v-for="row in 3"
+        :key="row"
+        class="skeleton-grid skeleton-row gap-x-4 gap-y-0 py-4 first:pt-0 last:pb-0"
+        :class="variant"
       >
-        <div
-          class="size-8 shrink-0 animate-pulse rounded-full bg-gray-200 dark:bg-gray-600"
-        />
-        <div class="flex flex-col gap-2">
+        <template v-if="variant === 'tables'">
+          <!-- User: avatar + 2 lines -->
           <div
-            class="h-4 w-24 animate-pulse rounded bg-gray-200 dark:bg-gray-600"
+            class="flex min-w-0 items-center gap-2"
+          >
+            <div
+              class="size-8 shrink-0 animate-pulse rounded-full bg-accented"
+            />
+            <div
+              class="flex min-w-0 flex-1 flex-col gap-1.5"
+            >
+              <div
+                class="h-3.5 w-20 min-w-0 animate-pulse rounded bg-accented"
+              />
+              <div
+                class="h-2.5 w-14 min-w-0 animate-pulse rounded bg-accented"
+              />
+            </div>
+          </div>
+          <!-- Project -->
+          <div
+            class="h-4 min-w-0 animate-pulse rounded bg-accented"
+          />
+          <!-- Team: 3 avatars -->
+          <div class="flex min-w-0 -space-x-2">
+            <div
+              v-for="j in 3"
+              :key="j"
+              class="size-6 shrink-0 animate-pulse rounded-full bg-accented"
+            />
+          </div>
+          <!-- Status pill -->
+          <div
+            class="h-5 w-14 min-w-0 animate-pulse rounded-full bg-accented"
+          />
+          <!-- Date -->
+          <div
+            class="h-4 min-w-0 animate-pulse rounded bg-accented"
+          />
+          <!-- Budget -->
+          <div
+            class="h-4 min-w-0 animate-pulse rounded bg-accented"
+          />
+        </template>
+        <template v-else>
+          <!-- Orders: Product (img+text), Category, Price, Status -->
+          <div
+            class="flex min-w-0 items-center gap-2"
+          >
+            <div
+              class="size-10 shrink-0 animate-pulse rounded-md bg-accented"
+            />
+            <div
+              class="flex min-w-0 flex-1 flex-col gap-1.5"
+            >
+              <div
+                class="h-3.5 w-24 min-w-0 animate-pulse rounded bg-accented"
+              />
+              <div
+                class="h-2.5 w-16 min-w-0 animate-pulse rounded bg-accented"
+              />
+            </div>
+          </div>
+          <div
+            class="h-4 min-w-0 animate-pulse rounded bg-accented"
           />
           <div
-            class="h-3 w-16 animate-pulse rounded bg-gray-200 dark:bg-gray-600"
+            class="h-4 min-w-0 animate-pulse rounded bg-accented"
           />
-        </div>
+          <div
+            class="h-5 w-14 min-w-0 animate-pulse rounded-full bg-accented"
+          />
+        </template>
       </div>
-      <!-- Project column -->
-      <div
-        class="h-4 w-28 animate-pulse rounded bg-gray-200 dark:bg-gray-600"
-      />
-      <!-- Team column -->
-      <div class="flex -space-x-2">
-        <div
-          v-for="i in 3"
-          :key="i"
-          class="size-8 animate-pulse rounded-full border-2 border-white bg-gray-200 dark:border-gray-800 dark:bg-gray-600"
-        />
-      </div>
-      <!-- Status column -->
-      <div
-        class="h-6 w-16 animate-pulse rounded-full bg-gray-200 dark:bg-gray-600"
-      />
-      <!-- Budget column -->
-      <div
-        class="h-4 w-12 animate-pulse rounded bg-gray-200 dark:bg-gray-600"
-      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// AG Grid loading overlay component - receives params from grid
+import { computed } from 'vue'
+
+const props = withDefaults(
+  defineProps<{
+    variant?: 'tables' | 'orders'
+  }>(),
+  { variant: 'tables' },
+)
+
+const cols = computed(() =>
+  props.variant === 'orders' ? 4 : 6,
+)
 </script>
 
 <style scoped>
 .skeleton-loading-overlay {
   animation: fadeIn 0.2s ease-out;
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr 1fr 1fr 1fr;
+}
+
+.skeleton-header.orders,
+.skeleton-row.orders {
+  grid-template-columns: 2fr 1fr 1fr 1fr;
 }
 
 @keyframes fadeIn {

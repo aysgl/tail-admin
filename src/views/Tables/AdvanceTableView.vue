@@ -10,9 +10,14 @@
   </UPageHeader>
   <UPageBody>
     <UPageCard
-      title="table-advance"
-      description="Theme seçimi, global arama, status tab'ları, satır seçimi, kolon göster/gizle ve filtreler."
+      title="Advance Tables"
+      description="Theme selection, global search, status tabs, row selection, column show/hide, and filters."
       variant="outline"
+      :ui="{
+        title:
+          'text-lg font-semibold text-highlighted',
+        description: 'mt-1 text-sm text-muted',
+      }"
     >
       <TableTheme
         v-model:theme="advanceTheme"

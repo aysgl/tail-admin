@@ -6,13 +6,11 @@
       >
         <div>
           <h3
-            class="text-lg font-semibold text-default"
+            class="text-lg font-semibold text-highlighted"
           >
             Statistics
           </h3>
-          <p
-            class="mt-1 text-theme-sm text-muted"
-          >
+          <p class="mt-1 text-sm text-muted">
             Target you've set for each month
           </p>
         </div>
@@ -54,11 +52,21 @@
       </div>
     </template>
     <div
-      class="max-w-full overflow-x-auto custom-scrollbar"
+      class="relative max-w-full overflow-x-auto"
     >
+      <div
+        v-if="loading"
+        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg"
+      >
+        <ChartSkeletonOverlay
+          variant="area"
+          class="h-[310px] w-full"
+        />
+      </div>
       <div
         id="chartThree"
         class="-ml-4 min-w-[1000px] xl:min-w-full pl-2 h-[310px]"
+        :class="{ 'opacity-0': loading }"
       >
         <AgCharts :options="chartOptions" />
       </div>
@@ -71,7 +79,18 @@ import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
 import { ref, computed } from 'vue'
 import { useChartTheme } from '@/composables/useChartTheme'
-const { chartTheme } = useChartTheme()
+const {
+  chartTheme,
+  chartColors,
+  chartBackground,
+} = useChartTheme()
+
+withDefaults(
+  defineProps<{
+    loading?: boolean
+  }>(),
+  { loading: false },
+)
 
 const statisticsOptions = [
   { value: 'optionOne', label: 'Monthly' },
@@ -118,6 +137,7 @@ const chartData = [
 const chartOptions = computed<AgChartOptions>(
   () => ({
     theme: chartTheme.value,
+    background: { fill: chartBackground },
     data: chartData,
     series: [
       {
@@ -125,18 +145,20 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'month',
         yKey: 'sales',
         yName: 'Sales',
-        fill: '#465FFF',
+        fill: chartColors.value.primary,
         fillOpacity: 0.55,
-        stroke: '#465FFF',
+        stroke: chartColors.value.primary,
+        interpolation: { type: 'smooth' },
       },
       {
         type: 'area',
         xKey: 'month',
         yKey: 'revenue',
         yName: 'Revenue',
-        fill: '#9CB9FF',
+        fill: chartColors.value.primary,
         fillOpacity: 0.55,
-        stroke: '#9CB9FF',
+        stroke: chartColors.value.primary,
+        interpolation: { type: 'smooth' },
       },
     ],
     legend: { enabled: false },

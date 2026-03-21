@@ -65,6 +65,7 @@ export function useNavigationItems() {
     () => [
       {
         label: 'Dashboard',
+        value: 'nav-dashboard',
         icon: 'i-lucide-layout-grid',
         to: '/ecommerce',
         type: 'trigger',
@@ -116,6 +117,7 @@ export function useNavigationItems() {
       },
       {
         label: 'Tables',
+        value: 'nav-tables',
         icon: 'i-lucide-table',
         to: '/compact-tables',
         type: 'trigger',
@@ -165,15 +167,20 @@ export function useNavigationItems() {
       },
       {
         label: 'Pages',
+        value: 'nav-pages',
         icon: 'i-lucide-file-text',
         to: '/blank',
         type: 'trigger',
         defaultOpen:
           route.path === '/blank' ||
-          route.path === '/not-found',
+          route.path === '/not-found' ||
+          route.path.startsWith('/signin') ||
+          route.path.startsWith('/signup'),
         active:
           route.path === '/blank' ||
-          route.path === '/not-found',
+          route.path === '/not-found' ||
+          route.path.startsWith('/signin') ||
+          route.path.startsWith('/signup'),
         children: [
           {
             label: 'Blank Page',
@@ -185,44 +192,6 @@ export function useNavigationItems() {
             to: '/not-found',
             icon: 'i-lucide-alert-circle',
           },
-        ],
-      },
-      {
-        label: 'Charts',
-        icon: 'i-lucide-pie-chart',
-        to: '/line-chart',
-        type: 'trigger',
-        defaultOpen:
-          route.path.startsWith('/line-chart') ||
-          route.path.startsWith('/bar-chart'),
-        active:
-          route.path.startsWith('/line-chart') ||
-          route.path.startsWith('/bar-chart'),
-        children: [
-          {
-            label: 'Line Chart',
-            to: '/line-chart',
-            icon: 'i-lucide-trending-up',
-          },
-          {
-            label: 'Bar Chart',
-            to: '/bar-chart',
-            icon: 'i-lucide-bar-chart-3',
-          },
-        ],
-      },
-      {
-        label: 'Authentication',
-        icon: 'i-lucide-plug',
-        to: '/signin',
-        type: 'trigger',
-        defaultOpen:
-          route.path.startsWith('/signin') ||
-          route.path.startsWith('/signup'),
-        active:
-          route.path.startsWith('/signin') ||
-          route.path.startsWith('/signup'),
-        children: [
           {
             label: 'Signin',
             to: '/signin',

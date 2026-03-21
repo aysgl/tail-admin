@@ -1,6 +1,5 @@
 import 'temporal-polyfill/global'
 import './assets/main.css'
-import 'jsvectormap/dist/jsvectormap.css'
 import 'v-calendar/style.css'
 
 import {
@@ -28,6 +27,7 @@ import TeamCellRenderer from '@/components/tables/cell-renderers/TeamCellRendere
 import StatusCellRenderer from '@/components/tables/cell-renderers/StatusCellRenderer.vue'
 import SkeletonLoadingCellRenderer from '@/components/tables/cell-renderers/SkeletonLoadingCellRenderer.vue'
 import SkeletonLoadingOverlay from '@/components/tables/SkeletonLoadingOverlay.vue'
+import ChartSkeletonOverlay from '@/components/charts/ChartSkeletonOverlay.vue'
 
 ModuleRegistry.registerModules([
   AllCommunityModule,
@@ -59,6 +59,10 @@ app.component(
 app.component(
   'SkeletonLoadingOverlay',
   SkeletonLoadingOverlay,
+)
+app.component(
+  'ChartSkeletonOverlay',
+  ChartSkeletonOverlay,
 )
 
 app.use(setupCalendar, {})

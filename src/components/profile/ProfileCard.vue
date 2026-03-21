@@ -16,11 +16,11 @@
           class="size-20"
         />
         <div class="order-3 xl:order-2">
-          <h4
-            class="mb-2 text-center text-lg font-semibold text-default xl:text-left"
+          <h2
+            class="text-lg font-semibold text-highlighted mb-2 text-center xl:text-left"
           >
             Musharof Chowdhury
-          </h4>
+          </h2>
           <div
             class="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left"
           >
@@ -72,14 +72,14 @@
     <template #body>
       <form class="flex flex-col">
         <div
-          class="custom-scrollbar max-h-[458px] space-y-7 overflow-y-auto p-2"
+          class="max-h-[458px] space-y-7 overflow-y-auto p-2"
         >
           <div>
-            <h5
-              class="mb-5 text-lg font-medium text-default lg:mb-6"
+            <h3
+              class="mb-5 text-lg font-medium text-highlighted lg:mb-6"
             >
               Social Links
-            </h5>
+            </h3>
             <div
               class="grid grid-cols-1 gap-5 gap-x-6 lg:grid-cols-2"
             >
@@ -98,11 +98,11 @@
             </div>
           </div>
           <div>
-            <h5
-              class="mb-5 text-lg font-medium text-default lg:mb-6"
+            <h3
+              class="mb-5 text-lg font-medium text-highlighted lg:mb-6"
             >
               Personal Information
-            </h5>
+            </h3>
             <div
               class="grid grid-cols-1 gap-5 gap-x-6 lg:grid-cols-2"
             >

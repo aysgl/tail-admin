@@ -1,44 +1,72 @@
 <template>
   <UPageCard variant="outline">
     <template #header>
-      <div
-        class="flex items-center justify-between"
+      <DashboardCardHeader
+        title="Customers Demographic"
+        description="Number of customer based on country"
       >
-        <div>
-          <h3
-            class="text-lg font-semibold text-default"
+        <template #actions>
+          <UDropdownMenu
+            :items="chartMenuItems"
+            :content="{ align: 'end' }"
           >
-            Customers Demographic
-          </h3>
-          <p
-            class="mt-1 text-theme-sm text-muted"
-          >
-            Number of customer based on country
-          </p>
-        </div>
-        <UDropdownMenu
-          :items="chartMenuItems"
-          :content="{ align: 'end' }"
-        >
-          <UButton
-            color="primary"
-            variant="ghost"
-            square
-            icon="i-lucide-more-vertical"
-            aria-label="Menu"
-          />
-        </UDropdownMenu>
-      </div>
+            <UButton
+              color="primary"
+              variant="ghost"
+              square
+              icon="i-lucide-more-vertical"
+              aria-label="Menu"
+            />
+          </UDropdownMenu>
+        </template>
+      </DashboardCardHeader>
     </template>
     <UCard variant="outline">
-      <div
-        ref="mapRef"
-        id="demographicMap"
-        class="mapOne map-btn -mx-4 -my-6 h-[212px] w-[252px] 2xsm:w-[307px] xsm:w-[358px] sm:-mx-6 md:w-[668px] lg:w-[634px] xl:w-[393px] 2xl:w-[554px]"
-      />
+      <div class="relative -mx-4 -my-6">
+        <div
+          v-if="loading"
+          class="loading-overlay absolute inset-0 z-20 flex items-center justify-center overflow-hidden rounded-lg bg/95"
+        >
+          <ChartSkeletonOverlay
+            variant="line"
+            class="h-[212px] w-full max-w-[358px]"
+          />
+        </div>
+        <div
+          class="h-[212px] w-full min-w-[252px] sm:-mx-6 md:w-[668px] lg:w-[634px] xl:w-[393px] 2xl:w-[554px]"
+          :class="{ 'opacity-0': loading }"
+        >
+          <AgCharts :options="chartOptions" />
+        </div>
+      </div>
     </UCard>
     <div class="space-y-5">
+      <template v-if="loading">
+        <div
+          v-for="i in 2"
+          :key="`sk-${i}`"
+          class="flex items-center justify-between"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="size-8 animate-pulse rounded-full bg-accented"
+            />
+            <div class="flex flex-col gap-2">
+              <div
+                class="h-4 w-16 animate-pulse rounded bg-accented"
+              />
+              <div
+                class="h-3 w-20 animate-pulse rounded bg-accented"
+              />
+            </div>
+          </div>
+          <div
+            class="h-2 w-24 animate-pulse rounded-full bg-accented"
+          />
+        </div>
+      </template>
       <div
+        v-else
         v-for="country in countries"
         :key="country.name"
         class="flex items-center justify-between"
@@ -62,7 +90,7 @@
             class="max-w-[100px]"
           />
           <p
-            class="font-medium text-theme-sm text-default shrink-0"
+            class="font-medium text-sm text-highlighted shrink-0"
           >
             {{ country.percent }}%
           </p>
@@ -73,10 +101,11 @@
 </template>
 
 <script setup lang="ts">
+import type { AgChartOptions } from 'ag-charts-community'
 import type { DropdownMenuItem } from '@nuxt/ui'
-import { ref, onMounted } from 'vue'
-import jsVectorMap from 'jsvectormap'
-import 'jsvectormap/dist/maps/world'
+import { computed } from 'vue'
+import { AgCharts } from 'ag-charts-vue3'
+import { useChartTheme } from '@/composables/useChartTheme'
 
 const chartMenuItems: DropdownMenuItem[][] = [
   [
@@ -110,53 +139,92 @@ const countries = [
   },
 ]
 
-const mapRef = ref<HTMLElement | null>(null)
+const chartData = [
+  {
+    country: 'USA',
+    customers: 2540,
+    target: 3000,
+  },
+  {
+    country: 'Germany',
+    customers: 1520,
+    target: 1800,
+  },
+  {
+    country: 'UK',
+    customers: 1450,
+    target: 1600,
+  },
+  {
+    country: 'France',
+    customers: 1200,
+    target: 950,
+  },
+  {
+    country: 'Japan',
+    customers: 620,
+    target: 550,
+  },
+]
 
-onMounted(() => {
-  if (mapRef.value) {
-    new jsVectorMap({
-      selector: mapRef.value,
-      map: 'world',
-      zoomButtons: false,
-      regionStyle: {
-        initial: {
-          fontFamily: 'Outfit',
-          fill: '#D9D9D9',
+withDefaults(
+  defineProps<{
+    loading?: boolean
+  }>(),
+  { loading: false },
+)
+
+const {
+  chartTheme,
+  chartColors,
+  chartBackground,
+} = useChartTheme()
+
+const chartOptions = computed<AgChartOptions>(
+  () => ({
+    theme: chartTheme.value,
+    background: { fill: chartBackground },
+    data: chartData,
+    series: [
+      {
+        type: 'area',
+        xKey: 'country',
+        yKey: 'customers',
+        yName: 'Customers',
+        fill: chartColors.value.getValues(
+          'primary',
+          0.2,
+        ),
+        fillOpacity: 0.5,
+        stroke: chartColors.value.getValues(
+          'primary',
+          0.3,
+        ),
+        strokeWidth: 2,
+        marker: {
+          size: 8,
+          fill: 'transparent',
+          stroke: 'transparent',
         },
-        hover: {
-          fillOpacity: 1,
-          fill: '#465fff',
-        },
+        interpolation: { type: 'smooth' },
       },
-      markers: [
-        {
-          name: 'Egypt',
-          coords: [26.8206, 30.8025],
+      {
+        type: 'line',
+        xKey: 'country',
+        yKey: 'target',
+        yName: 'Target',
+        stroke: chartColors.value.primary,
+        strokeWidth: 3,
+        lineDash: [8, 4],
+        marker: {
+          size: 8,
+          fill: 'transparent',
+          stroke: 'transparent',
         },
-        {
-          name: 'United States',
-          coords: [55.3781, 3.436],
-        },
-        {
-          name: 'United States',
-          coords: [37.0902, -95.7129],
-        },
-      ],
-      markerStyle: {
-        initial: {
-          strokeWidth: 1,
-          fill: '#465fff',
-          fillOpacity: 1,
-          r: 4,
-        },
-        hover: {
-          fill: '#465fff',
-          fillOpacity: 1,
-        },
-        selected: {},
-        selectedHover: {},
+        interpolation: { type: 'smooth' },
       },
-    })
-  }
-})
+    ],
+    legend: { position: 'top' },
+  }),
+)
 </script>

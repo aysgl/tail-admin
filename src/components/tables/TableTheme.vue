@@ -1,6 +1,6 @@
 <template>
   <div
-    class="ag-grid-basic-table space-y-4"
+    class="ag-grid-basic-table min-w-0 space-y-4 overflow-hidden"
     style="width: 100%"
   >
     <div
@@ -97,83 +97,91 @@
         </UDropdownMenu>
       </div>
     </div>
-    <div class="relative min-h-[200px]">
+    <div
+      class="relative h-[460px] w-full min-w-0 overflow-hidden"
+    >
       <div
         v-if="gridLoading && !useClientSide"
-        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg bg-default/95"
+        class="loading-overlay absolute inset-0 z-20 flex min-w-0 flex-col overflow-x-hidden overflow-y-auto rounded-lg bg/95"
       >
         <SkeletonLoadingOverlay
-          class="h-full w-full"
+          class="min-h-0 flex-1"
         />
       </div>
       <div
         v-else-if="showEmptyOverlay"
-        class="empty-overlay absolute inset-0 z-10 flex items-center justify-center rounded-lg border border-default bg-default/95"
+        class="empty-overlay absolute inset-0 z-10 flex items-center justify-center rounded-lg border border-gray-200 bg-elevated/95"
       >
         <p class="text-center text-sm text-muted">
           {{ emptyOverlayMessage }}
         </p>
       </div>
-      <AgGridVue
-        :loading="gridLoading"
-        :loading-overlay-component="
-          useClientSide
-            ? undefined
-            : 'SkeletonLoadingOverlay'
-        "
-        :default-col-group-def="
-          defaultColGroupDef
-        "
-        :theme="gridTheme"
-        :context="{ tableTheme: theme }"
-        :column-defs="columnDefs"
-        :column-types="columnTypes"
-        :default-col-def="defaultColDef"
-        :column-hover-highlight="true"
-        :row-selection="
-          showToolbar ? 'multiple' : undefined
-        "
-        :row-data="
-          useClientSide
-            ? dateFilteredUsers
-            : undefined
-        "
-        :quick-filter-text="
-          useClientSide ? searchText : undefined
-        "
-        :floating-filter="showFloatingFilter"
-        :pagination="true"
-        :pagination-page-size="10"
-        :pagination-page-size-selector="[
-          10, 25, 50, 100,
-        ]"
-        :row-model-type="
-          useClientSide
-            ? 'clientSide'
-            : 'serverSide'
-        "
-        :suppress-server-side-full-width-loading-row="
-          !useClientSide
-        "
-        :cache-block-size="
-          useClientSide ? undefined : 50
-        "
-        :max-blocks-in-cache="
-          useClientSide ? undefined : 4
-        "
-        :row-buffer="
-          useClientSide ? undefined : 10
-        "
-        :max-concurrent-datasource-requests="
-          useClientSide ? undefined : 2
-        "
-        :block-load-debounce-millis="
-          useClientSide ? undefined : 200
-        "
-        dom-layout="autoHeight"
-        style="width: 100%"
-        @grid-ready="onGridReady"
-      />
+      <div
+        class="h-full min-h-0"
+        :class="{
+          'invisible pointer-events-none':
+            gridLoading && !useClientSide,
+        }"
+      >
+        <AgGridVue
+          :loading="
+            useClientSide ? gridLoading : false
+          "
+          :loading-overlay-component="undefined"
+          :default-col-group-def="
+            defaultColGroupDef
+          "
+          :theme="gridTheme"
+          :context="{ tableTheme: theme }"
+          :column-defs="columnDefs"
+          :column-types="columnTypes"
+          :default-col-def="defaultColDef"
+          :column-hover-highlight="true"
+          :row-selection="
+            showToolbar ? 'multiple' : undefined
+          "
+          :row-data="
+            useClientSide
+              ? dateFilteredUsers
+              : undefined
+          "
+          :quick-filter-text="
+            useClientSide ? searchText : undefined
+          "
+          :floating-filter="showFloatingFilter"
+          :pagination="true"
+          :pagination-page-size="10"
+          :pagination-page-size-selector="[
+            10, 25, 50, 100,
+          ]"
+          :row-model-type="
+            useClientSide
+              ? 'clientSide'
+              : 'serverSide'
+          "
+          :suppress-server-side-full-width-loading-row="
+            !useClientSide
+          "
+          :cache-block-size="
+            useClientSide ? undefined : 50
+          "
+          :max-blocks-in-cache="
+            useClientSide ? undefined : 4
+          "
+          :row-buffer="
+            useClientSide ? undefined : 10
+          "
+          :max-concurrent-datasource-requests="
+            useClientSide ? undefined : 2
+          "
+          :block-load-debounce-millis="
+            useClientSide ? undefined : 200
+          "
+          dom-layout="normal"
+          style="width: 100%; height: 100%"
+          @grid-ready="onGridReady"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -438,7 +446,7 @@ const calendarDateRange = shallowRef<{
   end: CalendarDate
 }>({ start: defaultStart, end: defaultEnd })
 
-const dateFormatter = new DateFormatter('tr-TR', {
+const dateFormatter = new DateFormatter('en-US', {
   day: '2-digit',
   month: '2-digit',
   year: 'numeric',
@@ -518,8 +526,8 @@ const showEmptyOverlay = computed(() => {
 
 const emptyOverlayMessage = computed(() =>
   hasActiveFilter.value
-    ? 'Arama kriterlerinize uygun sonuç bulunamadı'
-    : 'Veri bulunamadı',
+    ? 'No results match your search criteria'
+    : 'No data found',
 )
 
 function filterByDateRange(
@@ -544,7 +552,7 @@ function filterByDateRange(
 const dateRangeDisplay = computed(() => {
   const r = calendarDateRange.value
   if (!r?.start || isDefaultDateRange.value)
-    return 'Tarih seçin'
+    return 'Select date'
   const fmt = (d: CalendarDate) =>
     dateFormatter.format(
       d.toDate(getLocalTimeZone()),

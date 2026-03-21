@@ -2,6 +2,10 @@ import {
   createRouter,
   createWebHistory,
 } from 'vue-router'
+import { useScrollRestoration } from '@/composables/useScrollRestoration'
+
+const { saveScroll, restoreScroll } =
+  useScrollRestoration()
 
 const router = createRouter({
   history: createWebHistory(
@@ -23,7 +27,7 @@ const router = createRouter({
           '../views/Dashboard/EcommerceView.vue'
         ),
       meta: {
-        title: 'eCommerce Dashboard',
+        title: 'Ecommerce',
         layout: 'main',
       },
     },
@@ -68,7 +72,7 @@ const router = createRouter({
       name: 'Calendar',
       component: () =>
         import(
-          '../views/Others/CalendarView.vue'
+          '../views/Calendar/CalendarView.vue'
         ),
       meta: {
         title: 'Calendar',
@@ -80,7 +84,7 @@ const router = createRouter({
       name: 'Profile',
       component: () =>
         import(
-          '../views/Others/UserProfileView.vue'
+          '../views/Profile/UserProfileView.vue'
         ),
       meta: {
         title: 'Profile',
@@ -92,7 +96,7 @@ const router = createRouter({
       name: 'Account Settings',
       component: () =>
         import(
-          '../views/Others/AccountSettingsView.vue'
+          '../views/Profile/AccountSettingsView.vue'
         ),
       meta: {
         title: 'Account Settings',
@@ -136,28 +140,6 @@ const router = createRouter({
       },
     },
     {
-      path: '/line-chart',
-      name: 'Line Chart',
-      component: () =>
-        import(
-          '../views/Chart/LineChartView.vue'
-        ),
-      meta: {
-        title: 'Line Chart',
-        layout: 'main',
-      },
-    },
-    {
-      path: '/bar-chart',
-      name: 'Bar Chart',
-      component: () =>
-        import('../views/Chart/BarChartView.vue'),
-      meta: {
-        title: 'Bar Chart',
-        layout: 'main',
-      },
-    },
-    {
       path: '/blank',
       name: 'Blank',
       component: () =>
@@ -175,17 +157,6 @@ const router = createRouter({
       meta: {
         title: 'Form',
         layout: 'main',
-      },
-    },
-
-    {
-      path: '/not-found',
-      name: 'Not Found',
-      component: () =>
-        import('../views/Pages/NotFoundView.vue'),
-      meta: {
-        title: 'Not Found',
-        layout: 'none',
       },
     },
 
@@ -209,6 +180,16 @@ const router = createRouter({
         layout: 'auth',
       },
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () =>
+        import('../views/Pages/NotFoundView.vue'),
+      meta: {
+        title: 'Not Found',
+        layout: 'auth',
+      },
+    },
   ],
 })
 
@@ -216,5 +197,14 @@ export default router
 
 router.beforeEach((to, from, next) => {
   document.title = `Vue.js ${to.meta.title} | TailAdmin - Vue.js Tailwind CSS Dashboard Template`
+  if (from.path && from.meta?.layout === 'main') {
+    saveScroll(from.path)
+  }
   next()
+})
+
+router.afterEach((to) => {
+  if (to.path && to.meta?.layout === 'main') {
+    restoreScroll(to.path)
+  }
 })

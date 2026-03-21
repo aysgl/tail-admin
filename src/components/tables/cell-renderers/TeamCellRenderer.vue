@@ -6,7 +6,7 @@
       :src="member"
       alt="team member"
       size="xs"
-      class="size-6 shrink-0 border-2 border-white dark:border-gray-900"
+      class="size-6 shrink-0 border-2 border-[var(--color-stack-separator)]"
     />
   </div>
 </template>

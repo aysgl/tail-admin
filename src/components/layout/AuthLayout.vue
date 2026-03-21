@@ -1,9 +1,7 @@
 <template>
-  <UMain
-    class="h-screen overflow-hidden bg-default p-0"
-  >
+  <UMain class="h-screen overflow-hidden bg p-0">
     <UPage
-      class="flex h-full w-full flex-col bg-default p-0"
+      class="flex h-full w-full flex-col bg p-0"
     >
       <slot />
     </UPage>

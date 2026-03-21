@@ -11,10 +11,10 @@
   >
     <UButton
       color="primary"
-      variant="ghost"
+      variant="soft"
       square
       aria-label="Bildirimler"
-      class="relative"
+      class="relative h-10 w-10 shrink-0 justify-center items-center"
     >
       <UIcon
         name="i-lucide-bell"
@@ -22,20 +22,20 @@
       />
       <span
         v-if="notifying"
-        class="absolute right-0 top-0.5 size-2 rounded-full bg-orange-400"
+        class="absolute right-2 top-2 size-2 rounded-full bg-orange-400"
       />
     </UButton>
     <template #content>
       <div
-        class="flex items-center justify-between border-b border-default p-3"
+        class="flex items-center justify-between border-b border-muted p-3"
       >
-        <h5 class="font-semibold text-default">
+        <h5
+          class="font-semibold text-highlighted"
+        >
           Notification
         </h5>
       </div>
-      <div
-        class="max-h-80 overflow-y-auto p-2 custom-scrollbar"
-      >
+      <div class="max-h-80 overflow-y-auto p-2">
         <a
           v-for="notification in notifications"
           :key="notification.id"
@@ -51,12 +51,12 @@
           <div class="min-w-0 flex-1">
             <p class="text-sm text-muted">
               <span
-                class="font-medium text-default"
+                class="font-medium text-highlighted"
                 >{{ notification.userName }}</span
               >
               {{ notification.action }}
               <span
-                class="font-medium text-default"
+                class="font-medium text-highlighted"
                 >{{ notification.project }}</span
               >
             </p>
@@ -67,7 +67,7 @@
           </div>
         </a>
       </div>
-      <div class="border-t border-default p-2">
+      <div class="border-t border-muted p-2">
         <UButton
           block
           color="primary"

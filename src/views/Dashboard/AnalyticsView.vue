@@ -9,40 +9,31 @@
     </template>
   </UPageHeader>
   <UPageBody>
-    <UPageCard
-      title="Analytics"
-      variant="outline"
-    >
-      <div
-        class="flex flex-col items-center justify-center py-16 text-center"
-      >
-        <div
-          class="mb-4 flex size-16 items-center justify-center rounded-full bg-muted"
-        >
-          <UIcon
-            name="i-lucide-bar-chart-3"
-            class="size-8 text-muted"
-          />
-        </div>
-        <h4
-          class="mb-2 text-lg font-semibold text-default"
-        >
-          Veri Analizi
-        </h4>
-        <p class="max-w-md text-sm text-muted">
-          Bu sayfa analitik verileri, grafikleri
-          ve istatistikleri gösterecek. İçerik
-          yakında eklenecek.
-        </p>
+    <div class="grid grid-cols-12 gap-4 md:gap-6">
+      <div class="col-span-12">
+        <VisitorTrendLineCard
+          :loading="pageLoading"
+        />
       </div>
-    </UPageCard>
+    </div>
   </UPageBody>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { usePageBreadcrumb } from '@/composables/usePageBreadcrumb'
+import VisitorTrendLineCard from '@/components/dashboard/VisitorTrendLineCard.vue'
+
 const breadcrumbItems = usePageBreadcrumb(
   'Dashboard',
   'Analytics',
 )
+
+const pageLoading = ref(true)
+
+onMounted(() => {
+  setTimeout(() => {
+    pageLoading.value = false
+  }, 1500)
+})
 </script>
