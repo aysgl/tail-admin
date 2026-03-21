@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+GREEN='\033[32m'
 RED='\033[31m'
 NC='\033[0m'
 
@@ -8,3 +9,4 @@ if ! npx --no -- commitlint --edit "$1" >/dev/null 2>&1; then
   printf "Beklenen format: feat: description veya feat(scope): description\n"
   exit 1
 fi
+printf "${GREEN}✓ Commit mesajı formatı geçerli${NC}\n"
