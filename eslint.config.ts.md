@@ -2,18 +2,28 @@
 
 Bu doküman, projedeki `eslint.config.ts` yapılandırmasını ve kullanılan eklentileri açıklar. ESLint 9+ **flat config** formatı kullanılır. Vue 3, TypeScript ve Prettier ile uyumlu bir kurulum sağlanır.
 
-> **Sunum için kısa özet:** [docs/ESLINT-SUNUM-OZETI.md](./docs/ESLINT-SUNUM-OZETI.md) — 2 dakikada anlatım
+## İçindekiler
+
+1. [Konfigürasyon Özeti](#1-konfigürasyon-özeti)
+2. [Dosya ve Dizin Kuralları](#2-dosya-ve-dizin-kuralları)
+3. [Eklentiler ve Kurallar](#3-eklentiler-ve-kurallar)
+4. [NPM Scriptleri](#4-npm-scriptleri)
+5. [Kural Devre Dışı Bırakma](#5-kural-devre-dışı-bırakma)
+6. [Gelişmiş Kurulum (Opsiyonel)](#6-gelişmiş-kurulum-opsiyonel)
+7. [Lint-Staged Entegrasyonu](#7-lint-staged-entegrasyonu)
+8. [IDE Desteği](#8-ide-desteği)
+9. [Özet Akış](#9-özet-akış)
 
 ---
 
 ## 1. Konfigürasyon Özeti
 
-| Özellik            | Değer                                         |
-| ------------------ | --------------------------------------------- |
-| **Config formatı** | Flat config (`eslint.config.ts`)              |
-| **Lint edilen**    | `**/*.{ts,mts,tsx,vue}`                       |
-| **Hariç tutulan**  | `dist`, `dist-ssr`, `coverage`                |
-| **Formatlama**     | Prettier (ESLint format kuralları devre dışı) |
+| Özellik            | Değer                                                        |
+| ------------------ | ------------------------------------------------------------ |
+| **Config formatı** | Flat config (`eslint.config.ts`)                             |
+| **Lint edilen**    | `**/*.{ts,mts,js,mjs,vue}`                                   |
+| **Hariç tutulan**  | `dist`, `dist-ssr`, `coverage`, `storybook-static`, `*.d.ts` |
+| **Formatlama**     | Prettier (ESLint format kuralları devre dışı)                |
 
 ---
 
@@ -22,29 +32,37 @@ Bu doküman, projedeki `eslint.config.ts` yapılandırmasını ve kullanılan ek
 ### `files` — Lint Edilen Dosyalar
 
 ```ts
-files: ['**/*.{ts,mts,tsx,vue}']
+files: ['**/*.{ts,mts,js,mjs,vue}']
 ```
 
 - **`.ts`** — TypeScript dosyaları
 - **`.mts`** — ESM TypeScript modülleri
-- **`.tsx`** — TypeScript + JSX (React benzeri sözdizimi)
+- **`.js`** — JavaScript dosyaları (örn. `commitlint.config.js`)
+- **`.mjs`** — ESM JavaScript modülleri (projede kullanılmıyor)
+- **`scripts/*.ts`** — CLI script'ler (`run.ts`, `clean.ts`) — tsx ile çalıştırılır
 - **`.vue`** — Vue single-file component'leri
 
-### `ignores` — Hariç Tutulan Dizinler
+**Not:** `.tsx` projede kullanılmıyor; Vue SFC kullanıldığı için dahil edilmedi. TSX kullanımı planlanıyorsa pattern'e eklenebilir.
+
+### `ignores` — Hariç Tutulan Dizinler ve Dosyalar
 
 ```ts
 ignores: [
   '**/dist/**',
   '**/dist-ssr/**',
   '**/coverage/**',
+  '**/storybook-static/**',
+  '**/*.d.ts',
 ]
 ```
 
-| Dizin         | Açıklama                |
-| ------------- | ----------------------- |
-| `dist/**`     | Vite build çıktısı      |
-| `dist-ssr/**` | SSR build çıktısı       |
-| `coverage/**` | Test coverage raporları |
+| Pattern               | Açıklama                           |
+| --------------------- | ---------------------------------- |
+| `dist/**`             | Vite build çıktısı                 |
+| `dist-ssr/**`         | SSR build çıktısı                  |
+| `coverage/**`         | Test coverage raporları            |
+| `storybook-static/**` | Storybook build çıktısı            |
+| `*.d.ts`              | Tip tanım dosyaları (env.d.ts vb.) |
 
 ---
 
@@ -74,24 +92,40 @@ Prettier ile çakışan ESLint format kurallarını devre dışı bırakır. For
 - **Amaç:** ESLint ↔ Prettier çakışmasını önlemek
 - **Not:** `eslint-config-prettier` benzeri davranış; format kuralları ESLint'te kapalı
 
+### `eslint-plugin-vuejs-accessibility` (a11y)
+
+Erişilebilirlik kuralları. Recommended preset'e ek olarak özelleştirilmiş kurallar:
+
+- **app/vue-a11y-extended:** `no-aria-hidden-on-focusable`, `no-onchange`, `no-role-presentation-on-focusable`
+- **app/vue-a11y-label-has-for:** `label-has-for` ve `form-control-has-label` (özel seçeneklerle)
+
+### Projeye Özel Kurallar
+
+| Kural bloğu                     | Kurallar                                                                                                                              |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **app/vue-style-rules**         | `vue/multi-word-component-names`, `vue/component-name-in-template-casing` (PascalCase), `vue/block-order` (template → script → style) |
+| **app/no-console**              | `no-console: warn` — console kullanımına uyarı                                                                                        |
+| **app/scripts-console-allowed** | `scripts/**/*.ts` için `no-console: off` — CLI script'lerde console kullanımı serbest                                                 |
+
 ---
 
 ## 4. NPM Scriptleri
 
-| Komut              | Açıklama                                                    |
-| ------------------ | ----------------------------------------------------------- |
-| `npm run lint`     | Tüm dosyalarda lint kontrolü (`--format stylish`)           |
-| `npm run lint:fix` | Önce Prettier ile formatla, sonra ESLint `--fix` ile düzelt |
-| `npm run format`   | Sadece Prettier ile formatla                                |
+| Komut                  | Açıklama                                          |
+| ---------------------- | ------------------------------------------------- |
+| `npm run check:lint`   | Tüm dosyalarda lint kontrolü (`--format stylish`) |
+| `npm run fix:lint`     | ESLint `--fix` ile otomatik düzeltme              |
+| `npm run check:format` | Sadece Prettier ile kontrol                       |
+| `npm run fix:format`   | Prettier ile formatla                             |
 
 ### Örnek Kullanım
 
 ```bash
 # Sadece kontrol
-npm run lint
+npm run check:lint
 
-# Otomatik düzeltme (format + lint fix)
-npm run lint:fix
+# Otomatik düzeltme (format + lint)
+npm run fix:format && npm run fix:lint
 
 # Belirli dosya veya dizin
 npx eslint src/views --fix
@@ -162,17 +196,17 @@ Daha fazla bilgi: [eslint-config-typescript - Advanced Setup](https://github.com
 ```json
 {
   "lint-staged": {
-    "*.{ts,tsx,vue,js,jsx}": [
-      "eslint --fix",
-      "prettier --write"
+    "*.{ts,tsx,vue,js,jsx,mts,mjs}": [
+      "prettier --write",
+      "eslint --fix --no-warn-ignored"
     ],
-    "*.{json,css,scss,md}": ["prettier --write"]
+    "*.{json,css,md}": ["prettier --write"]
   }
 }
 ```
 
-- **JS/TS/Vue:** Önce ESLint `--fix`, sonra Prettier
-- **JSON/CSS/SCSS/MD:** Sadece Prettier
+- **JS/TS/Vue:** Önce Prettier ile format, sonra ESLint `--fix`
+- **JSON/CSS/MD:** Sadece Prettier
 
 ---
 
@@ -193,7 +227,7 @@ Dosya değişikliği
        ↓
   Lint-staged
        ↓
-  eslint --fix  →  prettier --write
+  prettier --write  →  eslint --fix
        ↓
   Commit (lint/format hatası yoksa)
 ```

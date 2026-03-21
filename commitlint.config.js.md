@@ -2,15 +2,28 @@
 
 Bu doküman, projedeki `commitlint.config.js` dosyasını açıklar. Commitlint, commit mesajlarının [Conventional Commits](https://www.conventionalcommits.org/) standardına uygun olmasını sağlar. Husky ile birlikte commit öncesi çalışır.
 
+## İçindekiler
+
+1. [Konfigürasyon Özeti](#1-konfigürasyon-özeti)
+2. [Commit Formatı](#2-commit-formatı)
+3. [İzin Verilen type Değerleri](#3-izin-verilen-type-değerleri)
+4. [Sık Yapılan Hatalar](#4-sık-yapılan-hatalar)
+5. [Kurallar](#5-kurallar)
+6. [Örnek Commit Mesajları](#6-örnek-commit-mesajları)
+7. [Husky Entegrasyonu](#7-husky-entegrasyonu)
+8. [Evrensel Kurallar Rehberi](#8-evrensel-kurallar-rehberi)
+9. [Referanslar](#9-referanslar)
+
 ---
 
 ## 1. Konfigürasyon Özeti
 
-| Özellik             | Değer                             |
-| ------------------- | --------------------------------- |
-| **Dosya**           | `commitlint.config.js`            |
-| **Base**            | `@commitlint/config-conventional` |
-| **Başlık uzunluğu** | 100 karakter                      |
+| Özellik              | Değer                             |
+| -------------------- | --------------------------------- |
+| **Dosya**            | `commitlint.config.js`            |
+| **Base**             | `@commitlint/config-conventional` |
+| **Başlık uzunluğu**  | 100 karakter (max)                |
+| **Subject uzunluğu** | 3 karakter (min)                  |
 
 ---
 
@@ -31,16 +44,19 @@ Bu doküman, projedeki `commitlint.config.js` dosyasını açıklar. Commitlint,
 
 ## 3. İzin Verilen type Değerleri
 
-| type       | Açıklama                             |
-| ---------- | ------------------------------------ |
-| `feat`     | Yeni özellik                         |
-| `fix`      | Bug düzeltmesi                       |
-| `docs`     | Dokümantasyon                        |
-| `style`    | Kod formatı (mantık değişikliği yok) |
-| `refactor` | Refaktör                             |
-| `perf`     | Performans                           |
-| `test`     | Test                                 |
-| `chore`    | Build, config, bağımlılık vb.        |
+| type       | Açıklama                               |
+| ---------- | -------------------------------------- |
+| `feat`     | Yeni özellik                           |
+| `fix`      | Bug düzeltmesi                         |
+| `docs`     | Dokümantasyon                          |
+| `style`    | Kod formatı (mantık değişikliği yok)   |
+| `refactor` | Refaktör                               |
+| `perf`     | Performans                             |
+| `test`     | Test                                   |
+| `build`    | Build, Vite, bağımlılık değişiklikleri |
+| `ci`       | CI/CD (GitHub Actions vb.)             |
+| `chore`    | Genel bakım, config                    |
+| `revert`   | Git revert mesajları                   |
 
 ---
 
@@ -56,7 +72,7 @@ Bu doküman, projedeki `commitlint.config.js` dosyasını açıklar. Commitlint,
 
 - **Seviye:** `2` (hata)
 - **Koşul:** `always`
-- **Değerler:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
+- **Değerler:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 - **Açıklama:** `type` yalnızca bu değerlerden biri olabilir
 
 ### `header-max-length`
@@ -65,12 +81,30 @@ Bu doküman, projedeki `commitlint.config.js` dosyasını açıklar. Commitlint,
 - **Değer:** `100`
 - **Açıklama:** Commit başlığı (ilk satır) en fazla 100 karakter
 
+### `subject-min-length`
+
+- **Seviye:** `2` (hata)
+- **Değer:** `3`
+- **Açıklama:** Subject en az 3 karakter olmalıdır
+
 ### `subject-case`
 
 - **Seviye:** `2` (hata)
 - **Koşul:** `never`
 - **Yasaklanan:** `start-case`, `pascal-case`, `upper-case`
 - **Açıklama:** Subject büyük harfle başlamamalı, PascalCase veya UPPER_CASE olmamalı; küçük harf tercih edilir
+
+### `body-leading-blank`
+
+- **Seviye:** `2` (hata)
+- **Koşul:** `always`
+- **Açıklama:** Body'den önce boş satır zorunludur (body kullanılıyorsa)
+
+### `footer-leading-blank`
+
+- **Seviye:** `2` (hata)
+- **Koşul:** `always`
+- **Açıklama:** Footer'dan önce boş satır zorunludur (footer kullanılıyorsa)
 
 ---
 
@@ -80,7 +114,7 @@ Bu doküman, projedeki `commitlint.config.js` dosyasını açıklar. Commitlint,
 # Geçerli
 git commit -m "feat: add user profile page"
 git commit -m "fix(auth): resolve login redirect loop"
-git commit -m "docs: update ESLINT.md"
+git commit -m "docs: update eslint.config.ts.md"
 git commit -m "chore: upgrade vue to 3.5"
 
 # Geçersiz (type yanlış)
