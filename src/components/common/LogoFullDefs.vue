@@ -7,39 +7,32 @@
       width="5.36841"
       height="20.5263"
       filterUnits="userSpaceOnUse"
-      color-interpolation-filters="sRGB"
-    >
+      color-interpolation-filters="sRGB">
       <feFlood
         flood-opacity="0"
-        result="BackgroundImageFix"
-      />
+        result="BackgroundImageFix" />
       <feColorMatrix
         in="SourceAlpha"
         type="matrix"
         values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-        result="hardAlpha"
-      />
+        result="hardAlpha" />
       <feOffset dy="0.5" />
       <feGaussianBlur stdDeviation="0.5" />
       <feComposite
         in2="hardAlpha"
-        operator="out"
-      />
+        operator="out" />
       <feColorMatrix
         type="matrix"
-        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"
-      />
+        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0" />
       <feBlend
         mode="normal"
         in2="BackgroundImageFix"
-        result="effect1_dropShadow"
-      />
+        result="effect1_dropShadow" />
       <feBlend
         mode="normal"
         in="SourceGraphic"
         in2="effect1_dropShadow"
-        result="shape"
-      />
+        result="shape" />
     </filter>
     <filter
       :id="`filter1_${prefix}`"
@@ -48,39 +41,32 @@
       width="5.36841"
       height="13.7895"
       filterUnits="userSpaceOnUse"
-      color-interpolation-filters="sRGB"
-    >
+      color-interpolation-filters="sRGB">
       <feFlood
         flood-opacity="0"
-        result="BackgroundImageFix"
-      />
+        result="BackgroundImageFix" />
       <feColorMatrix
         in="SourceAlpha"
         type="matrix"
         values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-        result="hardAlpha"
-      />
+        result="hardAlpha" />
       <feOffset dy="0.5" />
       <feGaussianBlur stdDeviation="0.5" />
       <feComposite
         in2="hardAlpha"
-        operator="out"
-      />
+        operator="out" />
       <feColorMatrix
         type="matrix"
-        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"
-      />
+        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0" />
       <feBlend
         mode="normal"
         in2="BackgroundImageFix"
-        result="effect1_dropShadow"
-      />
+        result="effect1_dropShadow" />
       <feBlend
         mode="normal"
         in="SourceGraphic"
         in2="effect1_dropShadow"
-        result="shape"
-      />
+        result="shape" />
     </filter>
     <filter
       :id="`filter2_${prefix}`"
@@ -89,39 +75,32 @@
       width="5.36841"
       height="18"
       filterUnits="userSpaceOnUse"
-      color-interpolation-filters="sRGB"
-    >
+      color-interpolation-filters="sRGB">
       <feFlood
         flood-opacity="0"
-        result="BackgroundImageFix"
-      />
+        result="BackgroundImageFix" />
       <feColorMatrix
         in="SourceAlpha"
         type="matrix"
         values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-        result="hardAlpha"
-      />
+        result="hardAlpha" />
       <feOffset dy="0.5" />
       <feGaussianBlur stdDeviation="0.5" />
       <feComposite
         in2="hardAlpha"
-        operator="out"
-      />
+        operator="out" />
       <feColorMatrix
         type="matrix"
-        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"
-      />
+        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0" />
       <feBlend
         mode="normal"
         in2="BackgroundImageFix"
-        result="effect1_dropShadow"
-      />
+        result="effect1_dropShadow" />
       <feBlend
         mode="normal"
         in="SourceGraphic"
         in2="effect1_dropShadow"
-        result="shape"
-      />
+        result="shape" />
     </filter>
   </defs>
 </template>

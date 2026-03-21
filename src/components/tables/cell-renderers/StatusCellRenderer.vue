@@ -2,8 +2,7 @@
   <UBadge
     :color="statusColor"
     variant="subtle"
-    size="sm"
-  >
+    size="sm">
     {{ params.value }}
   </UBadge>
 </template>

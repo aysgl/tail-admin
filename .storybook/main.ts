@@ -39,6 +39,27 @@ const config: StorybookConfig = {
         )
       return false
     }
+    // Nuxt UI zaten unplugin-auto-import ve unplugin-vue-components ekliyor;
+    // Storybook tarafından gelen kopyaları çıkar, yoksa "Multiple instances" hatası alınır
+    const isDuplicateUnplugin = (
+      p: PluginOption,
+    ): boolean => {
+      if (
+        typeof p === 'object' &&
+        p !== null &&
+        p &&
+        'name' in p
+      ) {
+        const name = String(
+          (p as { name?: string }).name,
+        )
+        return (
+          name === 'unplugin-auto-import' ||
+          name === 'unplugin-vue-components'
+        )
+      }
+      return false
+    }
     const flatten = (
       arr: PluginOption[],
     ): PluginOption[] =>
@@ -52,7 +73,11 @@ const config: StorybookConfig = {
     )
     const plugins = [
       uiPlugin,
-      ...raw.filter((p) => !isDevtoolsPlugin(p)),
+      ...raw.filter(
+        (p) =>
+          !isDevtoolsPlugin(p) &&
+          !isDuplicateUnplugin(p),
+      ),
     ]
     // 2) Tarayıcıda Vue devtools'un devre dışı kalması için define
     const define = {

@@ -43,6 +43,7 @@ export default defineConfig({
     }),
   ],
   build: {
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -56,10 +57,16 @@ export default defineConfig({
             'ag-grid-community',
           ],
           'ui-libs': ['v-calendar'],
+          fullcalendar: [
+            '@fullcalendar/core',
+            '@fullcalendar/daygrid',
+            '@fullcalendar/interaction',
+            '@fullcalendar/timegrid',
+            '@fullcalendar/vue3',
+          ],
         },
       },
     },
-    chunkSizeWarningLimit: 600,
   },
   resolve: {
     alias: {

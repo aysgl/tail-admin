@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-ssr
+coverage
+storybook-static
+.nuxt-ui
+*.min.js
+package-lock.json
+auto-imports.d.ts
+components.d.ts

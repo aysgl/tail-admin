@@ -243,6 +243,12 @@ const closeModal = () => {
   resetModalFields()
 }
 
+// Template'de @update:open ile kullanılıyor; ESLint SFC bağlantısını görmüyor
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function onModalOpenChange(open: boolean) {
+  if (!open) resetModalFields()
+}
+
 const resetModalFields = () => {
   eventTitle.value = ''
   eventStartDate.value = ''

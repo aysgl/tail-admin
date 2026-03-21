@@ -7,31 +7,25 @@
     :ui="{
       content:
         'w-80 max-h-[480px] overflow-hidden flex flex-col p-0',
-    }"
-  >
+    }">
     <UButton
       color="primary"
       variant="soft"
       square
       aria-label="Bildirimler"
-      class="relative h-10 w-10 shrink-0 justify-center items-center"
-    >
+      class="relative h-10 w-10 shrink-0 justify-center items-center">
       <UIcon
         name="i-lucide-bell"
-        class="size-5"
-      />
+        class="size-5" />
       <span
         v-if="notifying"
-        class="absolute right-2 top-2 size-2 rounded-full bg-orange-400"
-      />
+        class="absolute right-2 top-2 size-2 rounded-full bg-orange-400" />
     </UButton>
     <template #content>
       <div
-        class="flex items-center justify-between border-b border-muted p-3"
-      >
+        class="flex items-center justify-between border-b border-muted p-3">
         <h5
-          class="font-semibold text-highlighted"
-        >
+          class="font-semibold text-highlighted">
           Notification
         </h5>
       </div>
@@ -41,13 +35,11 @@
           :key="notification.id"
           href="#"
           class="flex gap-3 rounded-lg p-3 hover:bg-muted"
-          @click.prevent
-        >
+          @click.prevent>
           <UAvatar
             :src="notification.userImage"
             :alt="notification.userName"
-            size="sm"
-          />
+            size="sm" />
           <div class="min-w-0 flex-1">
             <p class="text-sm text-muted">
               <span
@@ -72,8 +64,7 @@
           block
           color="primary"
           variant="outline"
-          size="sm"
-        >
+          size="sm">
           View All Notification
         </UButton>
       </div>

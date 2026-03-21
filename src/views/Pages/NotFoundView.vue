@@ -1,10 +1,8 @@
 <template>
   <div
-    class="relative flex min-h-full flex-1 flex-col items-center justify-center overflow-hidden bg p-6"
-  >
+    class="relative flex min-h-full flex-1 flex-col items-center justify-center overflow-hidden bg p-6">
     <div
-      class="relative z-0 flex flex-1 flex-col items-center justify-center"
-    >
+      class="relative z-0 flex flex-1 flex-col items-center justify-center">
       <AuthCover />
       <UPageHero
         :links="[
@@ -16,23 +14,19 @@
             size: 'lg',
           },
         ]"
-        class="mx-auto w-full max-w-[472px] text-center"
-      >
+        class="mx-auto w-full max-w-[472px] text-center">
         <template #header>
           <h1
-            class="mb-8 font-bold text-4xl text-highlighted xl:text-7xl"
-          >
+            class="mb-8 font-bold text-4xl text-highlighted xl:text-7xl">
             Page Not Found
           </h1>
           <UColorModeImage
             light="/images/error/404.svg"
             dark="/images/error/404-dark.svg"
             alt="404"
-            class="mx-auto w-full max-w-[242px] sm:max-w-[472px]"
-          />
+            class="mx-auto w-full max-w-[242px] sm:max-w-[472px]" />
           <p
-            class="mt-10 mb-6 text-base text-muted sm:text-lg"
-          >
+            class="mt-10 mb-6 text-base text-muted sm:text-lg">
             We can't seem to find the page you are
             looking for!
           </p>
@@ -40,8 +34,7 @@
       </UPageHero>
     </div>
     <p
-      class="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-sm text-muted"
-    >
+      class="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-sm text-muted">
       &copy; {{ currentYear }} - TailAdmin
     </p>
   </div>

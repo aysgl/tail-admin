@@ -2,8 +2,7 @@
   <UPageCard
     title="Completion Rate"
     description="Report completion rate (Radial Gauge)"
-    variant="outline"
-  >
+    variant="outline">
     <div class="h-[330px]">
       <AgGauge :options="gaugeOptions" />
     </div>

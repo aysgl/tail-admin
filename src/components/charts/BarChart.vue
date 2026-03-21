@@ -2,17 +2,14 @@
   <div class="relative min-h-[280px]">
     <div
       v-if="loading"
-      class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg"
-    >
+      class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg">
       <ChartSkeletonOverlay
         variant="bar"
-        class="h-full w-full"
-      />
+        class="h-full w-full" />
     </div>
     <AgCharts
       v-show="!loading"
-      :options="chartOptions"
-    />
+      :options="chartOptions" />
   </div>
 </template>
 

@@ -2,12 +2,10 @@
   <UPageCard
     title="Visitors Distribution"
     description="Visitor distribution (Histogram instead of Range Bar)"
-    variant="outline"
-  >
+    variant="outline">
     <div class="max-w-full overflow-x-auto">
       <div
-        class="-ml-4 min-w-[500px] pl-2 h-[310px] xl:min-w-full"
-      >
+        class="-ml-4 min-w-[500px] pl-2 h-[310px] xl:min-w-full">
         <AgCharts :options="chartOptions" />
       </div>
     </div>

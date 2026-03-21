@@ -28,11 +28,14 @@ jobs:
       - name: Commitlint
         run: npx commitlint --from HEAD~20 --to HEAD
 
+      - name: Format
+        run: npm run check:format
+
       - name: Lint
-        run: npm run lint
+        run: npm run check:lint
 
       - name: Type check
-        run: npm run type-check
+        run: npm run check:types
 
       - name: Build
         run: npm run build

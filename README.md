@@ -83,7 +83,14 @@ git clone https://github.com/TailAdmin/vue-tailwind-admin-dashboard.git
    npm run build
    ```
 
-Tüm komutlar (`lint`, `format`, `storybook`, `stash` vb.) ve geliştirme akışı için aşağıdaki [Config Dokümantasyonu & Tooling](#config-dokümantasyonu--tooling-) bölümüne ve ilgili config dosyalarına bakın.
+#### Cache Temizleme ve Yeniden Kurulum
+
+- **`npm run clean:cache`** — node_modules, dist, storybook-static, coverage, npm cache siler
+- **`npm run clean:install`** — clean:cache + `npm install --legacy-peer-deps` ile temiz kurulum
+
+> **Not:** @nuxt/ui peer dep uyumu için `--legacy-peer-deps` kullanılır. Cursor/VS Code açıkken `EPERM` hatası alırsanız IDE’yi kapatıp **Terminal.app**’den çalıştırın.
+
+Tüm komutlar (`check:*`, `fix:*`, `storybook`, `stash` vb.) ve script lifecycle için [package.json.md](./package.json.md) ve [Config Dokümantasyonu & Tooling](#config-dokümantasyonu--tooling-) bölümüne bakın.
 
 ## Config Dokümantasyonu & Tooling ⚠️
 
@@ -93,6 +100,7 @@ Bu projedeki tüm yapılandırma dosyalarının dokümantasyonu. **Merge conflic
 
 | Dosya                                | Açıklama                           |
 | ------------------------------------ | ---------------------------------- |
+| [package.json.md](./package.json.md) | Paketler ve script lifecycle       |
 | [COMMITLINT.md](./COMMITLINT.md)     | Commit mesajı kuralları ve formatı |
 | [EDITORCONFIG.md](./EDITORCONFIG.md) | EditorConfig ayarları              |
 | [ESLINT.md](./ESLINT.md)             | ESLint kuralları ve kullanımı      |
@@ -140,9 +148,8 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 
 **Geliştirme Aşaması**
 
-- **ESLint**: `npm run lint` — Kod kalitesi ve stil kuralları
-- **Prettier**: `npm run format` — Otomatik formatlama (VSCode/Cursor'da format on save önerilir)
-- **TypeScript (vue-tsc)**: `npm run type-check` — Vue SFC'leri dahil tip güvenliği kontrolü
+- **check:\*** — kontrol (dosya değiştirmez): `check:lint`, `check:format`, `check:types`
+- **fix:\*** — düzelt (dosyayı değiştirir): `fix:lint`, `fix:format` (prefix var, ayrı ayrı)
 
 **Lokal Onay (Git Hooks)**
 
@@ -167,7 +174,7 @@ npm run stash
 # veya git stash kullanmak için (bir kez): npm run stash:setup
 ```
 
-Stash sonrası: `lint:fix`, `lint`, `type-check`, `build` sırasını çalıştırmanız hatırlatılır.
+Stash sonrası: `fix:format`, `fix:lint`, `check:types`, `build` sırasını çalıştırmanız hatırlatılır.
 
 **CI Pipeline** (.github/workflows/ci.yml)
 

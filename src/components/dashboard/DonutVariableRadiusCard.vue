@@ -2,8 +2,7 @@
   <UPageCard
     title="Revenue Overview"
     description="This year vs last year by category"
-    variant="outline"
-  >
+    variant="outline">
     <div class="h-[350px]">
       <AgCharts :options="chartOptions" />
     </div>

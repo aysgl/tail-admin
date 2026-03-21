@@ -2,26 +2,21 @@
   <UPageCard
     title="Visitor Trend"
     description="Visitor, new user, and return rate"
-    variant="outline"
-  >
+    variant="outline">
     <div class="relative h-[400px] w-full">
       <div
         v-if="loading"
-        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg"
-      >
+        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg">
         <ChartSkeletonOverlay
           variant="line"
-          class="h-full w-full"
-        />
+          class="h-full w-full" />
       </div>
       <div
         class="h-full w-full"
-        :class="{ 'opacity-0': loading }"
-      >
+        :class="{ 'opacity-0': loading }">
         <AgCharts
           class="h-full w-full"
-          :options="chartOptions"
-        />
+          :options="chartOptions" />
       </div>
     </div>
   </UPageCard>

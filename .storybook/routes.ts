@@ -7,9 +7,7 @@ export const storybookRoutes: RouteRecordRaw[] = [
     path: '/',
     name: 'Ecommerce',
     component: () =>
-      import(
-        '../src/views/Dashboard/EcommerceView.vue'
-      ),
+      import('../src/views/Dashboard/EcommerceView.vue'),
     meta: { title: 'eCommerce' },
   },
   {
@@ -74,9 +72,7 @@ export const storybookRoutes: RouteRecordRaw[] = [
     path: '/form-elements',
     name: 'Form Elements',
     component: () =>
-      import(
-        '../src/views/Forms/FormElements.vue'
-      ),
+      import('../src/views/Forms/FormView.vue'),
     meta: { title: 'Form Elements' },
   },
   {

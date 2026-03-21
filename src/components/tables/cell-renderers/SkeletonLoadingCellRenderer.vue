@@ -4,22 +4,17 @@
     :class="{
       'skeleton-user': type === 'user',
       'skeleton-text': type === 'text',
-    }"
-  >
+    }">
     <!-- User type: avatar + lines -->
     <template v-if="type === 'user'">
       <div
-        class="size-8 shrink-0 animate-pulse overflow-hidden rounded-full bg-accented"
-      />
+        class="size-8 shrink-0 animate-pulse overflow-hidden rounded-full bg-accented" />
       <div
-        class="flex min-w-0 flex-1 flex-col gap-2"
-      >
+        class="flex min-w-0 flex-1 flex-col gap-2">
         <div
-          class="h-4 w-24 animate-pulse rounded bg-accented"
-        />
+          class="h-4 w-24 animate-pulse rounded bg-accented" />
         <div
-          class="h-3 w-16 animate-pulse rounded bg-accented"
-        />
+          class="h-3 w-16 animate-pulse rounded bg-accented" />
       </div>
     </template>
     <!-- Team type: avatars -->
@@ -28,21 +23,18 @@
         <div
           v-for="i in 3"
           :key="i"
-          class="size-8 animate-pulse rounded-full bg-accented"
-        />
+          class="size-8 animate-pulse rounded-full bg-accented" />
       </div>
     </template>
     <!-- Status type: pill -->
     <template v-else-if="type === 'status'">
       <div
-        class="h-6 w-16 animate-pulse rounded-full bg-accented"
-      />
+        class="h-6 w-16 animate-pulse rounded-full bg-accented" />
     </template>
     <!-- Default text type -->
     <template v-else>
       <div
-        class="h-4 w-full max-w-[80%] animate-pulse rounded bg-accented"
-      />
+        class="h-4 w-full max-w-[80%] animate-pulse rounded bg-accented" />
     </template>
   </div>
 </template>

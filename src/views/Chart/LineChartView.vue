@@ -2,8 +2,7 @@
   <UPageHeader
     headline="Charts"
     title="Line Chart"
-    class="py-0 border-none"
-  >
+    class="py-0 border-none">
     <template #headline>
       <UBreadcrumb :items="breadcrumbItems" />
     </template>
@@ -11,8 +10,7 @@
   <UPageBody>
     <UPageCard
       title="Line Chart"
-      variant="outline"
-    >
+      variant="outline">
       <LineChart />
     </UPageCard>
   </UPageBody>

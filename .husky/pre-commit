@@ -7,5 +7,5 @@ NC='\033[0m'
 npx lint-staged --quiet >/dev/null 2>&1 || { printf "${RED}✗ Lint başarısız${NC}\n"; exit 1; }
 printf "${GREEN}✓ Lint başarılı${NC}\n"
 
-npm run type-check -s >/dev/null 2>&1 || { printf "${RED}✗ TypeScript hatası${NC}\n"; exit 1; }
+npm run check:types -s >/dev/null 2>&1 || { printf "${RED}✗ TypeScript hatası${NC}\n"; exit 1; }
 printf "${GREEN}✓ Pre-commit kontrolleri başarılı${NC}\n"

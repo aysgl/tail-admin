@@ -1,36 +1,31 @@
 <template>
   <div
-    class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 md:gap-6"
-  >
+    class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 md:gap-6">
     <UPageCard
       v-for="metric in metrics"
       :key="metric.label"
       variant="outline"
-      class="h-full"
-    >
+      class="h-full">
       <div
-        class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15"
-      >
+        class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15">
         <UIcon
           :name="metric.icon"
-          class="size-6 text-primary"
-        />
+          class="size-6 text-primary" />
       </div>
       <div class="mt-4">
         <span class="text-sm text-muted">{{
           metric.label
         }}</span>
         <h4
-          class="mt-1 font-bold text-2xl text-highlighted"
-        >
+          class="mt-1 font-bold text-2xl text-highlighted">
           {{ metric.value }}
         </h4>
         <div
-          class="mt-3 h-[64px] w-full overflow-hidden rounded-md"
-        >
+          class="mt-3 h-[64px] w-full overflow-hidden rounded-md">
           <AgCharts
-            :options="metric.chartOptions.value"
-          />
+            :options="
+              metric.chartOptions.value
+            " />
         </div>
       </div>
     </UPageCard>

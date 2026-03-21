@@ -2,12 +2,10 @@
   <RouterLink
     to="/"
     class="flex items-center"
-    aria-label="Home"
-  >
+    aria-label="Home">
     <Logo
       :icon="collapsed"
-      :class="collapsed ? 'mx-auto' : ''"
-    />
+      :class="collapsed ? 'mx-auto' : ''" />
   </RouterLink>
 </template>
 

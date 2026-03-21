@@ -5,18 +5,15 @@
       :src="params.data?.avatar"
       :alt="params.data?.name"
       size="sm"
-      class="shrink-0"
-    />
+      class="shrink-0" />
     <div class="min-w-0">
       <span
-        class="block truncate font-medium text-sm text-highlighted"
-      >
+        class="block truncate font-medium text-sm text-highlighted">
         {{ params.data?.name }}
       </span>
       <span
         v-if="!isCompact"
-        class="block truncate text-xs text-muted"
-      >
+        class="block truncate text-xs text-muted">
         {{ params.data?.role }}
       </span>
     </div>

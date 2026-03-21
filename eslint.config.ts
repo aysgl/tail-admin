@@ -23,7 +23,7 @@ import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
 export default defineConfigWithVueTs(
   {
     name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+    files: ['**/*.{ts,mts,js,mjs,vue}'],
   },
 
   {
@@ -33,6 +33,7 @@ export default defineConfigWithVueTs(
       '**/dist-ssr/**',
       '**/coverage/**',
       '**/storybook-static/**',
+      '**/*.d.ts',
     ],
   },
 
@@ -51,18 +52,6 @@ export default defineConfigWithVueTs(
     },
   },
   {
-    name: 'app/vue-parsing-error',
-    rules: {
-      'vue/no-parsing-error': [
-        'error',
-        {
-          'invalid-first-character-of-tag-name':
-            false,
-        },
-      ],
-    },
-  },
-  {
     name: 'app/vue-a11y-label-has-for',
     rules: {
       'vuejs-accessibility/label-has-for': [
@@ -74,6 +63,36 @@ export default defineConfigWithVueTs(
       ],
       'vuejs-accessibility/form-control-has-label':
         'error',
+    },
+  },
+  {
+    name: 'app/vue-style-rules',
+    rules: {
+      'vue/multi-word-component-names': 'error',
+      'vue/component-name-in-template-casing': [
+        'error',
+        'PascalCase',
+      ],
+      'vue/block-order': [
+        'error',
+        {
+          order: ['template', 'script', 'style'],
+        },
+      ],
+    },
+  },
+  {
+    name: 'app/no-console',
+    rules: {
+      'no-console': 'warn',
+    },
+  },
+  // CLI script'leri terminale yazdırır; console kullanımı beklenir
+  {
+    name: 'app/scripts-console-allowed',
+    files: ['scripts/**/*.ts'],
+    rules: {
+      'no-console': 'off',
     },
   },
   skipFormatting,

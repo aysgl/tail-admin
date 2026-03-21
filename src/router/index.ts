@@ -23,9 +23,7 @@ const router = createRouter({
       path: '/ecommerce',
       name: 'Ecommerce',
       component: () =>
-        import(
-          '../views/Dashboard/EcommerceView.vue'
-        ),
+        import('../views/Dashboard/EcommerceView.vue'),
       meta: {
         title: 'Ecommerce',
         headline: 'Dashboard',
@@ -36,9 +34,7 @@ const router = createRouter({
       path: '/analytics',
       name: 'Analytics',
       component: () =>
-        import(
-          '../views/Dashboard/AnalyticsView.vue'
-        ),
+        import('../views/Dashboard/AnalyticsView.vue'),
       meta: {
         title: 'Analytics',
         headline: 'Dashboard',
@@ -49,9 +45,7 @@ const router = createRouter({
       path: '/sales',
       name: 'Sales',
       component: () =>
-        import(
-          '../views/Dashboard/SalesView.vue'
-        ),
+        import('../views/Dashboard/SalesView.vue'),
       meta: {
         title: 'Sales',
         headline: 'Dashboard',
@@ -62,9 +56,7 @@ const router = createRouter({
       path: '/reports',
       name: 'Reports',
       component: () =>
-        import(
-          '../views/Dashboard/ReportsView.vue'
-        ),
+        import('../views/Dashboard/ReportsView.vue'),
       meta: {
         title: 'Reports',
         headline: 'Dashboard',
@@ -75,9 +67,7 @@ const router = createRouter({
       path: '/calendar',
       name: 'Calendar',
       component: () =>
-        import(
-          '../views/Calendar/CalendarView.vue'
-        ),
+        import('../views/Calendar/CalendarView.vue'),
       meta: {
         title: 'Calendar',
         layout: 'main',
@@ -87,9 +77,7 @@ const router = createRouter({
       path: '/profile',
       name: 'Profile',
       component: () =>
-        import(
-          '../views/Profile/UserProfileView.vue'
-        ),
+        import('../views/Profile/UserProfileView.vue'),
       meta: {
         title: 'Profile',
         headline: 'User Profile',
@@ -100,9 +88,7 @@ const router = createRouter({
       path: '/account-settings',
       name: 'Account Settings',
       component: () =>
-        import(
-          '../views/Profile/AccountSettingsView.vue'
-        ),
+        import('../views/Profile/AccountSettingsView.vue'),
       meta: {
         title: 'Account Settings',
         headline: 'Account',
@@ -115,9 +101,7 @@ const router = createRouter({
       path: '/compact-tables',
       name: 'Compact Tables',
       component: () =>
-        import(
-          '../views/Tables/CompactTableView.vue'
-        ),
+        import('../views/Tables/CompactTableView.vue'),
       meta: {
         title: 'Compact Tables',
         headline: 'Tables',
@@ -128,9 +112,7 @@ const router = createRouter({
       path: '/relaxed-tables',
       name: 'Relaxed Tables',
       component: () =>
-        import(
-          '../views/Tables/RelaxedTableView.vue'
-        ),
+        import('../views/Tables/RelaxedTableView.vue'),
       meta: {
         title: 'Relaxed Tables',
         headline: 'Tables',
@@ -141,9 +123,7 @@ const router = createRouter({
       path: '/advance-tables',
       name: 'Advance Tables',
       component: () =>
-        import(
-          '../views/Tables/AdvanceTableView.vue'
-        ),
+        import('../views/Tables/AdvanceTableView.vue'),
       meta: {
         title: 'Advance Tables',
         headline: 'Tables',

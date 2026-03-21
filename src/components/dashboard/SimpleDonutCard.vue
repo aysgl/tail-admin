@@ -2,22 +2,18 @@
   <UPageCard
     title="Category Breakdown"
     description="Distribution by report category"
-    variant="outline"
-  >
+    variant="outline">
     <div class="relative h-[340px]">
       <div
         v-if="loading"
-        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg"
-      >
+        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg">
         <ChartSkeletonOverlay
           variant="donut"
-          class="h-full w-full"
-        />
+          class="h-full w-full" />
       </div>
       <div
         class="h-full"
-        :class="{ 'opacity-0': loading }"
-      >
+        :class="{ 'opacity-0': loading }">
         <AgCharts :options="chartOptions" />
       </div>
     </div>

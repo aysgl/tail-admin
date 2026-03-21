@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 
 node_modules
+node_modules._delete_
 .DS_Store
 dist
 coverage

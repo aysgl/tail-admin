@@ -2,12 +2,10 @@
   <UPageCard variant="outline">
     <template #header>
       <div
-        class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
-      >
+        class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3
-            class="text-lg font-semibold text-highlighted"
-          >
+            class="text-lg font-semibold text-highlighted">
             Statistics
           </h3>
           <p class="mt-1 text-sm text-muted">
@@ -15,13 +13,11 @@
           </p>
         </div>
         <div
-          class="grid shrink-0 grid-cols-[auto_auto] items-center gap-3"
-        >
+          class="grid shrink-0 grid-cols-[auto_auto] items-center gap-3">
           <UTabs
             v-model="statisticsSelected"
             :items="statisticsOptions"
-            :content="false"
-          />
+            :content="false" />
           <UPopover>
             <UButton
               color="primary"
@@ -32,8 +28,7 @@
               "
               icon="i-lucide-calendar"
               class="min-w-40"
-              size="lg"
-            />
+              size="lg" />
             <template #content>
               <VDatePicker
                 v-model.range="
@@ -44,30 +39,25 @@
                 :is-dark="{
                   selector: 'html',
                   darkClass: 'dark',
-                }"
-              />
+                }" />
             </template>
           </UPopover>
         </div>
       </div>
     </template>
     <div
-      class="relative max-w-full overflow-x-auto"
-    >
+      class="relative max-w-full overflow-x-auto">
       <div
         v-if="loading"
-        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg"
-      >
+        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg">
         <ChartSkeletonOverlay
           variant="area"
-          class="h-[310px] w-full"
-        />
+          class="h-[310px] w-full" />
       </div>
       <div
         id="chartThree"
         class="-ml-4 min-w-[1000px] xl:min-w-full pl-2 h-[310px]"
-        :class="{ 'opacity-0': loading }"
-      >
+        :class="{ 'opacity-0': loading }">
         <AgCharts :options="chartOptions" />
       </div>
     </div>

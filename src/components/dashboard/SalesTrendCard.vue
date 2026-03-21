@@ -2,24 +2,19 @@
   <UPageCard
     title="Sales Trend"
     description="Monthly sales and revenue performance"
-    variant="outline"
-  >
+    variant="outline">
     <div
-      class="relative min-h-[340px] max-w-full overflow-x-auto"
-    >
+      class="relative min-h-[340px] max-w-full overflow-x-auto">
       <div
         v-if="loading"
-        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg"
-      >
+        class="loading-overlay absolute inset-0 z-20 overflow-hidden rounded-lg">
         <ChartSkeletonOverlay
           variant="area"
-          class="h-[340px] w-full"
-        />
+          class="h-[340px] w-full" />
       </div>
       <div
         class="-ml-4 min-w-[650px] pl-2 h-[340px] xl:min-w-full"
-        :class="{ 'opacity-0': loading }"
-      >
+        :class="{ 'opacity-0': loading }">
         <AgCharts :options="chartOptions" />
       </div>
     </div>
