@@ -1,8 +1,12 @@
 #!/usr/bin/env sh
 
+GREEN='\033[32m'
+RED='\033[31m'
+NC='\033[0m'
+
 echo ""
 echo "🔍 Push öncesi build kontrolü..."
 echo ""
-npm run build
+npm run build || { printf "${RED}✗ Build başarısız${NC}\n"; exit 1; }
 echo ""
-echo "✓ Build başarılı, push devam ediyor"
+printf "${GREEN}✓ Build başarılı, push devam ediyor${NC}\n"

@@ -1,9 +1,11 @@
 #!/usr/bin/env sh
 
-echo "📋 Prettier + ESLint (staged files)..."
-npx lint-staged --quiet
-echo "✓ Lint geçti"
+GREEN='\033[32m'
+RED='\033[31m'
+NC='\033[0m'
 
-echo "📋 TypeScript kontrolü..."
-npm run type-check
-echo "✓ Pre-commit kontrolleri başarılı"
+npx lint-staged --quiet >/dev/null 2>&1 || { printf "${RED}✗ Lint başarısız${NC}\n"; exit 1; }
+printf "${GREEN}✓ Lint başarılı${NC}\n"
+
+npm run type-check -s >/dev/null 2>&1 || { printf "${RED}✗ TypeScript hatası${NC}\n"; exit 1; }
+printf "${GREEN}✓ Pre-commit kontrolleri başarılı${NC}\n"
