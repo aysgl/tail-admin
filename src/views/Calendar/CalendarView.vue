@@ -57,7 +57,7 @@
       "
       description="Plan your next big moment: schedule or edit an event to stay on track"
       @update:open="
-        (v) => {
+        (v: boolean) => {
           if (!v) resetModalFields()
         }
       ">

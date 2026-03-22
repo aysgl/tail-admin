@@ -25,7 +25,5 @@ export default {
       'never',
       ['start-case', 'pascal-case', 'upper-case'],
     ],
-    'body-leading-blank': [2, 'always'],
-    'footer-leading-blank': [2, 'always'],
   },
 }

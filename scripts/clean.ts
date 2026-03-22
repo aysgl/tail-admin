@@ -77,34 +77,34 @@ function remove(path: string): boolean {
   }
 }
 
+const boxTitle = isReinstall
+  ? 'Tam yeniden kurulum'
+  : 'Cache temizleniyor'
+
 try {
-  console.log(
-    `\n${isReinstall ? 'Tam yeniden kurulum' : 'Cache'} temizleniyor:\n`,
-  )
+  console.log(`\n┌  ${boxTitle}\n│`)
 
   for (const path of dirs) {
     const full = join(root, path)
     if (existsSync(full)) {
       remove(path)
-      console.log(`  ${green}✓${reset} ${path}`)
+      console.log(`│  ${green}✓${reset} ${path}`)
       cleaned++
     } else {
       console.log(
-        `  ${dim}·${reset} ${path} (yok)`,
+        `│  ${dim}·${reset} ${path} (yok)`,
       )
     }
   }
 
   console.log(
-    `\n${green}✓ Temizlendi.${reset} ${cleaned} öğe silindi.`,
+    `│\n└  ${green}✓ Temizlendi.${reset} ${cleaned} öğe silindi.\n`,
   )
 
   if (isReinstall) {
     console.log(
-      `  npm install ile yeniden yükleme yapılıyor...\n`,
+      '  npm install ile yeniden yükleme yapılıyor...\n',
     )
-  } else {
-    console.log('')
   }
 } catch (err) {
   const message =

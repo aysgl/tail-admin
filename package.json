@@ -15,7 +15,7 @@
     "build:storybook": "storybook build",
     "build:chromatic": "npx chromatic --project-token=chpt_a654caf7d2b2fa0",
     "clean:cache": "tsx scripts/clean.ts",
-    "clean:install": "tsx scripts/clean.ts --reinstall && npm install --legacy-peer-deps",
+    "clean:install": "tsx scripts/clean.ts --reinstall && npm install",
     "prepare": "husky"
   },
   "lint-staged": {
