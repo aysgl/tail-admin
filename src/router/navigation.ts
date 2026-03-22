@@ -45,6 +45,7 @@ const TABLES_PREFIXES = [
 ]
 const PAGES_PATHS = [
   '/blank',
+  '/graphql-demo',
   '/not-found',
   '/signin',
   '/signup',
@@ -208,6 +209,11 @@ function buildPagesNavItem(
         label: 'Blank Page',
         to: '/blank',
         icon: 'i-lucide-file',
+      },
+      {
+        label: 'GraphQL Demo',
+        to: '/graphql-demo',
+        icon: 'i-lucide-database',
       },
       {
         label: 'Not Found',

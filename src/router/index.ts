@@ -136,6 +136,17 @@ const router = createRouter({
       },
     },
     {
+      path: '/graphql-demo',
+      name: 'GraphQL Demo',
+      component: () =>
+        import('../views/Demo/GraphqlDemoView.vue'),
+      meta: {
+        title: 'GraphQL Demo',
+        headline: 'Demo',
+        layout: 'main',
+      },
+    },
+    {
       path: '/form-elements',
       name: 'Form',
       component: () =>

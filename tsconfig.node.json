@@ -14,6 +14,7 @@
   "include": [
     "vite.config.*",
     "eslint.config.*",
+    "graphql.config.*",
     "eslint-rules/**/*.d.ts",
     "scripts/**/*.ts"
   ]

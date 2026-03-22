@@ -24,6 +24,10 @@
       "prettier --write",
       "eslint --fix --no-warn-ignored"
     ],
+    "*.{graphql,gql}": [
+      "prettier --write",
+      "eslint --fix --no-warn-ignored"
+    ],
     "*.{json,css,md}": [
       "prettier --write"
     ]
@@ -39,12 +43,15 @@
     "ag-charts-vue3": "^13.1.0",
     "ag-grid-vue3": "^33.0.0",
     "axios": "^1.13.6",
+    "graphql": "^16.13.1",
+    "graphql-request": "^7.4.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.4.4",
     "@commitlint/config-conventional": "^20.4.4",
+    "@graphql-eslint/eslint-plugin": "^4.4.0",
     "@iconify-json/lucide": "^1.2.14",
     "@storybook/addon-a11y": "^10.2.19",
     "@storybook/addon-designs": "^11.1.2",

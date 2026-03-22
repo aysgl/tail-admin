@@ -1,13 +1,15 @@
 /**
- * ESLint Flat Config — Vue 3 + TypeScript + Prettier
+ * ESLint Flat Config — Vue 3 + TypeScript + Prettier + GraphQL
  *
  * Paketler:
  *   eslint-plugin-vue              → Vue kuralları (.vue dosyaları)
- *   @vue/eslint-config-typescript   → TypeScript kuralları
- *   @vue/eslint-config-prettier    → Prettier ile çakışmayı önler
+ *   @vue/eslint-config-typescript  → TypeScript kuralları
+ *   @vue/eslint-config-prettier   → Prettier ile çakışmayı önler
+ *   @graphql-eslint/eslint-plugin  → GraphQL operasyon kuralları
  *
  * Erişilebilirlik: Storybook addon-a11y ile kontrol edilir.
  */
+import graphqlPlugin from '@graphql-eslint/eslint-plugin'
 import pluginVue from 'eslint-plugin-vue'
 import {
   defineConfigWithVueTs,
@@ -191,6 +193,36 @@ export default defineConfigWithVueTs(
     files: ['scripts/**/*.ts'],
     rules: {
       'no-console': 'off',
+    },
+  },
+  // GraphQL dosyaları — TS/JS kuralları devre dışı (farklı parser)
+  {
+    name: 'app/graphql',
+    files: ['**/*.graphql', '**/*.gql'],
+    languageOptions: {
+      parser: graphqlPlugin.parser,
+      parserOptions: {
+        graphQLConfig: {
+          schema:
+            'https://graphqlzero.almansi.me/api',
+          documents: ['src/graphql/**/*.graphql'],
+        },
+      },
+    },
+    plugins: {
+      '@graphql-eslint': graphqlPlugin,
+    },
+    rules: {
+      ...graphqlPlugin.configs[
+        'flat/operations-recommended'
+      ].rules,
+      '@typescript-eslint/no-floating-promises':
+        'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/prefer-nullish-coalescing':
+        'off',
+      '@typescript-eslint/no-unnecessary-type-assertion':
+        'off',
     },
   },
   skipFormatting,
