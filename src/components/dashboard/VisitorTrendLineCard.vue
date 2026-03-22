@@ -26,13 +26,7 @@
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
-import { useChartTheme } from '@/composables/useChartTheme'
-
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+import { chart } from '@/constants/chartColors'
 
 withDefaults(
   defineProps<{
@@ -71,8 +65,8 @@ const chartData = [
 
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data: chartData,
     series: [
       {
@@ -80,12 +74,12 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'period',
         yKey: 'ziyaretci',
         yName: 'Visitor',
-        stroke: chartColors.value.primary,
+        stroke: chart.colors.primary,
         strokeWidth: 5,
         marker: {
           size: 10,
-          fill: chartColors.value.primary,
-          stroke: chartColors.value.primary,
+          fill: chart.colors.primary,
+          stroke: chart.colors.primary,
         },
         interpolation: { type: 'smooth' },
       },
@@ -94,12 +88,12 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'period',
         yKey: 'yeni',
         yName: 'New User',
-        stroke: chartColors.value.warning,
+        stroke: chart.colors.warning,
         strokeWidth: 5,
         marker: {
           size: 10,
-          fill: chartColors.value.warning,
-          stroke: chartColors.value.warning,
+          fill: chart.colors.warning,
+          stroke: chart.colors.warning,
         },
         interpolation: { type: 'smooth' },
       },
@@ -108,16 +102,30 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'period',
         yKey: 'donus',
         yName: 'Return Rate',
-        stroke: chartColors.value.success,
+        stroke: chart.colors.success,
         strokeWidth: 5,
         marker: {
           size: 10,
-          fill: chartColors.value.success,
-          stroke: chartColors.value.success,
+          fill: chart.colors.success,
+          stroke: chart.colors.success,
         },
         interpolation: { type: 'smooth' },
       },
     ],
+    axes: {
+      y: {
+        gridLine: {
+          style: [
+            {
+              stroke: chart.withOpacity(
+                chart.colors.gray,
+                0.2,
+              ),
+            },
+          ],
+        },
+      },
+    },
     legend: { position: 'top' },
   }),
 )

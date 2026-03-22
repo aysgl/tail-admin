@@ -30,16 +30,11 @@
               class="min-w-40"
               size="lg" />
             <template #content>
-              <VDatePicker
-                v-model.range="
-                  statisticsDateRange
-                "
-                mode="date"
-                :masks="{ modelValue: 'MMM d' }"
-                :is-dark="{
-                  selector: 'html',
-                  darkClass: 'dark',
-                }" />
+              <UCalendar
+                v-model="statisticsDateRange"
+                range
+                :number-of-months="2"
+                class="p-2" />
             </template>
           </UPopover>
         </div>
@@ -67,18 +62,12 @@
 <script setup lang="ts">
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
-import { ref, computed } from 'vue'
-import { useChartTheme } from '@/composables/useChartTheme'
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+import { ref, computed, shallowRef } from 'vue'
+import { CalendarDate } from '@internationalized/date'
+import { chart } from '@/constants/chartColors'
 
 withDefaults(
-  defineProps<{
-    loading?: boolean
-  }>(),
+  defineProps<{ loading?: boolean }>(),
   { loading: false },
 )
 
@@ -88,11 +77,24 @@ const statisticsOptions = [
   { value: 'optionThree', label: 'Annually' },
 ]
 const statisticsSelected = ref('optionOne')
-const statisticsDateRange = ref({
-  start: new Date(
-    Date.now() - 7 * 24 * 60 * 60 * 1000,
+const now = new Date()
+const weekAgo = new Date(
+  Date.now() - 7 * 24 * 60 * 60 * 1000,
+)
+const statisticsDateRange = shallowRef<{
+  start: CalendarDate
+  end: CalendarDate
+}>({
+  start: new CalendarDate(
+    weekAgo.getFullYear(),
+    weekAgo.getMonth() + 1,
+    weekAgo.getDate(),
   ),
-  end: new Date(),
+  end: new CalendarDate(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    now.getDate(),
+  ),
 })
 const statisticsDateRangeDisplay = computed(
   () => {
@@ -101,8 +103,12 @@ const statisticsDateRangeDisplay = computed(
     const start = statisticsDateRange.value.start
     const end =
       statisticsDateRange.value.end ?? start
-    const fmt = (d: Date) =>
-      d.toLocaleDateString('en-US', {
+    const fmt = (d: CalendarDate) =>
+      new Date(
+        d.year,
+        d.month - 1,
+        d.day,
+      ).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
       })
@@ -126,8 +132,8 @@ const chartData = [
 ]
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data: chartData,
     series: [
       {
@@ -135,9 +141,9 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'month',
         yKey: 'sales',
         yName: 'Sales',
-        fill: chartColors.value.primary,
+        fill: chart.colors.primary,
         fillOpacity: 0.55,
-        stroke: chartColors.value.primary,
+        stroke: chart.colors.primary,
         interpolation: { type: 'smooth' },
       },
       {
@@ -145,12 +151,26 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'month',
         yKey: 'revenue',
         yName: 'Revenue',
-        fill: chartColors.value.primary,
+        fill: chart.colors.primary,
         fillOpacity: 0.55,
-        stroke: chartColors.value.primary,
+        stroke: chart.colors.primary,
         interpolation: { type: 'smooth' },
       },
     ],
+    axes: {
+      y: {
+        gridLine: {
+          style: [
+            {
+              stroke: chart.withOpacity(
+                chart.colors.gray,
+                0.2,
+              ),
+            },
+          ],
+        },
+      },
+    },
     legend: { enabled: false },
   }),
 )

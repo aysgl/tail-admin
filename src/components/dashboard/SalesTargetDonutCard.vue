@@ -23,15 +23,11 @@
 <script setup lang="ts">
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
+import { useColorMode } from '@vueuse/core'
 import { computed } from 'vue'
-import { useChartTheme } from '@/composables/useChartTheme'
+import { chart } from '@/constants/chartColors'
 
-const {
-  chartTheme,
-  isDark,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+const colorMode = useColorMode()
 
 withDefaults(
   defineProps<{
@@ -80,8 +76,8 @@ const formattedTotal = new Intl.NumberFormat(
 
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data: categories,
     series: [
       {
@@ -100,36 +96,40 @@ const chartOptions = computed<AgChartOptions>(
             text: formattedTotal,
             spacing: 4,
             fontSize: 24,
-            color: isDark.value
-              ? chartColors.value.gray200
-              : chartColors.value.gray800,
+            color:
+              colorMode.value === 'dark'
+                ? chart.withOpacity(
+                    chart.colors.neutral,
+                    0.9,
+                  )
+                : chart.colors.gray,
           },
         ],
         cornerRadius: 5,
         strokeWidth: 2,
         fills: [
-          chartColors.value.getValues(
-            'success',
+          chart.withOpacity(
+            chart.colors.success,
             0.5,
           ),
-          chartColors.value.getValues(
-            'primary',
+          chart.withOpacity(
+            chart.colors.primary,
             0.5,
           ),
-          chartColors.value.getValues(
-            'warning',
+          chart.withOpacity(
+            chart.colors.warning,
             0.5,
           ),
-          chartColors.value.getValues(
-            'error',
+          chart.withOpacity(
+            chart.colors.error,
             0.5,
           ),
         ],
         strokes: [
-          chartColors.value.success,
-          chartColors.value.primary,
-          chartColors.value.warning,
-          chartColors.value.error,
+          chart.colors.success,
+          chart.colors.primary,
+          chart.colors.warning,
+          chart.colors.error,
         ],
         highlight: {
           highlightedItem: {

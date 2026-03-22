@@ -6,5 +6,6 @@ storybook-static
 .nuxt-ui
 *.min.js
 package-lock.json
+yarn.lock
 auto-imports.d.ts
 components.d.ts

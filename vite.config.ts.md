@@ -63,7 +63,6 @@ Kod bölme stratejisi; büyük kütüphaneler ayrı chunk'larda toplanır:
 | `vue-vendor`   | vue, vue-router                                          |
 | `charts`       | ag-charts-vue3, ag-charts-community                      |
 | `ag-grid`      | ag-grid-vue3, ag-grid-community                          |
-| `ui-libs`      | v-calendar                                               |
 | `fullcalendar` | @fullcalendar/core, daygrid, interaction, timegrid, vue3 |
 
 ### chunkSizeWarningLimit
@@ -94,11 +93,11 @@ resolve: {
 
 ## 5. İlgili Komutlar
 
-| Komut               | Açıklama                                             |
-| ------------------- | ---------------------------------------------------- |
-| `npm run dev`       | Geliştirme sunucusu (Vite)                           |
-| `npm run build`     | check:format + check:lint + check:types + Vite build |
-| `npm run storybook` | Storybook geliştirme sunucusu                        |
+| Komut            | Açıklama                                                          |
+| ---------------- | ----------------------------------------------------------------- |
+| `yarn dev`       | Geliştirme sunucusu (Vite)                                        |
+| `yarn build`     | check:deps → check:format → check:lint → check:types → Vite build |
+| `yarn storybook` | Storybook geliştirme sunucusu                                     |
 
 ---
 

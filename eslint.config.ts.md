@@ -7,7 +7,7 @@ Bu doküman, projedeki `eslint.config.ts` yapılandırmasını ve kullanılan ek
 1. [Konfigürasyon Özeti](#1-konfigürasyon-özeti)
 2. [Dosya ve Dizin Kuralları](#2-dosya-ve-dizin-kuralları)
 3. [Eklentiler ve Kurallar](#3-eklentiler-ve-kurallar)
-4. [NPM Scriptleri](#4-npm-scriptleri)
+4. [Yarn Scriptleri](#4-yarn-scriptleri)
 5. [Kural Devre Dışı Bırakma](#5-kural-devre-dışı-bırakma)
 6. [Gelişmiş Kurulum (Opsiyonel)](#6-gelişmiş-kurulum-opsiyonel)
 7. [Lint-Staged Entegrasyonu](#7-lint-staged-entegrasyonu)
@@ -92,12 +92,9 @@ Prettier ile çakışan ESLint format kurallarını devre dışı bırakır. For
 - **Amaç:** ESLint ↔ Prettier çakışmasını önlemek
 - **Not:** `eslint-config-prettier` benzeri davranış; format kuralları ESLint'te kapalı
 
-### `eslint-plugin-vuejs-accessibility` (a11y)
+### Erişilebilirlik (a11y)
 
-Erişilebilirlik kuralları. Recommended preset'e ek olarak özelleştirilmiş kurallar:
-
-- **app/vue-a11y-extended:** `no-aria-hidden-on-focusable`, `no-onchange`, `no-role-presentation-on-focusable`
-- **app/vue-a11y-label-has-for:** `label-has-for` ve `form-control-has-label` (özel seçeneklerle)
+a11y = accessibility (erişilebilirlik). ESLint a11y plugin'i kaldırıldı; kontrol **Storybook addon-a11y** ile yapılır. Detay: `.storybook/.storybook.md` → Addon'lar → a11y.
 
 ### Projeye Özel Kurallar
 
@@ -109,23 +106,23 @@ Erişilebilirlik kuralları. Recommended preset'e ek olarak özelleştirilmiş k
 
 ---
 
-## 4. NPM Scriptleri
+## 4. Yarn Scriptleri
 
-| Komut                  | Açıklama                                          |
-| ---------------------- | ------------------------------------------------- |
-| `npm run check:lint`   | Tüm dosyalarda lint kontrolü (`--format stylish`) |
-| `npm run fix:lint`     | ESLint `--fix` ile otomatik düzeltme              |
-| `npm run check:format` | Sadece Prettier ile kontrol                       |
-| `npm run fix:format`   | Prettier ile formatla                             |
+| Komut               | Açıklama                                          |
+| ------------------- | ------------------------------------------------- |
+| `yarn check:lint`   | Tüm dosyalarda lint kontrolü (`--format stylish`) |
+| `yarn fix:lint`     | ESLint `--fix` ile otomatik düzeltme              |
+| `yarn check:format` | Sadece Prettier ile kontrol                       |
+| `yarn fix:format`   | Prettier ile formatla                             |
 
 ### Örnek Kullanım
 
 ```bash
 # Sadece kontrol
-npm run check:lint
+yarn check:lint
 
 # Otomatik düzeltme (format + lint)
-npm run fix:format && npm run fix:lint
+yarn fix:format && yarn fix:lint
 
 # Belirli dosya veya dizin
 npx eslint src/views --fix

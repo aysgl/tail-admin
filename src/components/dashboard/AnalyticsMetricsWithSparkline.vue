@@ -36,45 +36,46 @@
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
-import { useChartTheme } from '@/composables/useChartTheme'
-
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+import { chart } from '@/constants/chartColors'
 
 const sparklineData = (vals: number[]) =>
   vals.map((v, i) => ({ i, v }))
 
-type ChartColorKey =
-  | 'primary'
-  | 'primaryLight'
-  | 'gray300'
-  | 'gray500'
-
 function createSparklineOptions(
   data: { i: number; v: number }[],
-  colorKey: ChartColorKey,
+  color: string,
 ) {
   return computed<AgChartOptions>(() => {
-    const c = chartColors.value[colorKey]
     return {
-      theme: chartTheme.value,
-      background: { fill: chartBackground },
+      theme: chart.theme,
+      background: chart.background,
       data,
       series: [
         {
           type: 'area',
           xKey: 'i',
           yKey: 'v',
-          fill: c,
+          fill: color,
           fillOpacity: 0.5,
-          stroke: c,
+          stroke: color,
           strokeWidth: 2,
           marker: { enabled: false },
         },
       ],
+      axes: {
+        y: {
+          gridLine: {
+            style: [
+              {
+                stroke: chart.withOpacity(
+                  chart.colors.gray,
+                  0.2,
+                ),
+              },
+            ],
+          },
+        },
+      },
       legend: { enabled: false },
       padding: {
         top: 4,
@@ -96,7 +97,7 @@ const metrics = [
       sparklineData([
         220, 280, 190, 310, 260, 340, 290,
       ]),
-      'primary',
+      chart.colors.primary,
     ),
   },
   {
@@ -108,7 +109,10 @@ const metrics = [
       sparklineData([
         1200, 1350, 1180, 1420, 1280, 1550, 1480,
       ]),
-      'primaryLight',
+      chart.withOpacity(
+        chart.colors.primary,
+        0.85,
+      ),
     ),
   },
   {
@@ -120,7 +124,7 @@ const metrics = [
       sparklineData([
         3.2, 3.8, 4.1, 3.9, 4.5, 4.2, 4.8,
       ]),
-      'gray300',
+      chart.withOpacity(chart.colors.gray, 0.6),
     ),
   },
   {
@@ -130,7 +134,7 @@ const metrics = [
     color: 'neutral' as const,
     chartOptions: createSparklineOptions(
       sparklineData([32, 30, 29, 28, 27, 28, 26]),
-      'gray500',
+      chart.colors.gray,
     ),
   },
 ]

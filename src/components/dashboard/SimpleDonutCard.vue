@@ -24,13 +24,7 @@
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
-import { useChartTheme } from '@/composables/useChartTheme'
-
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+import { chart } from '@/constants/chartColors'
 
 withDefaults(
   defineProps<{
@@ -48,8 +42,8 @@ const data = [
 
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data,
     series: [
       {
@@ -57,10 +51,36 @@ const chartOptions = computed<AgChartOptions>(
         calloutLabelKey: 'category',
         angleKey: 'amount',
         innerRadiusRatio: 0.6,
-        fills:
-          chartColors.value.chartPaletteMuted,
-        strokes:
-          chartColors.value.chartPaletteMuted,
+        fills: [
+          chart.colors.primary,
+          chart.withOpacity(
+            chart.colors.primary,
+            0.4,
+          ),
+          chart.withOpacity(
+            chart.colors.primary,
+            0.3,
+          ),
+          chart.withOpacity(
+            chart.colors.primary,
+            0.2,
+          ),
+        ],
+        strokes: [
+          chart.colors.primary,
+          chart.withOpacity(
+            chart.colors.primary,
+            0.4,
+          ),
+          chart.withOpacity(
+            chart.colors.primary,
+            0.3,
+          ),
+          chart.withOpacity(
+            chart.colors.primary,
+            0.2,
+          ),
+        ],
       },
     ],
     legend: {

@@ -44,13 +44,7 @@ import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
 import { CHART_CARD_MENU_ITEMS } from '@/constants/dashboardCardMenu'
-import { useChartTheme } from '@/composables/useChartTheme'
-
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+import { chart } from '@/constants/chartColors'
 
 const props = withDefaults(
   defineProps<{
@@ -76,8 +70,8 @@ const chartData = [
 ]
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data: chartData,
     series: [
       {
@@ -85,11 +79,11 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'month',
         yKey: 'sales',
         yName: 'Sales',
-        fill: chartColors.value.getValues(
-          'primary',
+        fill: chart.withOpacity(
+          chart.colors.primary,
           0.5,
         ),
-        stroke: chartColors.value.primary,
+        stroke: chart.colors.primary,
         strokeWidth: 2,
         cornerRadius: 50,
       },
@@ -98,15 +92,29 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'month',
         yKey: 'target',
         yName: 'Target',
-        fill: chartColors.value.getValues(
-          'warning',
+        fill: chart.withOpacity(
+          chart.colors.warning,
           0.5,
         ),
-        stroke: chartColors.value.warning,
+        stroke: chart.colors.warning,
         strokeWidth: 2,
         cornerRadius: 50,
       },
     ],
+    axes: {
+      y: {
+        gridLine: {
+          style: [
+            {
+              stroke: chart.withOpacity(
+                chart.colors.gray,
+                0.2,
+              ),
+            },
+          ],
+        },
+      },
+    },
     legend: {
       position: 'top',
       item: { marker: { shape: 'circle' } },

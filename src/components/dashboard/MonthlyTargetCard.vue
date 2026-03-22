@@ -40,8 +40,7 @@
     </div>
     <p
       class="mx-auto mt-1.5 w-full max-w-[380px] text-center text-sm text-muted sm:text-base">
-      You earn $3287 today, it's higher than last
-      month. Keep up your good work!
+      {{ description }}
     </p>
 
     <div
@@ -53,10 +52,10 @@
         </p>
         <p
           class="flex items-center justify-center gap-1 text-base font-semibold text-highlighted sm:text-lg">
-          $20K
+          {{ formatAmount(target) }}
           <UIcon
-            name="i-lucide-trending-down"
-            class="size-4 text-error-500" />
+            :name="targetTrendIcon"
+            :class="targetTrendIconClass" />
         </p>
       </div>
       <div class="h-7 w-px bg-muted" />
@@ -67,10 +66,10 @@
         </p>
         <p
           class="flex items-center justify-center gap-1 text-base font-semibold text-highlighted sm:text-lg">
-          $20K
+          {{ formatAmount(revenue) }}
           <UIcon
-            name="i-lucide-trending-up"
-            class="size-4 text-success-500" />
+            :name="revenueTrendIcon"
+            :class="revenueTrendIconClass" />
         </p>
       </div>
       <div class="h-7 w-px bg-muted" />
@@ -81,10 +80,10 @@
         </p>
         <p
           class="flex items-center justify-center gap-1 text-base font-semibold text-highlighted sm:text-lg">
-          $20K
+          {{ formatAmount(today) }}
           <UIcon
-            name="i-lucide-trending-up"
-            class="size-4 text-success-500" />
+            :name="todayTrendIcon"
+            :class="todayTrendIconClass" />
         </p>
       </div>
     </div>
@@ -94,38 +93,103 @@
 <script setup lang="ts">
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
+import { useColorMode } from '@vueuse/core'
 import { computed } from 'vue'
 import { CHART_CARD_MENU_ITEMS } from '@/constants/dashboardCardMenu'
-import { useChartTheme } from '@/composables/useChartTheme'
+import { chart } from '@/constants/chartColors'
 
-const {
-  chartTheme,
-  isDark,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+const colorMode = useColorMode()
+
+function formatAmount(value: number): string {
+  if (value >= 10_000) {
+    const k = Math.round(value / 1000)
+    return `$${k}K`
+  }
+  return `$${value.toLocaleString()}`
+}
 
 const props = withDefaults(
   defineProps<{
     class?: string
     loading?: boolean
+    target?: number
+    revenue?: number
+    today?: number
+    description?: string
+    targetTrend?: 'up' | 'down' | 'neutral'
+    revenueTrend?: 'up' | 'down' | 'neutral'
+    todayTrend?: 'up' | 'down' | 'neutral'
   }>(),
-  { loading: false },
+  {
+    loading: false,
+    target: 20_000,
+    revenue: 15_000,
+    today: 3_287,
+    description:
+      "You earn $3,287 today, it's higher than last month. Keep up your good work!",
+    targetTrend: 'neutral',
+    revenueTrend: 'up',
+    todayTrend: 'up',
+  },
 )
 
-const monthlyTargetValue = 75
+const progressPercent = computed(() =>
+  props.target > 0
+    ? Math.min(
+        100,
+        Math.round(
+          (props.revenue / props.target) * 100,
+        ),
+      )
+    : 0,
+)
+
+const trendConfig = {
+  up: {
+    icon: 'i-lucide-trending-up',
+    class: 'size-4 text-success-500',
+  },
+  down: {
+    icon: 'i-lucide-trending-down',
+    class: 'size-4 text-error-500',
+  },
+  neutral: {
+    icon: 'i-lucide-target',
+    class: 'size-4 text-muted',
+  },
+} as const
+
+const targetTrendIcon = computed(
+  () => trendConfig[props.targetTrend].icon,
+)
+const targetTrendIconClass = computed(
+  () => trendConfig[props.targetTrend].class,
+)
+const revenueTrendIcon = computed(
+  () => trendConfig[props.revenueTrend].icon,
+)
+const revenueTrendIconClass = computed(
+  () => trendConfig[props.revenueTrend].class,
+)
+const todayTrendIcon = computed(
+  () => trendConfig[props.todayTrend].icon,
+)
+const todayTrendIconClass = computed(
+  () => trendConfig[props.todayTrend].class,
+)
+
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data: [
       {
         label: 'Progress',
-        value: monthlyTargetValue,
+        value: progressPercent.value,
       },
       {
         label: 'Remaining',
-        value: 100 - monthlyTargetValue,
+        value: 100 - progressPercent.value,
       },
     ],
     series: [
@@ -136,30 +200,34 @@ const chartOptions = computed<AgChartOptions>(
         innerRadiusRatio: 0.8,
         showInLegend: false,
         fills: [
-          chartColors.value.getValues(
-            'primary',
+          chart.withOpacity(
+            chart.colors.primary,
             0.5,
           ),
-          chartColors.value.getValues(
-            'success',
+          chart.withOpacity(
+            chart.colors.success,
             0.5,
           ),
         ],
         strokes: [
-          chartColors.value.primary,
-          chartColors.value.success,
+          chart.colors.primary,
+          chart.colors.success,
         ],
         strokeWidth: 2,
         sectorSpacing: 2,
         cornerRadius: 50,
         innerLabels: [
           {
-            text: `${monthlyTargetValue}%`,
+            text: `${progressPercent.value}%`,
             fontSize: 36,
             fontWeight: 600,
-            color: isDark.value
-              ? chartColors.value.gray200
-              : chartColors.value.gray800,
+            color:
+              colorMode.value === 'dark'
+                ? chart.withOpacity(
+                    chart.colors.neutral,
+                    0.9,
+                  )
+                : chart.colors.gray,
           },
         ],
       },

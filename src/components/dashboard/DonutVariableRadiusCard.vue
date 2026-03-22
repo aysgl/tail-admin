@@ -13,13 +13,7 @@
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
-import { useChartTheme } from '@/composables/useChartTheme'
-
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+import { chart } from '@/constants/chartColors'
 
 const currentYearData = [
   { category: 'Revenue', amount: 45000 },
@@ -37,8 +31,8 @@ const previousYearData = [
 
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data: currentYearData,
     legend: { enabled: false },
     series: [
@@ -50,10 +44,36 @@ const chartOptions = computed<AgChartOptions>(
         innerRadiusRatio: 0.72,
         title: { text: 'This Year' },
         showInLegend: false,
-        fills:
-          chartColors.value.chartPaletteMuted,
-        strokes:
-          chartColors.value.chartPaletteMuted,
+        fills: [
+          chart.colors.primary,
+          chart.withOpacity(
+            chart.colors.primary,
+            0.4,
+          ),
+          chart.withOpacity(
+            chart.colors.primary,
+            0.3,
+          ),
+          chart.withOpacity(
+            chart.colors.primary,
+            0.2,
+          ),
+        ],
+        strokes: [
+          chart.colors.primary,
+          chart.withOpacity(
+            chart.colors.primary,
+            0.4,
+          ),
+          chart.withOpacity(
+            chart.colors.primary,
+            0.3,
+          ),
+          chart.withOpacity(
+            chart.colors.primary,
+            0.2,
+          ),
+        ],
       },
       {
         type: 'donut',
@@ -65,16 +85,34 @@ const chartOptions = computed<AgChartOptions>(
         title: { text: 'Last Year' },
         showInLegend: false,
         fills: [
-          chartColors.value.primaryLight,
-          chartColors.value.gray200,
-          chartColors.value.gray300,
-          chartColors.value.gray500,
+          chart.withOpacity(
+            chart.colors.primary,
+            0.85,
+          ),
+          chart.withOpacity(
+            chart.colors.gray,
+            0.3,
+          ),
+          chart.withOpacity(
+            chart.colors.gray,
+            0.6,
+          ),
+          chart.colors.gray,
         ],
         strokes: [
-          chartColors.value.primaryLight,
-          chartColors.value.gray200,
-          chartColors.value.gray300,
-          chartColors.value.gray500,
+          chart.withOpacity(
+            chart.colors.primary,
+            0.85,
+          ),
+          chart.withOpacity(
+            chart.colors.gray,
+            0.3,
+          ),
+          chart.withOpacity(
+            chart.colors.gray,
+            0.6,
+          ),
+          chart.colors.gray,
         ],
       },
     ],

@@ -3,12 +3,12 @@
  *
  * Paketler:
  *   eslint-plugin-vue              → Vue kuralları (.vue dosyaları)
- *   eslint-plugin-vuejs-accessibility → Erişilebilirlik (a11y)
  *   @vue/eslint-config-typescript   → TypeScript kuralları
  *   @vue/eslint-config-prettier    → Prettier ile çakışmayı önler
+ *
+ * Erişilebilirlik: Storybook addon-a11y ile kontrol edilir.
  */
 import pluginVue from 'eslint-plugin-vue'
-import pluginVueA11y from 'eslint-plugin-vuejs-accessibility'
 import {
   defineConfigWithVueTs,
   vueTsConfigs,
@@ -39,32 +39,6 @@ export default defineConfigWithVueTs(
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
-  // Vue erişilebilirlik (a11y) – alt-text, form-label, aria-*, key-events vb.
-  ...pluginVueA11y.configs['flat/recommended'],
-  {
-    name: 'app/vue-a11y-extended',
-    rules: {
-      'vuejs-accessibility/no-aria-hidden-on-focusable':
-        'error',
-      'vuejs-accessibility/no-onchange': 'error',
-      'vuejs-accessibility/no-role-presentation-on-focusable':
-        'error',
-    },
-  },
-  {
-    name: 'app/vue-a11y-label-has-for',
-    rules: {
-      'vuejs-accessibility/label-has-for': [
-        'error',
-        {
-          required: { some: ['nesting', 'id'] },
-          allowChildren: true,
-        },
-      ],
-      'vuejs-accessibility/form-control-has-label':
-        'error',
-    },
-  },
   {
     name: 'app/vue-style-rules',
     rules: {

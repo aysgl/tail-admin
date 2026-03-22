@@ -1,5 +1,4 @@
 import './assets/main.css'
-import 'v-calendar/style.css'
 
 import {
   AllCommunityModule,
@@ -10,10 +9,6 @@ import {
   ModuleRegistry as AgGridModuleRegistry,
 } from 'ag-grid-community'
 import { createApp } from 'vue'
-import {
-  setupCalendar,
-  DatePicker,
-} from 'v-calendar'
 import ui from '@nuxt/ui/vue-plugin'
 import App from './App.vue'
 import router from './router'
@@ -58,8 +53,6 @@ app.component(
   ChartSkeletonOverlay,
 )
 
-app.use(setupCalendar, {})
-app.component('VDatePicker', DatePicker)
 app.use(router)
 app.use(ui)
 

@@ -16,13 +16,7 @@
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
-import { useChartTheme } from '@/composables/useChartTheme'
-
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+import { chart } from '@/constants/chartColors'
 
 const chartData = [
   22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44,
@@ -32,8 +26,8 @@ const chartData = [
 
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data: chartData.map((v) => ({ value: v })),
     series: [
       {
@@ -41,11 +35,25 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'value',
         xName: 'Session Duration (min)',
         areaPlot: false,
-        fill: chartColors.value.primary,
-        stroke: chartColors.value.primary,
+        fill: chart.colors.primary,
+        stroke: chart.colors.primary,
         fillOpacity: 0.7,
       },
     ],
+    axes: {
+      y: {
+        gridLine: {
+          style: [
+            {
+              stroke: chart.withOpacity(
+                chart.colors.gray,
+                0.2,
+              ),
+            },
+          ],
+        },
+      },
+    },
   }),
 )
 </script>

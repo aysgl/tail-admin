@@ -66,39 +66,20 @@
                 {{ dateDisplay || 'Select date' }}
               </UButton>
               <template #content>
-                <VDatePicker
+                <UCalendar
                   v-model="date"
-                  mode="date"
-                  :masks="{
-                    modelValue: 'YYYY-MM-DD',
-                  }"
-                  :is-dark="{
-                    selector: 'html',
-                    darkClass: 'dark',
-                  }" />
+                  class="p-2" />
               </template>
             </UPopover>
           </UFormField>
           <UFormField label="Time Select Input">
-            <UPopover>
-              <UButton
-                color="primary"
-                variant="outline"
-                trailing-icon="i-lucide-chevron-down"
-                class="w-full justify-between">
-                {{ timeDisplay || 'Select time' }}
-              </UButton>
-              <template #content>
-                <VDatePicker
-                  v-model="time"
-                  mode="time"
-                  :is24hr="false"
-                  :is-dark="{
-                    selector: 'html',
-                    darkClass: 'dark',
-                  }" />
-              </template>
-            </UPopover>
+            <UInputTime
+              v-model="time"
+              :hour-cycle="12"
+              icon="i-lucide-clock"
+              variant="outline"
+              color="primary"
+              class="w-full" />
           </UFormField>
           <UFormField label="Input with Payment">
             <UInput
@@ -333,7 +314,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import {
+  ref,
+  reactive,
+  computed,
+  shallowRef,
+} from 'vue'
+import {
+  CalendarDate,
+  Time,
+  getLocalTimeZone,
+  today,
+} from '@internationalized/date'
 
 const showPassword = ref(false)
 const formData = reactive({
@@ -348,26 +340,23 @@ const selectItems = [
   { label: 'Template', value: 'template' },
   { label: 'Development', value: 'development' },
 ]
-const date = ref<Date | null>(null)
-const time = ref<Date | null>(null)
-const dateDisplay = computed(() =>
-  date.value
-    ? date.value.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
-    : '',
+const date = shallowRef<CalendarDate>(
+  today(getLocalTimeZone()),
 )
-const timeDisplay = computed(() =>
-  time.value
-    ? time.value.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true,
-      })
-    : '',
-)
+const time = shallowRef<Time>(new Time(12, 0, 0))
+const dateDisplay = computed(() => {
+  if (!date.value) return ''
+  const d = date.value
+  return new Date(
+    d.year,
+    d.month - 1,
+    d.day,
+  ).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+})
 
 const singleSelect = ref('')
 const selectedItems = ref<string[]>([])

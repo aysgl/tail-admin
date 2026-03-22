@@ -30,3 +30,6 @@ storybook-static
 .vercel
 
 .npmrc
+
+# Prevent accidental npm usage (proje yarn kullanır)
+package-lock.json

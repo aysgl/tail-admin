@@ -48,7 +48,7 @@ Tüm bağımlılıklar ve script'ler için `package.json` dosyasına bakın.
 To get started with TailAdmin, ensure you have the following prerequisites installed and set up:
 
 - **Node.js:** Minimum 22.x (Node 24 ile de uyumludur)
-- **Paket yöneticisi:** `npm` kullanın — `package-lock.json` commit edilir, tutarlılık için yarn/pnpm karıştırmayın
+- **Paket yöneticisi:** `yarn` kullanın — `yarn.lock` commit edilir, tutarlılık için npm/pnpm karıştırmayın
 - **IDE:** [VSCode](https://code.visualstudio.com/) veya [Cursor](https://cursor.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) önerilir (Vetur devre dışı)
 
 #### Type Support for `.vue` Imports in TS
@@ -68,27 +68,29 @@ git clone https://github.com/TailAdmin/vue-tailwind-admin-dashboard.git
 1. Install dependencies:
 
    ```bash
-   npm install
+   yarn
    ```
 
 2. Start the development server:
 
    ```bash
-   npm run dev
+   yarn dev
    ```
 
 3. Production build:
 
    ```bash
-   npm run build
+   yarn build
    ```
 
 #### Cache Temizleme ve Yeniden Kurulum
 
-- **`npm run clean:cache`** — node_modules, dist, storybook-static, coverage, npm cache siler
-- **`npm run clean:install`** — clean:cache + `npm install --legacy-peer-deps` ile temiz kurulum
+| Script                   | Ne yapar                                                                                                                |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| **`yarn clean:cache`**   | Sadece cache/build: `dist`, `node_modules/.vite`, `storybook-static`, `coverage`, `.nuxt-ui` siler. Paketlere dokunmaz. |
+| **`yarn clean:install`** | `clean:cache` + `node_modules` siler, ardından `yarn install` ile yeniden kurar.                                        |
 
-> **Not:** @nuxt/ui peer dep uyumu için `--legacy-peer-deps` kullanılır. Cursor/VS Code açıkken `EPERM` hatası alırsanız IDE’yi kapatıp **Terminal.app**’den çalıştırın.
+> **Not:** Cursor/VS Code açıkken `EPERM` hatası alırsanız IDE’yi kapatıp **Terminal.app**’den çalıştırın.
 
 Tüm komutlar (`check:*`, `fix:*`, `storybook`, `stash` vb.) ve script lifecycle için [package.json.md](./package.json.md) ve [Config Dokümantasyonu & Tooling](#config-dokümantasyonu--tooling-) bölümüne bakın.
 
@@ -113,7 +115,7 @@ Bu projedeki tüm yapılandırma dosyalarının dokümantasyonu. **Merge conflic
 ### Takım Gereksinimleri
 
 - **Node.js:** Minimum Node 22.x (Node 24 ile de uyumludur)
-- **Paket yöneticisi:** `npm` kullanın — `package-lock.json` commit edilir, tutarlılık için yarn/pnpm karıştırmayın
+- **Paket yöneticisi:** `yarn` kullanın — `yarn.lock` commit edilir, tutarlılık için npm/pnpm karıştırmayın
 - **IDE:** VSCode veya Cursor + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) önerilir (Vetur devre dışı)
 
 ### Frontend Tooling Akışı & Standartları 🚦
@@ -148,8 +150,11 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 
 **Geliştirme Aşaması**
 
-- **check:\*** — kontrol (dosya değiştirmez): `check:lint`, `check:format`, `check:types`
+- **check:\*** — kontrol (dosya değiştirmez): `check:deps`, `check:lint`, `check:format`, `check:types`
+- **check:deps** — `yarn install --frozen-lockfile` ile bağımlılık doğrulama; çakışma varsa build başlamadan hata verir
 - **fix:\*** — düzelt (dosyayı değiştirir): `fix:lint`, `fix:format` (prefix var, ayrı ayrı)
+
+**Build sırası:** `check:deps` → `check:format` → `check:lint` → `check:types` → `vite build`
 
 **Lokal Onay (Git Hooks)**
 
@@ -159,28 +164,35 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 | **commit-msg** | Commit mesajı formatı kontrolü (commitlint)                                            |
 | **pre-push**   | Commit mesajları kontrolü (**IDE commit'leri de yakalanır**) + lint/build hatırlatması |
 
-**Geçerli commit tipleri:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
+**Geçerli commit tipleri:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 
 **Örnek commit mesajı:** `feat: kullanıcı giriş sayfası eklendi`
+
+**Not:** Body ve footer boş satır zorunluluğu kaldırıldı; sadece tip ve başlık formatı kontrol edilir.
 
 **Not:** IDE sadece script yolunu gösterebilir. Hata mesajı `COMMIT_ERROR.txt` dosyasına yazılır (proje kökünde, IDE'de görünür).
 
 **Stash Sonrası Hatırlatma**
 
-`npm run stash` veya `git stash` (stash:setup sonrası) kullandığınızda stash tamamlandıktan sonra hatırlatma gösterilir:
+`yarn stash` veya `git stash` (stash:setup sonrası) kullandığınızda stash tamamlandıktan sonra hatırlatma gösterilir:
 
 ```bash
-npm run stash
-# veya git stash kullanmak için (bir kez): npm run stash:setup
+yarn stash
+# veya git stash kullanmak için (bir kez): yarn stash:setup
 ```
 
 Stash sonrası: `fix:format`, `fix:lint`, `check:types`, `build` sırasını çalıştırmanız hatırlatılır.
 
 **CI Pipeline** (.github/workflows/ci.yml)
 
-- Lint kontrolü
-- Type-check (vue-tsc)
-- Production build testi
+1. `yarn install --frozen-lockfile` — bağımlılık kurulumu
+2. Commitlint — son 20 commit mesajı
+3. Format (Prettier)
+4. Lint (ESLint)
+5. Type-check (vue-tsc)
+6. Build — `check:deps` + format + lint + type-check + vite build
+
+> **CI geçmesi için:** TypeScript `^5.9.3` olmalı (veya peer dep çözülmeli).
 
 **Önerilen IDE Ayarları** (.vscode/settings.json)
 
@@ -199,3 +211,5 @@ Stash sonrası: `fix:format`, `fix:lint`, `check:types`, `build` sırasını ça
 - Config değişikliği yapmadan önce `git pull` ile güncel olun
 - Mümkünse config dokümanlarını tek kişi güncellemeye çalışın
 - Merge sonrası `*.md` dosyalarını kontrol edin
+
+**check:format hatası:** Editörde dosyalar açıkken Prettier kontrolü bazen tutarsız sonuç verebilir. İlgili sekmeleri veya tüm dosyaları kapatıp `yarn check:format` veya `yarn fix:format` tekrar deneyin.

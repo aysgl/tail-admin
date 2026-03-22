@@ -13,30 +13,27 @@
 import type { AgGaugeOptions } from 'ag-charts-community'
 import { AgGauge } from 'ag-charts-vue3'
 import { computed } from 'vue'
-import { useChartTheme } from '@/composables/useChartTheme'
-
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+import { chart } from '@/constants/chartColors'
 
 const gaugeOptions = computed<AgGaugeOptions>(
   () => ({
     type: 'radial-gauge',
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     value: 78,
     scale: {
       min: 0,
       max: 100,
-      fill: chartColors.value.gray200,
+      fill: chart.withOpacity(
+        chart.colors.gray,
+        0.2,
+      ),
       label: {
         enabled: false,
       },
     },
     bar: {
-      fill: chartColors.value.primary,
+      fill: chart.colors.primary,
     },
     label: {
       formatter: ({ value }: { value: number }) =>

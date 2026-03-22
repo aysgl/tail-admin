@@ -15,15 +15,9 @@
 
 <script setup lang="ts">
 import type { AgChartOptions } from 'ag-charts-community'
-import { computed } from 'vue'
 import { AgCharts } from 'ag-charts-vue3'
-import { useChartTheme } from '@/composables/useChartTheme'
-
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+import { computed } from 'vue'
+import { chart } from '@/constants/chartColors'
 
 const chartData = [
   { month: 'Jan', sales: 168 },
@@ -41,16 +35,14 @@ const chartData = [
 ]
 
 withDefaults(
-  defineProps<{
-    loading?: boolean
-  }>(),
+  defineProps<{ loading?: boolean }>(),
   { loading: false },
 )
 
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data: chartData,
     series: [
       {
@@ -58,15 +50,27 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'month',
         yKey: 'sales',
         yName: 'Sales',
-        fill: chartColors.value.primary,
+        fill: chart.colors.primary,
         cornerRadius: 5,
       },
     ],
+    axes: {
+      y: {
+        gridLine: {
+          style: [
+            {
+              stroke: chart.withOpacity(
+                chart.colors.gray,
+                0.2,
+              ),
+            },
+          ],
+        },
+      },
+    },
     legend: {
       position: 'top',
-      item: {
-        marker: { shape: 'square' },
-      },
+      item: { marker: { shape: 'square' } },
     },
   }),
 )

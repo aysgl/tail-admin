@@ -86,10 +86,10 @@
 
 <script setup lang="ts">
 import type { AgChartOptions } from 'ag-charts-community'
-import { computed } from 'vue'
 import { AgCharts } from 'ag-charts-vue3'
+import { computed } from 'vue'
 import { CHART_CARD_MENU_ITEMS } from '@/constants/dashboardCardMenu'
-import { useChartTheme } from '@/composables/useChartTheme'
+import { chart } from '@/constants/chartColors'
 
 const countries = [
   {
@@ -135,22 +135,14 @@ const chartData = [
 ]
 
 withDefaults(
-  defineProps<{
-    loading?: boolean
-  }>(),
+  defineProps<{ loading?: boolean }>(),
   { loading: false },
 )
 
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
-
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data: chartData,
     series: [
       {
@@ -158,13 +150,13 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'country',
         yKey: 'customers',
         yName: 'Customers',
-        fill: chartColors.value.getValues(
-          'primary',
+        fill: chart.withOpacity(
+          chart.colors.primary,
           0.2,
         ),
         fillOpacity: 0.5,
-        stroke: chartColors.value.getValues(
-          'primary',
+        stroke: chart.withOpacity(
+          chart.colors.primary,
           0.3,
         ),
         strokeWidth: 2,
@@ -180,7 +172,7 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'country',
         yKey: 'target',
         yName: 'Target',
-        stroke: chartColors.value.primary,
+        stroke: chart.colors.primary,
         strokeWidth: 3,
         lineDash: [8, 4],
         marker: {
@@ -191,6 +183,20 @@ const chartOptions = computed<AgChartOptions>(
         interpolation: { type: 'smooth' },
       },
     ],
+    axes: {
+      y: {
+        gridLine: {
+          style: [
+            {
+              stroke: chart.withOpacity(
+                chart.colors.gray,
+                0.2,
+              ),
+            },
+          ],
+        },
+      },
+    },
     legend: { position: 'top' },
   }),
 )

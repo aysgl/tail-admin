@@ -7,6 +7,9 @@ import ui from '@nuxt/ui/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    port: 5174,
+  },
   plugins: [
     vue(),
     vueDevTools(),
@@ -56,7 +59,6 @@ export default defineConfig({
             'ag-grid-vue3',
             'ag-grid-community',
           ],
-          'ui-libs': ['v-calendar'],
           fullcalendar: [
             '@fullcalendar/core',
             '@fullcalendar/daygrid',

@@ -25,18 +25,10 @@
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
-import { useChartTheme } from '@/composables/useChartTheme'
-
-const {
-  chartTheme,
-  chartColors,
-  chartBackground,
-} = useChartTheme()
+import { chart } from '@/constants/chartColors'
 
 withDefaults(
-  defineProps<{
-    loading?: boolean
-  }>(),
+  defineProps<{ loading?: boolean }>(),
   { loading: false },
 )
 
@@ -57,8 +49,8 @@ const chartData = [
 
 const chartOptions = computed<AgChartOptions>(
   () => ({
-    theme: chartTheme.value,
-    background: { fill: chartBackground },
+    theme: chart.theme,
+    background: chart.background,
     data: chartData,
     series: [
       {
@@ -66,15 +58,12 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'month',
         yKey: 'sales',
         yName: 'Sales',
-        fill: chartColors.value.getColor(
-          'primary',
-          400,
+        fill: chart.withOpacity(
+          chart.colors.primary,
+          0.85,
         ),
         fillOpacity: 0.55,
-        stroke: chartColors.value.getColor(
-          'primary',
-          500,
-        ),
+        stroke: chart.colors.primary,
         interpolation: { type: 'smooth' },
       },
       {
@@ -82,18 +71,26 @@ const chartOptions = computed<AgChartOptions>(
         xKey: 'month',
         yKey: 'revenue',
         yName: 'Revenue',
-        fill: chartColors.value.getColor(
-          'primary',
-          800,
-        ),
+        fill: chart.colors.primary,
         fillOpacity: 0.55,
-        stroke: chartColors.value.getColor(
-          'primary',
-          800,
-        ),
+        stroke: chart.colors.primary,
         interpolation: { type: 'smooth' },
       },
     ],
+    axes: {
+      y: {
+        gridLine: {
+          style: [
+            {
+              stroke: chart.withOpacity(
+                chart.colors.gray,
+                0.2,
+              ),
+            },
+          ],
+        },
+      },
+    },
     legend: {
       position: 'top',
       item: { marker: { shape: 'square' } },
