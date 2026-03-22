@@ -22,7 +22,7 @@ export function filterByQuickText(
         ? val.toLowerCase().includes(q)
         : Array.isArray(val)
           ? false
-          : val != null &&
+          : val !== null &&
             String(val).toLowerCase().includes(q)
     }),
   )

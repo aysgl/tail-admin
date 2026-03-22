@@ -111,139 +111,155 @@ export function useSearchGroups() {
   ])
 }
 
-export function useNavigationItems() {
-  const route = useRoute()
-
-  const items = computed<NavigationMenuItem[]>(
-    () => [
+function buildDashboardNavItem(
+  path: string,
+): NavigationMenuItem {
+  return {
+    label: 'Dashboard',
+    value: 'nav-dashboard',
+    icon: 'i-lucide-layout-grid',
+    to: '/ecommerce',
+    type: 'trigger',
+    defaultOpen: pathMatchesPrefix(
+      path,
+      DASHBOARD_PREFIXES,
+    ),
+    active:
+      path === '/' ||
+      pathMatchesPrefix(path, DASHBOARD_PREFIXES),
+    children: [
       {
-        label: 'Dashboard',
-        value: 'nav-dashboard',
-        icon: 'i-lucide-layout-grid',
+        label: 'Ecommerce',
         to: '/ecommerce',
-        type: 'trigger',
-        defaultOpen: pathMatchesPrefix(
-          route.path,
-          DASHBOARD_PREFIXES,
-        ),
-        active:
-          route.path === '/' ||
-          pathMatchesPrefix(
-            route.path,
-            DASHBOARD_PREFIXES,
-          ),
-        children: [
-          {
-            label: 'Ecommerce',
-            to: '/ecommerce',
-            icon: 'i-lucide-shopping-cart',
-          },
-          {
-            label: 'Analytics',
-            to: '/analytics',
-            icon: 'i-lucide-bar-chart-3',
-          },
-          {
-            label: 'Sales',
-            to: '/sales',
-            icon: 'i-lucide-trending-up',
-          },
-          {
-            label: 'Reports',
-            to: '/reports',
-            icon: 'i-lucide-file-text',
-          },
-        ],
+        icon: 'i-lucide-shopping-cart',
       },
       {
-        label: 'Calendar',
-        icon: 'i-lucide-calendar',
-        to: '/calendar',
-        active: route.path === '/calendar',
+        label: 'Analytics',
+        to: '/analytics',
+        icon: 'i-lucide-bar-chart-3',
       },
       {
-        label: 'User Profile',
-        icon: 'i-lucide-user-circle',
-        to: '/profile',
-        active: route.path === '/profile',
+        label: 'Sales',
+        to: '/sales',
+        icon: 'i-lucide-trending-up',
       },
       {
-        label: 'Tables',
-        value: 'nav-tables',
-        icon: 'i-lucide-table',
-        to: '/compact-tables',
-        type: 'trigger',
-        defaultOpen: pathMatchesPrefix(
-          route.path,
-          TABLES_PREFIXES,
-        ),
-        active: pathMatchesPrefix(
-          route.path,
-          TABLES_PREFIXES,
-        ),
-        children: [
-          {
-            label: 'Compact Tables',
-            to: '/compact-tables',
-            icon: 'i-lucide-table-2',
-          },
-          {
-            label: 'Relaxed Tables',
-            to: '/relaxed-tables',
-            icon: 'i-lucide-table-properties',
-          },
-          {
-            label: 'Advance Tables',
-            to: '/advance-tables',
-            icon: 'i-lucide-table-cells-split',
-          },
-        ],
-      },
-      {
-        label: 'Form',
-        icon: 'i-lucide-file-input',
-        to: '/form-elements',
-        active: route.path === '/form-elements',
-      },
-      {
-        label: 'Pages',
-        value: 'nav-pages',
+        label: 'Reports',
+        to: '/reports',
         icon: 'i-lucide-file-text',
-        to: '/blank',
-        type: 'trigger',
-        defaultOpen: pathMatchesOne(
-          route.path,
-          PAGES_PATHS,
-        ),
-        active: pathMatchesOne(
-          route.path,
-          PAGES_PATHS,
-        ),
-        children: [
-          {
-            label: 'Blank Page',
-            to: '/blank',
-            icon: 'i-lucide-file',
-          },
-          {
-            label: 'Not Found',
-            to: '/not-found',
-            icon: 'i-lucide-alert-circle',
-          },
-          {
-            label: 'Signin',
-            to: '/signin',
-            icon: 'i-lucide-log-in',
-          },
-          {
-            label: 'Signup',
-            to: '/signup',
-            icon: 'i-lucide-user-plus',
-          },
-        ],
       },
     ],
-  )
+  }
+}
 
+function buildTablesNavItem(
+  path: string,
+): NavigationMenuItem {
+  return {
+    label: 'Tables',
+    value: 'nav-tables',
+    icon: 'i-lucide-table',
+    to: '/compact-tables',
+    type: 'trigger',
+    defaultOpen: pathMatchesPrefix(
+      path,
+      TABLES_PREFIXES,
+    ),
+    active: pathMatchesPrefix(
+      path,
+      TABLES_PREFIXES,
+    ),
+    children: [
+      {
+        label: 'Compact Tables',
+        to: '/compact-tables',
+        icon: 'i-lucide-table-2',
+      },
+      {
+        label: 'Relaxed Tables',
+        to: '/relaxed-tables',
+        icon: 'i-lucide-table-properties',
+      },
+      {
+        label: 'Advance Tables',
+        to: '/advance-tables',
+        icon: 'i-lucide-table-cells-split',
+      },
+    ],
+  }
+}
+
+function buildPagesNavItem(
+  path: string,
+): NavigationMenuItem {
+  return {
+    label: 'Pages',
+    value: 'nav-pages',
+    icon: 'i-lucide-file-text',
+    to: '/blank',
+    type: 'trigger',
+    defaultOpen: pathMatchesOne(
+      path,
+      PAGES_PATHS,
+    ),
+    active: pathMatchesOne(path, PAGES_PATHS),
+    children: [
+      {
+        label: 'Blank Page',
+        to: '/blank',
+        icon: 'i-lucide-file',
+      },
+      {
+        label: 'Not Found',
+        to: '/not-found',
+        icon: 'i-lucide-alert-circle',
+      },
+      {
+        label: 'Signin',
+        to: '/signin',
+        icon: 'i-lucide-log-in',
+      },
+      {
+        label: 'Signup',
+        to: '/signup',
+        icon: 'i-lucide-user-plus',
+      },
+    ],
+  }
+}
+
+function buildNavigationItems(
+  path: string,
+): NavigationMenuItem[] {
+  return [
+    buildDashboardNavItem(path),
+    {
+      label: 'Calendar',
+      icon: 'i-lucide-calendar',
+      to: '/calendar',
+      active: path === '/calendar',
+    },
+    {
+      label: 'User Profile',
+      icon: 'i-lucide-user-circle',
+      to: '/profile',
+      active: path === '/profile',
+    },
+    buildTablesNavItem(path),
+    {
+      label: 'Form',
+      icon: 'i-lucide-file-input',
+      to: '/form-elements',
+      active: path === '/form-elements',
+    },
+    buildPagesNavItem(path),
+  ]
+}
+
+export function useNavigationItems() {
+  const route = useRoute()
+  const items = computed(() =>
+    buildNavigationItems(route.path),
+  )
   return { items }
 }

@@ -1,6 +1,9 @@
 import type { BreadcrumbItem } from '@nuxt/ui'
-import type { MaybeRefOrGetter } from 'vue'
-import { computed, toValue } from 'vue'
+import {
+  computed,
+  toValue,
+  type MaybeRefOrGetter,
+} from 'vue'
 
 /**
  * UBreadcrumb (Nuxt UI) için items üretir.

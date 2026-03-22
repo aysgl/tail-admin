@@ -1,0 +1,39 @@
+---
+description: Tekrarlayan mantığı azalt - composable, slot, ortak bileşenler
+globs: "**/*.{vue,ts}"
+alwaysApply: true
+---
+
+# Duplicate Logic Önleme
+
+Semantic clone’ları azaltmak için önce tekrar eden mantığı ortak yerlere taşı.
+
+## Yeni Mantık Eklerken Sor
+
+1. **Composable var mı?** `src/composables/` klasörüne bak: `usePageBreadcrumb`, `useTableFilters`, `usePageLoading`, `useScrollRestoration`
+2. **Benzer bileşen var mı?** Örn. `ProfileEditModalFooter`, `ProfileInfoField`, `AuthFormCard`, `AuthPasswordField`
+3. **Aynı form/modal yapısı tekrarlanıyor mu?** → Slot veya config-driven form bileşeni düşün
+
+## Taşınacak Mantık Örnekleri
+
+| Tekrarlayan | Çözüm |
+|-------------|-------|
+| UPageCard + Edit butonu + UModal + form + ProfileEditModalFooter | `ProfileEditCard` wrapper bileşeni (slot ile form alanları) |
+| UFormField + UInput (outline, primary, w-full) | `FormTextField` veya mevcut `AuthPasswordField` gibi bileşen |
+| Chart + loading overlay + opacity | `ChartCard` wrapper (loading prop, slot) |
+| Tarih aralığı → "Jan 1 - Dec 31" formatı | `useDateRangeDisplay` composable |
+
+## Kural: Aynı Yapı 2+ Kez → Extract
+
+```vue
+<!-- ❌ AddressCard, PersonalInfoCard, ProfileCard aynı modal kalıbını kopyalıyor -->
+<UPageCard>... <UButton @click="modal=true"> ... <UModal> <form>... </UModal> </UPageCard>
+
+<!-- ✅ Ortak ProfileEditCard bileşeni veya useProfileEditModal composable -->
+```
+
+## Composable Yazarken
+
+- `use` prefix zorunlu
+- Tek sorumluluk
+- TypeScript ile tip tanımla

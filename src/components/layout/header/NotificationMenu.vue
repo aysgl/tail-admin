@@ -30,10 +30,10 @@
         </h5>
       </div>
       <div class="max-h-80 overflow-y-auto p-2">
-        <a
+        <ULink
           v-for="notification in notifications"
           :key="notification.id"
-          href="#"
+          to="#"
           class="flex gap-3 rounded-lg p-3 hover:bg-muted"
           @click.prevent>
           <UAvatar
@@ -57,7 +57,7 @@
               {{ notification.time }}
             </p>
           </div>
-        </a>
+        </ULink>
       </div>
       <div class="border-t border-muted p-2">
         <UButton

@@ -68,9 +68,7 @@ const config: StorybookConfig = {
           ? flatten(item)
           : [item],
       )
-    const raw = flatten(
-      (config.plugins ?? []) as PluginOption[],
-    )
+    const raw = flatten(config.plugins ?? [])
     const plugins = [
       uiPlugin,
       ...raw.filter(

@@ -12,13 +12,10 @@ const router = createRouter({
     import.meta.env.BASE_URL,
   ),
   scrollBehavior(to, from, savedPosition) {
-    return savedPosition || { left: 0, top: 0 }
+    return savedPosition ?? { left: 0, top: 0 }
   },
   routes: [
-    {
-      path: '/',
-      redirect: '/ecommerce',
-    },
+    { path: '/', redirect: '/ecommerce' },
     {
       path: '/ecommerce',
       name: 'Ecommerce',
@@ -68,10 +65,7 @@ const router = createRouter({
       name: 'Calendar',
       component: () =>
         import('../views/Calendar/CalendarView.vue'),
-      meta: {
-        title: 'Calendar',
-        layout: 'main',
-      },
+      meta: { title: 'Calendar', layout: 'main' },
     },
     {
       path: '/profile',
@@ -158,20 +152,14 @@ const router = createRouter({
       name: 'Signin',
       component: () =>
         import('../views/Auth/SigninView.vue'),
-      meta: {
-        title: 'Signin',
-        layout: 'auth',
-      },
+      meta: { title: 'Signin', layout: 'auth' },
     },
     {
       path: '/signup',
       name: 'Signup',
       component: () =>
         import('../views/Auth/SignupView.vue'),
-      meta: {
-        title: 'Signup',
-        layout: 'auth',
-      },
+      meta: { title: 'Signup', layout: 'auth' },
     },
     {
       path: '/:pathMatch(.*)*',

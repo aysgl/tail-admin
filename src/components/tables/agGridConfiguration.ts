@@ -1,11 +1,9 @@
 import {
   themeQuartz,
   iconSetQuartzBold,
-} from 'ag-grid-community'
-import type {
-  ColDef,
-  ColGroupDef,
-  ValueFormatterParams,
+  type ColDef,
+  type ColGroupDef,
+  type ValueFormatterParams,
 } from 'ag-grid-community'
 
 /** Nuxt UI primary */

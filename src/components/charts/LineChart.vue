@@ -19,6 +19,11 @@ import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
 import { chart } from '@/constants/chartColors'
 
+withDefaults(
+  defineProps<{ loading?: boolean }>(),
+  { loading: false },
+)
+
 const chartData = [
   { month: 'Jan', sales: 180, revenue: 40 },
   { month: 'Feb', sales: 190, revenue: 30 },
@@ -33,11 +38,6 @@ const chartData = [
   { month: 'Nov', sales: 240, revenue: 150 },
   { month: 'Dec', sales: 235, revenue: 140 },
 ]
-
-withDefaults(
-  defineProps<{ loading?: boolean }>(),
-  { loading: false },
-)
 
 const chartOptions = computed<AgChartOptions>(
   () => ({

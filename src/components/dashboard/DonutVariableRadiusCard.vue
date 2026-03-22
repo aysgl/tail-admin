@@ -10,7 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import type { AgChartOptions } from 'ag-charts-community'
+import type {
+  AgChartOptions,
+  AgDonutSeriesOptions,
+} from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
 import { computed } from 'vue'
 import { chart } from '@/constants/chartColors'
@@ -29,93 +32,91 @@ const previousYearData = [
   { category: 'Ops', amount: 10000 },
 ]
 
-const chartOptions = computed<AgChartOptions>(
-  () => ({
+const thisYearDonutSeries: AgDonutSeriesOptions =
+  {
+    type: 'donut',
+    calloutLabelKey: 'category',
+    angleKey: 'amount',
+    outerRadiusRatio: 1,
+    innerRadiusRatio: 0.72,
+    title: { text: 'This Year' },
+    showInLegend: false,
+    fills: [
+      chart.colors.primary,
+      chart.withOpacity(
+        chart.colors.primary,
+        0.4,
+      ),
+      chart.withOpacity(
+        chart.colors.primary,
+        0.3,
+      ),
+      chart.withOpacity(
+        chart.colors.primary,
+        0.2,
+      ),
+    ],
+    strokes: [
+      chart.colors.primary,
+      chart.withOpacity(
+        chart.colors.primary,
+        0.4,
+      ),
+      chart.withOpacity(
+        chart.colors.primary,
+        0.3,
+      ),
+      chart.withOpacity(
+        chart.colors.primary,
+        0.2,
+      ),
+    ],
+  }
+
+const lastYearDonutSeries: AgDonutSeriesOptions =
+  {
+    type: 'donut',
+    data: previousYearData,
+    calloutLabelKey: 'category',
+    angleKey: 'amount',
+    outerRadiusRatio: 0.58,
+    innerRadiusRatio: 0.2,
+    title: { text: 'Last Year' },
+    showInLegend: false,
+    fills: [
+      chart.withOpacity(
+        chart.colors.primary,
+        0.85,
+      ),
+      chart.withOpacity(chart.colors.gray, 0.3),
+      chart.withOpacity(chart.colors.gray, 0.6),
+      chart.colors.gray,
+    ],
+    strokes: [
+      chart.withOpacity(
+        chart.colors.primary,
+        0.85,
+      ),
+      chart.withOpacity(chart.colors.gray, 0.3),
+      chart.withOpacity(chart.colors.gray, 0.6),
+      chart.colors.gray,
+    ],
+  }
+
+function buildDonutVariableRadiusChartOptions(): AgChartOptions {
+  return {
     theme: chart.theme,
     background: chart.background,
     data: currentYearData,
     legend: { enabled: false },
     series: [
-      {
-        type: 'donut',
-        calloutLabelKey: 'category',
-        angleKey: 'amount',
-        outerRadiusRatio: 1,
-        innerRadiusRatio: 0.72,
-        title: { text: 'This Year' },
-        showInLegend: false,
-        fills: [
-          chart.colors.primary,
-          chart.withOpacity(
-            chart.colors.primary,
-            0.4,
-          ),
-          chart.withOpacity(
-            chart.colors.primary,
-            0.3,
-          ),
-          chart.withOpacity(
-            chart.colors.primary,
-            0.2,
-          ),
-        ],
-        strokes: [
-          chart.colors.primary,
-          chart.withOpacity(
-            chart.colors.primary,
-            0.4,
-          ),
-          chart.withOpacity(
-            chart.colors.primary,
-            0.3,
-          ),
-          chart.withOpacity(
-            chart.colors.primary,
-            0.2,
-          ),
-        ],
-      },
-      {
-        type: 'donut',
-        data: previousYearData,
-        calloutLabelKey: 'category',
-        angleKey: 'amount',
-        outerRadiusRatio: 0.58,
-        innerRadiusRatio: 0.2,
-        title: { text: 'Last Year' },
-        showInLegend: false,
-        fills: [
-          chart.withOpacity(
-            chart.colors.primary,
-            0.85,
-          ),
-          chart.withOpacity(
-            chart.colors.gray,
-            0.3,
-          ),
-          chart.withOpacity(
-            chart.colors.gray,
-            0.6,
-          ),
-          chart.colors.gray,
-        ],
-        strokes: [
-          chart.withOpacity(
-            chart.colors.primary,
-            0.85,
-          ),
-          chart.withOpacity(
-            chart.colors.gray,
-            0.3,
-          ),
-          chart.withOpacity(
-            chart.colors.gray,
-            0.6,
-          ),
-          chart.colors.gray,
-        ],
-      },
+      thisYearDonutSeries,
+      lastYearDonutSeries,
     ],
-  }),
+  }
+}
+
+const chartOptions = computed<AgChartOptions>(
+  () => buildDonutVariableRadiusChartOptions(),
 )
 </script>

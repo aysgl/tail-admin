@@ -264,7 +264,7 @@ const handleDateSelect = (selectInfo: {
   resetModalFields()
   eventStartDate.value = selectInfo.startStr
   eventEndDate.value =
-    selectInfo.endStr || selectInfo.startStr
+    selectInfo.endStr ?? selectInfo.startStr
   openModal()
 }
 

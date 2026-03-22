@@ -1,0 +1,72 @@
+---
+description: Nuxt UI bileşen kalıpları - UPageCard, UForm, UInput, UModal
+globs: "**/*.vue"
+alwaysApply: false
+---
+
+# Nuxt UI Bileşen Kuralları
+
+Proje Vue 3 + @nuxt/ui v4 kullanıyor. Tutarlı stil için bu kalıpları uygula.
+
+## Kart ve Sayfa Yapısı
+
+- **Sayfa içeriği**: `UPageCard` (variant="outline" varsayılan)
+- **İç içe / sidebar kart**: `UCard variant="outline"`
+- **Profil / dashboard kartları**: UPageCard + header slot veya title/description prop
+
+```vue
+<!-- ✅ Sayfa kartı -->
+<UPageCard variant="outline">
+  <template #header>...</template>
+  ...
+</UPageCard>
+
+<!-- ❌ UCard sayfa seviyesinde (CalendarView hariç, özel layout) -->
+<UCard>...</UCard>
+```
+
+## Form Alanları
+
+`UFormField` + `UInput` kombinasyonunda tutarlı props:
+
+```vue
+<UFormField label="Email" required>
+  <UInput
+    v-model="state.email"
+    type="email"
+    variant="outline"
+    color="primary"
+    class="w-full" />
+</UFormField>
+```
+
+- `variant="outline"` ve `color="primary"` form alanlarında standart
+- `class="w-full"` input genişliği için
+
+## Düzenleme Modal Kalıbı
+
+Profil/bilgi düzenleme modalları için ortak yapı:
+
+```vue
+<UModal v-model:open="isOpen" title="..." description="...">
+  <template #body>
+    <form class="flex flex-col">
+      <div class="overflow-y-auto p-2">
+        <div class="grid grid-cols-1 gap-5 gap-x-6 lg:grid-cols-2">
+          <UFormField label="...">
+            <UInput v-model="form.field" variant="outline" color="primary" class="w-full" />
+          </UFormField>
+        </div>
+      </div>
+    </form>
+  </template>
+  <template #footer="{ close }">
+    <ProfileEditModalFooter :close="close" @save="onSave" />
+  </template>
+</UModal>
+```
+
+## Buton Varyantları
+
+- **Primary işlem**: `color="primary"` + `variant="solid"` veya `variant="outline"`
+- **Edit ikonu**: `leading-icon="i-lucide-pencil"`

@@ -30,7 +30,7 @@ export function useScrollRestoration() {
     const saved = scrollPositions.get(routePath)
     if (!saved) return
 
-    nextTick(() => {
+    void nextTick(() => {
       const tryRestore = () => {
         const el = document.getElementById(
           SCROLL_CONTAINER_ID,

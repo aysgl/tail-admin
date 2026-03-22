@@ -406,8 +406,10 @@ const updatePhoneNumber2 = () => {
   phoneNumber2.value =
     countryCodes[selectedCountry2.value] ?? ''
 }
-const copyWebsite = () => {
-  navigator.clipboard.writeText(website.value)
+const copyWebsite = async () => {
+  await navigator.clipboard.writeText(
+    website.value,
+  )
   copyText.value = 'Copied!'
   setTimeout(() => {
     copyText.value = 'Copy'

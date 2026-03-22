@@ -68,8 +68,8 @@ const child = spawn(command, {
   env: process.env,
 })
 
-prefixLines(child.stdout!)
-prefixLines(child.stderr!)
+prefixLines(child.stdout)
+prefixLines(child.stderr)
 
 child.on('close', (code) => {
   const ok = code === 0

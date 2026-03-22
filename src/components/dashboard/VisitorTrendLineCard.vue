@@ -63,54 +63,46 @@ const chartData = [
   },
 ]
 
-const chartOptions = computed<AgChartOptions>(
-  () => ({
+const lineSeries = (
+  yKey: string,
+  yName: string,
+  color: string,
+) => ({
+  type: 'line' as const,
+  xKey: 'period',
+  yKey,
+  yName,
+  stroke: color,
+  strokeWidth: 5,
+  marker: {
+    size: 10,
+    fill: color,
+    stroke: color,
+  },
+  interpolation: { type: 'smooth' as const },
+})
+
+function buildChartOptions(): AgChartOptions {
+  return {
     theme: chart.theme,
     background: chart.background,
     data: chartData,
     series: [
-      {
-        type: 'line',
-        xKey: 'period',
-        yKey: 'ziyaretci',
-        yName: 'Visitor',
-        stroke: chart.colors.primary,
-        strokeWidth: 5,
-        marker: {
-          size: 10,
-          fill: chart.colors.primary,
-          stroke: chart.colors.primary,
-        },
-        interpolation: { type: 'smooth' },
-      },
-      {
-        type: 'line',
-        xKey: 'period',
-        yKey: 'yeni',
-        yName: 'New User',
-        stroke: chart.colors.warning,
-        strokeWidth: 5,
-        marker: {
-          size: 10,
-          fill: chart.colors.warning,
-          stroke: chart.colors.warning,
-        },
-        interpolation: { type: 'smooth' },
-      },
-      {
-        type: 'line',
-        xKey: 'period',
-        yKey: 'donus',
-        yName: 'Return Rate',
-        stroke: chart.colors.success,
-        strokeWidth: 5,
-        marker: {
-          size: 10,
-          fill: chart.colors.success,
-          stroke: chart.colors.success,
-        },
-        interpolation: { type: 'smooth' },
-      },
+      lineSeries(
+        'ziyaretci',
+        'Visitor',
+        chart.colors.primary,
+      ),
+      lineSeries(
+        'yeni',
+        'New User',
+        chart.colors.warning,
+      ),
+      lineSeries(
+        'donus',
+        'Return Rate',
+        chart.colors.success,
+      ),
     ],
     axes: {
       y: {
@@ -127,6 +119,10 @@ const chartOptions = computed<AgChartOptions>(
       },
     },
     legend: { position: 'top' },
-  }),
+  }
+}
+
+const chartOptions = computed<AgChartOptions>(
+  () => buildChartOptions(),
 )
 </script>

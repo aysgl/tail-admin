@@ -29,7 +29,7 @@ const props = withDefaults(
     class?: string
     icon?: boolean
   }>(),
-  { icon: false },
+  { class: undefined, icon: false },
 )
 
 const colorMode = useColorMode()

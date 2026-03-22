@@ -51,7 +51,7 @@ const props = withDefaults(
     class?: string
     loading?: boolean
   }>(),
-  { loading: false },
+  { class: undefined, loading: false },
 )
 
 const chartData = [
@@ -68,57 +68,68 @@ const chartData = [
   { month: 'Nov', sales: 280, target: 290 },
   { month: 'Dec', sales: 112, target: 180 },
 ]
-const chartOptions = computed<AgChartOptions>(
-  () => ({
+
+const monthlySalesSeries = [
+  {
+    type: 'bar' as const,
+    xKey: 'month',
+    yKey: 'sales',
+    yName: 'Sales',
+    fill: chart.withOpacity(
+      chart.colors.primary,
+      0.5,
+    ),
+    stroke: chart.colors.primary,
+    strokeWidth: 2,
+    cornerRadius: 50,
+  },
+  {
+    type: 'bar' as const,
+    xKey: 'month',
+    yKey: 'target',
+    yName: 'Target',
+    fill: chart.withOpacity(
+      chart.colors.warning,
+      0.5,
+    ),
+    stroke: chart.colors.warning,
+    strokeWidth: 2,
+    cornerRadius: 50,
+  },
+]
+
+const monthlySalesAxes = {
+  y: {
+    gridLine: {
+      style: [
+        {
+          stroke: chart.withOpacity(
+            chart.colors.gray,
+            0.2,
+          ),
+        },
+      ],
+    },
+  },
+}
+
+const monthlySalesLegend = {
+  position: 'top' as const,
+  item: { marker: { shape: 'circle' as const } },
+}
+
+function buildMonthlySalesChartOptions(): AgChartOptions {
+  return {
     theme: chart.theme,
     background: chart.background,
     data: chartData,
-    series: [
-      {
-        type: 'bar',
-        xKey: 'month',
-        yKey: 'sales',
-        yName: 'Sales',
-        fill: chart.withOpacity(
-          chart.colors.primary,
-          0.5,
-        ),
-        stroke: chart.colors.primary,
-        strokeWidth: 2,
-        cornerRadius: 50,
-      },
-      {
-        type: 'bar',
-        xKey: 'month',
-        yKey: 'target',
-        yName: 'Target',
-        fill: chart.withOpacity(
-          chart.colors.warning,
-          0.5,
-        ),
-        stroke: chart.colors.warning,
-        strokeWidth: 2,
-        cornerRadius: 50,
-      },
-    ],
-    axes: {
-      y: {
-        gridLine: {
-          style: [
-            {
-              stroke: chart.withOpacity(
-                chart.colors.gray,
-                0.2,
-              ),
-            },
-          ],
-        },
-      },
-    },
-    legend: {
-      position: 'top',
-      item: { marker: { shape: 'circle' } },
-    },
-  }),
+    series: monthlySalesSeries,
+    axes: monthlySalesAxes,
+    legend: monthlySalesLegend,
+  }
+}
+
+const chartOptions = computed<AgChartOptions>(
+  () => buildMonthlySalesChartOptions(),
 )
 </script>

@@ -38,7 +38,7 @@
       title="Edit Address"
       description="Update your details to keep your profile up-to-date.">
       <template #body>
-        <form class="flex flex-col">
+        <UForm class="flex flex-col">
           <div class="overflow-y-auto p-2">
             <div
               class="grid grid-cols-1 gap-5 gap-x-6 lg:grid-cols-2">
@@ -72,7 +72,7 @@
               </UFormField>
             </div>
           </div>
-        </form>
+        </UForm>
       </template>
       <template #footer="{ close }">
         <ProfileEditModalFooter

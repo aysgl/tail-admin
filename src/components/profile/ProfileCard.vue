@@ -59,7 +59,7 @@
     title="Edit Personal Information"
     description="Update your details to keep your profile up-to-date.">
     <template #body>
-      <form class="flex flex-col">
+      <UForm class="flex flex-col">
         <div
           class="max-h-[458px] space-y-7 overflow-y-auto p-2">
           <div>
@@ -129,7 +129,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </UForm>
     </template>
     <template #footer="{ close }">
       <div

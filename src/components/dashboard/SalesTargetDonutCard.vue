@@ -27,14 +27,14 @@ import { useColorMode } from '@vueuse/core'
 import { computed } from 'vue'
 import { chart } from '@/constants/chartColors'
 
-const colorMode = useColorMode()
-
 withDefaults(
   defineProps<{
     loading?: boolean
   }>(),
   { loading: false },
 )
+
+const colorMode = useColorMode()
 
 const categories = [
   {
@@ -74,18 +74,42 @@ const formattedTotal = new Intl.NumberFormat(
   },
 ).format(totalValue)
 
-const chartOptions = computed<AgChartOptions>(
-  () => ({
+const donutSeriesConfig = {
+  type: 'donut' as const,
+  calloutLabelKey: 'category',
+  angleKey: 'value',
+  radiusKey: 'targetRatio',
+  innerRadiusRatio: 0.35,
+  cornerRadius: 5,
+  strokeWidth: 2,
+  fills: [
+    chart.withOpacity(chart.colors.success, 0.5),
+    chart.withOpacity(chart.colors.primary, 0.5),
+    chart.withOpacity(chart.colors.warning, 0.5),
+    chart.withOpacity(chart.colors.error, 0.5),
+  ],
+  strokes: [
+    chart.colors.success,
+    chart.colors.primary,
+    chart.colors.warning,
+    chart.colors.error,
+  ],
+  highlight: {
+    highlightedItem: { strokeWidth: 4 },
+  },
+}
+
+function buildChartOptions(
+  total: string,
+  isDark: boolean,
+): AgChartOptions {
+  return {
     theme: chart.theme,
     background: chart.background,
     data: categories,
     series: [
       {
-        type: 'donut',
-        calloutLabelKey: 'category',
-        angleKey: 'value',
-        radiusKey: 'targetRatio',
-        innerRadiusRatio: 0.35,
+        ...donutSeriesConfig,
         innerLabels: [
           {
             text: 'Total Sales',
@@ -93,52 +117,28 @@ const chartOptions = computed<AgChartOptions>(
             fontWeight: 'bold',
           },
           {
-            text: formattedTotal,
+            text: total,
             spacing: 4,
             fontSize: 24,
-            color:
-              colorMode.value === 'dark'
-                ? chart.withOpacity(
-                    chart.colors.neutral,
-                    0.9,
-                  )
-                : chart.colors.gray,
+            color: isDark
+              ? chart.withOpacity(
+                  chart.colors.neutral,
+                  0.9,
+                )
+              : chart.colors.gray,
           },
         ],
-        cornerRadius: 5,
-        strokeWidth: 2,
-        fills: [
-          chart.withOpacity(
-            chart.colors.success,
-            0.5,
-          ),
-          chart.withOpacity(
-            chart.colors.primary,
-            0.5,
-          ),
-          chart.withOpacity(
-            chart.colors.warning,
-            0.5,
-          ),
-          chart.withOpacity(
-            chart.colors.error,
-            0.5,
-          ),
-        ],
-        strokes: [
-          chart.colors.success,
-          chart.colors.primary,
-          chart.colors.warning,
-          chart.colors.error,
-        ],
-        highlight: {
-          highlightedItem: {
-            strokeWidth: 4,
-          },
-        },
       },
     ],
     legend: { enabled: false },
-  }),
+  }
+}
+
+const chartOptions = computed<AgChartOptions>(
+  () =>
+    buildChartOptions(
+      formattedTotal,
+      colorMode.value === 'dark',
+    ),
 )
 </script>

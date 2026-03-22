@@ -91,6 +91,11 @@ import { computed } from 'vue'
 import { CHART_CARD_MENU_ITEMS } from '@/constants/dashboardCardMenu'
 import { chart } from '@/constants/chartColors'
 
+withDefaults(
+  defineProps<{ loading?: boolean }>(),
+  { loading: false },
+)
+
 const countries = [
   {
     name: 'USA',
@@ -134,70 +139,73 @@ const chartData = [
   },
 ]
 
-withDefaults(
-  defineProps<{ loading?: boolean }>(),
-  { loading: false },
-)
+const demographicChartSeries = [
+  {
+    type: 'area' as const,
+    xKey: 'country',
+    yKey: 'customers',
+    yName: 'Customers',
+    fill: chart.withOpacity(
+      chart.colors.primary,
+      0.2,
+    ),
+    fillOpacity: 0.5,
+    stroke: chart.withOpacity(
+      chart.colors.primary,
+      0.3,
+    ),
+    strokeWidth: 2,
+    marker: {
+      size: 8,
+      fill: 'transparent',
+      stroke: 'transparent',
+    },
+    interpolation: { type: 'smooth' as const },
+  },
+  {
+    type: 'line' as const,
+    xKey: 'country',
+    yKey: 'target',
+    yName: 'Target',
+    stroke: chart.colors.primary,
+    strokeWidth: 3,
+    lineDash: [8, 4],
+    marker: {
+      size: 8,
+      fill: 'transparent',
+      stroke: 'transparent',
+    },
+    interpolation: { type: 'smooth' as const },
+  },
+]
 
-const chartOptions = computed<AgChartOptions>(
-  () => ({
+const demographicChartAxes = {
+  y: {
+    gridLine: {
+      style: [
+        {
+          stroke: chart.withOpacity(
+            chart.colors.gray,
+            0.2,
+          ),
+        },
+      ],
+    },
+  },
+}
+
+function buildDemographicChartOptions(): AgChartOptions {
+  return {
     theme: chart.theme,
     background: chart.background,
     data: chartData,
-    series: [
-      {
-        type: 'area',
-        xKey: 'country',
-        yKey: 'customers',
-        yName: 'Customers',
-        fill: chart.withOpacity(
-          chart.colors.primary,
-          0.2,
-        ),
-        fillOpacity: 0.5,
-        stroke: chart.withOpacity(
-          chart.colors.primary,
-          0.3,
-        ),
-        strokeWidth: 2,
-        marker: {
-          size: 8,
-          fill: 'transparent',
-          stroke: 'transparent',
-        },
-        interpolation: { type: 'smooth' },
-      },
-      {
-        type: 'line',
-        xKey: 'country',
-        yKey: 'target',
-        yName: 'Target',
-        stroke: chart.colors.primary,
-        strokeWidth: 3,
-        lineDash: [8, 4],
-        marker: {
-          size: 8,
-          fill: 'transparent',
-          stroke: 'transparent',
-        },
-        interpolation: { type: 'smooth' },
-      },
-    ],
-    axes: {
-      y: {
-        gridLine: {
-          style: [
-            {
-              stroke: chart.withOpacity(
-                chart.colors.gray,
-                0.2,
-              ),
-            },
-          ],
-        },
-      },
-    },
+    series: demographicChartSeries,
+    axes: demographicChartAxes,
     legend: { position: 'top' },
-  }),
+  }
+}
+
+const chartOptions = computed<AgChartOptions>(
+  () => buildDemographicChartOptions(),
 )
 </script>

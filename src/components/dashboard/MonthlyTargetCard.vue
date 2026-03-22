@@ -98,16 +98,6 @@ import { computed } from 'vue'
 import { CHART_CARD_MENU_ITEMS } from '@/constants/dashboardCardMenu'
 import { chart } from '@/constants/chartColors'
 
-const colorMode = useColorMode()
-
-function formatAmount(value: number): string {
-  if (value >= 10_000) {
-    const k = Math.round(value / 1000)
-    return `$${k}K`
-  }
-  return `$${value.toLocaleString()}`
-}
-
 const props = withDefaults(
   defineProps<{
     class?: string
@@ -121,6 +111,7 @@ const props = withDefaults(
     todayTrend?: 'up' | 'down' | 'neutral'
   }>(),
   {
+    class: undefined,
     loading: false,
     target: 20_000,
     revenue: 15_000,
@@ -132,6 +123,16 @@ const props = withDefaults(
     todayTrend: 'up',
   },
 )
+
+const colorMode = useColorMode()
+
+function formatAmount(value: number): string {
+  if (value >= 10_000) {
+    const k = Math.round(value / 1000)
+    return `$${k}K`
+  }
+  return `$${value.toLocaleString()}`
+}
 
 const progressPercent = computed(() =>
   props.target > 0
@@ -178,18 +179,18 @@ const todayTrendIconClass = computed(
   () => trendConfig[props.todayTrend].class,
 )
 
-const chartOptions = computed<AgChartOptions>(
-  () => ({
+function buildChartOptions(
+  progress: number,
+  isDark: boolean,
+): AgChartOptions {
+  return {
     theme: chart.theme,
     background: chart.background,
     data: [
-      {
-        label: 'Progress',
-        value: progressPercent.value,
-      },
+      { label: 'Progress', value: progress },
       {
         label: 'Remaining',
-        value: 100 - progressPercent.value,
+        value: 100 - progress,
       },
     ],
     series: [
@@ -218,21 +219,28 @@ const chartOptions = computed<AgChartOptions>(
         cornerRadius: 50,
         innerLabels: [
           {
-            text: `${progressPercent.value}%`,
+            text: `${progress}%`,
             fontSize: 36,
             fontWeight: 600,
-            color:
-              colorMode.value === 'dark'
-                ? chart.withOpacity(
-                    chart.colors.neutral,
-                    0.9,
-                  )
-                : chart.colors.gray,
+            color: isDark
+              ? chart.withOpacity(
+                  chart.colors.neutral,
+                  0.9,
+                )
+              : chart.colors.gray,
           },
         ],
       },
     ],
-  }),
+  }
+}
+
+const chartOptions = computed<AgChartOptions>(
+  () =>
+    buildChartOptions(
+      progressPercent.value,
+      colorMode.value === 'dark',
+    ),
 )
 </script>
 

@@ -14,6 +14,7 @@ import {
   vueTsConfigs,
 } from '@vue/eslint-config-typescript'
 import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import noBusinessLogicInComponent from './eslint-rules/no-business-logic-in-component.js'
 
 // To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
 // import { configureVueProject } from '@vue/eslint-config-typescript'
@@ -53,6 +54,129 @@ export default defineConfigWithVueTs(
           order: ['template', 'script', 'style'],
         },
       ],
+    },
+  },
+  {
+    name: 'app/nuxt-ui-required',
+    files: ['**/*.vue'],
+    rules: {
+      'vue/no-restricted-html-elements': [
+        'error',
+        {
+          element: 'input',
+          message: 'Nuxt UI kullan: <UInput>',
+        },
+        {
+          element: 'textarea',
+          message: 'Nuxt UI kullan: <UTextarea>',
+        },
+        {
+          element: 'select',
+          message: 'Nuxt UI kullan: <USelect>',
+        },
+        {
+          element: 'button',
+          message: 'Nuxt UI kullan: <UButton>',
+        },
+        {
+          element: 'a',
+          message: 'Nuxt UI kullan: <ULink>',
+        },
+        {
+          element: 'form',
+          message: 'Nuxt UI kullan: <UForm>',
+        },
+      ],
+    },
+  },
+  // Genel TS/JS: max 80 satır, complexity 15
+  {
+    name: 'app/no-duplicate-logic',
+    rules: {
+      'no-duplicate-imports': 'error',
+      'max-lines-per-function': [
+        'warn',
+        {
+          max: 80,
+          skipBlankLines: true,
+          skipComments: true,
+        },
+      ],
+      complexity: ['warn', { max: 15 }],
+      'vue/require-explicit-emits': 'warn',
+      'vue/require-prop-types': 'warn',
+      'vue/require-default-prop': 'warn',
+    },
+  },
+  // Evrensel best practices
+  {
+    name: 'app/best-practices',
+    rules: {
+      'prefer-const': 'error',
+      eqeqeq: ['warn', 'always'],
+      'no-return-await': 'warn',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/no-floating-promises':
+        'warn',
+      '@typescript-eslint/prefer-nullish-coalescing':
+        'warn',
+      '@typescript-eslint/no-unnecessary-type-assertion':
+        'warn',
+    },
+  },
+  // Vue macro ve string stil
+  {
+    name: 'app/vue-macros-and-strings',
+    files: ['**/*.vue'],
+    rules: {
+      'vue/define-macros-order': [
+        'warn',
+        {
+          order: ['defineProps', 'defineEmits'],
+          defineExposeLast: true,
+        },
+      ],
+      'vue/prefer-template': 'warn',
+    },
+  },
+  // Vue component'lerde daha sıkı: max 50 satır, complexity 10
+  {
+    name: 'app/vue-stricter-complexity',
+    files: ['**/*.vue'],
+    rules: {
+      'max-lines-per-function': [
+        'warn',
+        {
+          max: 50,
+          skipBlankLines: true,
+          skipComments: true,
+        },
+      ],
+      complexity: ['warn', { max: 10 }],
+    },
+  },
+  // Custom: component'te doğrudan API çağrısı → composable'a taşı
+  {
+    name: 'app/no-business-logic-in-component',
+    files: ['**/*.vue'],
+    plugins: {
+      local: {
+        rules: {
+          'no-business-logic-in-component':
+            noBusinessLogicInComponent,
+        },
+      },
+    },
+    rules: {
+      'local/no-business-logic-in-component':
+        'warn',
     },
   },
   {

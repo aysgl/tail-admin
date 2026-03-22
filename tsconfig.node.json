@@ -11,5 +11,10 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "composite": true
   },
-  "include": ["vite.config.*", "eslint.config.*"]
+  "include": [
+    "vite.config.*",
+    "eslint.config.*",
+    "eslint-rules/**/*.d.ts",
+    "scripts/**/*.ts"
+  ]
 }

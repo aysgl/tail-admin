@@ -110,7 +110,7 @@ function setOpenSections(
   val: string | string[] | undefined,
 ) {
   openSections.value =
-    val == null
+    val === undefined
       ? []
       : Array.isArray(val)
         ? val

@@ -170,28 +170,6 @@ import {
   filterByDateRange,
 } from '@/composables/useTableFilters'
 
-const themeMap = {
-  compact: tableThemeCompact,
-  relaxed: tableThemeRelaxed,
-  advance: tableThemeAdvance,
-} as const
-
-const statusTabItems = [
-  { label: 'All', value: 'all' },
-  { label: 'Active', value: 'Active' },
-  { label: 'Pending', value: 'Pending' },
-  { label: 'Cancel', value: 'Cancel' },
-]
-
-const toggleableColumns = [
-  { id: 'name', label: 'User' },
-  { id: 'project', label: 'Project' },
-  { id: 'team', label: 'Team' },
-  { id: 'status', label: 'Status' },
-  { id: 'date', label: 'Tarih' },
-  { id: 'budget', label: 'Budget' },
-] as const
-
 const props = withDefaults(
   defineProps<{
     theme?: 'compact' | 'relaxed' | 'advance'
@@ -219,6 +197,28 @@ const emit = defineEmits<{
   ]
   'update:quickFilterText': [value: string]
 }>()
+
+const themeMap = {
+  compact: tableThemeCompact,
+  relaxed: tableThemeRelaxed,
+  advance: tableThemeAdvance,
+} as const
+
+const statusTabItems = [
+  { label: 'All', value: 'all' },
+  { label: 'Active', value: 'Active' },
+  { label: 'Pending', value: 'Pending' },
+  { label: 'Cancel', value: 'Cancel' },
+]
+
+const toggleableColumns = [
+  { id: 'name', label: 'User' },
+  { id: 'project', label: 'Project' },
+  { id: 'team', label: 'Team' },
+  { id: 'status', label: 'Status' },
+  { id: 'date', label: 'Tarih' },
+  { id: 'budget', label: 'Budget' },
+] as const
 
 const gridApi = ref<GridApi | null>(null)
 const activeStatusTab = ref<string>('all')

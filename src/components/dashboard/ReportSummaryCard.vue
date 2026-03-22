@@ -80,6 +80,6 @@ withDefaults(
       | 'neutral'
     loading?: boolean
   }>(),
-  { loading: false },
+  { color: 'neutral', loading: false },
 )
 </script>
