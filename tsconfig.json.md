@@ -251,7 +251,7 @@ Vite `vite.config.ts` içinde aynı alias tanımlı; derleme ve çalışma zaman
 ## 6. type-check Komutu
 
 ```bash
-yarn check:types
+npm run check:types
 ```
 
 `vue-tsc --build` çalıştırır; tüm referans projeleri derlenir ve tip hataları raporlanır.

@@ -93,11 +93,11 @@ resolve: {
 
 ## 5. İlgili Komutlar
 
-| Komut            | Açıklama                                                          |
-| ---------------- | ----------------------------------------------------------------- |
-| `yarn dev`       | Geliştirme sunucusu (Vite)                                        |
-| `yarn build`     | check:deps → check:format → check:lint → check:types → Vite build |
-| `yarn storybook` | Storybook geliştirme sunucusu                                     |
+| Komut               | Açıklama                                                          |
+| ------------------- | ----------------------------------------------------------------- |
+| `npm run dev`       | Geliştirme sunucusu (Vite)                                        |
+| `npm run build`     | check:deps → check:format → check:lint → check:types → Vite build |
+| `npm run storybook` | Storybook geliştirme sunucusu                                     |
 
 ---
 

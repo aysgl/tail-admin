@@ -6,7 +6,7 @@ Bu dokümanda projedeki tüm paketlerin kısa açıklamaları ve script lifecycl
 
 - [Package.json Paket Açıklamaları](#packagejson-paket-açıklamaları)
   - [İçindekiler](#i̇çindekiler)
-  - [Yarn Komutları](#yarn-komutları)
+  - [NPM scriptleri](#npm-scriptleri)
   - [Script Lifecycle](#script-lifecycle)
     - [Pattern (eylem:hedef)](#pattern-eylemhedef)
     - [Lifecycle akışı](#lifecycle-akışı)
@@ -21,21 +21,21 @@ Bu dokümanda projedeki tüm paketlerin kısa açıklamaları ve script lifecycl
     - [Diğer](#diğer)
   - [Özet: Opsiyonel Paketler](#özet-opsiyonel-paketler)
 
-## Yarn Komutları
+## NPM scriptleri
 
 | Komut               | Açıklama                                                                                                                |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | **dev**             | Geliştirme sunucusunu başlatır (`vite`)                                                                                 |
 | **build**           | check:deps + format + lint + type-check + production build                                                              |
-| **check:deps**      | `yarn install --frozen-lockfile` — bağımlılık doğrulama; çakışma varsa build durur                                      |
+| **check:deps**      | `npm ci` — lockfile ile birebir kurulum; `package.json` ile uyumsuzluk varsa build durur                                |
 | **check:lint**      | ESLint kontrolü (sadece kontrol, dosya değiştirmez)                                                                     |
 | **check:format**    | Prettier ile kontrol                                                                                                    |
 | **check:types**     | TypeScript tip kontrolü (`vue-tsc`)                                                                                     |
 | **fix:lint**        | ESLint `--fix` ile otomatik düzeltme                                                                                    |
 | **fix:format**      | Prettier ile otomatik düzeltme                                                                                          |
 | **clean:cache**     | Sadece cache/build: `dist`, `node_modules/.vite`, `storybook-static`, `coverage`, `.nuxt-ui` siler. Paketlere dokunmaz. |
-| **clean:install**   | clean:cache + `node_modules` siler + `yarn install` ile yeniden kurar                                                   |
-| **prepare**         | Husky kurulumu (`yarn` sonrası otomatik çalışır)                                                                        |
+| **clean:install**   | clean:cache + `node_modules` siler + `npm install` ile yeniden kurar                                                    |
+| **prepare**         | Husky kurulumu (`npm install` sonrası otomatik çalışır)                                                                 |
 | **storybook**       | Storybook dev sunucusu (port 6006)                                                                                      |
 | **build:storybook** | Storybook statik build                                                                                                  |
 | **build:chromatic** | Storybook build + Chromatic'e yükle (görsel regression)                                                                 |
@@ -61,7 +61,7 @@ Prefix'li script'ler **eylem:hedef** sırasını izler:
 
 | Aşama                | Ne yapılır                                                      | Script'ler                                                          |
 | -------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------- |
-| **1. Kurulum**       | `yarn` sonrası Husky otomatik devreye girer                     | `prepare`                                                           |
+| **1. Kurulum**       | `npm install` sonrası Husky otomatik devreye girer              | `prepare`                                                           |
 | **2. Geliştirme**    | Uygulamayı çalıştırırsınız                                      | `dev`                                                               |
 | **3. Kod düzeltme**  | Format ve lint hatalarını giderirsiniz (sıra önerilir)          | `fix:format` → `fix:lint`                                           |
 | **4. Kontrol**       | Düzeltmeden önce/sonra doğrulama                                | `check:deps`, `check:format`, `check:lint`, `check:types`           |
@@ -73,14 +73,14 @@ Prefix'li script'ler **eylem:hedef** sırasını izler:
 
 ### Tetikleyiciler
 
-Script'ler genelde manuel (`yarn ...` veya `yarn run ...`) çalışır. Aşağıdakiler **otomatik** tetiklenir:
+Script'ler genelde manuel (`npm run ...`) çalışır. Aşağıdakiler **otomatik** tetiklenir:
 
-| Ne zaman?        | Ne olur?                                                                                                                                      |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **yarn**         | `prepare` script'i çalışır; Husky Git hooks'ları kurar.                                                                                       |
-| **git commit**   | pre-commit hook: lint-staged (prettier + eslint) + `check:types`.                                                                             |
-| **git push**     | pre-push hook: `build` çalışır; hata varsa push engellenir.                                                                                   |
-| **CI** (PR/push) | yarn install --frozen-lockfile → commitlint → check:format → check:lint → check:types → build. `check:deps` peer dep çakışmasında hata verir. |
+| Ne zaman?        | Ne olur?                                                                                                              |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **npm install**  | `prepare` script'i çalışır; Husky Git hooks'ları kurar.                                                               |
+| **git commit**   | pre-commit hook: lint-staged (prettier + eslint) + `check:types`.                                                     |
+| **git push**     | pre-push hook: `build` çalışır; hata varsa push engellenir.                                                           |
+| **CI** (PR/push) | npm ci → commitlint → check:format → check:lint → check:types → build. `check:deps` peer dep çakışmasında hata verir. |
 
 **lint-staged:** Config (script değil); Husky `npx lint-staged` ile çalıştırır. `*.{ts,tsx,vue,js,jsx,mts,mjs}` için prettier + eslint; `*.{json,css,md}` için sadece prettier.
 

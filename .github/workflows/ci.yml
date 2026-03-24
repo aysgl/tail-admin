@@ -20,22 +20,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Commitlint
         run: npx commitlint --from HEAD~20 --to HEAD
 
       - name: Format
-        run: yarn run check:format
+        run: npm run check:format
 
       - name: Lint
-        run: yarn run check:lint
+        run: npm run check:lint
 
       - name: Type check
-        run: yarn run check:types
+        run: npm run check:types
 
       - name: Build
-        run: yarn run build
+        run: npm run build

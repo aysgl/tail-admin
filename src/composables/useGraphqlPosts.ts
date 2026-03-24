@@ -1,5 +1,5 @@
-import { graphqlClient } from '@/api/graphql'
-import GetPostsQuery from '@/graphql/queries/posts.graphql?raw'
+import { getPostsWith } from '@/lib/getPostsWith'
+import { getPostsWithout } from '@/lib/getPostsWithout'
 import { ref, type Ref } from 'vue'
 
 export interface GraphqlPost {
@@ -8,41 +8,42 @@ export interface GraphqlPost {
   body: string
 }
 
-interface PostsResponse {
-  posts: {
-    data: GraphqlPost[]
-    meta: { totalCount: number }
-  }
-}
+export type GraphqlPostsFetchMode =
+  | 'with'
+  | 'without'
 
 export function useGraphqlPosts(): {
   posts: Ref<GraphqlPost[]>
   totalCount: Ref<number>
   loading: Ref<boolean>
   error: Ref<Error | null>
-  fetchPosts: () => Promise<void>
+  lastFetchMode: Ref<GraphqlPostsFetchMode | null>
+  fetchPosts: (
+    mode?: GraphqlPostsFetchMode,
+  ) => Promise<void>
 } {
   const posts = ref<GraphqlPost[]>([])
   const totalCount = ref(0)
   const loading = ref(false)
   const error = ref<Error | null>(null)
+  const lastFetchMode =
+    ref<GraphqlPostsFetchMode | null>(null)
 
-  async function fetchPosts() {
+  async function fetchPosts(
+    mode: GraphqlPostsFetchMode = 'with',
+  ) {
     loading.value = true
     error.value = null
+    lastFetchMode.value = mode
     try {
-      const data =
-        await graphqlClient.request<PostsResponse>(
-          GetPostsQuery,
-          {
-            options: {
-              paginate: { page: 1, limit: 10 },
-            },
-          },
-        )
-      posts.value = data.posts.data ?? []
-      totalCount.value =
-        data.posts.meta?.totalCount ?? 0
+      const loader =
+        mode === 'without'
+          ? getPostsWithout
+          : getPostsWith
+      const { data, totalCount: count } =
+        await loader(1, 10)
+      posts.value = data
+      totalCount.value = count
     } catch (e) {
       error.value =
         e instanceof Error
@@ -59,6 +60,7 @@ export function useGraphqlPosts(): {
     totalCount,
     loading,
     error,
+    lastFetchMode,
     fetchPosts,
   }
 }

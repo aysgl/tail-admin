@@ -31,5 +31,5 @@ storybook-static
 
 .npmrc
 
-# Prevent accidental npm usage (proje yarn kullanır)
-package-lock.json
+# Proje npm kullanır; yarn.lock commit edilmez
+yarn.lock

@@ -2,7 +2,7 @@
 /**
  * Proje cache temizleme.
  * - clean:cache → sadece node_modules içi cache + build çıktıları (hızlı)
- * - clean:install → node_modules sil + yarn install (tam yeniden kurulum)
+ * - clean:install → node_modules sil + npm install (tam yeniden kurulum)
  *
  * @see https://vite.dev/config/shared-options.html#cachedir
  */
@@ -103,7 +103,7 @@ try {
 
   if (isReinstall) {
     console.log(
-      '  yarn install ile yeniden yükleme yapılıyor...\n',
+      '  npm install ile yeniden yükleme yapılıyor...\n',
     )
   }
 } catch (err) {

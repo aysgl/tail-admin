@@ -7,7 +7,7 @@ Bu doküman, projedeki `eslint.config.ts` yapılandırmasını ve kullanılan ek
 1. [Konfigürasyon Özeti](#1-konfigürasyon-özeti)
 2. [Dosya ve Dizin Kuralları](#2-dosya-ve-dizin-kuralları)
 3. [Eklentiler ve Kurallar](#3-eklentiler-ve-kurallar)
-4. [Yarn Scriptleri](#4-yarn-scriptleri)
+4. [NPM scriptleri](#4-npm-scriptleri)
 5. [Kural Devre Dışı Bırakma](#5-kural-devre-dışı-bırakma)
 6. [Gelişmiş Kurulum (Opsiyonel)](#6-gelişmiş-kurulum-opsiyonel)
 7. [Lint-Staged Entegrasyonu](#7-lint-staged-entegrasyonu)
@@ -106,23 +106,23 @@ a11y = accessibility (erişilebilirlik). ESLint a11y plugin'i kaldırıldı; kon
 
 ---
 
-## 4. Yarn Scriptleri
+## 4. NPM scriptleri
 
-| Komut               | Açıklama                                          |
-| ------------------- | ------------------------------------------------- |
-| `yarn check:lint`   | Tüm dosyalarda lint kontrolü (`--format stylish`) |
-| `yarn fix:lint`     | ESLint `--fix` ile otomatik düzeltme              |
-| `yarn check:format` | Sadece Prettier ile kontrol                       |
-| `yarn fix:format`   | Prettier ile formatla                             |
+| Komut                  | Açıklama                                          |
+| ---------------------- | ------------------------------------------------- |
+| `npm run check:lint`   | Tüm dosyalarda lint kontrolü (`--format stylish`) |
+| `npm run fix:lint`     | ESLint `--fix` ile otomatik düzeltme              |
+| `npm run check:format` | Sadece Prettier ile kontrol                       |
+| `npm run fix:format`   | Prettier ile formatla                             |
 
 ### Örnek Kullanım
 
 ```bash
 # Sadece kontrol
-yarn check:lint
+npm run check:lint
 
 # Otomatik düzeltme (format + lint)
-yarn fix:format && yarn fix:lint
+npm run fix:format && npm run fix:lint
 
 # Belirli dosya veya dizin
 npx eslint src/views --fix

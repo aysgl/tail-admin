@@ -1,0 +1,32 @@
+---
+description: Paket yöneticisi olarak sadece npm kullanılır
+alwaysApply: true
+---
+
+# Paket Yöneticisi: npm
+
+Bu proje **npm** kullanır. yarn veya pnpm kullanılmaz.
+
+## Kurallar
+
+| ✅ Doğru | ❌ Yanlış |
+|---------|---------|
+| `npm install` | `yarn install` |
+| `npm install paket` | `yarn add paket` |
+| `npm uninstall paket` | `yarn remove paket` |
+| `npm run dev` | `yarn dev` |
+
+## Silinmeyecek Dosyalar
+
+- `package.json` — Proje manifestosu, asla silinmez
+- `package-lock.json` — Bağımlılık kilidi, commit edilir, silinmez
+
+## yarn.lock
+
+- `yarn.lock` yarn dosyasıdır, projede **kullanılmaz**
+- `.gitignore`'da — yanlışlıkla `yarn install` çalışırsa commit edilmez
+- Eğer `yarn.lock` görürsen: kaldırılabilir, `npm install` kullanılmalı
+
+## Öneri Verirken
+
+Komut veya script önerirken her zaman `npm` kullan. yarn komutu yazma.

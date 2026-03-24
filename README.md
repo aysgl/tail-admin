@@ -48,7 +48,7 @@ Tüm bağımlılıklar ve script'ler için `package.json` dosyasına bakın.
 To get started with TailAdmin, ensure you have the following prerequisites installed and set up:
 
 - **Node.js:** Minimum 22.x (Node 24 ile de uyumludur)
-- **Paket yöneticisi:** `yarn` kullanın — `yarn.lock` commit edilir, tutarlılık için npm/pnpm karıştırmayın
+- **Paket yöneticisi:** `npm` kullanın — `package-lock.json` commit edilir, tutarlılık için yarn/pnpm karıştırmayın
 - **IDE:** [VSCode](https://code.visualstudio.com/) veya [Cursor](https://cursor.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) önerilir (Vetur devre dışı)
 
 #### Type Support for `.vue` Imports in TS
@@ -68,27 +68,27 @@ git clone https://github.com/TailAdmin/vue-tailwind-admin-dashboard.git
 1. Install dependencies:
 
    ```bash
-   yarn
+   npm install
    ```
 
 2. Start the development server:
 
    ```bash
-   yarn dev
+   npm run dev
    ```
 
 3. Production build:
 
    ```bash
-   yarn build
+   npm run build
    ```
 
 #### Cache Temizleme ve Yeniden Kurulum
 
-| Script                   | Ne yapar                                                                                                                |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| **`yarn clean:cache`**   | Sadece cache/build: `dist`, `node_modules/.vite`, `storybook-static`, `coverage`, `.nuxt-ui` siler. Paketlere dokunmaz. |
-| **`yarn clean:install`** | `clean:cache` + `node_modules` siler, ardından `yarn install` ile yeniden kurar.                                        |
+| Script                      | Ne yapar                                                                                                                |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **`npm run clean:cache`**   | Sadece cache/build: `dist`, `node_modules/.vite`, `storybook-static`, `coverage`, `.nuxt-ui` siler. Paketlere dokunmaz. |
+| **`npm run clean:install`** | `clean:cache` + `node_modules` siler, ardından `npm install` ile yeniden kurar.                                         |
 
 > **Not:** Cursor/VS Code açıkken `EPERM` hatası alırsanız IDE’yi kapatıp **Terminal.app**’den çalıştırın.
 
@@ -115,7 +115,7 @@ Bu projedeki tüm yapılandırma dosyalarının dokümantasyonu. **Merge conflic
 ### Takım Gereksinimleri
 
 - **Node.js:** Minimum Node 22.x (Node 24 ile de uyumludur)
-- **Paket yöneticisi:** `yarn` kullanın — `yarn.lock` commit edilir, tutarlılık için npm/pnpm karıştırmayın
+- **Paket yöneticisi:** `npm` kullanın — `package-lock.json` commit edilir, tutarlılık için yarn/pnpm karıştırmayın
 - **IDE:** VSCode veya Cursor + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) önerilir (Vetur devre dışı)
 
 ### Frontend Tooling Akışı & Standartları 🚦
@@ -151,7 +151,7 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 **Geliştirme Aşaması**
 
 - **check:\*** — kontrol (dosya değiştirmez): `check:deps`, `check:lint`, `check:format`, `check:types`
-- **check:deps** — `yarn install --frozen-lockfile` ile bağımlılık doğrulama; çakışma varsa build başlamadan hata verir
+- **check:deps** — `npm ci` ile bağımlılık kurulumu (lockfile ile birebir); uyumsuzluk varsa build başlamadan hata verir
 - **fix:\*** — düzelt (dosyayı değiştirir): `fix:lint`, `fix:format` (prefix var, ayrı ayrı)
 
 **Build sırası:** `check:deps` → `check:format` → `check:lint` → `check:types` → `vite build`
@@ -174,18 +174,17 @@ Kod Yazımı → ESLint/Prettier (Editör) → Git Commit → Husky + lint-stage
 
 **Stash Sonrası Hatırlatma**
 
-`yarn stash` veya `git stash` (stash:setup sonrası) kullandığınızda stash tamamlandıktan sonra hatırlatma gösterilir:
+`git stash` kullandığınızda (stash hatırlatması yapılandırıldıysa) tamamlandıktan sonra hatırlatma gösterilir:
 
 ```bash
-yarn stash
-# veya git stash kullanmak için (bir kez): yarn stash:setup
+git stash
 ```
 
 Stash sonrası: `fix:format`, `fix:lint`, `check:types`, `build` sırasını çalıştırmanız hatırlatılır.
 
 **CI Pipeline** (.github/workflows/ci.yml)
 
-1. `yarn install --frozen-lockfile` — bağımlılık kurulumu
+1. `npm ci` — bağımlılık kurulumu (lockfile ile)
 2. Commitlint — son 20 commit mesajı
 3. Format (Prettier)
 4. Lint (ESLint)
@@ -212,4 +211,4 @@ Stash sonrası: `fix:format`, `fix:lint`, `check:types`, `build` sırasını ça
 - Mümkünse config dokümanlarını tek kişi güncellemeye çalışın
 - Merge sonrası `*.md` dosyalarını kontrol edin
 
-**check:format hatası:** Editörde dosyalar açıkken Prettier kontrolü bazen tutarsız sonuç verebilir. İlgili sekmeleri veya tüm dosyaları kapatıp `yarn check:format` veya `yarn fix:format` tekrar deneyin.
+**check:format hatası:** Editörde dosyalar açıkken Prettier kontrolü bazen tutarsız sonuç verebilir. İlgili sekmeleri veya tüm dosyaları kapatıp `npm run check:format` veya `npm run fix:format` tekrar deneyin.
