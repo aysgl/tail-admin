@@ -1,0 +1,7 @@
+# Örnek: sunucuda yeni post oluşturur (GraphQL Zero — createPost)
+
+mutation CreatePost($input: CreatePostInput!) {
+  createPost(input: $input) {
+    ...PostFields
+  }
+}

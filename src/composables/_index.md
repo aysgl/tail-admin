@@ -1,7 +1,5 @@
 # Composable(Hooks) Adlandirma Kurali
 
-https://vuejs.org/guide/reusability/composables.html
-
 ## Hızlı Okuma
 
 - Amaç: tekrar kullanılabilir Vue mantığını standartlaştırmak.
@@ -31,3 +29,9 @@ https://vuejs.org/guide/reusability/composables.html
 - Tek sorumluluk ilkesine uy.
 - TypeScript tiplerini acik tanimla (`interface`, `type`, donus tipi).
 - Tekrarlayan mantik varsa yeni composable acmadan once mevcut composable'lari genisletmeyi degerlendir.
+
+## Kaynaklar
+
+- [Vue: Composables](https://vuejs.org/guide/reusability/composables.html) — kalıplar ve en iyi uygulamalar
+- [Vue: Reactivity Fundamentals](https://vuejs.org/guide/essentials/reactivity-fundamentals.html) — `ref`, `computed`, `watch`
+- [TypeScript Handbook: Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html) — dönüş tipleri ve yeniden kullanım

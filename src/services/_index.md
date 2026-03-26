@@ -38,3 +38,8 @@ Bu klasor, dis sistemlerle (API, storage, third-party) konusan katmandir.
 
 - View/Component dogrudan `fetch` cagrisi yapmaz; service veya composable uzerinden gider.
 - Composable, service cagrip loading/error/state yonetir.
+
+## Kaynaklar
+
+- [Axios](https://axios-http.com/docs/intro) — projede HTTP istemcisi
+- [GraphQL](https://graphql.org/learn/) — sorgu ve şema temelleri (demo: `fetch` + `src/graphql/*.graphql`)

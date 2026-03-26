@@ -1,0 +1,7 @@
+# Post kartında tekrarlanan alan seçimi
+
+fragment PostFields on Post {
+  id
+  title
+  body
+}

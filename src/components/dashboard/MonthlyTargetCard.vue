@@ -33,7 +33,8 @@
         id="chartTwo"
         class="h-[330px]"
         :class="{ 'opacity-0': loading }">
-        <div class="radial-bar-chart h-[330px]">
+        <!-- Eski: donut (inner label % progress) — buildChartOptions + progressPercent -->
+        <div class="pattern-pie-chart h-[330px]">
           <AgCharts :options="chartOptions" />
         </div>
       </div>
@@ -93,7 +94,6 @@
 <script setup lang="ts">
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-vue3'
-import { useColorMode } from '@vueuse/core'
 import { computed } from 'vue'
 import { CHART_CARD_MENU_ITEMS } from '@/constants/dashboardCardMenu'
 import { chart } from '@/constants/chartColors'
@@ -124,8 +124,6 @@ const props = withDefaults(
   },
 )
 
-const colorMode = useColorMode()
-
 function formatAmount(value: number): string {
   if (value >= 10_000) {
     const k = Math.round(value / 1000)
@@ -134,6 +132,7 @@ function formatAmount(value: number): string {
   return `$${value.toLocaleString()}`
 }
 
+/* Donut: hedef ilerlemesi (yüzde) — pie desen grafiğinde kullanılmıyor
 const progressPercent = computed(() =>
   props.target > 0
     ? Math.min(
@@ -144,6 +143,7 @@ const progressPercent = computed(() =>
       )
     : 0,
 )
+*/
 
 const trendConfig = {
   up: {
@@ -179,6 +179,7 @@ const todayTrendIconClass = computed(
   () => trendConfig[props.todayTrend].class,
 )
 
+/* Eski Monthly Target donut grafiği
 function buildChartOptions(
   progress: number,
   isDark: boolean,
@@ -242,10 +243,59 @@ const chartOptions = computed<AgChartOptions>(
       colorMode.value === 'dark',
     ),
 )
+*/
+
+function getPatternPieData(): Array<{
+  name: string
+  value: number
+  radius: number
+}> {
+  return [
+    { name: 'Enterprise', value: 185, radius: 1 },
+    { name: 'Growth', value: 142, radius: 0.92 },
+    { name: 'SMB', value: 98, radius: 0.85 },
+    {
+      name: 'Self-serve',
+      value: 76,
+      radius: 0.78,
+    },
+    { name: 'Other', value: 45, radius: 0.7 },
+  ]
+}
+
+const chartOptions = computed<AgChartOptions>(
+  () => ({
+    theme: chart.theme,
+    background: chart.background,
+    data: getPatternPieData(),
+    series: [
+      {
+        type: 'pie',
+        angleKey: 'value',
+        radiusKey: 'radius',
+        legendItemKey: 'name',
+        strokeWidth: 1,
+        fills: [
+          {
+            type: 'pattern',
+            pattern: 'diamonds',
+          },
+          { type: 'pattern', pattern: 'hearts' },
+          { type: 'pattern', pattern: 'squares' },
+          {
+            type: 'pattern',
+            pattern: 'triangles',
+          },
+          { type: 'pattern', pattern: 'stars' },
+        ],
+      },
+    ],
+  }),
+)
 </script>
 
 <style scoped>
-.radial-bar-chart {
+.pattern-pie-chart {
   width: 100%;
   max-width: 330px;
   margin: 0 auto;

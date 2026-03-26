@@ -35,3 +35,9 @@ Bu klasor, router tarafindan yuklenen **sayfa** bilesenlerini icerir.
 - Sayfa: composable kullanir (loading/error/state)
 - Composable: service cagirir
 - Service: HTTP/GraphQL konusur ve veriyi normalize eder
+
+## Kaynaklar
+
+- [Vue Router: Route Meta Fields](https://router.vuejs.org/guide/advanced/meta.html) — `meta.layout`, title, guard işaretleri
+- [Vue: Single-File Components](https://vuejs.org/guide/scaling-up/sfc.html) — sayfa bileşen yapısı
+- [Vue: Composition API - Setup](https://vuejs.org/api/composition-api-setup.html) — sayfa içi mantık düzeni

@@ -33,3 +33,9 @@ Bu klasor, Storybook dokumantasyonu ve orneklerini tutar.
 
 - Bir story tek bir bileseni hedeflemeli.
 - Ornekler gercek kullanim senaryosunu yansitmali (Nuxt UI ile uyumlu).
+
+## Kaynaklar
+
+- [Storybook for Vue](https://storybook.js.org/docs/get-started/frameworks/vue3-vite) — Vue 3 + Vite kurulumu ve API
+- [Storybook: Writing Stories](https://storybook.js.org/docs/writing-stories) — `args`, variantlar, dokümantasyon
+- [storybook-vue3-router](https://github.com/NickMcBurney/storybook-vue3-router) — router entegrasyonu (projede dev dependency)

@@ -1,47 +1,39 @@
-import { getPostsWith } from '@/lib/getPostsWith'
-import { getPostsWithout } from '@/lib/getPostsWithout'
+import {
+  createPost as createPostRemote,
+  fetchPosts,
+  type CreatePostInput,
+  type PostItem,
+} from '@/services/postsService'
 import { ref, type Ref } from 'vue'
 
-export interface GraphqlPost {
-  id: string
-  title: string
-  body: string
-}
-
-export type GraphqlPostsFetchMode =
-  | 'with'
-  | 'without'
+export type GraphqlPost = PostItem
+export type { CreatePostInput }
 
 export function useGraphqlPosts(): {
   posts: Ref<GraphqlPost[]>
   totalCount: Ref<number>
   loading: Ref<boolean>
   error: Ref<Error | null>
-  lastFetchMode: Ref<GraphqlPostsFetchMode | null>
-  fetchPosts: (
-    mode?: GraphqlPostsFetchMode,
+  creating: Ref<boolean>
+  createError: Ref<Error | null>
+  fetchPosts: () => Promise<void>
+  createPost: (
+    input: CreatePostInput,
   ) => Promise<void>
 } {
   const posts = ref<GraphqlPost[]>([])
   const totalCount = ref(0)
   const loading = ref(false)
   const error = ref<Error | null>(null)
-  const lastFetchMode =
-    ref<GraphqlPostsFetchMode | null>(null)
+  const creating = ref(false)
+  const createError = ref<Error | null>(null)
 
-  async function fetchPosts(
-    mode: GraphqlPostsFetchMode = 'with',
-  ) {
+  async function load() {
     loading.value = true
     error.value = null
-    lastFetchMode.value = mode
     try {
-      const loader =
-        mode === 'without'
-          ? getPostsWithout
-          : getPostsWith
       const { data, totalCount: count } =
-        await loader(1, 10)
+        await fetchPosts(1, 10)
       posts.value = data
       totalCount.value = count
     } catch (e) {
@@ -55,12 +47,32 @@ export function useGraphqlPosts(): {
     }
   }
 
+  async function submitCreate(
+    input: CreatePostInput,
+  ) {
+    creating.value = true
+    createError.value = null
+    try {
+      await createPostRemote(input)
+      await load()
+    } catch (e) {
+      createError.value =
+        e instanceof Error
+          ? e
+          : new Error(String(e))
+    } finally {
+      creating.value = false
+    }
+  }
+
   return {
     posts,
     totalCount,
     loading,
     error,
-    lastFetchMode,
-    fetchPosts,
+    creating,
+    createError,
+    fetchPosts: load,
+    createPost: submitCreate,
   }
 }

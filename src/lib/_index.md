@@ -31,3 +31,8 @@ Bu klasor, uygulama icinde tekrar kullanilan **kucuk, saf (pure)** yardimci fonk
 
 - Bir fonksiyon 2+ yerde kullaniliyorsa `lib`'e cek.
 - Domain-ozel agac (or. posts) icin `services` veya feature klasorunu tercih et.
+
+## Kaynaklar
+
+- [TypeScript Handbook: More on Functions](https://www.typescriptlang.org/docs/handbook/2/functions.html) — imzalar ve generics
+- [MDN JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide) — saf JS yardımcıları için referans

@@ -63,6 +63,17 @@ const chartData = [
   },
 ]
 
+/** AG Charts “Streaming Music Sales” örneğindeki Line (çizgili) pattern */
+const stripedLinePatternFill = {
+  type: 'pattern' as const,
+  path: 'M0,6 Q4,1 8,6 T16,6',
+  width: 6,
+  height: 6,
+  strokeWidth: 3,
+  fill: 'none' as const,
+  opacity: 0.8,
+}
+
 const lineSeries = (
   yKey: string,
   yName: string,
@@ -82,13 +93,33 @@ const lineSeries = (
   interpolation: { type: 'smooth' as const },
 })
 
+const areaSeriesWithStripedFill = (
+  yKey: string,
+  yName: string,
+  color: string,
+) => ({
+  type: 'area' as const,
+  xKey: 'period',
+  yKey,
+  yName,
+  stroke: color,
+  strokeWidth: 5,
+  fill: stripedLinePatternFill,
+  marker: {
+    size: 10,
+    fill: color,
+    stroke: color,
+  },
+  interpolation: { type: 'smooth' as const },
+})
+
 function buildChartOptions(): AgChartOptions {
   return {
     theme: chart.theme,
     background: chart.background,
     data: chartData,
     series: [
-      lineSeries(
+      areaSeriesWithStripedFill(
         'ziyaretci',
         'Visitor',
         chart.colors.primary,
@@ -110,7 +141,7 @@ function buildChartOptions(): AgChartOptions {
           style: [
             {
               stroke: chart.withOpacity(
-                chart.colors.gray,
+                chart.colors.primary,
                 0.2,
               ),
             },

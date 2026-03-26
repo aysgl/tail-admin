@@ -1,194 +1,240 @@
 <template>
-  <div class="space-y-6">
+  <div
+    class="space-y-6 text-gray-900 dark:text-gray-100">
     <UPageCard
-      title="graphql-request + graphql · fetch"
       variant="outline"
-      class="bg-white dark:bg-gray-900/90">
-      <div
-        class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
-        <div
-          class="space-y-2 rounded-lg border border-primary-200/80 bg-primary-50/40 p-4 dark:border-primary-800/50 dark:bg-primary-950/20">
+      class="min-w-0">
+      <template #header>
+        <div>
           <h3
-            class="text-sm font-semibold text-primary-800 dark:text-primary-200">
-            graphql-request + graphql
+            class="text-lg font-semibold text-gray-900 dark:text-gray-50">
+            GraphQL · fetch
           </h3>
-          <ul
-            class="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
-            <li class="flex gap-2">
-              <span
-                class="shrink-0 text-primary-600 dark:text-primary-400"
-                >·</span
-              >
-              <span>
-                <code
-                  class="rounded bg-white/80 px-1 font-mono text-xs dark:bg-gray-900/80">
-                  GraphQLClient
-                </code>
-                +
-                <code
-                  class="rounded bg-white/80 px-1 font-mono text-xs dark:bg-gray-900/80">
-                  request()
-                </code>
-                : gövde ve değişkenler hazır
-              </span>
-            </li>
-            <li class="flex gap-2">
-              <span
-                class="shrink-0 text-primary-600 dark:text-primary-400"
-                >·</span
-              >
-              <span>
-                <code
-                  class="rounded bg-white/80 px-1 font-mono text-xs dark:bg-gray-900/80">
-                  graphql
-                </code>
-                → peer dependency
-              </span>
-            </li>
-            <li class="flex gap-2">
-              <span
-                class="shrink-0 text-primary-600 dark:text-primary-400"
-                >·</span
-              >
-              <span
-                >HTTP / GraphQL errors daha az
-                kod</span
-              >
-            </li>
-          </ul>
+          <p
+            class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            Ek GraphQL istemci paketi yok: tek
+            <code
+              class="mx-0.5 rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              requestGraphql
+            </code>
+            ile POST + JSON gövde
+            <span
+              v-pre
+              class="font-mono text-gray-800 dark:text-gray-300">
+              ({ query, variables })
+            </span>
+            .
+          </p>
         </div>
-
-        <div
-          class="space-y-2 rounded-lg border border-gray-200 bg-gray-50/80 p-4 dark:border-gray-700 dark:bg-gray-800/40">
-          <h3
-            class="text-sm font-semibold text-gray-900 dark:text-white">
-            Paket olmadan (fetch)
-          </h3>
-          <ul
-            class="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
-            <li class="flex gap-2">
-              <span class="shrink-0 text-gray-400"
-                >·</span
-              >
-              <span>
-                <code
-                  class="rounded bg-white px-1 font-mono text-xs dark:bg-gray-900">
-                  POST
-                </code>
-                +
-                <code
-                  class="rounded bg-white px-1 font-mono text-xs dark:bg-gray-900">
-                  JSON.stringify
-                </code>
-                ({ query, variables })
-              </span>
-            </li>
-            <li class="flex gap-2">
-              <span class="shrink-0 text-gray-400"
-                >·</span
-              >
-              <span>
-                <code
-                  class="rounded bg-white px-1 font-mono text-xs dark:bg-gray-900">
-                  res.ok
-                </code>
-                ,
-                <code
-                  class="rounded bg-white px-1 font-mono text-xs dark:bg-gray-900">
-                  data
-                </code>
-                /
-                <code
-                  class="rounded bg-white px-1 font-mono text-xs dark:bg-gray-900">
-                  errors
-                </code>
-                elle
-              </span>
-            </li>
-            <li class="flex gap-2">
-              <span class="shrink-0 text-gray-400"
-                >·</span
-              >
-              <span
-                >Çok sorguda aynı kalıp
-                tekrarlanır</span
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+      </template>
+      <ul
+        class="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
+        <li class="flex gap-2">
+          <span
+            class="shrink-0 text-primary-600 dark:text-primary-400"
+            >·</span
+          >
+          <span>
+            Şema metinleri:
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              src/graphql/
+            </code>
+            — fragment,
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              queries/
+            </code>
+            ,
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              mutations/
+            </code>
+            ;
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              documents/*.ts
+            </code>
+            ham metni birleştirir.
+          </span>
+        </li>
+        <li class="flex gap-2">
+          <span
+            class="shrink-0 text-primary-600 dark:text-primary-400"
+            >·</span
+          >
+          <span>
+            Okuma:
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              Posts
+            </code>
+            sorgusu · Yazma örneği:
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              CreatePost
+            </code>
+            mutation (
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              fetchPosts
+            </code>
+            /
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              createPost
+            </code>
+            servisleri).
+          </span>
+        </li>
+        <li class="flex gap-2">
+          <span
+            class="shrink-0 text-primary-600 dark:text-primary-400"
+            >·</span
+          >
+          <span>
+            HTTP ve
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              errors
+            </code>
+            :
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              graphqlZeroClient.ts
+            </code>
+          </span>
+        </li>
+      </ul>
     </UPageCard>
 
     <UPageCard
-      title="Kaynak kod"
-      description="Aynı posts.graphql?raw — iki ayrı dosya."
       variant="outline"
-      class="min-w-0 bg-white dark:bg-gray-900/90">
-      <div
-        class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
-        <div class="min-w-0">
+      class="min-w-0">
+      <template #header>
+        <div>
+          <h3
+            class="text-lg font-semibold text-gray-900 dark:text-gray-50">
+            Kaynak kod
+          </h3>
           <p
-            class="mb-2 text-xs font-semibold text-primary-700 dark:text-primary-300">
-            getPostsWith.ts
+            class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            Ortak istemci ve post servisi; sorgu
+            belgesi
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              documents/posts-list.ts
+            </code>
+            , mutation
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              mutations/create-post.graphql
+            </code>
+            +
+            <code
+              class="rounded bg-gray-100 px-1 font-mono text-xs text-gray-900 dark:bg-gray-800 dark:text-gray-200">
+              documents/create-post.ts
+            </code>
+            .
           </p>
-          <pre
-            class="rounded-lg border border-primary-900/40 bg-gray-950 p-4 text-[11px] leading-relaxed text-gray-100 dark:border-primary-800/50"><code
-            class="whitespace-pre font-mono sm:text-xs">{{ getPostsWithSource }}</code></pre>
         </div>
-        <div class="min-w-0">
+      </template>
+      <div class="min-w-0 space-y-6">
+        <div>
           <p
             class="mb-2 text-xs font-semibold text-gray-700 dark:text-gray-300">
-            getPostsWithout.ts
+            graphqlZeroClient.ts
           </p>
           <pre
-            class="rounded-lg border border-gray-700 bg-gray-950 p-4 text-[11px] leading-relaxed text-gray-100"><code
-            class="whitespace-pre font-mono sm:text-xs">{{ getPostsWithoutSource }}</code></pre>
+            class="max-h-[320px] overflow-auto rounded-lg border border-gray-700 bg-gray-950 p-4 text-[11px] leading-relaxed text-gray-100"><code
+            class="whitespace-pre font-mono sm:text-xs">{{ graphqlZeroClientSource }}</code></pre>
+        </div>
+        <div>
+          <p
+            class="mb-2 text-xs font-semibold text-gray-700 dark:text-gray-300">
+            postsService.ts
+          </p>
+          <pre
+            class="max-h-[320px] overflow-auto rounded-lg border border-gray-700 bg-gray-950 p-4 text-[11px] leading-relaxed text-gray-100"><code
+            class="whitespace-pre font-mono sm:text-xs">{{ postsServiceSource }}</code></pre>
         </div>
       </div>
     </UPageCard>
 
     <UPageCard
-      title="Canlı örnek"
-      description="İki buton, aynı API."
       variant="outline"
-      class="min-w-0 bg-white dark:bg-gray-900/90">
-      <div class="space-y-4">
+      class="min-w-0">
+      <template #header>
+        <div>
+          <h3
+            class="text-lg font-semibold text-gray-900 dark:text-gray-50">
+            Canlı örnek
+          </h3>
+          <p
+            class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            GraphQL Zero: liste (query) ve yeni
+            post (mutation); liste mutation
+            sonrası yeniden yüklenir.
+          </p>
+        </div>
+      </template>
+      <div class="space-y-6">
         <div
           class="flex flex-wrap items-center gap-2 sm:gap-3">
           <UButton
             size="sm"
             color="primary"
-            :loading="
-              loading && lastFetchMode === 'with'
-            "
-            :disabled="loading"
-            @click="fetchPosts('with')">
-            getPostsWith
-          </UButton>
-          <UButton
-            size="sm"
-            color="neutral"
             variant="outline"
-            :loading="
-              loading &&
-              lastFetchMode === 'without'
-            "
-            :disabled="loading"
-            @click="fetchPosts('without')">
-            getPostsWithout
+            :loading="loading"
+            :disabled="loading || creating"
+            @click="fetchPosts">
+            Listeyi yenile
           </UButton>
           <span
-            v-if="lastFetchMode && !loading"
+            v-if="!loading && totalCount > 0"
             class="text-xs text-gray-500 dark:text-gray-400">
-            Son istek:
-            {{
-              lastFetchMode === 'with'
-                ? 'graphql-request'
-                : 'fetch'
-            }}
-            · Toplam
-            {{ totalCount }}
+            Toplam {{ totalCount }}
           </span>
+        </div>
+
+        <div
+          class="border-t border-gray-200 pt-6 dark:border-gray-700">
+          <h4
+            class="mb-3 text-sm font-semibold text-gray-800 dark:text-gray-200">
+            Mutation: CreatePost
+          </h4>
+          <div class="max-w-xl space-y-4">
+            <UFormField label="Başlık">
+              <UInput
+                v-model="draftTitle"
+                placeholder="Örn. Demo başlık"
+                class="w-full"
+                :disabled="creating" />
+            </UFormField>
+            <UFormField label="İçerik">
+              <UTextarea
+                v-model="draftBody"
+                placeholder="Gövde metni…"
+                :rows="4"
+                class="w-full"
+                :disabled="creating" />
+            </UFormField>
+            <div class="flex flex-wrap gap-2">
+              <UButton
+                size="sm"
+                color="primary"
+                leading-icon="i-lucide-plus"
+                :loading="creating"
+                :disabled="
+                  creating ||
+                  !draftTitle.trim() ||
+                  !draftBody.trim()
+                "
+                @click="onCreatePost">
+                Post oluştur
+              </UButton>
+            </div>
+          </div>
         </div>
 
         <div
@@ -197,8 +243,15 @@
           {{ error.message }}
         </div>
 
+        <div
+          v-if="createError"
+          class="rounded-lg bg-amber-50 p-4 text-amber-900 dark:bg-amber-900/20 dark:text-amber-200">
+          Mutation:
+          {{ createError.message }}
+        </div>
+
         <ul
-          v-else-if="posts.length"
+          v-if="posts.length"
           class="space-y-3">
           <li
             v-for="post in posts"
@@ -230,10 +283,10 @@
         </p>
 
         <p
-          v-else-if="!loading"
+          v-else
           class="text-gray-500 dark:text-gray-400">
-          Liste boş veya yanıt beklenmiyor;
-          sayfayı yenileyerek tekrar deneyin.
+          Henüz liste yok; yukarıdan yenileyin
+          veya bağlantıyı kontrol edin.
         </p>
       </div>
     </UPageCard>
@@ -241,21 +294,37 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useGraphqlPosts } from '@/composables/useGraphqlPosts'
-import getPostsWithSource from '@/lib/getPostsWith.ts?raw'
-import getPostsWithoutSource from '@/lib/getPostsWithout.ts?raw'
+import graphqlZeroClientSource from '@/services/graphqlZeroClient.ts?raw'
+import postsServiceSource from '@/services/postsService.ts?raw'
 
 const {
   posts,
   totalCount,
   loading,
   error,
-  lastFetchMode,
+  creating,
+  createError,
   fetchPosts,
+  createPost,
 } = useGraphqlPosts()
 
+const draftTitle = ref('')
+const draftBody = ref('')
+
+async function onCreatePost() {
+  const title = draftTitle.value.trim()
+  const body = draftBody.value.trim()
+  if (!title || !body) return
+  await createPost({ title, body })
+  if (!createError.value) {
+    draftTitle.value = ''
+    draftBody.value = ''
+  }
+}
+
 onMounted(() => {
-  void fetchPosts('with')
+  void fetchPosts()
 })
 </script>

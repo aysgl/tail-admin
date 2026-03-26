@@ -1,11 +1,15 @@
+import { CREATE_POST_DOCUMENT } from '@/graphql/documents/create-post'
+import { POSTS_GRAPHQL_DOCUMENT } from '@/graphql/documents/posts-list'
+import { requestGraphql } from '@/services/graphqlZeroClient'
+
 export interface PostItem {
   id: string
   title: string
   body: string
 }
 
-interface PostsResponse {
-  posts: {
+interface PostsQueryData {
+  posts?: {
     data: PostItem[]
     meta: { totalCount: number }
   }
@@ -16,61 +20,30 @@ export interface FetchPostsResult {
   totalCount: number
 }
 
-const POSTS_QUERY = `
-  query Posts($options: PageQueryOptions) {
-    posts(options: $options) {
-      data {
-        id
-        title
-        body
-      }
-      meta {
-        totalCount
-      }
-    }
-  }
-`
+export interface CreatePostInput {
+  title: string
+  body: string
+}
+
+interface CreatePostMutationData {
+  createPost?: PostItem | null
+}
 
 export async function fetchPosts(
   page = 1,
   limit = 10,
 ): Promise<FetchPostsResult> {
-  const res = await fetch(
-    'https://graphqlzero.almansi.me/api',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        query: POSTS_QUERY,
-        variables: {
-          options: {
-            paginate: { page, limit },
-          },
+  const data =
+    await requestGraphql<PostsQueryData>(
+      POSTS_GRAPHQL_DOCUMENT,
+      {
+        options: {
+          paginate: { page, limit },
         },
-      }),
-    },
-  )
-
-  if (!res.ok) {
-    throw new Error(
-      `HTTP ${res.status}: ${res.statusText}`,
+      },
     )
-  }
 
-  const json = (await res.json()) as {
-    data?: PostsResponse
-    errors?: { message: string }[]
-  }
-
-  if (json.errors?.length) {
-    throw new Error(
-      json.errors[0]?.message ?? 'GraphQL error',
-    )
-  }
-
-  const posts = json.data?.posts
+  const posts = data.posts
   if (!posts) {
     throw new Error('Invalid posts response')
   }
@@ -79,4 +52,22 @@ export async function fetchPosts(
     data: posts.data ?? [],
     totalCount: posts.meta?.totalCount ?? 0,
   }
+}
+
+/** Mutation örneği: demo API’de yeni post oluşturur. */
+export async function createPost(
+  input: CreatePostInput,
+): Promise<PostItem> {
+  const data =
+    await requestGraphql<CreatePostMutationData>(
+      CREATE_POST_DOCUMENT,
+      { input },
+    )
+
+  const created = data.createPost
+  if (!created) {
+    throw new Error('createPost returned no data')
+  }
+
+  return created
 }

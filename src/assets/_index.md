@@ -33,3 +33,9 @@ Bu dosya, `src/assets` icindeki statik varliklar icin kisa ekip standardidir.
 - Vite import ile kullan: `import heroImage from '@/assets/images/home-hero.webp'`
 - Ayni asset birden fazla yerde kullaniliyorsa tek dosya uzerinden paylas.
 - Farkli klasorlerde ayni varligi kopyalama (duplicate logic/asset olusmasin).
+
+## Kaynaklar
+
+- [Vite: Static Asset Handling](https://vite.dev/guide/assets.html) — import, `public/`, URL çözümü
+- [Vue: Building for Production (asset base)](https://vuejs.org/guide/best-practices/production.html) — dağıtım ve asset yolları
+- [MDN: Image file type and format guide](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types) — web için format seçimi

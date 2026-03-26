@@ -41,3 +41,9 @@ Bu klasor, route tanimlari ve navigation ile ilgili yardimci kodlari tutar.
 
 - `navigation.ts` route path'lerini tek bir yerde toplar; route degisince navigation da guncellenmeli.
 - Tekrarlayan path string'leri icin `src/constants` altinda sabitler dusunulebilir.
+
+## Kaynaklar
+
+- [Vue Router](https://router.vuejs.org/) — route tanımı, lazy import, `meta`
+- [Navigation Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html) — global ve per-route guard'lar
+- [Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html) — `() => import(...)` deseni

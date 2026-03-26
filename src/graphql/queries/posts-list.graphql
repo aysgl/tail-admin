@@ -1,12 +1,9 @@
-# Post listesi (GraphQL Zero API)
-# Sayfalama için PageQueryOptions kullanılır
+# Post listesi (GraphQL Zero) — PageQueryOptions ile sayfalama
 
 query Posts($options: PageQueryOptions) {
   posts(options: $options) {
     data {
-      id
-      title
-      body
+      ...PostFields
     }
     meta {
       totalCount

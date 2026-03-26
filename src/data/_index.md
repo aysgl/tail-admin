@@ -32,3 +32,8 @@ Bu klasor, uygulama icindeki statik/veri kaynagi dosyalari icindir.
 - Veri olabildigince tipli olmali (`interface/type`).
 - Buyuk mock dosyalarini feature'a gore bol.
 - Ayni mock veriyi farkli dosyalarda kopyalama; ortak kaynaktan export et.
+
+## Kaynaklar
+
+- [TypeScript Handbook: Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html) — mock/fixture için tip tanımları
+- [Martin Fowler: Test Data Builders](https://www.martinfowler.com/bliki/TestDataBuilder.html) — okunabilir test/fixture verisi (kavramsal)

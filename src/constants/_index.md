@@ -34,3 +34,8 @@ Bu klasor, uygulama genelinde degismeyen sabit degerler icindir.
 - Gerekirse union type turet:
 - `const STATUSES = ['active', 'inactive'] as const`
 - `type Status = (typeof STATUSES)[number]`
+
+## Kaynaklar
+
+- [TypeScript: `const` assertions](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions) — `as const` ve sabit türetimleri
+- [TypeScript: Literal Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) — union ve sabit listeler

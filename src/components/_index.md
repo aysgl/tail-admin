@@ -40,3 +40,9 @@ Vue [Style Guide](https://vuejs.org/style-guide/rules-strongly-recommended.html/
 ## Nuxt UI ile birlikte
 
 - Hazır primitive'ler (`UButton`, `UModal` vb.) varken aynı işi yapan ikinci bir `Base*` katmanı oluşturma; gerekirse ince bir wrapper veya slot ile projeye özelle.
+
+## Kaynaklar
+
+- [Vue Style Guide](https://vuejs.org/style-guide/) — bileşen adları ve yapı
+- [Vue: Components Basics](https://vuejs.org/guide/essentials/component-basics.html)
+- [Nuxt UI](https://ui.nuxt.com/) — projede kullanılan UI primitive dokümantasyonu

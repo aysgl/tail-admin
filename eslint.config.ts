@@ -5,7 +5,7 @@
  *   eslint-plugin-vue              → Vue kuralları (.vue dosyaları)
  *   @vue/eslint-config-typescript  → TypeScript kuralları
  *   @vue/eslint-config-prettier   → Prettier ile çakışmayı önler
- *   @graphql-eslint/eslint-plugin  → GraphQL operasyon kuralları
+ *   @graphql-eslint/eslint-plugin  → .graphql dosyaları (şema ile lint)
  *
  * Erişilebilirlik: Storybook addon-a11y ile kontrol edilir.
  */
